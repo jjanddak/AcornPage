@@ -8,8 +8,8 @@
 	</select>
 	<insert id="insert" parameterType="usersDto">
 		INSERT INTO users
-		(id, pwd, email, regdate)
-		VALUES(#{id}, #{pwd}, #{email}, SYSDATE)
+		(num, id, pwd, isWriter, wallet,regdate)
+		VALUES(users_seq.NEXTVAL, #{id}, #{pwd}, #{isWriter},3000, SYSDATE)
 	</insert>
 	<select id="getPwdHash" parameterType="String" resultType="String">
 		SELECT pwd 
