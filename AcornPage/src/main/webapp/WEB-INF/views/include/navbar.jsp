@@ -17,7 +17,7 @@
 		<!-- xs 영역에서는 숨겨졌다가 버튼을 누르면 나오게 할 컨텐츠를 넣을 div -->
 		<div class="collapse navbar-collapse" id="one">
 			<ul class="nav navbar-nav">
-				<li <c:if test="${param.category eq 'cafe' }">class="active"</c:if> ><a href="${pageContext.request.contextPath }/cafe/list.do">Cafe</a></li>
+				<li <c:if test="${param.category eq 'cafe' }">class="active"</c:if>><a href="${pageContext.request.contextPath }/cafe/list.do">Cafe</a></li>
 				<li <c:if test="${param.category eq 'file' }">class="active"</c:if>><a href="${pageContext.request.contextPath }/file/list.do">자료실</a></li>
 				<li <c:if test="${param.category eq 'shop' }">class="active"</c:if>><a href="${pageContext.request.contextPath }/shop/list.do">Shop</a></li>		
 			</ul>
@@ -26,6 +26,7 @@
 					<div class="pull-right">
 						<a class="btn btn-primary navbar-btn btn-xs" href="${pageContext.request.contextPath }/users/loginform.do">로그인</a>
 						<a class="btn btn-warning navbar-btn btn-xs" href="${pageContext.request.contextPath }/users/signup_form.do">회원가입</a>
+						<a onclick="popupOpen()" class="btn btn-success navbar-btn btn-xs">캐쉬충전</a>
 					</div>
 				</c:when>
 				<c:otherwise>
@@ -38,5 +39,13 @@
 		</div>
 	</div>
 </div>
-
+<script>
+function popupOpen(){
+	var url= "${pageContext.request.contextPath }/cash/addcash.do";    //팝업창 페이지 URL
+	var winWidth = 700;
+    var winHeight = 600;
+    var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
+	window.open(url,"",popupOption);
+}
+</script>
 

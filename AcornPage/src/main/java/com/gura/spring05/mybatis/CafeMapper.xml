@@ -101,6 +101,20 @@
 		SET title=#{title}, content=#{content}
 		WHERE num=#{num}
 	</update>
+	<select id="getList2" parameterType="infoDto"
+		resultType="infoDto">
+		select * from tooninfo
+	</select>
+	<select id="getList3" parameterType="String"
+		resultType="toonDto">
+		select * from (select * from toon where title=#{title})
+	</select>
+	<select id="getCodeData" parameterType="String" resultType="toonDto">
+		select * from toon where code=#{code}
+	</select>
+	<update id="CashUpdate" parameterType="int">
+		update users set wallet=wallet+#{cash} where id='kapman'
+	</update>
 </mapper>
 
 

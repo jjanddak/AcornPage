@@ -135,6 +135,48 @@ public class CafeController {
 		map.put("isSuccess", true);
 		return map;
 	}
+	//글목록 요청처리
+		@RequestMapping("/cafe/viewList")
+		public ModelAndView list2(HttpServletRequest request){
+			// HttpServletRequest 객체를 서비스에 넘겨 주면서
+			// 비즈니스 로직을 수행하고 
+			service.getList2(request);
+			
+			// view page 로 forward 이동해서 글 목록 출력하기 
+			return new ModelAndView("cafe/viewList");
+		}
+		
+		@RequestMapping("/cafe/selectedDetail")
+		public ModelAndView detailList(HttpServletRequest request,@RequestParam String title){
+			// HttpServletRequest 객체를 서비스에 넘겨 주면서
+			// 비즈니스 로직을 수행하고 
+			service.getList3(request,title);
+			
+			// view page 로 forward 이동해서 글 목록 출력하기 
+			return new ModelAndView("cafe/selectedDetail");
+		}
+		
+		@RequestMapping("/cafe/detailCode")
+		public ModelAndView detailCodeView(HttpServletRequest request,@RequestParam String code) {
+			service.getCodeDetail(request, code);
+			
+			return new ModelAndView("cafe/detailCode");
+		}
+		
+		@RequestMapping("/cash/addcash")
+		public ModelAndView moveCash(ModelAndView mView) {
+			mView.setViewName("cash/addcash");
+			return mView;
+		}
+		
+		@RequestMapping("/cash/cashcharge.do")
+		public ModelAndView chargeCash(HttpServletRequest request,@RequestParam int cash) {
+			//세션에 아이디를 리퀘스트에 담아 넘겨줘야되는 부분. 차후 수정!
+			
+			service.cashAdd(request, cash);
+			request.getAttribute("cashCheck");
+			return new ModelAndView("cash/addcash");
+		}
 }
 
 
