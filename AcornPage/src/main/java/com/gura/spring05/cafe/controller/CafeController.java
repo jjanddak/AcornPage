@@ -169,13 +169,21 @@ public class CafeController {
 			return mView;
 		}
 		
-		@RequestMapping("/cash/cashcharge.do")
-		public ModelAndView chargeCash(HttpServletRequest request,@RequestParam int cash) {
+		@RequestMapping("/cash/cashcharge")
+		public ModelAndView chargeCash(HttpServletRequest request,@RequestParam int cash,ModelAndView mView) {
 			//세션에 아이디를 리퀘스트에 담아 넘겨줘야되는 부분. 차후 수정!
+			//String id=(String)request.getSession().getAttribute("id");
+			//@RequestParam String id로 id값 넘겨준다.
+			if(service.cashAdd(request, cash)) {
+				String success="충전되었습니다!";
+				mView.addObject("success",success);
+			}else {
+				String fail="충전이 실패했습니다 ㅠㅠ";
+				mView.addObject("fail",fail);
+			}
+			mView.setViewName("/cash/test");
 			
-			service.cashAdd(request, cash);
-			request.getAttribute("cashCheck");
-			return new ModelAndView("cash/addcash");
+			return mView;
 		}
 }
 

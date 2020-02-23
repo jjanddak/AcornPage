@@ -8,7 +8,15 @@
 </head>
 <body>
 	<script>
-		
+	var success="${success}";
+	var fail="${fail}";
+		if(success!=""){
+			alert(success);
+			self.close();
+		}else{
+			alert(fail);
+			location.href="addcash.do";
+		}
 	</script>
 </body>
 </html>

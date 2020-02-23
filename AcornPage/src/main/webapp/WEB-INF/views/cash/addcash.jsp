@@ -55,9 +55,6 @@
 		var isAddCash=confirm(radioVal+"캐쉬를 충전하시겠습니까?");
 		if(isAddCash){
 			location.href="cashcharge.do?cash=${cash}";
-			if(${cashCheck}){
-				alert("ㅎㅇㅎㅇ");
-			}
 		}
 	}
 </script>

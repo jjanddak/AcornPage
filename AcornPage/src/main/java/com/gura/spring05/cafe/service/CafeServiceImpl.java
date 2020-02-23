@@ -275,11 +275,14 @@ public class CafeServiceImpl implements CafeService{
 	}
 
 	@Override
-	public void cashAdd(HttpServletRequest request, int cash) {
+	public boolean cashAdd(HttpServletRequest request, int cash) {
 		//유저 아이디도 전달해줘야됨! 차후 수정
-		if(cafeDao.cashUpdate(cash)) {
-			request.setAttribute("cashCheck", true);
-		};
+		boolean check=cafeDao.cashUpdate(cash);
+		if(check) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 }
 
