@@ -19,6 +19,7 @@
 <body>
 <jsp:include page="include/navbar.jsp"/>
 <div class="container">
+	<a href="cafe/viewList.do">카카오페이지 이동</a>
 	<h2>웹툰</h2>
 	<ul>
 		<c:forEach var="tmp" items="${notice }" varStatus="status">
