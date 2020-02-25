@@ -15,8 +15,6 @@ import com.gura.spring05.cafe.dao.CafeDao;
 import com.gura.spring05.cafe.dto.CafeCommentDto;
 import com.gura.spring05.cafe.dto.CafeDto;
 import com.gura.spring05.exception.CanNotDeleteException;
-import com.gura.spring05.info.dto.InfoDto;
-import com.gura.spring05.toon.dto.ToonDto;
 
 @Service
 public class CafeServiceImpl implements CafeService{
@@ -243,46 +241,6 @@ public class CafeServiceImpl implements CafeService{
 	@Override
 	public void updateComment(CafeCommentDto dto) {
 		cafeCommentDao.update(dto);
-	}
-	@Override
-	public void getList2(HttpServletRequest request) {
-		InfoDto dto=new InfoDto();
-		// startRowNum 과 endRowNum 에 해당하는 카페글 목록을 select 해 온다.
-		List<InfoDto> list=cafeDao.getList2(dto);
-		
-		//view 페이지에서 필요한 값을 request 에 담고 
-		request.setAttribute("list", list);
-
-	}
-	@Override
-	public void getList3(HttpServletRequest request,String title) {
-		ToonDto dto=new ToonDto();
-		// startRowNum 과 endRowNum 에 해당하는 카페글 목록을 select 해 온다.
-		List<ToonDto> list=cafeDao.getList3(title);
-		
-		//view 페이지에서 필요한 값을 request 에 담고 
-		request.setAttribute("list", list);
-
-	}
-
-	@Override
-	public void getCodeDetail(HttpServletRequest request, String code) {
-		ToonDto dto=new ToonDto();
-		
-		dto=cafeDao.getCodeData(code);
-		
-		request.setAttribute("dto", dto);
-	}
-
-	@Override
-	public boolean cashAdd(HttpServletRequest request, int cash) {
-		//유저 아이디도 전달해줘야됨! 차후 수정
-		boolean check=cafeDao.cashUpdate(cash);
-		if(check) {
-			return true;
-		}else {
-			return false;
-		}
 	}
 }
 

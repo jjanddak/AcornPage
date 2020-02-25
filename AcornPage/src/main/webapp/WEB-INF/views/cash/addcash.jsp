@@ -45,17 +45,21 @@
 				</tr>
 			</tbody>
 		</table>
-		<button class="btn btn-primary" type="submit" onclick="submitCash();">캐쉬충전</button>
+		<button class="btn btn-primary" type="submit" id="cashBtn">캐쉬충전</button>
 		<button class="btn btn-warning" type="reset">취소</button>
 	</form>
-</body>
 <script>
-	function submitCash(){
+	$("#cashBtn").click(function(){
 		var radioVal = $('input[name="cash"]:checked').val();
 		var isAddCash=confirm(radioVal+"캐쉬를 충전하시겠습니까?");
 		if(isAddCash){
-			location.href="cashcharge.do?cash=${cash}";
+			location.href="cashcharge.do?cash="+radioVal;
+		}else{
+			
 		}
-	}
+		return false;
+	});	
+	
 </script>
+</body>
 </html>
