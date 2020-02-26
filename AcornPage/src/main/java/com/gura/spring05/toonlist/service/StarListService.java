@@ -1,5 +1,9 @@
 package com.gura.spring05.toonlist.service;
 
-public interface StarListService {
+import javax.servlet.http.HttpServletRequest;
 
+import com.gura.spring05.toonlist.dto.StarPointDto;
+
+public interface StarListService {
+	public void addStar(StarPointDto dto);
 }

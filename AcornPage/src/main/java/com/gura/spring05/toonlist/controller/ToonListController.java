@@ -4,10 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.toonlist.dto.StarPointDto;
 import com.gura.spring05.toonlist.service.StarListService;
 import com.gura.spring05.toonlist.service.ToonListService;
 
@@ -15,14 +17,15 @@ import com.gura.spring05.toonlist.service.ToonListService;
 public class ToonListController {
 	@Autowired
 	private ToonListService service;
-	private StarListService service2;
+	private StarListService starService;
 	
-//	@RequestMapping("/toon/starAdd")
-//	public String delete(@RequestParam int num) {
-//		service2.addStar();
-//		//리다일렉트 응답
-//		return "redirect:/toon/detailCode.do";
-//	}
+	@RequestMapping("/toon/starAdd")
+	public String delete(@RequestParam int starValue,@RequestParam String code, HttpServletRequest request, @ModelAttribute("dto") StarPointDto dto, ModelAndView mView) {
+//		dto.set
+		starService.addStar(dto);
+		//리다일렉트 응답
+		return "redirect:/toon/detailCode.do";
+	}
 	
 	//만화를 눌렀을때 전체 화가 나오는 리스트 로직
 	@RequestMapping("/toon/selectedDetail")

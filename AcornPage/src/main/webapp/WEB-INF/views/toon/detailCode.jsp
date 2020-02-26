@@ -43,7 +43,7 @@
 			</tr>
 		</table>
 		<div class="contents">${dto.content }</div>
-	<form action="starvalue.do" method="get">
+	<form action="starvalue.do" method="post">
 		<p id="star_grade">
 			<a href="#">★</a>
 			<a href="#">★</a>
