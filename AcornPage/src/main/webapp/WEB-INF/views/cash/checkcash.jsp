@@ -8,13 +8,11 @@
 </head>
 <body>
 	<script>
-	var success="${success}";
-	var fail="${fail}";
-		if(success!=""){
-			alert(success);
+		if(${isSuccess}){
+			alert("충전 되었습니다.");
 			self.close();
 		}else{
-			alert(fail);
+			alert("충전에 실패했습니다 까비~");
 			location.href="addcash.do";
 		}
 	</script>

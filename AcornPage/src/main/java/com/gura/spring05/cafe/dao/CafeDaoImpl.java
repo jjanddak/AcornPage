@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.gura.spring05.cafe.dto.CafeDto;
-import com.gura.spring05.info.dto.InfoDto;
-import com.gura.spring05.toon.dto.ToonDto;
 
 @Repository
 public class CafeDaoImpl implements CafeDao{
@@ -57,29 +55,5 @@ public class CafeDaoImpl implements CafeDao{
 	@Override
 	public void update(CafeDto dto) {
 		session.update("cafe.update", dto);
-	}
-	@Override
-	public List<InfoDto> getList2(InfoDto dto) {
-		// TODO Auto-generated method stub
-		return session.selectList("cafe.getList2", dto);
-	}
-
-	@Override
-	public List<ToonDto> getList3(String title) {
-		return session.selectList("cafe.getList3", title);
-	}
-
-	@Override
-	public ToonDto getCodeData(String code) {
-		
-		return session.selectOne("cafe.getCodeData", code);
-	}
-
-	@Override
-	public boolean cashUpdate(int cash) {
-		// TODO Auto-generated method stub
-		session.update("cafe.CashUpdate",cash);
-		
-		return true;
 	}
 }

@@ -1,23 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/home.jsp</title>
-<jsp:include page="include/resource.jsp"/>
-<style>
-	.toon{
-		font-size: 30px;
-	}
-	.novel{
-		font-size: 25px;
-	}
-</style>
+<title>/cafe/list.jsp</title>
+<jsp:include page="include/resource.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="include/navbar.jsp"/>
+<jsp:include page="include/navbar.jsp">
+	<jsp:param value="cafe" name="category"/>
+</jsp:include>
 <div class="container">
 	<a href="cafe/viewList.do">카카오페이지 이동</a>
 	<h2>웹툰</h2>
@@ -33,16 +27,32 @@
 			<li><p class="novel">소설 ${status.count }</p></li>
 		</c:forEach>
 	</ul>
-		<form action="starvalue.do" method="get">
-		 <p id="star_grade">
-		        <a href="#">★</a>
-		        <a href="#">★</a>
-		        <a href="#">★</a>
-		        <a href="#">★</a>
-		        <a href="#">★</a>
-		   </p>
-		   <button id="starBtn" type="submit">별점제출</button>
-		</form>
+	<form action="starvalue.do" method="get">
+	 <p id="star_grade">
+	        <a href="#">★</a>
+	        <a href="#">★</a>
+	        <a href="#">★</a>
+	        <a href="#">★</a>
+	        <a href="#">★</a>
+	   </p>
+	   <button id="starBtn" type="submit">별점제출</button>
+	</form>
+</div>
+
+	<div class="bestList" style="width:100%; height:500px;">
+		<ul>
+			<c:forEach var="tmp" items="${requestScope.list }">
+				<a href="toon/selectedDetail.do?title=${tmp.title }">
+				<li>
+					<div class="list" style="width:100%; height:150px; border:1px solid blue;">
+						<p>${tmp.title }</p>
+						<p>${tmp.writer }</p>
+						<p>${tmp.info }</p>
+					</div>
+				</li>
+				</a>
+			</c:forEach>
+		</ul>
 	</div>
 </body>
 <style>
@@ -72,6 +82,7 @@
    });   
 </script>
 </html>
+
 
 
 

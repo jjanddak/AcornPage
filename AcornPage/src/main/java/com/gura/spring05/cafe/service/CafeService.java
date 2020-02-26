@@ -9,13 +9,6 @@ import com.gura.spring05.cafe.dto.CafeDto;
 
 public interface CafeService {
 	public void getList(HttpServletRequest request);
-	public void getList2(HttpServletRequest request);
-	public void getList3(HttpServletRequest request,String title);
-	//코드값을 통해 데이터를 가져오는 메소드
-	public void getCodeDetail(HttpServletRequest request,String code);
-	//유저의 Id와 충전할 캐쉬의 값을 전달하는 메소드
-	public boolean cashAdd(HttpServletRequest request,int cash);
-	
 	public void saveContent(CafeDto dto);
 	public void getDetail(HttpServletRequest request);
 	public void deleteContent(int num, HttpServletRequest request);
