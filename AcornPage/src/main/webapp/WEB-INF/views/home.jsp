@@ -33,8 +33,31 @@
 			<li><p class="novel">소설 ${status.count }</p></li>
 		</c:forEach>
 	</ul>
+	<p id="star_grade">
+        <a href="#">★</a>
+        <a href="#">★</a>
+        <a href="#">★</a>
+        <a href="#">★</a>
+        <a href="#">★</a>
+	</p>
 </div>
 </body>
+<style>
+     #star_grade a{
+        text-decoration: none;
+        color: gray;
+    }
+    #star_grade a.on{
+        color: red;
+    }
+</style>
+<script>
+	 $('#star_grade a').click(function(){
+	     $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+	     $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+	     return false;
+	 });
+</script>
 </html>
 
 
