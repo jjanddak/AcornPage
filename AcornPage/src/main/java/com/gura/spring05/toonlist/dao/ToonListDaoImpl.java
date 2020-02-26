@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.gura.spring05.library.dto.LibraryDto;
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
 import com.gura.spring05.toonlist.dto.ToonListDto;
 @Repository
@@ -33,8 +34,15 @@ public class ToonListDaoImpl implements ToonListDao{
 	@Override
 	public boolean cashUpdate(int cash) {
 
-		session.update("toon.CashUpdate",cash);
+		session.update("toon.cashUpdate",cash);
 		
 		return true;
+	}
+
+	@Override
+	public void BuyCodeOne(LibraryDto dto) {
+		
+		session.insert("toon.buyCodeOne",dto);
+		
 	}
 }

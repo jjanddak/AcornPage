@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<jsp:include page="../include/resource.jsp"/>
 </head>
 <body>
 	<div class="container">
@@ -13,20 +14,22 @@
 		<thead>
 			<tr>
 				<th>회차</th>
+				<th>썸네일</th>
 				<th>제목</th>
-				<th>내용</th>
+				<th>구매</th>
 			</tr>
 		</thead>
 		<tbody>
 		<c:forEach var="tmp" items="${requestScope.list }">
 			<tr>
 				<td>${tmp.num }</td>
-				<td>${tmp.writer }</td>
+				<td><!-- ${tmp.writer } -->썸네일</td>
 				<td>
 					<a href="detailCode.do?code=${tmp.code }">
 						${tmp.title }
 					</a>
-				</td>				
+				</td>
+				<td><a class="btn" href="buyCodeOne.do?code=${tmp.code }">구매</a></td>				
 			</tr>
 		</c:forEach>
 		</tbody>

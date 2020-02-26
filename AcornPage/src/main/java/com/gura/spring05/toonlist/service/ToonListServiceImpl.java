@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gura.spring05.library.dto.LibraryDto;
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
 import com.gura.spring05.toonlist.dao.ToonListDao;
 import com.gura.spring05.toonlist.dto.ToonListDto;
@@ -56,6 +57,12 @@ public class ToonListServiceImpl implements ToonListService{
 		}else {
 			return false;
 		}
+	}
+
+
+	@Override
+	public void buyCodeOne(LibraryDto dto) {		
+		dao.BuyCodeOne(dto);
 	}
 	
 }

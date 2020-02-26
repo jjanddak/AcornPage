@@ -4,10 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.library.dto.LibraryDto;
 import com.gura.spring05.toonlist.service.ToonListService;
 
 @Controller
@@ -32,13 +35,13 @@ public class ToonListController {
 		
 		return new ModelAndView("toon/detailCode");
 	}
-	
+	//캐쉬 충전팝업창 띄우기
 	@RequestMapping("/cash/addcash")
 	public ModelAndView moveCash(ModelAndView mView) {
 		mView.setViewName("cash/addcash");
 		return mView;
 	}
-	
+	//캐쉬 충전하기 버튼을 눌렀을때 캐쉬충전하는 로직
 	@RequestMapping("/cash/cashcharge")
 	public ModelAndView chargeCash(HttpServletRequest request,@RequestParam int cash,ModelAndView mView) {
 		//세션에 아이디를 리퀘스트에 담아 넘겨줘야되는 부분. 차후 수정!
@@ -54,5 +57,16 @@ public class ToonListController {
 		mView.setViewName("cash/checkcash");
 		
 		return mView;
+	}
+	
+	@RequestMapping("/toon/buyCodeOne")
+	public ModelAndView buyCode(HttpServletRequest request,@ModelAttribute LibraryDto dto,@RequestParam String code) {
+		//String id=(String)request.getSession().getAttribute("id");
+		String id="백조장";
+		dto.setId(id);
+		//dto.setCode((String)request.getAttribute("code"));
+		dto.setCode(code);
+		service.buyCodeOne(dto);
+		return new ModelAndView("redirect:/home.do");
 	}
 }

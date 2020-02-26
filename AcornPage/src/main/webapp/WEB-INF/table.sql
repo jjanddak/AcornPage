@@ -2,9 +2,9 @@
 create table toondetail(title varchar2(100),writer varchar2(100),info varchar2(100),regdate date);
 
 //toonDetail 테이블 더미로우
-insert into toonDetail values('원피스','김준서','동료를 모아 모험을 떠나는 만화');
-insert into toonDetail values('블리치','백종혁','사신대행');
-insert into toonDetail values('나루토','김대희','졸렬잎마을 정치이야기');
+insert into toonDetail values('원피스','김준서','동료를 모아 모험을 떠나는 만화',sysdate);
+insert into toonDetail values('블리치','백종혁','사신대행',sysdate);
+insert into toonDetail values('나루토','김대희','졸렬잎마을 정치이야기',sysdate);
 
 //ToonList 테이블
 create table toonlist(num number,title varchar2(100),writer varchar2(100),content clob,regdate date,
