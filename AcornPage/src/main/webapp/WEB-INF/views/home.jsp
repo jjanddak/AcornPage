@@ -33,14 +33,17 @@
 			<li><p class="novel">소설 ${status.count }</p></li>
 		</c:forEach>
 	</ul>
-	<p id="star_grade">
-        <a href="#">★</a>
-        <a href="#">★</a>
-        <a href="#">★</a>
-        <a href="#">★</a>
-        <a href="#">★</a>
-	</p>
-</div>
+		<form action="starvalue.do" method="get">
+		 <p id="star_grade">
+		        <a href="#">★</a>
+		        <a href="#">★</a>
+		        <a href="#">★</a>
+		        <a href="#">★</a>
+		        <a href="#">★</a>
+		   </p>
+		   <button id="starBtn" type="submit">별점제출</button>
+		</form>
+	</div>
 </body>
 <style>
      #star_grade a{
@@ -52,11 +55,21 @@
     }
 </style>
 <script>
-	 $('#star_grade a').click(function(){
-	     $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
-	     $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
-	     return false;
-	 });
+    $('#star_grade a').click(function(){
+        $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+        $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+        return false;
+    });
+    $("#starBtn").click(function(){
+      var starValue = document.querySelectorAll(".on").length*2;
+      var isAddStar=confirm("평점"+starValue+"을 제출하시겠습니까?");
+      if(isAddStar){
+         location.href="test1.do?starVal="+starValue;
+      }else{
+         
+      }
+      return false;
+   });   
 </script>
 </html>
 
