@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="toonComment">
+	<select id="getList" parameterType="int" resultType="toonCommentDto">
+		SELECT num, id, code, content, likecount, commcode, regdate
+		FROM toon_comment
+		ORDER BY likecount ASC, num ASC
+	</select>
+	<insert id="insert" parameterType="toonCommentDto">
+		INSERT INTO toon_comment
+		(num, id, code, content, likecount, commcode, regdate)
+		VALUES(#{num}, #{id}, #{code}, #{content},0, #{commcode},SYSDATE)
+	</insert>
+	<select id="getSequence" resultType="int">
+		SELECT toon_comment_seq.NEXTVAL
+		FROM DUAL
+	</select>
+</mapper>

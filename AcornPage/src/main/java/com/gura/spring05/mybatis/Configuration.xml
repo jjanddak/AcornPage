@@ -14,6 +14,7 @@
 	    <typeAlias type="com.gura.spring05.shop.dto.OrderDto" alias="orderDto"/>
 	    <typeAlias type="com.gura.spring05.info.dto.InfoDto" alias="infoDto"/>
 	    <typeAlias type="com.gura.spring05.toon.dto.ToonDto" alias="toonDto"/>
+		<typeAlias type="com.gura.spring05.toon.dto.ToonCommentDto" alias="toonCommentDto"/>
 	</typeAliases>
 
 	<!-- mapper 설정 -->
@@ -24,6 +25,7 @@
 		<mapper resource="com/gura/spring05/mybatis/CafeMapper.xml"/>
 		<mapper resource="com/gura/spring05/mybatis/CafeCommentMapper.xml"/>
 		<mapper resource="com/gura/spring05/mybatis/ShopMapper.xml"/>
+		<mapper resource="com/gura/spring05/mybatis/ToonCommentMapper.xml"/>
 	</mappers>
 </configuration>
 
