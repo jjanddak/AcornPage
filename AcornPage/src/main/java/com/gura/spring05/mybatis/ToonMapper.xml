@@ -18,5 +18,16 @@
 	<insert id="buyCodeOne" parameterType="libraryDto">
 		insert into library values(library_seq.nextval,#{id},#{code},sysdate)
 	</insert>
-	
+	<select id="checkCode" parameterType="libraryDto" resultType="libraryDto">
+		select * from library where 
+	</select>
+	<select id="getSelectedList" parameterType="String" resultType="toonListDto">
+		select * from toonlist where title=#{title}
+	</select>
+	<select id="getWallet" parameterType="String" resultType="int">
+		select wallet from users where id=#{id}
+	</select>
+	<insert id="insertCode" parameterType="toonListDto">
+		insert into library values(1,#{id},#{code},sysdate)
+	</insert>
 </mapper>

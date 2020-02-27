@@ -69,4 +69,11 @@ public class ToonListController {
 		service.buyCodeOne(dto);
 		return new ModelAndView("redirect:/home.do");
 	}
+	
+	@RequestMapping("/toon/buyAll")
+	public ModelAndView buyAll(HttpServletRequest request,@RequestParam String title,int price) {
+		//String id=(String)request.getSession().getAttribute("id");
+		service.buyAll(request,title,price);
+		return new ModelAndView("home");
+	}
 }

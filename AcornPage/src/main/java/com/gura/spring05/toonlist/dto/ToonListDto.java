@@ -9,11 +9,12 @@ public class ToonListDto {
 	private String hashtag;
 	private String toon_novel;
 	private String code;
+	private String id;
 	
 	public ToonListDto() {}
 
 	public ToonListDto(int num, String title, String writer, String content, String upload, String hashtag,
-			String toon_novel, String code) {
+			String toon_novel, String code,String id) {
 		super();
 		this.num = num;
 		this.title = title;
@@ -87,6 +88,14 @@ public class ToonListDto {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	

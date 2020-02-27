@@ -34,7 +34,6 @@ public class ToonListServiceImpl implements ToonListService{
 		ToonListDto dto=new ToonListDto();
 		// startRowNum 과 endRowNum 에 해당하는 카페글 목록을 select 해 온다.
 		List<ToonListDto> list=dao.getDetailList(title);
-		
 		//view 페이지에서 필요한 값을 request 에 담고 
 		request.setAttribute("list", list);		
 	}
@@ -64,5 +63,23 @@ public class ToonListServiceImpl implements ToonListService{
 	public void buyCodeOne(LibraryDto dto) {		
 		dao.BuyCodeOne(dto);
 	}
+
+
+	@Override
+	public void buyAll(HttpServletRequest request,String title, int price) {
+		//String id=(String)request.getSession().getAttribute("id");
+		String id="kapman";
+		
+		if(price < dao.getWallet(id)) {
+			List<ToonListDto> list=dao.getSelectedList(title);
+			for(int i=0; i<list.size(); i++) {
+				list.get(i).setId(id);
+				dao.insertCode(list.get(i));	
+			}
+		}
+		
+		
+	}
+
 	
 }

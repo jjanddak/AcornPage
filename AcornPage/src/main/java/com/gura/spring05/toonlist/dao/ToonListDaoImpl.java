@@ -45,4 +45,30 @@ public class ToonListDaoImpl implements ToonListDao{
 		session.insert("toon.buyCodeOne",dto);
 		
 	}
+
+	@Override
+	public LibraryDto BuyAll(LibraryDto dto) {
+		return session.selectOne("toon.checkCode", dto);
+		
+	}
+
+	@Override
+	public List<ToonListDto> getSelectedList(String title) {
+		
+		return session.selectList("toon.getSelectedList",title);
+	}
+
+	@Override
+	public int getWallet(String id) {
+		
+		return session.selectOne("toon.getWallet",id);
+	}
+
+	@Override
+	public void insertCode(ToonListDto dto) {
+		
+		session.insert("toon.insertCode",dto);
+	}
+	
+	
 }
