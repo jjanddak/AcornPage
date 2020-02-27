@@ -1,6 +1,6 @@
-package com.gura.spring05.toon.dto;
+package com.gura.spring05.toonlist.dto;
 
-public class ToonDto {
+public class ToonListDto {
 	private int num;
 	private String title;
 	private String writer;
@@ -10,9 +10,9 @@ public class ToonDto {
 	private String toon_novel;
 	private String code;
 	
-	public ToonDto() {}
+	public ToonListDto() {}
 
-	public ToonDto(int num, String title, String writer, String content, String upload, String hashtag,
+	public ToonListDto(int num, String title, String writer, String content, String upload, String hashtag,
 			String toon_novel, String code) {
 		super();
 		this.num = num;

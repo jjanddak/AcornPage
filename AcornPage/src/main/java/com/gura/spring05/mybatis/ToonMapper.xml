@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="toon">
+	<select id="getToonList" parameterType="toonDetailDto"
+		resultType="toonDetailDto">
+		select * from toondetail
+	</select>
+	<select id="getDetailList" parameterType="String"
+		resultType="toonListDto">
+		select * from (select * from toonlist where title=#{title})
+	</select>
+	<select id="getCodeDetail" parameterType="String" resultType="toonListDto">
+		select * from toonlist where code=#{code}
+	</select>
+	<update id="cashUpdate" parameterType="int">
+		update users set wallet=wallet+#{cash} where id='kapman'
+	</update>
+	<insert id="buyCodeOne" parameterType="libraryDto">
+		insert into library values(library_seq.nextval,#{id},#{code},sysdate)
+	</insert>
+	
+</mapper>
