@@ -1,5 +1,7 @@
 package com.gura.spring05.toonlist.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,13 +16,21 @@ public class StarListDaoImpl implements StarListDao{
 	
 	@Override
 	public void insert(StarPointDto dto) {
-		session.insert("star.insert", dto);
+//		StarPointDto babo=session.select("star.select", dto);
+//		if(babo.getCode()==null) {
+			session.update("star.update", dto);
+//		}else {
+//			session.insert("star.insert", dto);
+//		}
 	}
 
 	@Override
 	public void update(StarPointDto dto) {
-		session.update("star.insert", dto);
+		session.update("star.update", dto);
 		
 	}
+
+
+
 
 }

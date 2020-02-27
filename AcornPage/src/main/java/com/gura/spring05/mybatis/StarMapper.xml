@@ -2,19 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="star">
 	<insert id="insert" parameterType="starPointDto">
-		INSERT INTO star VALUES(star_seq.nextval, 
+		INSERT INTO starpoint VALUES(star_seq.nextval, 
 		#{id}, #{code}, #{starvalue}
-		);
+		)
 	</insert>
 	<update id="update" parameterType="starPointDto">
-		UPDATE star 
+		UPDATE starpoint 
 		SET starvalue=#{starvalue} 
-		WHERE id=#{id} AND code=#{code};
+		WHERE id=#{id} AND code=#{code}
 	</update>
+	<select id="select" parameterType="starPointDto" resultType="starPointDto">
+		SELECT starvalue WHERE id=#{id} FROM starpoint
+	</select>
 </mapper>
-
-
-
-
-
 

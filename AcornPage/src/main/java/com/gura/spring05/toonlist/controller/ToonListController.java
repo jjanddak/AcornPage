@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.toonlist.dto.StarPointDto;
@@ -20,8 +21,13 @@ public class ToonListController {
 	private StarListService starService;
 	
 	@RequestMapping("/toon/starAdd")
-	public String delete(@RequestParam int starValue,@RequestParam String code, HttpServletRequest request, @ModelAttribute("dto") StarPointDto dto, ModelAndView mView) {
-//		dto.set
+	public String addStar(@RequestParam int starValue,@RequestParam String code, HttpServletRequest request,ModelAndView mView) {
+		String id = (String) request.getSession().getAttribute("id");
+		StarPointDto dto= new StarPointDto();
+		dto.setCode(code);
+		dto.setId(id);
+		dto.setNum(starValue);
+		
 		starService.addStar(dto);
 		//리다일렉트 응답
 		return "redirect:/toon/detailCode.do";
