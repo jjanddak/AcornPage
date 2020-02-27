@@ -3,7 +3,7 @@
 <mapper namespace="star">
 	<insert id="insert" parameterType="starPointDto">
 		INSERT INTO starpoint VALUES(1, 
-		#{id}, #{code}, #{starvalue}
+		'구라', #{code}, #{starValue}
 		)
 	</insert>
 	<update id="update" parameterType="starPointDto">

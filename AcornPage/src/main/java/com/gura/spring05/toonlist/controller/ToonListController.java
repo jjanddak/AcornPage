@@ -18,15 +18,16 @@ import com.gura.spring05.toonlist.service.ToonListService;
 public class ToonListController {
 	@Autowired
 	private ToonListService service;
+	@Autowired
 	private StarListService starService;
 	
 	@RequestMapping("/toon/starAdd")
 	public ModelAndView addStar(HttpServletRequest request, @RequestParam String code, @RequestParam int starValue) {
 		//String id = (String) request.getSession().getAttribute("id");
 		
-		starService.addStar(dto);
+		starService.addStar(code,starValue);
 		//리다일렉트 응답
-		return new ModelAndView("toon/detailCode.do?code=${dto.getCode}") ;
+		return new ModelAndView("toon/detailCode.do?code="+code) ;
 	}
 	//만화를 눌렀을때 전체 화가 나오는 리스트 로직
 	@RequestMapping("/toon/selectedDetail")

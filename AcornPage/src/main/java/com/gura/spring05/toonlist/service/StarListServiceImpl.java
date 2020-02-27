@@ -21,7 +21,7 @@ public class StarListServiceImpl implements StarListService{
 		String id="대희짱짱맨";
 		dto.setCode(code);
 		dto.setId(id);
-		dto.setStarpoint(starValue);
+		dto.setStarValue(starValue);
 
 		dao.insert(dto);
 	}

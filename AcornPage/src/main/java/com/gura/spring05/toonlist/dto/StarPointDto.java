@@ -4,7 +4,7 @@ public class StarPointDto {
 	private int num;
 	private String id;
 	private String code;
-	private double starpoint;
+	private double starValue;
 	
 	public StarPointDto() {}
 
@@ -32,21 +32,21 @@ public class StarPointDto {
 		this.code = code;
 	}
 
-	public double getStarpoint() {
-		return starpoint;
+	public double getStarValue() {
+		return starValue;
 	}
 
-	public void setStarpoint(double starpoint) {
-		this.starpoint = starpoint;
+	public void setStarValue(double starValue) {
+		this.starValue = starValue;
 	}
 
-	public StarPointDto(int num, String id, String code, double starpoint) {
+	public StarPointDto(int num, String id, String code, double starValue) {
 		super();
 		this.num = num;
 		this.id = id;
 		this.code = code;
-		this.starpoint = starpoint;
-	};
-	
+		this.starValue = starValue;
+	}
+
 	
 }
