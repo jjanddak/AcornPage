@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <jsp:include page="../include/resource.jsp"/>
 </head>
-<body>
+<body> 
 	<div class="container">
 		<table class="table table-striped table-condensed">
 		<thead>
