@@ -5,5 +5,5 @@ import javax.servlet.http.HttpServletRequest;
 import com.gura.spring05.toonlist.dto.StarPointDto;
 
 public interface StarListService {
-	public void addStar(StarPointDto dto);
+	public void addStar(String code,int starValue);
 }

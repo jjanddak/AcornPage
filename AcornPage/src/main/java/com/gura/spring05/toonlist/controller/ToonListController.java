@@ -21,18 +21,13 @@ public class ToonListController {
 	private StarListService starService;
 	
 	@RequestMapping("/toon/starAdd")
-	public String addStar(@RequestParam int starValue,@RequestParam String code, HttpServletRequest request,ModelAndView mView) {
-		String id = (String) request.getSession().getAttribute("id");
-		StarPointDto dto= new StarPointDto();
-		dto.setCode(code);
-		dto.setId(id);
-		dto.setNum(starValue);
+	public ModelAndView addStar(HttpServletRequest request, @RequestParam String code, @RequestParam int starValue) {
+		//String id = (String) request.getSession().getAttribute("id");
 		
 		starService.addStar(dto);
 		//리다일렉트 응답
-		return "redirect:/toon/detailCode.do";
+		return new ModelAndView("toon/detailCode.do?code=${dto.getCode}") ;
 	}
-	
 	//만화를 눌렀을때 전체 화가 나오는 리스트 로직
 	@RequestMapping("/toon/selectedDetail")
 	public ModelAndView detailList(HttpServletRequest request,@RequestParam String title){

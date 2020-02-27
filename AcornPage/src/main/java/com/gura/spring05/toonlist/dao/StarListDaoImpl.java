@@ -18,9 +18,9 @@ public class StarListDaoImpl implements StarListDao{
 	public void insert(StarPointDto dto) {
 //		StarPointDto babo=session.select("star.select", dto);
 //		if(babo.getCode()==null) {
-			session.update("star.update", dto);
+//			session.update("star.update", dto);
 //		}else {
-//			session.insert("star.insert", dto);
+			session.insert("star.insert", dto);
 //		}
 	}
 

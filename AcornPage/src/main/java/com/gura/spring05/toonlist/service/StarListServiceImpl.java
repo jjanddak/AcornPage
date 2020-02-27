@@ -1,5 +1,7 @@
 package com.gura.spring05.toonlist.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,13 @@ public class StarListServiceImpl implements StarListService{
 	private StarListDao dao;
 
 	@Override
-	public void addStar(StarPointDto dto) {
+	public void addStar(String code, int starValue) {
+		StarPointDto dto=new StarPointDto();
+		String id="대희짱짱맨";
+		dto.setCode(code);
+		dto.setId(id);
+		dto.setStarpoint(starValue);
+
 		dao.insert(dto);
 	}
 }
