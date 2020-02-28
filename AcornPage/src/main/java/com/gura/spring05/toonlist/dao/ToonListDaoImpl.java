@@ -53,12 +53,6 @@ public class ToonListDaoImpl implements ToonListDao{
 	}
 
 	@Override
-	public List<ToonListDto> getSelectedList(String title) {
-		
-		return session.selectList("toon.getSelectedList",title);
-	}
-
-	@Override
 	public int getWallet(String id) {
 		
 		return session.selectOne("toon.getWallet",id);
@@ -74,6 +68,12 @@ public class ToonListDaoImpl implements ToonListDao{
 	public List<LibraryDto> checkLibrary(LibraryDto dto) {
 
 		return session.selectList("toon.checkLibrary",dto);
+	}
+
+	@Override
+	public List<ToonListDto> getUnBuyList(LibraryDto dto) {
+		
+		return session.selectList("toon.getUnBuyList",dto);
 	}
 	
 }

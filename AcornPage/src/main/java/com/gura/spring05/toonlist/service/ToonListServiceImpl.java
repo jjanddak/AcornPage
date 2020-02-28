@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.exception.NoMoneyException;
 import com.gura.spring05.library.dto.LibraryDto;
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
 import com.gura.spring05.toonlist.dao.ToonListDao;
@@ -85,32 +86,31 @@ public class ToonListServiceImpl implements ToonListService{
 
 	@Override
 	public void buyAll(HttpServletRequest request,String title, int price) {
+		//전체 구매했을때 소장테이블에서 해당아이디와 만화에 대해 소장여부 체크
+		LibraryDto dto=new LibraryDto();
 		//String id=(String)request.getSession().getAttribute("id");
-		String id="kapman";
-		
+		String id="종혁";		
+		dto.setId(id);
+		dto.setTitle(title);
+		List<ToonListDto> list=dao.getUnBuyList(dto);
+		//전달받은 금액과 유저의 잔액을 비교하여 잔액이 더 많을경우 메소드 실행
 		if(price < dao.getWallet(id)) {
-			List<ToonListDto> list=dao.getSelectedList(title);
+			System.out.println(list.size());
+			if(list.size()==0) {
+				request.setAttribute("list", list);
+				
+			}
 			for(int i=0; i<list.size(); i++) {
 				list.get(i).setId(id);
-				dao.insertCode(list.get(i));	
+				dao.insertCode(list.get(i));
+				request.setAttribute("list", list);
 			}
+		//잔액이 더 적다면 커스텀익셉션 실행
+		}else {
+			throw new NoMoneyException("캐쉬가 부족합니다. 캐쉬충전페이지로 이동하시겠습니까?");
 		}
 		
 		
 	}
-
-
-//	@Override
-//	public List<LibraryDto> checkLibrary(HttpServletRequest request,String title,String id) {
-//		LibraryDto dto=new LibraryDto();
-//		dto.setId(id);
-//		dto.setTitle(title);
-//		List<LibraryDto> list=dao.checkLibrary(dto);
-//		
-//		//request.setAttribute("libList", list);
-//		return list;
-//		
-//	}
-
 	
 }

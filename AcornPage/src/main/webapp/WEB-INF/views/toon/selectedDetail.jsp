@@ -59,8 +59,8 @@
 	    $("#AllCheck").click(function(){
 	        //클릭되었으면
 	        if($("#AllCheck").prop("checked")){
-	            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
-	            $("input[name=selectedCode]").prop("checked",true);
+	            //input태그의 name이 selectedCode인 태그들을 찾아서(disabled 제외) checked옵션을 true로 정의
+	            $("input[name=selectedCode]").not("[disabled]").prop("checked",true);
 	            //클릭이 안되있으면
 	        }else{
 	            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
@@ -69,9 +69,10 @@
 	    })
 	})
 	$("#buyAll").click(function(){
-		var allSize=${list.size()};
+		var allSize=$("input[name=selectedCode]").not("[disabled]").length;
+		var buySize=$("[disabled]").length;
 		var allValue=allSize*100;
-		var isBuy=confirm("전체 화 "+allSize+ "편을 구매하시겠습니까?\n"+allValue+"원이 차감됩니다.");
+		var isBuy=confirm("전체 화 "+allSize+ "편을 구매하시겠습니까?\n"+"총 ${list.size()} 편 중 "+buySize+" 편을 구매했습니다.\n"+allValue+"원이 차감됩니다.");
 		if(isBuy){
 			location.href="buyAll.do?title=${list[0].title}&price="+allValue;
 		}

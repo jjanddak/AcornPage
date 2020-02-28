@@ -5,6 +5,7 @@ create table toondetail(title varchar2(100),writer varchar2(100),info varchar2(1
 insert into toonDetail values('원피스','김준서','동료를 모아 모험을 떠나는 만화',sysdate);
 insert into toonDetail values('블리치','백종혁','사신대행',sysdate);
 insert into toonDetail values('나루토','김대희','졸렬잎마을 정치이야기',sysdate);
+insert into toonDetail values('클레이모어','윤지혜','내용은 나도몰라..',sysdate);
 
 //ToonList 테이블
 create table toonlist(num number,title varchar2(100),writer varchar2(100),content clob,regdate date,
@@ -24,6 +25,10 @@ insert into toonList values(3,'블리치','백종혁','asfdadsfqwf',sysdate,'ble
 insert into toonList values(1,'나루토','백종혁','asfdadsfqwf',sysdate,'nar1','코믹','toon');
 insert into toonList values(2,'나루토','백종혁','asfdadsfqwf',sysdate,'nar2','코믹','toon');
 insert into toonList values(3,'나루토','백종혁','asfdadsfqwf',sysdate,'nar3','코믹','toon');
+
+insert into toonList values(1,'클레이모어','윤지혜','asfdadsfqwf',sysdate,'클레이모어1','코믹','toon');
+insert into toonList values(2,'클레이모어','윤지혜','asfdadsfqwf',sysdate,'클레이모어2','코믹','toon');
+insert into toonList values(3,'클레이모어','윤지혜','asfdadsfqwf',sysdate,'클레이모어3','코믹','toon');
 
 //users 테이블
 create table users 

@@ -33,4 +33,7 @@
 	<select id="checkLibrary" parameterType="libraryDto" resultType="libraryDto">
 		select * from library where code in(select code from toonlist where title=#{title})and id=#{id}
 	</select>
+	<select id="getUnBuyList" parameterType="libraryDto" resultType="toonListDto">
+		select * from toonlist where code not in(select code from library where id=#{id})and title=#{title}
+	</select>
 </mapper>

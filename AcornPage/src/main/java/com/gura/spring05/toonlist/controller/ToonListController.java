@@ -78,6 +78,7 @@ public class ToonListController {
 	public ModelAndView buyAll(HttpServletRequest request,@RequestParam String title,int price) {
 		//String id=(String)request.getSession().getAttribute("id");
 		service.buyAll(request,title,price);
-		return new ModelAndView("home");
+		
+		return new ModelAndView("redirect:/home.do");
 	}
 }

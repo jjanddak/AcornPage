@@ -34,6 +34,13 @@ public class ExceptionController {
 		mView.setViewName("error/data_access");
 		return mView;
 	}
+	@ExceptionHandler(NoMoneyException.class)
+	public ModelAndView noMoney(NoMoneyException nme) {
+		ModelAndView mView=new ModelAndView();
+		mView.addObject("exception", nme);
+		mView.setViewName("error/noMoney");
+		return mView;
+	}
 	
 	/*
 	 *  @Repository 어노테이션이 작성된 Dao 에서 DB 관련 Exception 이 발생하면

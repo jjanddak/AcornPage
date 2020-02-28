@@ -20,12 +20,12 @@ public interface ToonListDao {
 	public void BuyCodeOne(LibraryDto dto);
 	
 	public LibraryDto BuyAll(LibraryDto dto);
-	
-	public List<ToonListDto> getSelectedList(String title);
-	
+		
 	public int getWallet(String id);
 	
 	public void insertCode(ToonListDto dto);
 	
 	public List<LibraryDto> checkLibrary(LibraryDto dto);
+	
+	public List<ToonListDto> getUnBuyList(LibraryDto dto);
 }
