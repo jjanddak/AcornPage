@@ -20,28 +20,28 @@
 		select id from commentlike 
 		where id=#{id} and commcode=#{commcode}
 	</select>
-	<insert id="addLike" parameterType="toonCommentDto">
+	<insert id="addLike" parameterType="commentLikeDto">
 		insert into commentlike
 		values (commentlike_seq.nextval, #{id}, #{commcode}, sysdate)
 	</insert>
-	<delete id="delLike" parameterType="toonCommentDto">
+	<delete id="delLike" parameterType="commentLikeDto">
 		delete from commentlike 
-		where id=#{id} and commcode=#{commcode}
+		where id=#{id} and commcode= #{commcode}
 	</delete>
-	<update id="upLike" parameterType="toonCommentDto">
+	<update id="upLike" parameterType="String">
 		update toon_comment 
-		set likeCount=#{likeCount}+1 
-		where commcode=#{commcode}
+		set likeCount=likeCount+1 
+		where commcode= #{commcode}
 	</update>
-	<update id="downLike" parameterType="toonCommentDto">
+	<update id="downLike" parameterType="String">
 		update toon_comment 
-		set likeCount=#{likeCount}-1
-		where commcode=#{commcode}
+		set likeCount=likeCount-1
+		where commcode= #{commcode}
 	</update>
-	<select id="getComment" parameterType="toonCommentDto" resultType="toonCommentDto">
-		SELECT num, id,code,content, likecount, commcode, regdate
-		FROM toon_comment 
-		WHERE id=#{id} and commcode=#{commcode}
+	<select id="getCommentLike" parameterType="toonCommentDto" resultType="CommentLikeDto">
+		SELECT num, id, commcode, sysdate
+		FROM  commentlike  
+		WHERE id=#{id} and commcode=  #{commcode}
 	</select>
 	
 

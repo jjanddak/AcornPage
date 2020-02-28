@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gura.spring05.ToonComment.dao.ToonCommentDao;
+import com.gura.spring05.toon.dto.CommentLikeDto;
 import com.gura.spring05.toon.dto.ToonCommentDto;
 
 @Service
@@ -44,22 +45,20 @@ public class ToonCommentServiceImpl implements ToonCommentService{
 	@Override
 	public void addLikeCount(HttpServletRequest request) {
 		String commcode=(String)request.getParameter("commcode");
+		String writer=(String)request.getParameter("writer");
 		String id=(String)request.getSession()
 				.getAttribute("id");	
 		//검증에 사용할 dto
-		ToonCommentDto dto=new ToonCommentDto();
+		CommentLikeDto dto=new CommentLikeDto();
 		dto.setId(id);
 		dto.setCommcode(commcode);
-		boolean isLiked=dao.isLiked(dto); 
-		//id로 쓴 모든 댓글 dto2
-		ToonCommentDto dto2= dao.getComment(dto);
-		
+		boolean isLiked=dao.isLiked(dto); 	
 		if(isLiked) { //라이크를 이미 눌렀다면
-			dao.downLikeCount(dto2);
+			dao.downLikeCount(commcode);
 			dao.delLikeCount(dto);
 			
 		}else {
-			dao.upLikeCount(dto2);
+			dao.upLikeCount(commcode);
 			dao.addLikeCount(dto);
 			
 		}

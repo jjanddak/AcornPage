@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.gura.spring05.toon.dto.CommentLikeDto;
 import com.gura.spring05.toon.dto.ToonCommentDto;
 @Repository
 public class ToonCommentDaoImpl implements ToonCommentDao{
@@ -29,46 +30,37 @@ public class ToonCommentDaoImpl implements ToonCommentDao{
 	}
 
 	@Override
-	public void addLikeCount(ToonCommentDto dto) {
+	public void addLikeCount(CommentLikeDto dto) {
 		session.insert("toonComment.addLike", dto );
 		
 	}
 
 	@Override
-	public void delLikeCount(ToonCommentDto dto) {
+	public void delLikeCount(CommentLikeDto dto) {
 		session.delete("toonComment.delLike",  dto);
 		
 	}
 
 	@Override
-	public boolean isLiked(ToonCommentDto dto) {
+	public boolean isLiked(CommentLikeDto dto) {
 		String id=session.selectOne("toonComment.checkLike",dto);
-		if(id==null) { //라이크를 이미 눌렀다면
+		if(id==null) { //라이크를 누르지 않았다면
 			return false;
 		}
 		return true;
 	}
 
 	@Override
-	public void upLikeCount(ToonCommentDto dto) {
-		session.update("toonComment.upLike",dto);
+	public void upLikeCount(String commcode) {
+		session.update("toonComment.upLike",commcode);
 		
 	}
 
 	@Override
-	public void downLikeCount(ToonCommentDto dto) {
-		session.update("toonComment.downLike",dto);
+	public void downLikeCount(String commcode) {
+		session.update("toonComment.downLike",commcode);
 		
 	}
-
-	@Override
-	public ToonCommentDto getComment(ToonCommentDto dto) {	
-		ToonCommentDto dto2=
-				session.selectOne("toonComment.getComment",dto);
-		return dto2;
 	
-	}
-		
-
 
 }
