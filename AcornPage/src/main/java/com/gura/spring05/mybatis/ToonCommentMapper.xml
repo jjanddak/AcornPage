@@ -16,4 +16,22 @@
 		SELECT toon_comment_seq.NEXTVAL
 		FROM DUAL
 	</select>
+	<select id="checkLike" parameterType="toonCommentDto" resultType="String">
+		select id from commentlike 
+		where id=#{id} and commcode=#{commcode}
+	</select>
+	<insert id="addLike" parameterType="toonCommentDto">
+		insert into commentlike
+		values (commentlike_seq.nextval, #{id}, #{commcode}, sysdate)
+	</insert>
+	<delete id="delLike" parameterType="toonCommentDto">
+		delete from commentlike 
+		where id=#{id} and commcode=#{commcode}
+	</delete>
+	<update id="upLike" parameterType="toonCommentDto">
+		update toon_comment 
+		set likeCount=#{likeCount}+1 
+		where commcode=#{commcode}
+	</update>
+	
 </mapper>

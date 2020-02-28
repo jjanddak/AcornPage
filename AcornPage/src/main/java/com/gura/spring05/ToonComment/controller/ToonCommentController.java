@@ -22,6 +22,13 @@ public class ToonCommentController {
 		service.saveComment(request);
 		return new ModelAndView("redirect:/home.do");
 	}
-	
+	//댓글 추천 처리
+	@RequestMapping(value = "/commentlike", 
+			method = RequestMethod.GET)
+	public ModelAndView authAddLikeCount(HttpServletRequest request) {
+		
+		service.addLikeCount(request);
+		return new ModelAndView("redirect:/home.do");
+	}
 	
 }

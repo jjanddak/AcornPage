@@ -56,7 +56,7 @@
 								<span>${tmp.id }</span>
 								<span>${tmp.regdate }</span>
 								<span>${tmp.likeCount }</span>
-								<span><button>좋아요</button></span>
+								<span><a href="commentlike.do?commcode=${tmp.commcode}">좋아요</a></span>
 							</dt>
 							<dd>
 								<pre>${tmp.content }</pre>

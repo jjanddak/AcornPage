@@ -28,4 +28,34 @@ public class ToonCommentDaoImpl implements ToonCommentDao{
 		return session.selectList("toonComment.getList",code );
 	}
 
+	@Override
+	public void addLikeCount(ToonCommentDto dto) {
+		session.insert("toonComment.addLike", dto );
+		
+	}
+
+	@Override
+	public void delLikeCount(ToonCommentDto dto) {
+		session.delete("toonComment.delLike",  dto);
+		
+	}
+
+	@Override
+	public boolean isLiked(ToonCommentDto dto) {
+		String id=session.selectOne("toonComment.checkLike",dto);
+		if(id==null) {
+			return false;
+		}else if(id.equals(dto.getId())) {
+			return true; //라이크이미해놨다면
+		}
+		return false;
+	}
+
+	@Override
+	public void upLikeCount(ToonCommentDto dto) {
+		session.update("toonComment.upLike",dto);
+		
+	}
+
+
 }

@@ -6,4 +6,6 @@ public interface ToonCommentService {
 
 	public void saveComment(HttpServletRequest request);
 
+	public void addLikeCount(HttpServletRequest request);
+
 }

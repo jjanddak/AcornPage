@@ -12,6 +12,7 @@ import com.gura.spring05.toon.dto.ToonCommentDto;
 public class ToonCommentServiceImpl implements ToonCommentService{
 	@Autowired
 	private ToonCommentDao dao;
+
 	
 	@Override
 	public void saveComment(HttpServletRequest request) {
@@ -37,8 +38,31 @@ public class ToonCommentServiceImpl implements ToonCommentService{
 		dto.setCommcode(commcode);
 		
 		//댓글 정보를 DB 에 저장한다.
-		dao.insert(dto);			
+		dao.insert(dto);					
+	}
+	
+	@Override
+	public void addLikeCount(HttpServletRequest request) {
+		String commcode=(String)request.getParameter("commcode");
+		String id=(String)request.getSession()
+				.getAttribute("id");
+		ToonCommentDto dto=new ToonCommentDto();
+		dto.setId(id);
+		dto.setCommcode(commcode);
+		boolean isLiked=dao.isLiked(dto); 
+		
+		if(isLiked) {
+			dao.delLikeCount(dto);
+			
+		}else {
+			dao.upLikeCount(dto);
+			dao.addLikeCount(dto);
+			
+		}
+
 		
 	}
+
+
 
 }
