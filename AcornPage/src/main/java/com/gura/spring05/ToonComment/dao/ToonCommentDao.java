@@ -11,5 +11,8 @@ public interface ToonCommentDao {
 	public void addLikeCount(ToonCommentDto dto);
 	public boolean isLiked(ToonCommentDto dto);
 	public void upLikeCount(ToonCommentDto dto);
-	public void delLikeCount(ToonCommentDto dto);	
+	public void delLikeCount(ToonCommentDto dto);
+	public void downLikeCount(ToonCommentDto dto);
+	public ToonCommentDto getComment(ToonCommentDto dto);
+	
 }

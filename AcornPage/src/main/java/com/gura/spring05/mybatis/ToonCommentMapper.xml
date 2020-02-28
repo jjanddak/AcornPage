@@ -5,7 +5,7 @@
 		SELECT num, id, content, likecount, commcode, regdate
 		FROM toon_comment
 		WHERE code=#{code}
-		ORDER BY likecount ASC, num ASC
+		ORDER BY likecount DESC, num DESC
 	</select>
 	<insert id="insert" parameterType="toonCommentDto">
 		INSERT INTO toon_comment
@@ -33,5 +33,16 @@
 		set likeCount=#{likeCount}+1 
 		where commcode=#{commcode}
 	</update>
+	<update id="downLike" parameterType="toonCommentDto">
+		update toon_comment 
+		set likeCount=#{likeCount}-1
+		where commcode=#{commcode}
+	</update>
+	<select id="getComment" parameterType="toonCommentDto" resultType="toonCommentDto">
+		SELECT num, id,code,content, likecount, commcode, regdate
+		FROM toon_comment 
+		WHERE id=#{id} and commcode=#{commcode}
+	</select>
 	
+
 </mapper>

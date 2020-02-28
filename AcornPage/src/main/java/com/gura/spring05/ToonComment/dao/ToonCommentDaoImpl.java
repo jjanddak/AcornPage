@@ -43,12 +43,10 @@ public class ToonCommentDaoImpl implements ToonCommentDao{
 	@Override
 	public boolean isLiked(ToonCommentDto dto) {
 		String id=session.selectOne("toonComment.checkLike",dto);
-		if(id==null) {
+		if(id==null) { //라이크를 이미 눌렀다면
 			return false;
-		}else if(id.equals(dto.getId())) {
-			return true; //라이크이미해놨다면
 		}
-		return false;
+		return true;
 	}
 
 	@Override
@@ -56,6 +54,21 @@ public class ToonCommentDaoImpl implements ToonCommentDao{
 		session.update("toonComment.upLike",dto);
 		
 	}
+
+	@Override
+	public void downLikeCount(ToonCommentDto dto) {
+		session.update("toonComment.downLike",dto);
+		
+	}
+
+	@Override
+	public ToonCommentDto getComment(ToonCommentDto dto) {	
+		ToonCommentDto dto2=
+				session.selectOne("toonComment.getComment",dto);
+		return dto2;
+	
+	}
+		
 
 
 }
