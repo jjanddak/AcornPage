@@ -12,8 +12,6 @@
 	    <typeAlias type="com.gura.spring05.cafe.dto.CafeCommentDto" alias="cafeCommentDto"/>
 	    <typeAlias type="com.gura.spring05.shop.dto.ShopDto" alias="shopDto"/>
 	    <typeAlias type="com.gura.spring05.shop.dto.OrderDto" alias="orderDto"/>
-	    <typeAlias type="com.gura.spring05.info.dto.InfoDto" alias="infoDto"/>
-	    <typeAlias type="com.gura.spring05.toon.dto.ToonDto" alias="toonDto"/>
 		<typeAlias type="com.gura.spring05.toon.dto.ToonCommentDto" alias="toonCommentDto"/>
 	    <typeAlias type="com.gura.spring05.toondetail.dto.ToonDetailDto" alias="toonDetailDto"/>
 	    <typeAlias type="com.gura.spring05.toonlist.dto.ToonListDto" alias="toonListDto"/>
