@@ -84,7 +84,7 @@
 		if(isLogin==false){
 			var isMove=confirm("로그인 페이지로 이동 하시겠습니까?");
 			if(isMove){
-				location.href="home.do";
+				location.href="users/loginform.do";
 			}
 		}
 	});
