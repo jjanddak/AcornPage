@@ -1,12 +1,12 @@
-package com.gura.spring05.toonlist.dto;
+package com.gura.spring05.star.dto;
 
-public class StarPointDto {
+public class StarDto {
 	private int num;
 	private String id;
 	private String code;
 	private double starValue;
 	
-	public StarPointDto() {}
+	public StarDto() {}
 
 	public int getNum() {
 		return num;
@@ -40,7 +40,7 @@ public class StarPointDto {
 		this.starValue = starValue;
 	}
 
-	public StarPointDto(int num, String id, String code, double starValue) {
+	public StarDto(int num, String id, String code, double starValue) {
 		super();
 		this.num = num;
 		this.id = id;

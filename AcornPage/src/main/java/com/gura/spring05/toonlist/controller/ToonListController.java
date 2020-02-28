@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gura.spring05.toonlist.dto.StarPointDto;
-import com.gura.spring05.toonlist.service.StarListService;
+import com.gura.spring05.star.dto.StarDto;
+import com.gura.spring05.star.service.StarService;
 import com.gura.spring05.toonlist.service.ToonListService;
 
 @Controller
@@ -19,7 +19,7 @@ public class ToonListController {
 	@Autowired
 	private ToonListService service;
 	@Autowired
-	private StarListService starService;
+	private StarService starService;
 	
 	@RequestMapping("/toon/starAdd")
 	public ModelAndView addStar(HttpServletRequest request, @RequestParam String code, @RequestParam int starValue) {
