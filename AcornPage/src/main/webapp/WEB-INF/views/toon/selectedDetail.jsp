@@ -27,8 +27,8 @@
 			</tr>
 		</thead>
 		<tbody>
-		<c:forEach var="tmp2" items="${libList }">
-		<c:forEach var="tmp" items="${requestScope.list }">
+		
+		<c:forEach var="tmp" items="${list }">
 			<tr>
 				<td>${tmp.num }</td>
 				<td><!-- ${tmp.writer } -->썸네일</td>
@@ -37,19 +37,19 @@
 						${tmp.title }
 					</a>
 				</td>
-					<c:choose>
-						<c:when test="${tmp.code eq tmp2.code}">
-							<td>소장중</td>
-							<td><input type="checkbox" name="selectedCode" value="${tmp.code }" disabled/></td>
-						</c:when>
-						<c:otherwise>
-							<td><a class="btn" href="buyCodeOne.do?code=${tmp.code }">구매</a></td>
-							<td><input type="checkbox" name="selectedCode" value="${tmp.code }"/></td>
-						</c:otherwise>
-					</c:choose>					
+				<c:choose>
+					<c:when test="${tmp.isBuy }">
+						<td>소장중</td>
+						<td><input type="checkbox" name="selectedCode" value="${tmp.code }" disabled/></td>
+					</c:when>
+					<c:otherwise>
+						<td><a class="btn" href="buyCodeOne.do?code=${tmp.code }">구매</a></td>
+						<td><input type="checkbox" name="selectedCode" value="${tmp.code }"/></td>
+					</c:otherwise>
+				</c:choose>		
 			</tr>
 		</c:forEach>
-		</c:forEach>	
+			
 		</tbody>
 	</table>
 	</div>

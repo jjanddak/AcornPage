@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.library.dto.LibraryDto;
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
@@ -31,11 +32,28 @@ public class ToonListServiceImpl implements ToonListService{
 
 	@Override
 	public void getDetailList(HttpServletRequest request, String title) {
-		ToonListDto dto=new ToonListDto();
-		// startRowNum 과 endRowNum 에 해당하는 카페글 목록을 select 해 온다.
+
 		List<ToonListDto> list=dao.getDetailList(title);
-		//view 페이지에서 필요한 값을 request 에 담고 
-		request.setAttribute("list", list);		
+		LibraryDto dto=new LibraryDto();
+		String id="kapman";
+		dto.setId(id);
+		dto.setTitle(title);
+		List<LibraryDto> libList=dao.checkLibrary(dto);
+		
+		for(int i=0; i<list.size(); i++) {
+			
+			if(libList.size()==0) {
+				request.setAttribute("list", list);
+				break;
+			}
+			for(int j=0; j<libList.size(); j++) {
+				if(list.get(i).getCode().equals(libList.get(j).getCode())){
+					list.get(i).setIsBuy(true);
+					request.setAttribute("list", list);
+				}
+			}
+		}
+		
 	}
 
 	@Override
@@ -82,16 +100,17 @@ public class ToonListServiceImpl implements ToonListService{
 	}
 
 
-	@Override
-	public void checkLibrary(HttpServletRequest request,String title,String id) {
-		LibraryDto dto=new LibraryDto();
-		dto.setId(id);
-		dto.setTitle(title);
-		List<LibraryDto> list=dao.checkLibrary(dto);
-		
-		request.setAttribute("libList", list);
-		
-	}
+//	@Override
+//	public List<LibraryDto> checkLibrary(HttpServletRequest request,String title,String id) {
+//		LibraryDto dto=new LibraryDto();
+//		dto.setId(id);
+//		dto.setTitle(title);
+//		List<LibraryDto> list=dao.checkLibrary(dto);
+//		
+//		//request.setAttribute("libList", list);
+//		return list;
+//		
+//	}
 
 	
 }

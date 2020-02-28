@@ -1,8 +1,11 @@
 package com.gura.spring05.toonlist.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.gura.spring05.library.dto.LibraryDto;
+import com.gura.spring05.toonlist.dto.ToonListDto;
 
 public interface ToonListService {
 	//ToonDetail 리스트를 가져오는 메소드
@@ -18,5 +21,5 @@ public interface ToonListService {
 	
 	public void buyAll(HttpServletRequest request,String title,int price);
 	
-	public void checkLibrary(HttpServletRequest request,String title,String id);
+	//public List<LibraryDto> checkLibrary(HttpServletRequest request,String title,String id);
 }
