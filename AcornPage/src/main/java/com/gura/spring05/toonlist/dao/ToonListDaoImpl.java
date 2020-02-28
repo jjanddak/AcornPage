@@ -69,6 +69,11 @@ public class ToonListDaoImpl implements ToonListDao{
 		
 		session.insert("toon.insertCode",dto);
 	}
-	
+
+	@Override
+	public List<LibraryDto> checkLibrary(LibraryDto dto) {
+
+		return session.selectList("toon.checkLibrary",dto);
+	}
 	
 }

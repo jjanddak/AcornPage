@@ -24,7 +24,13 @@ public class ToonListController {
 		// HttpServletRequest 객체를 서비스에 넘겨 주면서
 		// 비즈니스 로직을 수행하고 
 		service.getDetailList(request,title);
-		
+		//String id=(String)request.getSession().getAttribute("id");
+		String id="kapman";
+		//아이디가 로그인 됐다면
+		if(id!=null) {
+			//해당 아이디로 해당 타이틀에 구매한 여부가 존재하는지 서비스로직체크
+			service.checkLibrary(request,title,id);
+		}
 		// view page 로 forward 이동해서 글 목록 출력하기 
 		return new ModelAndView("toon/selectedDetail");
 	}
@@ -62,7 +68,7 @@ public class ToonListController {
 	@RequestMapping("/toon/buyCodeOne")
 	public ModelAndView buyCode(HttpServletRequest request,@ModelAttribute LibraryDto dto,@RequestParam String code) {
 		//String id=(String)request.getSession().getAttribute("id");
-		String id="백조장";
+		String id="kapman";
 		dto.setId(id);
 		//dto.setCode((String)request.getAttribute("code"));
 		dto.setCode(code);

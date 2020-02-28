@@ -30,4 +30,7 @@
 	<insert id="insertCode" parameterType="toonListDto">
 		insert into library values(1,#{id},#{code},sysdate)
 	</insert>
+	<select id="checkLibrary" parameterType="libraryDto" resultType="libraryDto">
+		select * from library where code in(select code from toonlist where title=#{title})and id=#{id}
+	</select>
 </mapper>

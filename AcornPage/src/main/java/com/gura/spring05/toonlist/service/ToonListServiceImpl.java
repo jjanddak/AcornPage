@@ -81,5 +81,17 @@ public class ToonListServiceImpl implements ToonListService{
 		
 	}
 
+
+	@Override
+	public void checkLibrary(HttpServletRequest request,String title,String id) {
+		LibraryDto dto=new LibraryDto();
+		dto.setId(id);
+		dto.setTitle(title);
+		List<LibraryDto> list=dao.checkLibrary(dto);
+		
+		request.setAttribute("libList", list);
+		
+	}
+
 	
 }

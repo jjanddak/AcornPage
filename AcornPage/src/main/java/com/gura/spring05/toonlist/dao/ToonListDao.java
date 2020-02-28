@@ -26,4 +26,6 @@ public interface ToonListDao {
 	public int getWallet(String id);
 	
 	public void insertCode(ToonListDto dto);
+	
+	public List<LibraryDto> checkLibrary(LibraryDto dto);
 }

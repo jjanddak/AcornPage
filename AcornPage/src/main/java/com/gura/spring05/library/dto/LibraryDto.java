@@ -5,10 +5,11 @@ public class LibraryDto {
 	private String id;
 	private String code;
 	private String regdate;
+	private String title;
 	
 	public LibraryDto() {}
 
-	public LibraryDto(int num, String id, String code, String regdate) {
+	public LibraryDto(int num, String id, String code, String regdate,String title) {
 		super();
 		this.num = num;
 		this.id = id;
@@ -46,6 +47,14 @@ public class LibraryDto {
 
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 	

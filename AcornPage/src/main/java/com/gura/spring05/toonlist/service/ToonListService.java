@@ -17,4 +17,6 @@ public interface ToonListService {
 	public void buyCodeOne(LibraryDto dto);
 	
 	public void buyAll(HttpServletRequest request,String title,int price);
+	
+	public void checkLibrary(HttpServletRequest request,String title,String id);
 }
