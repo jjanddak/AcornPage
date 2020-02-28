@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="toonComment">
-	<select id="getList" parameterType="int" resultType="toonCommentDto">
-		SELECT num, id, code, content, likecount, commcode, regdate
+	<select id="getList" parameterType="string" resultType="toonCommentDto">
+		SELECT num, id, content, likecount, commcode, regdate
 		FROM toon_comment
+		WHERE code=#{code}
 		ORDER BY likecount ASC, num ASC
 	</select>
 	<insert id="insert" parameterType="toonCommentDto">

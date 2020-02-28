@@ -40,27 +40,8 @@
 	</div>
 </div>
 	<div class="comments">
-		<ul>
-		<c:forEach items="${toonCommentList }" var="tmp">
-						<dl>
-							<dt>				
-								<span>${tmp.id }</span>
-								<span>${tmp.regdate }</span>
-								<span>${tmp.likeCount }</span>
-							</dt>
-							<dd>
-								<pre>${tmp.content }</pre>
-							</dd>
-						</dl>
-						<form class="comment-insert-form" action="comment_insert.do" method="post">
-							<textarea name="content"><c:if test="${empty id }">로그인이 필요합니다.</c:if></textarea>
-							
-							<button type="submit">등록</button>
-						</form>					
-		</c:forEach>
-		</ul>
-		<div class="clearfix"></div>	
 		<!-- 댓글을 작성할수 있는 폼 -->
+		<p>의견쓰기</p>
 		<div class="comment_form">
 			<form action="comment_insert.do" method="post">
 				<textarea name="content"><c:if test="${empty id }">로그인이 필요합니다.</c:if></textarea>
@@ -68,6 +49,22 @@
 			</form>
 		</div>
 	</div>
+		<ul>
+		<c:forEach items="${toonCommentList }" var="tmp">
+						<dl>
+							<dt>				
+								<span>${tmp.id }</span>
+								<span>${tmp.regdate }</span>
+								<span>${tmp.likeCount }</span>
+								<span><button>좋아요</button></span>
+							</dt>
+							<dd>
+								<pre>${tmp.content }</pre>
+							</dd>
+						</dl>		
+		</c:forEach>
+		</ul>
+
 </div>
 <script>	
 	//폼에 submit 이벤트가 일어 났을때 실행할 함수 등록 

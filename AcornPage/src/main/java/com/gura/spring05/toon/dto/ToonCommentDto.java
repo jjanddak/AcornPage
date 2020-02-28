@@ -5,19 +5,19 @@ public class ToonCommentDto {
 	private String id;
 	private String code;
 	private String content;
-	private int likecount;
+	private int likeCount;
 	private String commcode;
 	private String regdate;
 	
 	public ToonCommentDto(){};
-	public ToonCommentDto(int num, String id, String code, String content, int likecount, String commcode,
+	public ToonCommentDto(int num, String id, String code, String content, int likeCount, String commcode,
 			String regdate) {
 		super();
 		this.num = num;
 		this.id = id;
 		this.code = code;
 		this.content = content;
-		this.likecount = likecount;
+		this.likeCount = likeCount;
 		this.commcode = commcode;
 		this.regdate = regdate;
 	}
@@ -45,11 +45,11 @@ public class ToonCommentDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getLikecount() {
-		return likecount;
+	public int getLikeCount() {
+		return likeCount;
 	}
-	public void setLikecount(int likecount) {
-		this.likecount = likecount;
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
 	}
 	public String getCommcode() {
 		return commcode;

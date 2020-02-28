@@ -1,5 +1,7 @@
 package com.gura.spring05.ToonComment.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,6 +21,11 @@ public class ToonCommentDaoImpl implements ToonCommentDao{
 	@Override
 	public void insert(ToonCommentDto dto) {
 		session.insert("toonComment.insert", dto);	
+	}
+
+	@Override
+	public List<ToonCommentDto> getList(String code) {
+		return session.selectList("toonComment.getList",code );
 	}
 
 }
