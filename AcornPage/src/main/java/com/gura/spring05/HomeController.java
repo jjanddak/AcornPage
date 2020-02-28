@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.cafe.dto.CafeCommentDto;
 import com.gura.spring05.toonlist.service.ToonListService;
 
 /*
@@ -32,6 +33,7 @@ public class HomeController {
 		
 		// view page 로 forward 이동해서 글 목록 출력하기 
 		return new ModelAndView("home");
+
 	}
 }
 

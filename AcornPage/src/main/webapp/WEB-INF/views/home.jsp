@@ -41,11 +41,12 @@
 </div>
 	<div class="comments">
 		<ul>
-		<c:forEach items="${commentList }" var="tmp">
+		<c:forEach items="${toonCommentList }" var="tmp">
 						<dl>
 							<dt>				
-								<span>${tmp.writer }</span>
+								<span>${tmp.id }</span>
 								<span>${tmp.regdate }</span>
+								<span>${tmp.likeCount }</span>
 							</dt>
 							<dd>
 								<pre>${tmp.content }</pre>
@@ -55,9 +56,7 @@
 							<textarea name="content"><c:if test="${empty id }">로그인이 필요합니다.</c:if></textarea>
 							
 							<button type="submit">등록</button>
-						</form>	
-	
-					</li>				
+						</form>					
 		</c:forEach>
 		</ul>
 		<div class="clearfix"></div>	
