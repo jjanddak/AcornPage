@@ -38,9 +38,13 @@ public class ToonupController {
 	@RequestMapping(value = "/users/toonupload", method = RequestMethod.POST)
 	public ModelAndView authUpload(HttpServletRequest request,
 			@ModelAttribute ToonupDto dto) {
+		//세션에 있는 글작성자의 아이디
+		String writer="백";
+		//CafeDto 객체에 담고 
+		dto.setWriter(writer);
+		//서비스를 이용해서 DB 에 저장
+		service.saveToon(dto);
 		
-		service.saveToon(request, dto);
-		
-		return new ModelAndView("redirect:home.do");
+		return new ModelAndView("redirect:../home.do");
 	}
 }
