@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <jsp:include page="../include/resource.jsp"/>
+
 </head>
 <body>
 	<div class="container">
@@ -54,6 +55,7 @@
 	</table>
 	</div>
 	<script>
+
 	$(document).ready(function(){
 	    //최상단 체크박스 클릭
 	    $("#AllCheck").click(function(){
@@ -77,8 +79,29 @@
 			location.href="buyAll.do?title=${list[0].title}&price="+allValue;
 		}
 	});
-	
-	
+	$("#buyEach").click(function(){
+		var eachSize=$("input[name=selectedCode]:checked").length;
+		var allValue=eachSize*100;
+		var arrCode=[];
+		$("input[name=selectedCode]:checked").each(function(i){
+
+			arrCode.push($(this).val());
+
+			});
+		var isBuy=confirm("선택한 화 "+eachSize+ "편을 구매하시겠습니까?\n"+allValue+"원이 차감됩니다.");
+		if(isBuy){
+			$.ajax({
+				url: 'buyEach'
+				, type: 'post'
+				, dataType: 'text'
+				, data:{
+					arrEachCode: arrCode
+					
+				}
+			});
+		}
+	})
+
 	</script>
 </body>
 </html>

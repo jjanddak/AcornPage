@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.library.dto.LibraryDto;
@@ -81,4 +82,14 @@ public class ToonListController {
 		
 		return new ModelAndView("redirect:/home.do");
 	}
+	
+	@RequestMapping(value="/toon/buyEach", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView buyEach(HttpServletRequest request,@RequestParam(value="arrEachCode[]")List<String> eachCode,ModelAndView mView) {
+		System.out.println(eachCode.get(0));
+		mView.addObject("eachCode",eachCode);
+		mView.setViewName("toon/buyEach");
+		return mView;
+	}
+	
 }
