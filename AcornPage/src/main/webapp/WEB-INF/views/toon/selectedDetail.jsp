@@ -91,13 +91,18 @@
 		var isBuy=confirm("선택한 화 "+eachSize+ "편을 구매하시겠습니까?\n"+allValue+"원이 차감됩니다.");
 		if(isBuy){
 			$.ajax({
-				url: 'buyEach'
-				, type: 'post'
-				, dataType: 'text'
-				, data:{
-					arrEachCode: arrCode
-					
-				}
+				url: "buyEach.do",
+				type: "post",
+				dataType: "text",
+				data:
+					{"arrEachCode": arrCode},
+				success:function(responseData){
+					// responseData : {isSuccess:true}
+					if(responseData.isSuccess){
+						location.reload();
+					}
+				}	
+				
 			});
 		}
 	})

@@ -28,4 +28,6 @@ public interface ToonListDao {
 	public List<LibraryDto> checkLibrary(LibraryDto dto);
 	
 	public List<ToonListDto> getUnBuyList(LibraryDto dto);
+	
+	public void buyEach(LibraryDto dto);
 }

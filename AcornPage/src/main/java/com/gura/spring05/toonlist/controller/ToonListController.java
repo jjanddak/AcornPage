@@ -1,6 +1,8 @@
 package com.gura.spring05.toonlist.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -82,14 +84,13 @@ public class ToonListController {
 		
 		return new ModelAndView("redirect:/home.do");
 	}
-	
-	@RequestMapping(value="/toon/buyEach", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView buyEach(HttpServletRequest request,@RequestParam(value="arrEachCode[]")List<String> eachCode,ModelAndView mView) {
-		System.out.println(eachCode.get(0));
-		mView.addObject("eachCode",eachCode);
-		mView.setViewName("toon/buyEach");
-		return mView;
+	@RequestMapping(value="/toon/buyEach", method=RequestMethod.POST)
+	public Map<String, Object> buyEach(HttpServletRequest request,@RequestParam(value="arrEachCode[]")List<String> eachCode) {
+		service.buyEach(request, eachCode);
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("isSuccess", true);
+		return map;
 	}
 	
 }

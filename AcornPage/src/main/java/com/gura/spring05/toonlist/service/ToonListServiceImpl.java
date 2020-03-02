@@ -112,5 +112,22 @@ public class ToonListServiceImpl implements ToonListService{
 		
 		
 	}
+
+
+	@Override
+	public void buyEach(HttpServletRequest request, List<String> eachCode) {
+		System.out.println(eachCode.size());
+		
+		for(int i=0; i<eachCode.size(); i++) {
+			LibraryDto dto=new LibraryDto();
+			//String id=(String)request.getSession().getAttribute("id");
+			String id="kapman";
+			dto.setId(id);
+			dto.setCode(eachCode.get(i));
+			System.out.println(eachCode.get(i));
+			dao.buyEach(dto);
+		}
+				
+	}
 	
 }

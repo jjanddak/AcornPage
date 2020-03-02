@@ -36,4 +36,7 @@
 	<select id="getUnBuyList" parameterType="libraryDto" resultType="toonListDto">
 		select * from toonlist where code not in(select code from library where id=#{id})and title=#{title}
 	</select>
+	<insert id="buyEach" parameterType="libraryDto">
+		insert into library values(library_seq.nextval,#{id},#{code},sysdate)
+	</insert>
 </mapper>

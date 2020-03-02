@@ -75,5 +75,12 @@ public class ToonListDaoImpl implements ToonListDao{
 		
 		return session.selectList("toon.getUnBuyList",dto);
 	}
+
+	@Override
+	public void buyEach(LibraryDto dto) {
+		System.out.println(dto.getCode()+dto.getId());
+		session.insert("toon.buyEach",dto);
+		
+	}
 	
 }
