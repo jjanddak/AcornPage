@@ -20,7 +20,7 @@ public class StarDaoImpl implements StarDao{
 	}
 
 	@Override
-	public void insert(StarDto dto) {
+	public void insert(StarDto dto) { //insert
 		session.insert("star.insert", dto);
 	}
 
