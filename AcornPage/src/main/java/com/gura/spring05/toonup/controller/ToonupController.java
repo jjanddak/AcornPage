@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gura.spring05.file.dto.FileDto;
-import com.gura.spring05.file.service.FileService;
+import com.gura.spring05.toonup.dto.ToonupDto;
+import com.gura.spring05.toonup.service.ToonupService;
 
 @Controller
 public class ToonupController {
 	@Autowired 
-	private FileService service;
+	private ToonupService service;
 	
 //	//파일 목록 보기 요청 처리 
 //	@RequestMapping("/file/list")
@@ -33,14 +33,14 @@ public class ToonupController {
 		
 		return new ModelAndView("users/toonup");
 	}
-//	
-//	//파일 업로드 요청 처리
-//	@RequestMapping(value = "/file/upload", method = RequestMethod.POST)
-//	public ModelAndView authUpload(HttpServletRequest request,
-//			@ModelAttribute FileDto dto) {
-//		
-//		service.saveFile(request, dto);
-//		
-//		return new ModelAndView("redirect:/file/list.do");
-//	}
+	
+	//파일 업로드 요청 처리
+	@RequestMapping(value = "/users/toonupload", method = RequestMethod.POST)
+	public ModelAndView authUpload(HttpServletRequest request,
+			@ModelAttribute ToonupDto dto) {
+		
+		service.saveToon(request, dto);
+		
+		return new ModelAndView("redirect:home.do");
+	}
 }

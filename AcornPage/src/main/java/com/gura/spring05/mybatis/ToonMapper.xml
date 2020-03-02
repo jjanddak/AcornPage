@@ -19,4 +19,9 @@
 		insert into library values(library_seq.nextval,#{id},#{code},sysdate)
 	</insert>
 	
+	<insert id="upload" parameterType="toonupDto">
+		insert into toonlist values (toonlist_seq.nextval,#{title},
+		#{writer}, #{content}, sysdate, #{title}||toonlist_seq.val)
+	</insert>
+	
 </mapper>
