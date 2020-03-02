@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,12 +22,14 @@ public class ToonListController {
 	@Autowired
 	private StarService starService;
 	
-	@RequestMapping("/toon/starAdd")
-	public ModelAndView addStar(HttpServletRequest request, @RequestParam String code, @RequestParam int starValue) {
-		
+	@RequestMapping(value="/toon/starAdd", method=RequestMethod.GET)
+	public ModelAndView authAddStar(HttpServletRequest request, @RequestParam String code, @RequestParam int starValue) {
+
 		starService.addStar(code,starValue,request);
+		String loc=code;
+
+		return new ModelAndView("toon/detailCode.do?code="+loc);
 		//리다일렉트 응답
-		return new ModelAndView("toon/detailCode.do?code="+code) ;
 	}
 	//만화를 눌렀을때 전체 화가 나오는 리스트 로직
 	@RequestMapping("/toon/selectedDetail")

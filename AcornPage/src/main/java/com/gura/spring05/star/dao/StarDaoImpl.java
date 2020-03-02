@@ -13,8 +13,8 @@ public class StarDaoImpl implements StarDao{
 	private SqlSession session;
 
 	@Override
-	public String select(String inputId) {
-		String starValueResult=session.selectOne("star.select", inputId);
+	public String select(StarDto dto) {
+		String starValueResult=session.selectOne("star.selectStarValue", dto);
 		//select 된 비밀번호를 리턴해준다. 
 		return starValueResult;
 	}

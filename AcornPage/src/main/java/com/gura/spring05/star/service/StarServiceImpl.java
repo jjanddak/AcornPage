@@ -23,8 +23,8 @@ public class StarServiceImpl implements StarService{
 		dto.setCode(code);
 		dto.setStarValue(starValue);
 		
-		String starValueResult=dao.select(dto.getId());
-		if(starValueResult==null) {
+		String starValueResult=dao.select(dto);
+		if(starValueResult==null||starValueResult=="") {
 			dao.insert(dto);
 		}else if(starValueResult!=null){
 			dao.update(dto);
