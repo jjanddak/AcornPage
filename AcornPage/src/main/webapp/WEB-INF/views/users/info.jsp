@@ -29,21 +29,6 @@
 			<td>${dto.id }</td>
 		</tr>
 		<tr>
-			<th>프로필 이미지</th>
-			<td>
-				<a href="javascript:" id="profileLink">
-					<c:choose>
-						<c:when test="${ empty dto.profile }">
-							<img src="${pageContext.request.contextPath }/resources/images/default_user.jpeg"/>
-						</c:when>
-						<c:otherwise>
-							<img src="${pageContext.request.contextPath }${dto.profile}"/>
-						</c:otherwise>
-					</c:choose>
-				</a>
-			</td>
-		</tr>
-		<tr>
 			<th>비밀번호</th>
 			<td><a href="pwd_updateform.do">수정하기</a></td>
 		</tr>

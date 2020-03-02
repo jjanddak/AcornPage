@@ -3,6 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<!-- null에러를 처리하기위한 셋팅 -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
 	<!-- 자주 사용하는 type 의 별칭 지정하기 -->
 	<typeAliases>
 		<typeAlias type="com.gura.spring05.member.dto.MemberDto" alias="memberDto"/>

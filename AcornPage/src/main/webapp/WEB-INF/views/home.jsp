@@ -26,7 +26,7 @@
 	<div class="bestList" style="width:100%; height:500px;">
 		<ul>
 			<c:forEach var="tmp" items="${requestScope.list }">
-				<a href="toon/selectedDetail.do?title=${tmp.title }">
+				<a href="toon/selectedDetail.do?title="+encodeURI(${tmp.title })>
 				<li>
 					<div class="list" style="width:100%; height:150px; border:1px solid blue;">
 						<p>${tmp.title }</p>
