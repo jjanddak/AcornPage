@@ -4,5 +4,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+		<!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"></property>
+    <property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+    mapperLocations  속성 추가
+    <property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
+</bean> -->
 </beans>

@@ -23,9 +23,8 @@ public class ToonListController {
 	
 	@RequestMapping("/toon/starAdd")
 	public ModelAndView addStar(HttpServletRequest request, @RequestParam String code, @RequestParam int starValue) {
-		//String id = (String) request.getSession().getAttribute("id");
 		
-		starService.addStar(code,starValue);
+		starService.addStar(code,starValue,request);
 		//리다일렉트 응답
 		return new ModelAndView("toon/detailCode.do?code="+code) ;
 	}

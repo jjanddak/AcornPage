@@ -14,7 +14,7 @@
 	    <typeAlias type="com.gura.spring05.shop.dto.OrderDto" alias="orderDto"/>
 	    <typeAlias type="com.gura.spring05.toondetail.dto.ToonDetailDto" alias="toonDetailDto"/>
 	    <typeAlias type="com.gura.spring05.toonlist.dto.ToonListDto" alias="toonListDto"/>
-	 <typeAlias type="com.gura.spring05.toonlist.dto.StarPointDto" alias="starPointDto"/>
+	 <typeAlias type="com.gura.spring05.star.dto.StarDto" alias="starDto"/>
 	</typeAliases>
 
 	<!-- mapper 설정 -->

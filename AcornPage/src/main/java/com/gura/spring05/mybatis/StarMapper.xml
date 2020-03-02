@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="star">
-	<insert id="insert" parameterType="starPointDto">
-		INSERT INTO starpoint VALUES(1, 
-		'구라', #{code}, #{starValue}
+	<insert id="insert" parameterType="starDto">
+		INSERT INTO star VALUES(
+		star_seq.NEXTVAL, #{id}, #{code}, #{starValue}
 		)
 	</insert>
-	<update id="update" parameterType="starPointDto">
-		UPDATE starpoint 
+	<update id="update" parameterType="starDto">
+		UPDATE star
 		SET starvalue=#{starvalue} 
 		WHERE id=#{id} AND code=#{code}
 	</update>
-	<select id="select" parameterType="starPointDto" resultType="starPointDto">
-		SELECT starvalue WHERE id=#{id} FROM starpoint
+	<select id="selectStarValue" parameterType="String" resultType="String">
+		SELECT starvalue 
+		FROM star
+		WHERE id=#{inputId}
 	</select>
 </mapper>
 

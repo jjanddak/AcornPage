@@ -16,13 +16,18 @@ public class StarServiceImpl implements StarService{
 	private StarDao dao;
 
 	@Override
-	public void addStar(String code, int starValue) {
+	public void addStar(String code, int starValue,HttpServletRequest request) {
+		String id = (String) request.getSession().getAttribute("id");
 		StarDto dto=new StarDto();
-		String id="대희짱짱맨";
-		dto.setCode(code);
 		dto.setId(id);
+		dto.setCode(code);
 		dto.setStarValue(starValue);
-
-		dao.insert(dto);
+		
+		String starValueResult=dao.select(dto.getId());
+		if(starValueResult==null) {
+			dao.insert(dto);
+		}else if(starValueResult!=null){
+			dao.update(dto);
+		}
 	}
 }
