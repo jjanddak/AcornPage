@@ -30,17 +30,15 @@
 		</tr>
 		<tr>
 			<th>구분</th>
-			<td>	
-						
 				<c:choose>
-					<c:when test="${dto.isWriter eq 'Y'} ">
-						작가(writer)
+					<c:when test="${dto.isWriter eq 'Y' }">
+					<td>작가(writer)</td>
 					</c:when>
 					<c:otherwise>
-						독자(reader)
+					<td>독자(reader)</td>
 					</c:otherwise>
-				</c:choose>
-			</td>
+				</c:choose>		
+			
 		</tr>
 		<tr>
 			<th>프로필 이미지</th>
@@ -59,7 +57,7 @@
 		</tr>
 		<tr>
 			<th>캐쉬</th>
-			<td>${dto.wallet}</td>
+			<td>${dto.wallet}</td> 
 		</tr>
 		<tr>
 			<th>비밀번호</th>
