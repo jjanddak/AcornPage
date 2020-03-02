@@ -53,8 +53,8 @@
 		</div>
 		<div class="form-group">
 			<label class="control-label" for="isWriter">당신은 누구입니까?</label><br/>
-				<input type="radio" name="isWriter" value="true"/>작가<br/>
-				<input type="radio" name="isWriter" value="false" checked="checked"/>독자	
+				<input type="radio" name="isWriter" value="Y"/>작가<br/>
+				<input type="radio" name="isWriter" value="N" checked="checked"/>독자	
 		</div>
 		<button disabled="disabled" class="btn btn-primary" type="submit">가입</button>
 		<button class="btn btn-warning" type="reset">취소</button>
