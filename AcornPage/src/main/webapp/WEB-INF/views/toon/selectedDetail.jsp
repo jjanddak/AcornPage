@@ -55,7 +55,6 @@
 	</table>
 	</div>
 	<script>
-
 	$(document).ready(function(){
 	    //최상단 체크박스 클릭
 	    $("#AllCheck").click(function(){
@@ -99,11 +98,12 @@
 				success:function(responseData){
 					// responseData : {isSuccess:true}
 					if(responseData.isSuccess){
-						location.reload();
+						alert(eachSize+" 편 구매했습니다.");
 					}
 				}	
 				
 			});
+			location.reload();
 		}
 	})
 
