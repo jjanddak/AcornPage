@@ -17,7 +17,7 @@
 		WHERE id=#{inputId}
 	</select>
 	<select id="getData" parameterType="String" resultType="usersDto">
-		SELECT id,pwd,email,regdate,profile
+		SELECT id,pwd,email,regdate,profile,isWriter,wallet
 		FROM users
 		WHERE id=#{id}
 	</select>

@@ -30,7 +30,8 @@
 		</tr>
 		<tr>
 			<th>구분</th>
-			<td>				
+			<td>	
+						
 				<c:choose>
 					<c:when test="${dto.isWriter eq 'Y'} ">
 						작가(writer)
@@ -55,6 +56,10 @@
 					</c:choose>
 				</a>
 			</td>
+		</tr>
+		<tr>
+			<th>캐쉬</th>
+			<td>${dto.wallet}</td>
 		</tr>
 		<tr>
 			<th>비밀번호</th>
