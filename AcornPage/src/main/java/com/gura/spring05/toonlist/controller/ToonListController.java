@@ -51,7 +51,7 @@ public class ToonListController {
 	//캐쉬 충전하기 버튼을 눌렀을때 캐쉬충전하는 로직
 	@RequestMapping("/cash/cashcharge")
 	public ModelAndView chargeCash(HttpServletRequest request,@RequestParam int cash) {
-
+		//아아 요거는 지우길
 		service.cashAdd(request, cash);
 		
 		return new ModelAndView("cash/checkcash");
