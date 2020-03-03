@@ -39,14 +39,22 @@
 			<label class="control-label" for="pwd2">비밀번호 확인</label>
 			<input class="form-control" type="password" id="pwd2" name="pwd2"/>
 		</div>
+		<!-- 이메일 -->
+		<div class="form-group has-feedback">
+			<label class="control-label" for="email">이메일</label>
+			<input class="form-control" type="email" id="email" name="email" />
+			<p class="help-block" id="email_notmatch">이메일 형식에 맞게 입력하세요</p>
+			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span class="glyphicon glyphicon-ok form-control-feedback"></span>
+		</div>
 		<div class="form-group has-feedback">
 			<label class="control-label" for="wallet">잔액</label>
 			<p>3000원</p>
 		</div>
 		<div class="form-group">
 			<label class="control-label" for="isWriter">당신은 누구입니까?</label><br/>
-				<input type="radio" name="isWriter" value="true"/>작가<br/>
-				<input type="radio" name="isWriter" value="false" checked="checked"/>독자	
+				<input type="radio" name="isWriter" value="Y"/>작가<br/>
+				<input type="radio" name="isWriter" value="N" checked="checked"/>독자	
 		</div>
 		<button disabled="disabled" class="btn btn-primary" type="submit">가입</button>
 		<button class="btn btn-warning" type="reset">취소</button>
@@ -72,7 +80,28 @@
 	var isIdDirty=false;
 	//비밀 번호 입력란에 한번이라도 입력한 적이 있는지 여부
 	var isPwdDirty=false;
-	
+
+	//이메일을 입력할때 실행할 함수 등록
+	$("#email").on("input", function(){
+		var email=$("#email").val();
+		
+		if(email.match("@")){//이메일 형식에 맞게 입력 했다면
+			isEmailMatch=true;
+		}else{//형식에 맞지 않게 입력했다면 
+			isEmailMatch=false;
+		}
+		
+		if(email.length == 0){ //이메일을 입력하지 않았다면
+			isEmailInput=false;
+		}else{//이메일을 입력 했다면 
+			isEmailInput=true;
+		}
+		//이메일 에러 여부 
+		var isError=isEmailInput && !isEmailMatch;
+		//이메일 상태 바꾸기 
+		setState("#email", isError);
+	});
+		
 
 	//비밀번호를 입력할때 실행할 함수 등록
 	$("#pwd, #pwd2").on("input", function(){

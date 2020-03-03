@@ -16,6 +16,7 @@
 	    <typeAlias type="com.gura.spring05.toonlist.dto.ToonListDto" alias="toonListDto"/>
 	    <typeAlias type="com.gura.spring05.library.dto.LibraryDto" alias="libraryDto"/>
 	    <typeAlias type="com.gura.spring05.toonup.dto.ToonupDto" alias="toonupDto"/>
+	    <typeAlias type="com.gura.spring05.toon.dto.CommentLikeDto" alias="commentLikeDto"/>
 	</typeAliases>
 
 	<!-- mapper 설정 -->
