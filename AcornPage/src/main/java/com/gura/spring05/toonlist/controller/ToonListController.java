@@ -50,20 +50,11 @@ public class ToonListController {
 	}
 	//캐쉬 충전하기 버튼을 눌렀을때 캐쉬충전하는 로직
 	@RequestMapping("/cash/cashcharge")
-	public ModelAndView chargeCash(HttpServletRequest request,@RequestParam int cash,ModelAndView mView) {
-		//세션에 아이디를 리퀘스트에 담아 넘겨줘야되는 부분. 차후 수정!
-		//String id=(String)request.getSession().getAttribute("id");
-		//@RequestParam String id로 id값 넘겨준다.
-		if(service.cashAdd(request, cash)) {
-			boolean isSuccess=true;
-			mView.addObject("isSuccess",isSuccess);
-		}else {
-			boolean isSuccess=false;
-			mView.addObject("isSuccess",isSuccess);
-		}
-		mView.setViewName("cash/checkcash");
+	public ModelAndView chargeCash(HttpServletRequest request,@RequestParam int cash) {
+
+		service.cashAdd(request, cash);
 		
-		return mView;
+		return new ModelAndView("cash/checkcash");
 	}
 	
 	@RequestMapping("/toon/buyCodeOne")

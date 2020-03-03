@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.gura.spring05.library.dto.LibraryDto;
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
 import com.gura.spring05.toonlist.dto.ToonListDto;
+import com.gura.spring05.users.dto.UsersDto;
 @Repository
 public class ToonListDaoImpl implements ToonListDao{
 	
@@ -32,11 +33,10 @@ public class ToonListDaoImpl implements ToonListDao{
 	}
 
 	@Override
-	public boolean cashUpdate(int cash) {
+	public void cashUpdate(UsersDto dto) {
 
-		session.update("toon.cashUpdate",cash);
+		session.update("toon.cashUpdate",dto);
 		
-		return true;
 	}
 
 	@Override
@@ -78,9 +78,15 @@ public class ToonListDaoImpl implements ToonListDao{
 
 	@Override
 	public void buyEach(LibraryDto dto) {
-		System.out.println(dto.getCode()+dto.getId());
+
 		session.insert("toon.buyEach",dto);
 		
+	}
+
+	@Override
+	public void minusCash(UsersDto dto) {
+		
+		session.update("toon.minusCash",dto);
 	}
 	
 }

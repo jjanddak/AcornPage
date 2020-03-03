@@ -12,8 +12,8 @@
 	<select id="getCodeDetail" parameterType="String" resultType="toonListDto">
 		select * from toonlist where code=#{code}
 	</select>
-	<update id="cashUpdate" parameterType="int">
-		update users set wallet=wallet+#{cash} where id='kapman'
+	<update id="cashUpdate" parameterType="usersDto">
+		update users set wallet=wallet+#{price} where id=#{id}
 	</update>
 	<insert id="buyCodeOne" parameterType="libraryDto">
 		insert into library values(library_seq.nextval,#{id},#{code},sysdate)
@@ -39,4 +39,7 @@
 	<insert id="buyEach" parameterType="libraryDto">
 		insert into library values(library_seq.nextval,#{id},#{code},sysdate)
 	</insert>
+	<update id="minusCash" parameterType="usersDto">
+		update users set wallet=wallet-#{price} where id=#{id}
+	</update>
 </mapper>
