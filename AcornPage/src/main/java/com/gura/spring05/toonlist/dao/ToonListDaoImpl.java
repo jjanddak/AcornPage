@@ -33,11 +33,10 @@ public class ToonListDaoImpl implements ToonListDao{
 	}
 
 	@Override
-	public boolean cashUpdate(int cash) {
+	public void cashUpdate(int cash) {
 
 		session.update("toon.cashUpdate",cash);
 		
-		return true;
 	}
 
 	@Override
@@ -79,9 +78,15 @@ public class ToonListDaoImpl implements ToonListDao{
 
 	@Override
 	public void buyEach(LibraryDto dto) {
-		System.out.println(dto.getCode()+dto.getId());
+
 		session.insert("toon.buyEach",dto);
 		
+	}
+
+	@Override
+	public void minusCash(UsersDto dto) {
+		
+		session.update("toon.minusCash",dto);
 	}
 	
 }

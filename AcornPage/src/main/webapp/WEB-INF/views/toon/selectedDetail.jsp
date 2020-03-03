@@ -23,8 +23,6 @@
 				<th>회차</th>
 				<th>썸네일</th>
 				<th>제목</th>
-				<th>내용</th>
-				<th>평균 별점</th>
 				<th>구매</th>
 				<th><input type="checkbox" id="AllCheck"/></th>
 			</tr>
@@ -40,17 +38,16 @@
 						${tmp.title }
 					</a>
 				</td>
-				<td>10점만점에 10점~!</td>		
 				<c:choose>
 					<c:when test="${tmp.isBuy }">
 						<td>소장중</td>
 						<td><input type="checkbox" name="selectedCode" value="${tmp.code }" disabled/></td>
 					</c:when>
 					<c:otherwise>
-						<td><a class="btn" href="buyCodeOne.do?code=${tmp.code }">구매</a></td>
+						<td><a class="btn" href="buyCodeOne.do?code=${tmp.code }&title=${tmp.title }">구매</a></td>
 						<td><input type="checkbox" name="selectedCode" value="${tmp.code }"/></td>
 					</c:otherwise>
-				</c:choose>		
+				</c:choose>	
 			</tr>
 		</c:forEach>
 			
