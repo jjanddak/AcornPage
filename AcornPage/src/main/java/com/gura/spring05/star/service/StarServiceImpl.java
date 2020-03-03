@@ -16,12 +16,7 @@ public class StarServiceImpl implements StarService{
 	private StarDao dao;
 
 	@Override
-	public void addStar(String code, int starValue,HttpServletRequest request) {
-		String id = (String) request.getSession().getAttribute("id");
-		StarDto dto=new StarDto();
-		dto.setId(id);
-		dto.setCode(code);
-		dto.setStarValue(starValue);
+	public void addStar(StarDto dto) {
 		
 		String starValueResult=dao.select(dto);
 		if(starValueResult==null||starValueResult=="") {
