@@ -9,7 +9,7 @@
 <jsp:include page="../include/resource.jsp"/>
 
 </head>
-<body>
+<body> 
 	<div class="container">
 		<div class="buy" style="float:right">
 			<ul style="list-style:none">

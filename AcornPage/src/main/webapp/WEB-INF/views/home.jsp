@@ -38,6 +38,8 @@
 			</c:forEach>
 		</ul>
 	</div>
+	<a href="users/toonup.do">만화 업로드</a>
+	<a href="users/novelup.do">소설 업로드</a>
 </div>
 </body>
 </html>

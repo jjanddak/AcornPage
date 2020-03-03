@@ -1,23 +1,21 @@
 package com.gura.spring05.users.dto;
 
 public class UsersDto {
+	private int num;
 	private String id;
 	private String pwd;
-	private String email;
+	private boolean isWriter;
+	private int wallet;
 	private String regdate;
 	private String profile; //프로필 이미지 경로를 저장할 필드
 	private String newPwd; //새로운 비밀번호를 저장할 필드
 	
-	public UsersDto() {}
+	public int getNum() {
+		return num;
+	}
 
-	public UsersDto(String id, String pwd, String email, String regdate, String profile, String newPwd) {
-		super();
-		this.id = id;
-		this.pwd = pwd;
-		this.email = email;
-		this.regdate = regdate;
-		this.profile = profile;
-		this.newPwd = newPwd;
+	public void setNum(int num) {
+		this.num = num;
 	}
 
 	public String getId() {
@@ -36,12 +34,20 @@ public class UsersDto {
 		this.pwd = pwd;
 	}
 
-	public String getEmail() {
-		return email;
+	public boolean isWriter() {
+		return isWriter;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setWriter(boolean isWriter) {
+		this.isWriter = isWriter;
+	}
+
+	public int getWallet() {
+		return wallet;
+	}
+
+	public void setWallet(int wallet) {
+		this.wallet = wallet;
 	}
 
 	public String getRegdate() {
@@ -67,8 +73,12 @@ public class UsersDto {
 	public void setNewPwd(String newPwd) {
 		this.newPwd = newPwd;
 	}
+
+	public UsersDto() {}
+
 	
 }
+
 
 
 
