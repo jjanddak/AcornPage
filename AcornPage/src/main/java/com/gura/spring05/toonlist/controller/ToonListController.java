@@ -1,5 +1,9 @@
 package com.gura.spring05.toonlist.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.star.dto.StarDto;
 import com.gura.spring05.star.service.StarService;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.gura.spring05.library.dto.LibraryDto;
+import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.toonlist.service.ToonListService;
 
 @Controller
@@ -51,7 +58,8 @@ public class ToonListController {
 		// HttpServletRequest 객체를 서비스에 넘겨 주면서
 		// 비즈니스 로직을 수행하고 
 		service.getDetailList(request,title);
-		
+		//String id=(String)request.getSession().getAttribute("id");
+				
 		// view page 로 forward 이동해서 글 목록 출력하기 
 		return new ModelAndView("toon/selectedDetail");
 	}
@@ -62,13 +70,13 @@ public class ToonListController {
 		
 		return new ModelAndView("toon/detailCode");
 	}
-	
+	//캐쉬 충전팝업창 띄우기
 	@RequestMapping("/cash/addcash")
 	public ModelAndView moveCash(ModelAndView mView) {
 		mView.setViewName("cash/addcash");
 		return mView;
 	}
-	
+	//캐쉬 충전하기 버튼을 눌렀을때 캐쉬충전하는 로직
 	@RequestMapping("/cash/cashcharge")
 	public ModelAndView chargeCash(HttpServletRequest request,@RequestParam int cash,ModelAndView mView) {
 		//세션에 아이디를 리퀘스트에 담아 넘겨줘야되는 부분. 차후 수정!
@@ -85,4 +93,32 @@ public class ToonListController {
 		
 		return mView;
 	}
+	
+	@RequestMapping("/toon/buyCodeOne")
+	public ModelAndView buyCode(HttpServletRequest request,@ModelAttribute LibraryDto dto,@RequestParam String code) {
+		//String id=(String)request.getSession().getAttribute("id");
+		String id="kapman";
+		dto.setId(id);
+		//dto.setCode((String)request.getAttribute("code"));
+		dto.setCode(code);
+		service.buyCodeOne(dto);
+		return new ModelAndView("redirect:/home.do");
+	}
+	
+	@RequestMapping("/toon/buyAll")
+	public ModelAndView buyAll(HttpServletRequest request,@RequestParam String title,int price) {
+		//String id=(String)request.getSession().getAttribute("id");
+		service.buyAll(request,title,price);
+		
+		return new ModelAndView("redirect:/home.do");
+	}
+	@ResponseBody
+	@RequestMapping(value="/toon/buyEach", method=RequestMethod.POST)
+	public Map<String, Object> buyEach(HttpServletRequest request,@RequestParam(value="arrEachCode[]")List<String> eachCode) {
+		service.buyEach(request, eachCode);
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("isSuccess", true);
+		return map;
+	}
+	
 }

@@ -4,11 +4,22 @@ public class UsersDto {
 	private int num;
 	private String id;
 	private String pwd;
-	private boolean isWriter;
+	private String isWriter;
 	private int wallet;
+	private String email;
 	private String regdate;
 	private String profile; //프로필 이미지 경로를 저장할 필드
 	private String newPwd; //새로운 비밀번호를 저장할 필드
+	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	
 	public int getNum() {
 		return num;
@@ -34,11 +45,11 @@ public class UsersDto {
 		this.pwd = pwd;
 	}
 
-	public boolean isWriter() {
+	public String isWriter() {
 		return isWriter;
 	}
 
-	public void setWriter(boolean isWriter) {
+	public void setWriter(String isWriter) {
 		this.isWriter = isWriter;
 	}
 
@@ -68,6 +79,14 @@ public class UsersDto {
 
 	public String getNewPwd() {
 		return newPwd;
+	}
+
+	public String getIsWriter() {
+		return isWriter;
+	}
+
+	public void setIsWriter(String isWriter) {
+		this.isWriter = isWriter;
 	}
 
 	public void setNewPwd(String newPwd) {

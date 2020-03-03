@@ -25,23 +25,39 @@
 	<h1>개인 정보 페이지</h1>
 	<table>
 		<tr>
-			<th>아이디</th>
+			<th>id</th>
 			<td>${dto.id }</td>
+		</tr>
+		<tr>
+			<th>구분</th>
+				<c:choose>
+					<c:when test="${dto.isWriter eq 'Y' }">
+					<td>작가(writer)</td>
+					</c:when>
+					<c:otherwise>
+					<td>독자(reader)</td>
+					</c:otherwise>
+				</c:choose>		
+			
 		</tr>
 		<tr>
 			<th>프로필 이미지</th>
 			<td>
 				<a href="javascript:" id="profileLink">
 					<c:choose>
-						<c:when test="${ empty dto.profile }">
-							<img src="${pageContext.request.contextPath }/resources/images/default_user.jpeg"/>
+						<c:when test="${empty dto.profile }">
+						<img src="${pageContext.request.contextPath }/resources/images/default_user.jpeg" alt="" />
 						</c:when>
 						<c:otherwise>
-							<img src="${pageContext.request.contextPath }${dto.profile}"/>
+						<img src="${pageContext.request.contextPath }${dto.profile}" alt="" />
 						</c:otherwise>
 					</c:choose>
 				</a>
 			</td>
+		</tr>
+		<tr>
+			<th>캐쉬</th>
+			<td>${dto.wallet}</td> 
 		</tr>
 		<tr>
 			<th>비밀번호</th>
@@ -49,14 +65,14 @@
 		</tr>
 		<tr>
 			<th>이메일</th>
-			<td>${dto.email }</td>
+			<td>${dto.email }<a href="updateform.do">이메일 수정하기</a></td>
 		</tr>
 		<tr>
 			<th>가입일</th>
 			<td>${dto.regdate }</td>
 		</tr>
 	</table>
-	<a href="updateform.do">개인 정보 수정하기</a>
+	<a href="../home.do">수정완료</a>
 	<a href="javascript:deleteConfirm()">회원 탈퇴</a>
 </div>
 

@@ -12,7 +12,40 @@
 	<select id="getCodeDetail" parameterType="String" resultType="toonListDto">
 		select * from toonlist where code=#{code}
 	</select>
-	<update id="CashUpdate" parameterType="int">
+	<update id="cashUpdate" parameterType="int">
 		update users set wallet=wallet+#{cash} where id='kapman'
 	</update>
+	<insert id="buyCodeOne" parameterType="libraryDto">
+		insert into library values(library_seq.nextval,#{id},#{code},sysdate)
+	</insert>
+	<select id="checkCode" parameterType="libraryDto" resultType="libraryDto">
+		select * from library where 
+	</select>
+	<select id="getSelectedList" parameterType="String" resultType="toonListDto">
+		select * from toonlist where title=#{title}
+	</select>
+	<select id="getWallet" parameterType="String" resultType="int">
+		select wallet from users where id=#{id}
+	</select>
+	<insert id="insertCode" parameterType="toonListDto">
+		insert into library values(1,#{id},#{code},sysdate)
+	</insert>
+	<select id="checkLibrary" parameterType="libraryDto" resultType="libraryDto">
+		select * from library where code in(select code from toonlist where title=#{title})and id=#{id}
+	</select>
+	<select id="getUnBuyList" parameterType="libraryDto" resultType="toonListDto">
+		select * from toonlist where code not in(select code from library where id=#{id})and title=#{title}
+	</select>
+	<insert id="buyEach" parameterType="libraryDto">
+		insert into library values(library_seq.nextval,#{id},#{code},sysdate)
+	</insert>	
+	<insert id="upload" parameterType="toonupDto">
+		insert into toonlist (num,title,writer,content,regdate,code)
+		values (toonlist_seq.nextval,#{title},
+		#{writer}, #{content}, sysdate, #{title}||toonlist_seq.currval)
+	</insert>
+	
 </mapper>
+
+
+
