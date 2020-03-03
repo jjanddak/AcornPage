@@ -43,7 +43,7 @@
 			</tr>
 		</table>
 		<div class="contents">${dto.content }</div>
-	<form action="starvalue.do" method="post">
+	<form action="starAdd.do" method="post">
 		<p id="star_grade">
 			<a href="#">★</a>
 			<a href="#">★</a>
@@ -56,11 +56,15 @@
 	</div>
 </body>
 <script>
+var formObj = $("form[role='form']");//폼 가저오기
+
     $('#star_grade a').click(function(){
         $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
         $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
         return false;
     });
+    
+    
     $("#starBtn").click(function(){
       var starValue = document.querySelectorAll(".on").length*2;
       var isAddStar=confirm("평점"+starValue+"을 제출하시겠습니까?");

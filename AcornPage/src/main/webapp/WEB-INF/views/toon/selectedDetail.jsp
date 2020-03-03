@@ -15,6 +15,7 @@
 				<th>회차</th>
 				<th>제목</th>
 				<th>내용</th>
+				<th>평균 별점</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -26,7 +27,8 @@
 					<a href="detailCode.do?code=${tmp.code }">
 						${tmp.title }
 					</a>
-				</td>				
+				</td>
+				<td>10점만점에 10점~!</td>				
 			</tr>
 		</c:forEach>
 		</tbody>
