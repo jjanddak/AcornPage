@@ -10,6 +10,7 @@ public class UsersDto {
 	private String regdate;
 	private String profile; //프로필 이미지 경로를 저장할 필드
 	private String newPwd; //새로운 비밀번호를 저장할 필드
+	private int price;
 	
 
 	public String getEmail() {
@@ -95,6 +96,14 @@ public class UsersDto {
 
 	public UsersDto() {}
 
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	
 }
 

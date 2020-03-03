@@ -13,6 +13,7 @@ import com.gura.spring05.library.dto.LibraryDto;
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
 import com.gura.spring05.toonlist.dao.ToonListDao;
 import com.gura.spring05.toonlist.dto.ToonListDto;
+import com.gura.spring05.users.dto.UsersDto;
 
 @Service
 public class ToonListServiceImpl implements ToonListService{
