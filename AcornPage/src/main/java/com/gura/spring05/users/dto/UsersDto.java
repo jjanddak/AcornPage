@@ -11,6 +11,7 @@ public class UsersDto {
 	private String profile; //프로필 이미지 경로를 저장할 필드
 	private String newPwd; //새로운 비밀번호를 저장할 필드
 	
+
 	public String getEmail() {
 		return email;
 	}

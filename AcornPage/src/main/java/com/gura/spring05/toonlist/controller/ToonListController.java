@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.star.dto.StarDto;
+import com.gura.spring05.star.service.StarService;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.gura.spring05.library.dto.LibraryDto;
 import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.toonlist.service.ToonListService;
@@ -23,7 +26,32 @@ import com.gura.spring05.toonlist.service.ToonListService;
 public class ToonListController {
 	@Autowired
 	private ToonListService service;
+	@Autowired
+	private StarService starService;
 	
+	@RequestMapping("/toon/starAdd")
+	public ModelAndView authAddStar(HttpServletRequest request, @ModelAttribute StarDto dto, 
+			@RequestParam String code, @RequestParam int starValue) {
+		String id = (String) request.getSession().getAttribute("id");
+		dto.setCode(code);
+		dto.setStarValue(starValue);
+		dto.setId(id);
+		starService.addStar(dto);
+		String loc=code;
+
+		return new ModelAndView("redirect:detailCode.do?code="+loc);
+		//리다일렉트 응답
+	}
+//	@RequestMapping("/toon/buyCodeOne")
+//	public ModelAndView buyCode(HttpServletRequest request,@ModelAttribute LibraryDto dto,@RequestParam String code) {
+//		//String id=(String)request.getSession().getAttribute("id");
+//		String id="kapman";
+//		dto.setId(id);
+//		//dto.setCode((String)request.getAttribute("code"));
+//		dto.setCode(code);
+//		service.buyCodeOne(dto);
+//		return new ModelAndView("redirect:/home.do");
+//	}
 	//만화를 눌렀을때 전체 화가 나오는 리스트 로직
 	@RequestMapping("/toon/selectedDetail")
 	public ModelAndView detailList(HttpServletRequest request,@RequestParam String title){

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="star">
+	<insert id="insert" parameterType="starDto">
+		insert into star values(star_seq.nextval,'${id}','${code}',${starValue})
+	</insert>
+	<update id="update" parameterType="starDto">
+		UPDATE star
+		SET starValue=#{starValue} 
+		WHERE id=#{id} AND code=#{code}
+	</update>
+	<select id="selectStarValue" parameterType="starDto" resultType="String">
+		SELECT starValue 
+		FROM star
+		where id=#{id} and code=#{code}
+	</select>
+</mapper>
+

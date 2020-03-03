@@ -41,11 +41,13 @@
 		</div>
 		<!-- 이메일 -->
 		<div class="form-group has-feedback">
-			<label class="control-label" for="email">이메일</label>
-			<input class="form-control" type="email" id="email" name="email" />
-			<p class="help-block" id="email_notmatch">이메일 형식에 맞게 입력하세요</p>
-			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
-			<span class="glyphicon glyphicon-ok form-control-feedback"></span>
+			<label class="control-label" for="wallet">잔액</label>
+			<p>3000원</p>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="isWriter">당신은 누구입니까?</label><br/>
+				<input type="radio" name="isWriter" value="true"/>작가<br/>
+				<input type="radio" name="isWriter" value="false" checked="checked"/>독자	
 		</div>
 		<div class="form-group has-feedback">
 			<label class="control-label" for="wallet">잔액</label>
@@ -80,7 +82,6 @@
 	var isIdDirty=false;
 	//비밀 번호 입력란에 한번이라도 입력한 적이 있는지 여부
 	var isPwdDirty=false;
-
 	//이메일을 입력할때 실행할 함수 등록
 	$("#email").on("input", function(){
 		var email=$("#email").val();
