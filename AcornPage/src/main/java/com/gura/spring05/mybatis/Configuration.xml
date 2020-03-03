@@ -9,15 +9,15 @@
 		<typeAlias type="com.gura.spring05.users.dto.UsersDto" alias="usersDto"/>
 	    <typeAlias type="com.gura.spring05.file.dto.FileDto" alias="fileDto"/>
 	    <typeAlias type="com.gura.spring05.cafe.dto.CafeDto" alias="cafeDto"/>
-	    <typeAlias type="com.gura.spring05.cafe.dto.CafeCommentDto" alias="cafeCommentDto"/>
 	    <typeAlias type="com.gura.spring05.shop.dto.ShopDto" alias="shopDto"/>
 	    <typeAlias type="com.gura.spring05.shop.dto.OrderDto" alias="orderDto"/>
 	    <typeAlias type="com.gura.spring05.toondetail.dto.ToonDetailDto" alias="toonDetailDto"/>
 	    <typeAlias type="com.gura.spring05.toonlist.dto.ToonListDto" alias="toonListDto"/>
-	 <typeAlias type="com.gura.spring05.star.dto.StarDto" alias="starDto"/>
+	 	<typeAlias type="com.gura.spring05.star.dto.StarDto" alias="starDto"/>
 	    <typeAlias type="com.gura.spring05.library.dto.LibraryDto" alias="libraryDto"/>
 	    <typeAlias type="com.gura.spring05.toonup.dto.ToonupDto" alias="toonupDto"/>
 	    <typeAlias type="com.gura.spring05.toon.dto.CommentLikeDto" alias="commentLikeDto"/>
+	    <typeAlias type="com.gura.spring05.toon.dto.ToonCommentDto" alias="toonCommentDto"/>
 	</typeAliases>
 
 	<!-- mapper 설정 -->
@@ -26,10 +26,10 @@
 		<mapper resource="com/gura/spring05/mybatis/UsersMapper.xml"/>
 		<mapper resource="com/gura/spring05/mybatis/FileMapper.xml"/>
 		<mapper resource="com/gura/spring05/mybatis/CafeMapper.xml"/>
-		<mapper resource="com/gura/spring05/mybatis/CafeCommentMapper.xml"/>
+		<mapper resource="com/gura/spring05/mybatis/ToonCommentMapper.xml"/>
 		<mapper resource="com/gura/spring05/mybatis/ShopMapper.xml"/>
 		<mapper resource="com/gura/spring05/mybatis/ToonMapper.xml"/>
-	<mapper resource="com/gura/spring05/mybatis/StarMapper.xml"/> 
+		<mapper resource="com/gura/spring05/mybatis/StarMapper.xml"/> 
 	</mappers>
 </configuration>
 
