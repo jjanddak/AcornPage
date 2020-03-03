@@ -42,9 +42,9 @@ insert into toonlist values(1,'나루토','백종혁','나루토1화content',sys
 insert into toonlist values(2,'나루토','백종혁','나루토2화content',sysdate,'nar2');
 insert into toonlist values(3,'나루토','백종혁','나루토3화content',sysdate,'nar3');
 
-insert into toonList values(1,'클레이모어','윤지혜','asfdadsfqwf',sysdate,'클레이모어1','코믹','toon');
-insert into toonList values(2,'클레이모어','윤지혜','asfdadsfqwf',sysdate,'클레이모어2','코믹','toon');
-insert into toonList values(3,'클레이모어','윤지혜','asfdadsfqwf',sysdate,'클레이모어3','코믹','toon');
+insert into toonList values(1,'클레이모어','윤지혜','클레이모어1화content',sysdate,'클레이모어1');
+insert into toonList values(2,'클레이모어','윤지혜','클레이모어2화content',sysdate,'클레이모어2');
+insert into toonList values(3,'클레이모어','윤지혜','클레이모어3화content',sysdate,'클레이모어3');
 
 create table users 
 (num number,
