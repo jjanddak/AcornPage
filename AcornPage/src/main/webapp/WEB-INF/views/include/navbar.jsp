@@ -25,15 +25,15 @@
 			<div class="pull-right">
 			<!-- 검색기 -->
 			<div class="search">
-			<form action="">
-			 <select name="searchType">
-				  <option value="null"<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
-				  <option value="title"<c:out value="${scri.searchType eq 'title' ? 'selected' : ''}"/>>제목</option>
-				  <option value="writer"<c:out value="${scri.searchType eq 'writer' ? 'selected' : ''}"/>>작가</option>
-				  <option value="hashtag"<c:out value="${scri.searchType eq 'hashtag' ? 'selected' : ''}"/>>태그검색</option>
+			<form action="list.do" method="post">
+			 <select name="select">
+				  <option value="null">-----</option>
+				  <option value="title">제목</option>
+				  <option value="writer">작가</option>
+				  <option value="hashtag">태그검색</option>
 			 </select>		  
-			 <input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
-			 <button id="searchBtn">검색</button>
+			 <input type="text" name="keyword" id="keyword"/>
+			 <input type="submit" class="button" value="검색"/>
 			</form>
 			</div>		
 			<c:choose>
@@ -55,7 +55,7 @@
 	</div>
 </div>
 <script>
-$(function(){
+/* $(function(){
 	  $('#searchBtn').click(function() {
 	   self.location = "listSearch"
 	     + '${pageMaker.makeQuery(1)}'
@@ -64,7 +64,7 @@ $(function(){
 	     + "&keyword="
 	     + encodeURIComponent($('#keywordInput').val());
 	    });
-	 });   
+	 }); */   
 function popupOpen(){
 	var url= "${pageContext.request.contextPath }/cash/addcash.do";    //팝업창 페이지 URL
 	var winWidth = 700;
