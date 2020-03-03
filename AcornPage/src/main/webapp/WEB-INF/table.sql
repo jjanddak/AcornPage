@@ -1,11 +1,3 @@
-drop table toondetail;
-drop table toonlist;
-drop table users;
-drop table star;
-drop table library;
-drop table toon_comment;
-drop table commentlike;
-
 create sequence toonlist_seq;
 create sequence users_seq;
 create sequence star_seq;
@@ -50,6 +42,9 @@ insert into toonlist values(1,'나루토','백종혁','나루토1화content',sys
 insert into toonlist values(2,'나루토','백종혁','나루토2화content',sysdate,'nar2');
 insert into toonlist values(3,'나루토','백종혁','나루토3화content',sysdate,'nar3');
 
+insert into toonList values(1,'클레이모어','윤지혜','asfdadsfqwf',sysdate,'클레이모어1','코믹','toon');
+insert into toonList values(2,'클레이모어','윤지혜','asfdadsfqwf',sysdate,'클레이모어2','코믹','toon');
+insert into toonList values(3,'클레이모어','윤지혜','asfdadsfqwf',sysdate,'클레이모어3','코믹','toon');
 
 create table users 
 (num number,

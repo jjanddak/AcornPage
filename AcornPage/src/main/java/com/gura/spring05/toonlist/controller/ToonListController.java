@@ -1,5 +1,9 @@
 package com.gura.spring05.toonlist.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.library.dto.LibraryDto;
+import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.toonlist.service.ToonListService;
 
 @Controller
@@ -24,7 +30,8 @@ public class ToonListController {
 		// HttpServletRequest 객체를 서비스에 넘겨 주면서
 		// 비즈니스 로직을 수행하고 
 		service.getDetailList(request,title);
-		
+		//String id=(String)request.getSession().getAttribute("id");
+				
 		// view page 로 forward 이동해서 글 목록 출력하기 
 		return new ModelAndView("toon/selectedDetail");
 	}
@@ -62,11 +69,28 @@ public class ToonListController {
 	@RequestMapping("/toon/buyCodeOne")
 	public ModelAndView buyCode(HttpServletRequest request,@ModelAttribute LibraryDto dto,@RequestParam String code) {
 		//String id=(String)request.getSession().getAttribute("id");
-		String id="백조장";
+		String id="kapman";
 		dto.setId(id);
 		//dto.setCode((String)request.getAttribute("code"));
 		dto.setCode(code);
 		service.buyCodeOne(dto);
 		return new ModelAndView("redirect:/home.do");
 	}
+	
+	@RequestMapping("/toon/buyAll")
+	public ModelAndView buyAll(HttpServletRequest request,@RequestParam String title,int price) {
+		//String id=(String)request.getSession().getAttribute("id");
+		service.buyAll(request,title,price);
+		
+		return new ModelAndView("redirect:/home.do");
+	}
+	@ResponseBody
+	@RequestMapping(value="/toon/buyEach", method=RequestMethod.POST)
+	public Map<String, Object> buyEach(HttpServletRequest request,@RequestParam(value="arrEachCode[]")List<String> eachCode) {
+		service.buyEach(request, eachCode);
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("isSuccess", true);
+		return map;
+	}
+	
 }

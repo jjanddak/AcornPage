@@ -30,6 +30,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void getMember(ModelAndView mView, int num) {
 		MemberDto dto=dao.getData(num);
+		
 		mView.addObject("dto", dto);
 	}
 	//회원정보를 수정하는 비즈니스 로직 처리 
