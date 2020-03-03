@@ -21,12 +21,25 @@
 				<li <c:if test="${param.category eq 'file' }">class="active"</c:if>><a href="${pageContext.request.contextPath }/file/list.do">자료실</a></li>
 				<li <c:if test="${param.category eq 'shop' }">class="active"</c:if>><a href="${pageContext.request.contextPath }/shop/list.do">Shop</a></li>		
 			</ul>
+			
+			<div class="pull-right">
+			<!-- 검색기 -->
+			<div class="search">
+			<form action="">
+			 <select name="searchType">
+				  <option value="null"<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
+				  <option value="title"<c:out value="${scri.searchType eq 'title' ? 'selected' : ''}"/>>제목</option>
+				  <option value="writer"<c:out value="${scri.searchType eq 'writer' ? 'selected' : ''}"/>>작가</option>
+				  <option value="hashtag"<c:out value="${scri.searchType eq 'hashtag' ? 'selected' : ''}"/>>태그검색</option>
+			 </select>		  
+			 <input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
+			 <button id="searchBtn">검색</button>
+			</form>
+			</div>		
 			<c:choose>
 				<c:when test="${empty sessionScope.id }">
-					<div class="pull-right">
 						<a class="btn btn-primary navbar-btn btn-xs" href="${pageContext.request.contextPath }/users/loginform.do">로그인</a>
-						<a class="btn btn-warning navbar-btn btn-xs" href="${pageContext.request.contextPath }/users/signup_form.do">회원가입</a>
-					</div>
+						<a class="btn btn-warning navbar-btn btn-xs" href="${pageContext.request.contextPath }/users/signup_form.do">회원가입</a>	
 				</c:when>
 				<c:otherwise>
 					<p class="navbar-text pull-right">
@@ -34,12 +47,24 @@
 						<a class="navbar-link" href="${pageContext.request.contextPath }/users/logout.do">로그아웃</a> 
 						<a onclick="popupOpen()" class="btn btn-success navbar-btn btn-xs">캐쉬충전</a>
 					</p>
+		
 				</c:otherwise>
 			</c:choose>
+			</div>
 		</div>
 	</div>
 </div>
 <script>
+$(function(){
+	  $('#searchBtn').click(function() {
+	   self.location = "listSearch"
+	     + '${pageMaker.makeQuery(1)}'
+	     + "&searchType="
+	     + $("select option:selected").val()
+	     + "&keyword="
+	     + encodeURIComponent($('#keywordInput').val());
+	    });
+	 });   
 function popupOpen(){
 	var url= "${pageContext.request.contextPath }/cash/addcash.do";    //팝업창 페이지 URL
 	var winWidth = 700;
