@@ -44,7 +44,7 @@ public class ToonListController {
 	}
 	
 	@RequestMapping("/toon/userStarList")
-	public ModelAndView authStarSearch(HttpServletRequest request, @RequestParam String id, @RequestParam String code) {
+	public ModelAndView authStarSearch(HttpServletRequest request, @RequestParam String id) {
 		service.userStarList(request, id);
 		
 		return new ModelAndView("toon/userStarList");
