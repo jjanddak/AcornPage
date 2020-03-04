@@ -10,6 +10,9 @@ body{
 	padding-top: 60px;
 	font-family: 'Nanum Gothic', sans-serif;
 }
+h1{
+	font-size:0px;
+}
 .logo{
 	margin:12px auto;
 }
@@ -68,7 +71,7 @@ a{
 .contentwrapper{
 	min-height:1000px;
 	background-color:#eee;
-	margin-top:85px;
+	margin-top:80px;
 	border-top:20px solid #eee;
 }
 .content{
@@ -76,6 +79,7 @@ a{
 	padding-top:10px;
 	padding-bottom:10px;
 	border-bottom:10px solid #eee;
+	border-top:10px solid #eee;
 }
 
 @media (min-width: 768px) {
@@ -139,6 +143,11 @@ div.list{
 .list-info{
 	font-size:14px;
 	color:#999999;
+}
+.slide{
+	padding:0px;
+	border:0px;
+	border-top:10px solid #eee;
 }
 
 

@@ -13,7 +13,14 @@
 	<jsp:param value="home" name="category"/>
 </jsp:include>
 <div class="contentwrapper">
-	<div class="container content">
+	<div class="container content slide">
+		<div class="your-class">
+		  <div><p style="width:100%; height:450px; background-color:green; margin:0px;"></p></div>
+		  <div><p style="width:100%; height:450px; background-color:blue; margin:0px;"></p></div>
+		  <div><p style="width:100%; height:450px; background-color:grey; margin:0px;"></p></div>
+		</div>
+	</div>
+	<div class="container content" style="border-top:20px solid #eee;">
 		<h2>웹툰</h2>
 		<ul>
 			<c:forEach var="tmp" items="${notice }" varStatus="status">
@@ -102,7 +109,21 @@
 		</ul>
 </div><!-- //contentwrapper -->
 </body>
-<script>	
+<script>
+
+	$(document).ready(function(){
+		  $('.your-class').slick({
+			  slidesToShow: 3,
+			  slidesToShow: 1,
+			  slidesToScroll: 1,
+			  autoplay:true,
+			  autoplaySpeed:5000,
+			  speed:1000,
+			  pauseOnHover:true,
+			  infinite:true,
+			  arrow:true,
+		  });
+		});
 	//폼에 submit 이벤트가 일어 났을때 실행할 함수 등록 
 	$(".comments form").on("submit", function(){
 		//로그인 여부

@@ -11,11 +11,11 @@
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar">
-				<div class="logo text-center">
+				<h1 class="logo text-center">
 					<a href="${pageContext.request.contextPath }/home.do">
 			      	<img src="<c:url value='/resources/images/acornLogo.png'/>" alt="logo"/>
 			      </a>
-				</div>
+				</h1>
 		      
 		    	<div class="right-box">	
 			      	<!-- 검색기 -->
@@ -34,8 +34,8 @@
 					</div>
 						<c:choose>
 							<c:when test="${empty sessionScope.id }">
-								<a class="btn btn-primary navbar-btn btn-sm" href="${pageContext.request.contextPath }/users/loginform.do">로그인</a>
-								<a class="btn btn-warning navbar-btn btn-sm" href="${pageContext.request.contextPath }/users/signup_form.do">회원가입</a>	
+								<a class="btn btn-primary navbar-btn btn-sm btn-right" href="${pageContext.request.contextPath }/users/loginform.do">로그인</a>
+								<a class="btn btn-warning navbar-btn btn-sm btn-right" href="${pageContext.request.contextPath }/users/signup_form.do">회원가입</a>	
 							</c:when>
 							<c:otherwise>
 								<strong><a class="navbar-link" href="${pageContext.request.contextPath }/users/info.do">${id }</a></strong>
