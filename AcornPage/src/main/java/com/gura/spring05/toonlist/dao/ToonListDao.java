@@ -33,4 +33,8 @@ public interface ToonListDao {
 	public void buyEach(LibraryDto dto);
 	
 	public void minusCash(UsersDto dto);
+	
+	public void plusCash(UsersDto dto);
+	
+	public String checkWriter(String code);
 }

@@ -47,7 +47,12 @@
 	<update id="minusCash" parameterType="usersDto">
 		update users set wallet=wallet-#{price} where id=#{id}
 	</update>
-	
+	<update id="plusCash" parameterType="usersDto">
+		update users set wallet=wallet+#{price} where id=#{id}
+	</update>
+	<select id="checkWriter" parameterType="String" resultType="String">
+		select writer from toonlist where code=#{code}
+	</select>
 </mapper>
 
 
