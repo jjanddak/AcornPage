@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.gura.spring05.star.dao.StarDao;
 import com.gura.spring05.star.dto.StarDto;
 
-
 @Service
 public class StarServiceImpl implements StarService{
 	
@@ -24,5 +23,11 @@ public class StarServiceImpl implements StarService{
 		}else if(starValueResult!=null){
 			dao.update(dto);
 		}
+	}
+
+	@Override
+	public void selectStarValueOneAVG(HttpServletRequest request, String code) {
+		double starValue=dao.selectStarOneAVG(code);
+		request.setAttribute("starValue", starValue);
 	}
 }
