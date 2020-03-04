@@ -63,8 +63,6 @@
 			</c:forEach>
 		</ul>
 	</div>
-	<a href="users/toonup.do">만화 업로드</a>
-	<a href="users/novelup.do">소설 업로드</a>
 </div>
 	<div class="comments">
 		<!-- 댓글을 작성할수 있는 폼 -->

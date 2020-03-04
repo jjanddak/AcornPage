@@ -41,8 +41,7 @@
 	</insert>	
 	<insert id="upload" parameterType="toonupDto">
 		insert into toonlist (num,title,writer,content,regdate,code)
-		values (toonlist_seq.nextval,#{title},
-		#{writer}, #{content}, sysdate, #{title}||toonlist_seq.currval)
+		values (#{num},#{title}, #{writer}, #{content}, sysdate, #{title}||#{num})
 	</insert>
 	<update id="minusCash" parameterType="usersDto">
 		update users set wallet=wallet-#{price} where id=#{id}
@@ -50,7 +49,9 @@
 	<select id="getMyToon" parameterType="String" resultType="toonDetailDto">
 		select * from toondetail where writer=#{id}
 	</select>
-	
+	<select id="getLastNum" parameterType="String" resultType="int">
+		select max(num) from toonlist where title=#{title}
+	</select>
 </mapper>
 
 

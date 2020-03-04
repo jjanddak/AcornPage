@@ -78,8 +78,8 @@
 						<c:forEach var="tmp" items="${myToon }">
 						<tr>
 						<td>			
-							<a href="${pageContext.request.contextPath}/toon/selectedDetail.do?title=${tmp.title }">											
-								<div class="list" style="width:100%; height:150px; border:1px solid blue;">
+							<a href="${pageContext.request.contextPath}/toon/toonup.do?title=${tmp.title }">											
+								<div class="list" style="width:600px; height:150px; border:1px solid blue;">
 									<p>${tmp.title }</p>
 									<p>${tmp.writer }</p>
 									<p>${tmp.info }</p>
@@ -90,9 +90,9 @@
 						</c:forEach>			
 				</table>
 			</tr>
-		</c:if>
-		
+		</c:if>		
 	</table>
+	<a href="${pageContext.request.contextPath}/toon/newToonup.do">신작 업로드</a>
 	<a href="../home.do">수정완료</a>
 	<a href="javascript:deleteConfirm()">회원 탈퇴</a>
 </div>
