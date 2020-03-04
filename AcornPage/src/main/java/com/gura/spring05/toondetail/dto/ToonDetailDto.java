@@ -4,16 +4,18 @@ public class ToonDetailDto {
 	private String title;
 	private String writer;
 	private String info;
-	private String codesample;
+	private String regdate;
+	private String hashtag;
+	private String toonovel;
 	
-	public ToonDetailDto() {}
-	
-	public ToonDetailDto(String title, String writer, String info, String codesample) {
+	public ToonDetailDto(String title, String writer, String info, String regdate, String hashtag, String toonovel) {
 		super();
 		this.title = title;
 		this.writer = writer;
 		this.info = info;
-		this.codesample = codesample;
+		this.regdate = regdate;
+		this.hashtag = hashtag;
+		this.toonovel = toonovel;
 	}
 
 	public String getTitle() {
@@ -40,12 +42,30 @@ public class ToonDetailDto {
 		this.info = info;
 	}
 
-	
-	public String getCodesample() {
-		return codesample;
+	public String getRegdate() {
+		return regdate;
 	}
 
-	public void setCodesample(String codesample) {
-		this.codesample = codesample;
-	}	
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
+
+	public String getHashtag() {
+		return hashtag;
+	}
+
+	public void setHashtag(String hashtag) {
+		this.hashtag = hashtag;
+	}
+
+	public String getToonovel() {
+		return toonovel;
+	}
+
+	public void setToonovel(String toonovel) {
+		this.toonovel = toonovel;
+	}
+
+	public ToonDetailDto() {};
+
 }

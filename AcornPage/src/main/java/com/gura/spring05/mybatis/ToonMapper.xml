@@ -47,7 +47,22 @@
 	<update id="minusCash" parameterType="usersDto">
 		update users set wallet=wallet-#{price} where id=#{id}
 	</update>
-	
+	<select id="getWriterDetail" parameterType="String"
+		resultType="toonDetailDto">
+		select * from toondetail
+		WHERE writer like '%'||#{writer}||'%'
+	</select>
+	<select id="getTitleDetail" parameterType="String"
+		resultType="toonDetailDto">
+		select * from toondetail
+		WHERE title like '%'||#{title}||'%'
+		
+	</select>
+	<select id="getHashtagDetail" parameterType="String"
+		resultType="toonDetailDto">
+		select * from toondetail
+		WHERE hashtag like '%'||#{hashtag}||'%'
+	</select>		
 </mapper>
 
 

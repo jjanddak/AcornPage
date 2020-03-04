@@ -25,7 +25,8 @@
 			<div class="pull-right">
 			<!-- 검색기 -->
 			<div class="search">
-			<form action="list.do" method="post">
+<!-- 			디테일리스트페이지로 연결되게 -->
+			<form action="toon/searchedDetail.do" method="post">
 			 <select name="select">
 				  <option value="null">-----</option>
 				  <option value="title">제목</option>
@@ -55,16 +56,7 @@
 	</div>
 </div>
 <script>
-/* $(function(){
-	  $('#searchBtn').click(function() {
-	   self.location = "listSearch"
-	     + '${pageMaker.makeQuery(1)}'
-	     + "&searchType="
-	     + $("select option:selected").val()
-	     + "&keyword="
-	     + encodeURIComponent($('#keywordInput').val());
-	    });
-	 }); */   
+ 
 function popupOpen(){
 	var url= "${pageContext.request.contextPath }/cash/addcash.do";    //팝업창 페이지 URL
 	var winWidth = 700;
