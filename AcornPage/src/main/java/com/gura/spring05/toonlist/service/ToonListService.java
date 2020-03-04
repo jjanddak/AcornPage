@@ -24,4 +24,6 @@ public interface ToonListService {
 	public void buyEach(HttpServletRequest request,List<String> eachCode);
 	
 	public void list(HttpServletRequest request,String category);
+	
+	public void getDetailInfo(HttpServletRequest request,String title);
 }

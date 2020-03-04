@@ -59,6 +59,9 @@
 	<select id="selectedHashtag" parameterType="String" resultType="toonDetailDto">
 		select * from toondetail where hashtag=#{category}
 	</select>
+	<select id="getDetailInfo" parameterType="String" resultType="toonDetailDto">
+		select * from toondetail where title=#{title}
+	</select>
 </mapper>
 
 

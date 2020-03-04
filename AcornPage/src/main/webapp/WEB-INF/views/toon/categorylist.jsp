@@ -19,10 +19,15 @@
 				<c:forEach var="tmp" items="${requestScope.list }">
 					<a href="${pageContext.request.contextPath }/toon/selectedDetail.do?title=${tmp.title }">
 					<li>
-						<div class="list" style="width:100%; height:150px; border:1px solid blue;">
-							<p>${tmp.title }</p>
-							<p>${tmp.writer }</p>
-							<p>${tmp.info }</p>
+						<div class="list">
+							<div class="imgwrapper">
+								<img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>
+							</div>
+							<div class="textwrapper">
+								<p>${tmp.title }</p>
+								<p>${tmp.writer }</p>
+								<p>${tmp.info }</p>
+							</div>
 						</div>
 					</li>
 					</a>

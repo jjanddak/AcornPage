@@ -180,5 +180,12 @@ public class ToonListServiceImpl implements ToonListService{
 		request.setAttribute("list", list);
 		
 	}
+
+
+	@Override
+	public void getDetailInfo(HttpServletRequest request, String title) {
+		ToonDetailDto dto=dao.getDetailInfo(title);
+		request.setAttribute("dto", dto);
+	}
 	
 }

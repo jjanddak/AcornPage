@@ -39,4 +39,6 @@ public interface ToonListDao {
 	public String checkWriter(String code);
 	
 	public List<ToonDetailDto> getSelectedDetail(String category);
+	
+	public ToonDetailDto getDetailInfo(String title);
 }

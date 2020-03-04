@@ -12,6 +12,18 @@
 <jsp:include page="../include/navbar.jsp"/>
 	<div class="contentwrapper">
 		<div class="container content">
+			<div class="list">
+				<div class="imgwrapper">
+					<img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>
+				</div>
+				<div class="textwrapper">
+					<p>${dto.title }</p>
+					<p>${dto.writer }</p>
+					<p>${dto.info }</p>
+				</div>
+			</div>
+		</div>
+		<div class="container content">
 			<div class="buy" style="float:right">
 				<ul style="list-style:none">
 					<li class="btn btn-primary" id="buyEach" style="float:left"><a style="color:#fff" href="">선택구매</a></li>

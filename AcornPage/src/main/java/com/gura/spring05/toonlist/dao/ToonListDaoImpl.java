@@ -110,5 +110,11 @@ public class ToonListDaoImpl implements ToonListDao{
 		}
 		
 	}
+
+	@Override
+	public ToonDetailDto getDetailInfo(String title) {
+		
+		return session.selectOne("toon.getDetailInfo", title);
+	}
 	
 }
