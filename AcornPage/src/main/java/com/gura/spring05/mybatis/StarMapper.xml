@@ -14,10 +14,10 @@
 		FROM star
 		where id=#{id} and code=#{code}
 	</select>
-	<select id="selectStarValueOneAVG" parameterType="String" resultType="double">
+	<select id="selectStarValueOneAVG" parameterType="starDto" resultType="double">
 		SELECT AVG(starvalue) 
 		FROM star 
-		WHERE code LIKE '%#{code}%'
+		WHERE code LIKE '%${code}%' 
 	</select>
 </mapper>
 

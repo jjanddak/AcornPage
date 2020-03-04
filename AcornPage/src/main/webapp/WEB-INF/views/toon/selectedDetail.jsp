@@ -108,5 +108,7 @@
 	})
 
 	</script>
+	
+	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
 </body>
 </html>

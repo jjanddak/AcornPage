@@ -6,5 +6,5 @@ public interface StarDao {
 	public String select(StarDto dto);
 	public void insert(StarDto dto);
 	public void update(StarDto dto);
-	public double selectStarOneAVG(String code);
+	public double selectStarOneAVG(StarDto dto);
 }

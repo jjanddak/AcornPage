@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,6 +39,10 @@
 				<td>${dto.title }</td>
 			</tr>
 			<tr>
+				<th>평균 별점</th>
+				<td><fmt:formatNumber value="${starvalueAVG }" pattern=".00"/> 점</td>
+			</tr>
+			<tr>
 				<th>등록일</th>
 				<td>${dto.upload }</td>
 			</tr>
@@ -54,6 +59,8 @@
 		<button id="starBtn" type="submit">별점제출</button>
 	</form>
 	</div>
+	
+	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
 </body>
 <script>
 var formObj = $("form[role='form']");//폼 가저오기

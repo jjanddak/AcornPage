@@ -52,7 +52,7 @@ public class ToonListServiceImpl implements ToonListService{
 				}
 				for(int j=0; j<libList.size(); j++) {
 					if(list.get(i).getCode().equals(libList.get(j).getCode())){
-						list.get(i).setBuy(true);
+						list.get(i).setIsBuy(true);
 						request.setAttribute("list", list);
 					}
 				}
