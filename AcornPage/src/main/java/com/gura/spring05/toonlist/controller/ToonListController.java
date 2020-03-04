@@ -104,10 +104,11 @@ public class ToonListController {
 		return map;
 	}
 	
-	@RequestMapping("/toon/list")
-	public ModelAndView list(HttpServletRequest request,@RequestParam String category,ModelAndView mView) {
+	@RequestMapping("/toon/categorylist")
+	public ModelAndView list(HttpServletRequest request,@RequestParam String category,ModelAndView mView) throws UnsupportedEncodingException {
 		service.list(request, category);
-		mView.setViewName("toon/list");
+		request.setAttribute("category", category);
+		mView.setViewName("toon/categorylist");
 		return mView;
 	}
 }	
