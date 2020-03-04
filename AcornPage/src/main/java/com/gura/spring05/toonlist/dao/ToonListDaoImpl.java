@@ -100,5 +100,15 @@ public class ToonListDaoImpl implements ToonListDao{
 		
 		return session.selectOne("toon.checkWriter", code);
 	}
+
+	@Override
+	public List<ToonDetailDto> getSelectedDetail(String category) {
+		if(category.equals("toon") || category.equals("novel")) {
+			return session.selectList("toon.selectedToonovel",category);
+		}else {
+			return session.selectList("toon.selectedHashtag",category);
+		}
+		
+	}
 	
 }

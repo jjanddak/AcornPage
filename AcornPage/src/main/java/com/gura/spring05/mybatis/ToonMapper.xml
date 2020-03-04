@@ -53,6 +53,12 @@
 	<select id="checkWriter" parameterType="String" resultType="String">
 		select writer from toonlist where code=#{code}
 	</select>
+	<select id="selectedToonovel" parameterType="String" resultType="toonDetailDto">
+		select * from toondetail where toonovel=#{category}
+	</select>
+	<select id="selectedHashtag" parameterType="String" resultType="toonDetailDto">
+		select * from toondetail where hashtag=#{category}
+	</select>
 </mapper>
 
 

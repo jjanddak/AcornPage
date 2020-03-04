@@ -172,5 +172,13 @@ public class ToonListServiceImpl implements ToonListService{
 			throw new NoMoneyException("캐쉬가 부족합니다. 캐쉬충전페이지로 이동하시겠습니까?");
 		}
 	}
+
+
+	@Override
+	public void list(HttpServletRequest request, String category) {
+		List<ToonDetailDto> list=dao.getSelectedDetail(category);
+		request.setAttribute("list", list);
+		
+	}
 	
 }

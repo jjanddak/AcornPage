@@ -37,4 +37,6 @@ public interface ToonListDao {
 	public void plusCash(UsersDto dto);
 	
 	public String checkWriter(String code);
+	
+	public List<ToonDetailDto> getSelectedDetail(String category);
 }

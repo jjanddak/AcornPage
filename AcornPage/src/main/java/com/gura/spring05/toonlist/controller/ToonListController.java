@@ -94,6 +94,7 @@ public class ToonListController {
 		String param=URLEncoder.encode(title, "UTF-8");
 		return new ModelAndView("redirect:/toon/selectedDetail.do?title="+param);
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/toon/buyEach", method=RequestMethod.POST)
 	public Map<String, Object> authbuyEach(HttpServletRequest request,@RequestParam(value="arrEachCode[]")List<String> eachCode) {
@@ -103,4 +104,10 @@ public class ToonListController {
 		return map;
 	}
 	
-}
+	@RequestMapping("/toon/list")
+	public ModelAndView list(HttpServletRequest request,@RequestParam String category,ModelAndView mView) {
+		service.list(request, category);
+		mView.setViewName("toon/list");
+		return mView;
+	}
+}	
