@@ -23,6 +23,7 @@
 				<th>회차</th>
 				<th>썸네일</th>
 				<th>제목</th>
+				<th>별점</th>
 				<th>구매</th>
 				<th><input type="checkbox" id="AllCheck"/></th>
 			</tr>
@@ -35,9 +36,10 @@
 				<td><!-- ${tmp.writer } -->썸네일</td>
 				<td>
 					<a href="detailCode.do?code=${tmp.code }">
-						${tmp.title }
+						<strong>${tmp.title } ${tmp.num }화</strong>
 					</a>
 				</td>
+				<td>여기에 별점 입력${tmp.starvalue }</td>
 				<c:choose>
 					<c:when test="${tmp.isBuy }">
 						<td>소장중</td>

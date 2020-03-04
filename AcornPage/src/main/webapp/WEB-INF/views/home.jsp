@@ -111,8 +111,6 @@
 
 
 </script>
-
-	<a href="toon/userStarList.do?id=${id }"><button><strong>${id }</strong>  님이 별점 매긴 만화 목록 보기</button></a>
 </body>
 </html>
 

@@ -39,7 +39,7 @@
 				<td>${dto.title }</td>
 			</tr>
 			<tr>
-				<th>평균 별점</th>
+				<th>회별 별점</th>
 				<td><fmt:formatNumber value="${starvalueAVG }" pattern=".00"/> 점</td>
 			</tr>
 			<tr>
