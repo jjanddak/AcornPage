@@ -33,4 +33,6 @@ public interface ToonListDao {
 	public void buyEach(LibraryDto dto);
 	
 	public void minusCash(UsersDto dto);
+	
+	public List<ToonListDto> getUserStarList(ToonListDto dto);
 }

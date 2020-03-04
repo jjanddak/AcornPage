@@ -40,11 +40,18 @@ public class ToonListController {
 		dto.setId(id);
 		starService.addStar(dto);
 		String loc=code;
-
-		return new ModelAndView("redirect:detailCode.do?code="+loc);
 		//리다일렉트 응답
+		return new ModelAndView("redirect:detailCode.do?code="+loc);
+		
 	}
-
+	
+	@RequestMapping("/toon/userStarList")
+	public ModelAndView authStarSearch(HttpServletRequest request, @RequestParam String id) {
+		service.userStarList(request, id);
+		
+		return new ModelAndView("toon/userStarList");
+	}
+	
 	//만화를 눌렀을때 전체 화가 나오는 리스트 로직
 	@RequestMapping("/toon/selectedDetail")
 	public ModelAndView detailList(HttpServletRequest request,@RequestParam String title){

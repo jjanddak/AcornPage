@@ -88,5 +88,10 @@ public class ToonListDaoImpl implements ToonListDao{
 		
 		session.update("toon.minusCash",dto);
 	}
+
+	@Override
+	public List<ToonListDto> getUserStarList(ToonListDto dto) {
+		return session.selectList("toon.getUserStarList", dto);
+	}
 	
 }

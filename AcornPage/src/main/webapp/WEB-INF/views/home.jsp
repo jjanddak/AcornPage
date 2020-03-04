@@ -22,7 +22,8 @@
 	<jsp:param value="cafe" name="category"/>
 </jsp:include>
 <div class="container">
-	<a href="cafe/viewList.do">카카오페이지 이동</a>
+	<a href="cafe/viewList.do">카카오페이지 이동</a><br />
+	<a href="toon/userStarList.do"><strong>${id }</strong>  님이 별점 매긴 만화 목록 보기</a>
 	<h2>웹툰</h2>
 	<ul>
 		<c:forEach var="tmp" items="${notice }" varStatus="status">
@@ -110,6 +111,8 @@
 
 
 </script>
+
+	<a href="toon/userStarList.do?id=${id }"><button><strong>${id }</strong>  님이 별점 매긴 만화 목록 보기</button></a>
 </body>
 </html>
 
