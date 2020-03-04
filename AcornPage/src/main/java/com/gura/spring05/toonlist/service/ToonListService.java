@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import com.gura.spring05.library.dto.LibraryDto;
+import com.gura.spring05.toondetail.dto.ToonDetailDto;
 import com.gura.spring05.toonlist.dto.ToonListDto;
 
 public interface ToonListService {
@@ -22,4 +25,6 @@ public interface ToonListService {
 	public void buyAll(HttpServletRequest request,String title,int price);
 	
 	public void buyEach(HttpServletRequest request,List<String> eachCode);
+	
+	public void getMyToon(String id, ModelAndView mView);
 }

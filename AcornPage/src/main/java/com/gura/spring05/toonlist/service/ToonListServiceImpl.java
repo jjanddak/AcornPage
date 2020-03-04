@@ -130,5 +130,11 @@ public class ToonListServiceImpl implements ToonListService{
 		}
 				
 	}
+
+	@Override
+	public void getMyToon(String id, ModelAndView mView) {
+		List<ToonDetailDto> myToon=dao.getMyToon(id);
+		mView.addObject("myToon",myToon);
+	}
 	
 }

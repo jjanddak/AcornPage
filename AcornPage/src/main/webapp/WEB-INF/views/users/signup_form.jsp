@@ -41,13 +41,8 @@
 		</div>
 		<!-- 이메일 -->
 		<div class="form-group has-feedback">
-			<label class="control-label" for="wallet">잔액</label>
-			<p>3000원</p>
-		</div>
-		<div class="form-group">
-			<label class="control-label" for="isWriter">당신은 누구입니까?</label><br/>
-				<input type="radio" name="isWriter" value="true"/>작가<br/>
-				<input type="radio" name="isWriter" value="false" checked="checked"/>독자	
+			<label class="control-label" for="email">이메일</label>
+			<input class="form-control" type="text" id="email" name="email"/>
 		</div>
 		<div class="form-group has-feedback">
 			<label class="control-label" for="wallet">잔액</label>

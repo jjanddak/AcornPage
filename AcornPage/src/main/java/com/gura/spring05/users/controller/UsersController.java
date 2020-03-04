@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.toonlist.service.ToonListService;
 import com.gura.spring05.users.dto.UsersDto;
 import com.gura.spring05.users.service.UsersService;
 
@@ -26,6 +27,10 @@ import com.gura.spring05.users.service.UsersService;
 public class UsersController {
 	@Autowired
 	private UsersService service;
+	
+	@Autowired
+	private ToonListService toonService;
+	
 	//회원가입 폼 요청 처리 
 	@RequestMapping("/users/signup_form")
 	public String signup_form() {
@@ -137,6 +142,7 @@ public class UsersController {
 		String id=(String)request.getSession().getAttribute("id");
 		//UsersService 객체를 이용해서 개인정보를 ModelAndView 객체에 담기도록 한다.
 		service.showInfo(id, mView);
+		toonService.getMyToon(id, mView);
 		//view page 정보를 담고 
 		mView.setViewName("users/info");
 		return mView;//ModelAndView 객체를 리턴해주기 
