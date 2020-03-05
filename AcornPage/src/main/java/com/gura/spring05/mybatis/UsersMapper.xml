@@ -44,6 +44,10 @@
 		DELETE FROM users
 		WHERE id=#{id}
 	</delete>
+	
+	<select id="getWallet" parameterType="String" resultType="int">
+		select wallet from users where id=#{inputId}
+	</select>
 </mapper>
 
 

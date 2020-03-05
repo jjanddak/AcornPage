@@ -64,6 +64,13 @@ public class UsersDaoImpl implements UsersDao{
 		session.delete("users.delete", id);
 	}
 
+	@Override
+	public int getWallet(String inputId) {
+		
+		return session.selectOne("users.getWallet", inputId);
+		
+	}
+
 }
 
 

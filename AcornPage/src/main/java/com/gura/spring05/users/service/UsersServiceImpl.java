@@ -51,8 +51,9 @@ public class UsersServiceImpl implements UsersService{
 		}
 		if(isValid) {
 			//로그인 처리를 한다.
+			int wallet=dao.getWallet(dto.getId());
 			session.setAttribute("id", dto.getId());
-			session.setAttribute("wallet", dto.getWallet());
+			session.setAttribute("wallet", wallet);
 		}
 	}
 	@Override
