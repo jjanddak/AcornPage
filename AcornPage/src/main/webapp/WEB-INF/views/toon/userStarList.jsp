@@ -9,8 +9,11 @@
 <jsp:include page="../include/resource.jsp"/>
 </head>
 <body>
-
-	<div class="container">
+<jsp:include page="../include/navbar.jsp">
+	<jsp:param value="home" name="category"/>
+</jsp:include>
+	<div class="contentwrapper">
+	<div class="container content">
 		<table class="table table-striped table-condensed">
 		<thead>
 			<tr>
@@ -39,6 +42,7 @@
 		</tbody>
 	</table>
 	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
+	</div>
 	</div>
 </body>
 </html>
