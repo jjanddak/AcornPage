@@ -48,7 +48,7 @@
 	                        <img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>                                           	
                      	</c:when>
                      	<c:otherwise>
-                     		<img src="${pageContext.request.contextPath}${tmp.thumb }"/>
+                     		<img class="img-thumbnail" src="${pageContext.request.contextPath}${tmp.thumb }" alt="logo"/>
                      	</c:otherwise>
                      </c:choose>
                      </div>
