@@ -119,5 +119,8 @@ public class ToonListDaoImpl implements ToonListDao{
 		
 		return session.selectOne("toon.getDetailInfo", title);
 	}
+	public List<ToonListDto> getUserStarList(ToonListDto dto) {
+		return session.selectList("toon.getUserStarList", dto);
+	}
 	
 }

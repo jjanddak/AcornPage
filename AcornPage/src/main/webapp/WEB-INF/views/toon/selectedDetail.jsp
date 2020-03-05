@@ -23,24 +23,41 @@
 				</div>
 			</div>
 		</div>
-		<div class="container content">
-			<div class="buy" style="float:right">
-				<ul style="list-style:none">
-					<li class="btn btn-primary" id="buyEach" style="float:left"><a style="color:#fff" href="">선택구매</a></li>
-					<li class="btn btn-warning" id="buyAll" style="float:left"><a style="color:#fff" href="#">전체구매</a></li>
-				</ul>
-			</div>
-			<table class="table table-striped table-condensed">
-			<thead>
-				<tr>
-					<th>회차</th>
-					<th>썸네일</th>
-					<th>제목</th>
-					<th>구매</th>
-					<th><input type="checkbox" id="AllCheck"/></th>
-				</tr>
-			</thead>
-			<tbody>
+		<table class="table table-striped table-condensed">
+		<thead>
+			<tr>
+				<th>회차</th>
+				<th>썸네일</th>
+				<th>제목</th>
+				<th>별점</th>
+				<th>구매</th>
+				<th><input type="checkbox" id="AllCheck"/></th>
+			</tr>
+		</thead>
+		<tbody>
+		
+		<c:forEach var="tmp" items="${list }">
+			<tr>
+				<td>${tmp.num }</td>
+				<td><!-- ${tmp.writer } -->썸네일</td>
+				<td>
+					<a href="detailCode.do?code=${tmp.code }">
+						<strong>${tmp.title } ${tmp.num }화</strong>
+					</a>
+				</td>
+				<td>여기에 별점 입력${tmp.starvalue }</td>
+				<c:choose>
+					<c:when test="${tmp.isBuy }">
+						<td>소장중</td>
+						<td><input type="checkbox" name="selectedCode" value="${tmp.code }" disabled/></td>
+					</c:when>
+					<c:otherwise>
+						<td><a class="btn" href="buyCodeOne.do?code=${tmp.code }&title=${tmp.title }">구매</a></td>
+						<td><input type="checkbox" name="selectedCode" value="${tmp.code }"/></td>
+					</c:otherwise>
+				</c:choose>	
+			</tr>
+		</c:forEach>
 			
 			<c:forEach var="tmp" items="${list }">
 				<tr>
@@ -122,5 +139,7 @@
 	})
 
 	</script>
+	
+	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
 </body>
 </html>

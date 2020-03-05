@@ -31,4 +31,7 @@ public interface ToonListService {
 	public void list(HttpServletRequest request,String category);
 	
 	public void getDetailInfo(HttpServletRequest request,String title);
+
+	public void userStarList(HttpServletRequest request, String id);
+
 }

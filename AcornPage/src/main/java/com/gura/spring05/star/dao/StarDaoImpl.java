@@ -28,4 +28,9 @@ public class StarDaoImpl implements StarDao{
 	public void update(StarDto dto) {
 		session.update("star.update", dto);
 	}
+
+	@Override
+	public double selectStarOneAVG(StarDto dto) {
+		return session.selectOne("star.selectStarValueOneAVG", dto);
+	}
 }

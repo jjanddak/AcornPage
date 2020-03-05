@@ -33,6 +33,7 @@ public interface ToonListDao {
 	public void buyEach(LibraryDto dto);
 	
 	public List<ToonDetailDto> getMyToon(String id);
+	
 	public void minusCash(UsersDto dto);
 	
 	public void plusCash(UsersDto dto);
@@ -42,4 +43,7 @@ public interface ToonListDao {
 	public List<ToonDetailDto> getSelectedDetail(String category);
 	
 	public ToonDetailDto getDetailInfo(String title);
+
+	public List<ToonListDto> getUserStarList(ToonListDto dto);
+
 }

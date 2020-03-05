@@ -11,11 +11,12 @@ public class ToonListDto {
 	private String code;
 	private String id;
 	private boolean isBuy;
+	private double starvalue;
 	
 	public ToonListDto() {}
 
 	public ToonListDto(int num, String title, String writer, String content, String upload, String hashtag,
-			String toon_novel, String code,String id,boolean isBuy) {
+			String toon_novel, String code,String id,boolean isBuy,double starvalue) {
 		super();
 		this.num = num;
 		this.title = title;
@@ -25,6 +26,7 @@ public class ToonListDto {
 		this.hashtag = hashtag;
 		this.toon_novel = toon_novel;
 		this.code = code;
+		this.starvalue = starvalue;
 	}
 
 	public int getNum() {
@@ -105,6 +107,14 @@ public class ToonListDto {
 
 	public void setIsBuy(boolean isBuy) {
 		this.isBuy = isBuy;
+	}
+
+	public double getStarvalue() {
+		return starvalue;
+	}
+
+	public void setStarvalue(double starvalue) {
+		this.starvalue = starvalue;
 	}
 	
 	

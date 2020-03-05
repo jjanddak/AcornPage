@@ -12,6 +12,7 @@
 <jsp:include page="include/navbar.jsp">
 	<jsp:param value="home" name="category"/>
 </jsp:include>
+<<<<<<< HEAD
 <div class="contentwrapper">
 	<div class="container content slide">
 		<div class="your-class">
@@ -20,19 +21,20 @@
 		  <div><p style="width:100%; height:450px; background-color:grey; margin:0px;"></p></div>
 		</div>
 <div class="container content" style="border-top:20px solid #eee;">
-      <h2>웹툰</h2>
-      <ul>
-         <c:forEach var="tmp" items="${notice }" varStatus="status">
-            <li><p class="toon">만화 ${status.count }</p></li>
-         </c:forEach>
-      </ul>
-      <br/><br/>
-      <h2>웹소설</h2>
-      <ul>
-         <c:forEach var="tmp" items="${notice }" varStatus="status">
-            <li><p class="novel">소설 ${status.count }</p></li>
-         </c:forEach>
-      </ul>
+	<h2>웹툰</h2>
+	<ul>
+		<c:forEach var="tmp" items="${notice }" varStatus="status">
+			<li><p class="toon">만화 ${status.count }</p></li>
+		</c:forEach>
+	</ul>
+	<br/><br/>
+	<h2>웹소설</h2>
+	<ul>
+		<c:forEach var="tmp" items="${notice }" varStatus="status">
+			<li><p class="novel">소설 ${status.count }</p></li>
+		</c:forEach>
+	</ul>
+</div>
 
       <div class="bestList">
          <ul>

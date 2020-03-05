@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.gura.spring05.star.dao.StarDao;
 import com.gura.spring05.star.dto.StarDto;
-
+import com.gura.spring05.toonlist.dto.ToonListDto;
 
 @Service
 public class StarServiceImpl implements StarService{
@@ -24,5 +24,15 @@ public class StarServiceImpl implements StarService{
 		}else if(starValueResult!=null){
 			dao.update(dto);
 		}
+	}
+
+	@Override
+	public void selectStarValueOneAVG(HttpServletRequest request, String code) {
+		
+		StarDto dto= new StarDto();
+		dto.setCode(code);
+		double starvalueAVG=dao.selectStarOneAVG(dto);
+		
+		request.setAttribute("starvalueAVG", starvalueAVG);
 	}
 }

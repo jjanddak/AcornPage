@@ -173,7 +173,6 @@ public class ToonListServiceImpl implements ToonListService{
 		}
 	}
 
-
 	@Override
 	public void list(HttpServletRequest request, String category) {
 		List<ToonDetailDto> list=dao.getSelectedDetail(category);
@@ -192,6 +191,14 @@ public class ToonListServiceImpl implements ToonListService{
 	public void getMyToon(String id, ModelAndView mView) {
 		List<ToonDetailDto> myToon=dao.getMyToon(id);
 		mView.addObject("myToon",myToon);
+	}
+
+	@Override
+	public void userStarList(HttpServletRequest request, String id) {
+		ToonListDto dto=new ToonListDto();
+		dto.setId(id);
+		List<ToonListDto> list=dao.getUserStarList(dto);
+		request.setAttribute("list", list);
 	}
 	
 }

@@ -48,7 +48,7 @@
 	
 	<update id="minusCash" parameterType="usersDto">
 		update users set wallet=wallet-#{price} where id=#{id}
-	</update>
+	</update>	
 	
 	<select id="getWriterDetail" parameterType="String"
 		resultType="toonDetailDto">
@@ -75,20 +75,35 @@
 	<select id="getLastNum" parameterType="String" resultType="int">
 		select max(num) from toonlist where title=#{title}
 	</select>
+	
 	<update id="plusCash" parameterType="usersDto">
 		update users set wallet=wallet+#{price} where id=#{id}
 	</update>
+	
 	<select id="checkWriter" parameterType="String" resultType="String">
 		select writer from toonlist where code=#{code}
 	</select>
+	
 	<select id="selectedToonovel" parameterType="String" resultType="toonDetailDto">
 		select * from toondetail where toonovel=#{category}
 	</select>
+	
 	<select id="selectedHashtag" parameterType="String" resultType="toonDetailDto">
 		select * from toondetail where hashtag=#{category}
 	</select>
+	
 	<select id="getDetailInfo" parameterType="String" resultType="toonDetailDto">
 		select * from toondetail where title=#{title}
+	</select>
+	
+	<select id="getUserStarList" parameterType="toonListDto" resultType="toonListDto">
+			select * from (
+			select toonlist.code,starvalue,toonlist.num,toonlist.title
+			from toonlist
+			inner join star on toonlist.code=star.code
+		    where id='${id}'
+		    order by title asc 
+		    )		
 	</select>
 </mapper>
 

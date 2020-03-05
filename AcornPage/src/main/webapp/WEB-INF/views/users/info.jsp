@@ -93,8 +93,10 @@
 		</c:if>		
 	</table>
 	<a href="${pageContext.request.contextPath}/toon/newToonup.do">신작 업로드</a>
-	<a href="../home.do">수정완료</a>
-	<a href="javascript:deleteConfirm()">회원 탈퇴</a>
+	<a href="../home.do"><button>수정완료</button></a>
+	<a href="javascript:deleteConfirm()"><button>회원 탈퇴</button></a>
+	<a href="${pageContext.request.contextPath }/toon/userStarList.do?id=${id }"><button><strong>${id }</strong>  님이 별점 매긴 만화 목록 보기</button></a>
+
 </div>
 
 <form action="profile_upload.do" method="post"
