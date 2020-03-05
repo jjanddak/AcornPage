@@ -27,14 +27,14 @@
 			<div class="search">
 <!-- 			디테일리스트페이지로 연결되게 -->
 			<form action="toon/searchedDetail.do" method="post">
-			 <select name="select">
+			 <select id="select" name="select">
 				  <option value="null">-----</option>
 				  <option value="title">제목</option>
 				  <option value="writer">작가</option>
 				  <option value="hashtag">태그검색</option>
 			 </select>		  
 			 <input type="text" name="keyword" id="keyword"/>
-			 <input type="submit" class="button" value="검색"/>
+			 <input type="button" id="button" class="button" onclick="send(this.form);" value="검색"/>
 			</form>
 			</div>		
 			<c:choose>
@@ -64,5 +64,19 @@ function popupOpen(){
     var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
 	window.open(url,"",popupOption);
 }
-</script>
 
+
+function send(theform){ 
+	if(theform.keyword.value==""){ 
+		alert("검색어를 입력 하세요.");
+		theform.keyword.focus(); 
+		return false;
+	}else
+	theform.submit();
+}
+
+
+
+
+</script>
+}

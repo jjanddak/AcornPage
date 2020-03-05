@@ -5,12 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<jsp:include page="../include/resource.jsp"/>
 <title>toon/searchedDetail.jsp</title>
+<jsp:include page="../include/navbar.jsp">
+	<jsp:param value="cafe" name="category"/>
+</jsp:include>
 </head>
 <body>
 <div class="container">
 	<h1>선택된 목록입니다.</h1>
-	<table>
+	<table class="table table-striped table-condensed">
 		<thead>
 			<tr>
 				<th>제목</th>
@@ -34,6 +38,7 @@
 			</c:forEach>
 		</tbody>	
 	</table>
+
 </div>
 </body>
 </html>
