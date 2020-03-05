@@ -19,6 +19,8 @@
 </style>
 </head>
 <body>
+<div class="contentwrapper">
+   <div class="container content">
 	<div class="container">
 		<h3>카페 글 상세 보기</h3>
 			<table class="table table-bordered table-condensed">
@@ -59,7 +61,8 @@
 		<button id="starBtn" type="submit">별점제출</button>
 	</form>
 	</div>
-	
+	 </div> <!-- //content -->
+</div> <!--//contentwrapper -->
 	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
 </body>
 <script>

@@ -1,43 +1,29 @@
-package com.gura.spring05.toondetail.dto;
+package com.gura.spring05.toonup.dto;
 
-public class ToonDetailDto {
+import org.springframework.web.multipart.MultipartFile;
+
+public class NewToonupDto {
 	private String title;
 	private String writer;
 	private String info;
-	private String regdate;
 	private String hashtag;
 	private String toonovel;
 	private String thumb;
+	private MultipartFile File;
 	
-	public ToonDetailDto() {}
-	
-	
+	public NewToonupDto() {}
 
-	public ToonDetailDto(String title, String writer, String info, String regdate, String hashtag, String toonovel,
-			String thumb) {
+	public NewToonupDto(String title, String writer, String info, String hashtag, String toonovel, String thumb,
+			MultipartFile file) {
 		super();
 		this.title = title;
 		this.writer = writer;
 		this.info = info;
-		this.regdate = regdate;
 		this.hashtag = hashtag;
 		this.toonovel = toonovel;
 		this.thumb = thumb;
+		File = file;
 	}
-
-
-
-	public String getThumb() {
-		return thumb;
-	}
-
-
-
-	public void setThumb(String thumb) {
-		this.thumb = thumb;
-	}
-
-
 
 	public String getTitle() {
 		return title;
@@ -63,14 +49,6 @@ public class ToonDetailDto {
 		this.info = info;
 	}
 
-	public String getRegdate() {
-		return regdate;
-	}
-
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
-	}
-
 	public String getHashtag() {
 		return hashtag;
 	}
@@ -86,4 +64,22 @@ public class ToonDetailDto {
 	public void setToonovel(String toonovel) {
 		this.toonovel = toonovel;
 	}
+
+	public String getThumb() {
+		return thumb;
+	}
+
+	public void setThumb(String thumb) {
+		this.thumb = thumb;
+	}
+
+	public MultipartFile getFile() {
+		return File;
+	}
+
+	public void setFile(MultipartFile file) {
+		File = file;
+	}
+	
+	
 }

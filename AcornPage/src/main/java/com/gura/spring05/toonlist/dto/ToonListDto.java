@@ -12,6 +12,7 @@ public class ToonListDto {
 	private String id;
 	private boolean isBuy;
 	private double starvalue;
+	private String thumb;
 	
 	public ToonListDto() {}
 
@@ -27,6 +28,19 @@ public class ToonListDto {
 		this.toon_novel = toon_novel;
 		this.code = code;
 		this.starvalue = starvalue;
+	}
+
+	
+	public String getThumb() {
+		return thumb;
+	}
+
+	public void setThumb(String thumb) {
+		this.thumb = thumb;
+	}
+
+	public void setBuy(boolean isBuy) {
+		this.isBuy = isBuy;
 	}
 
 	public int getNum() {

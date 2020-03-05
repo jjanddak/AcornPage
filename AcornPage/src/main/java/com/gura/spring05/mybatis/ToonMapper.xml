@@ -72,7 +72,7 @@
 		select * from toondetail where writer=#{id}
 	</select>
 	
-	<select id="getLastNum" parameterType="String" resultType="int">
+	<select id="getLastNum" parameterType="String" resultType="Integer">
 		select max(num) from toonlist where title=#{title}
 	</select>
 	
@@ -105,6 +105,11 @@
 		    order by title asc 
 		    )		
 	</select>
+
+	<insert id="newToonup" parameterType="newToonupDto">
+		insert into toondetail values (#{title}, #{writer}, #{info}, sysdate, #{hashtag}, 
+		#{toonovel}, #{thumb})
+	</insert>
 </mapper>
 
 
