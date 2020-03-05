@@ -16,9 +16,15 @@ h1{
 .logo{
 	margin:5px auto;
 }
+@media (max-width: 992px) {
+  .logo {
+    padding-left:30px;
+    text-align:left;
+  }
+}
 .right-box{
 	position:absolute;
-	top:0;
+	top:-5px;
 	right:0;
 	padding-right:20px;
 }

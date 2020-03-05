@@ -71,6 +71,7 @@
 	</nav>
 </body>
 <script>
+
 function popupOpen(){
 	var url= "${pageContext.request.contextPath }/cash/addcash.do";    //팝업창 페이지 URL
 	var winWidth = 550;
