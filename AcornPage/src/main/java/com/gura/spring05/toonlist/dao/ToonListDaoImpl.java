@@ -33,11 +33,10 @@ public class ToonListDaoImpl implements ToonListDao{
 	}
 
 	@Override
-	public boolean cashUpdate(int cash) {
+	public void cashUpdate(int cash) {
 
 		session.update("toon.cashUpdate",cash);
 		
-		return true;
 	}
 
 	@Override
@@ -79,7 +78,7 @@ public class ToonListDaoImpl implements ToonListDao{
 
 	@Override
 	public void buyEach(LibraryDto dto) {
-		System.out.println(dto.getCode()+dto.getId());
+
 		session.insert("toon.buyEach",dto);
 		
 	}
@@ -87,6 +86,38 @@ public class ToonListDaoImpl implements ToonListDao{
 	@Override
 	public List<ToonDetailDto> getMyToon(String id) {
 		return session.selectList("toon.getMyToon",id);
+	}
+	public void minusCash(UsersDto dto) {
+		
+		session.update("toon.minusCash",dto);
+	}
+
+	@Override
+	public void plusCash(UsersDto dto) {
+		
+		session.update("toon.plusCash",dto);
+	}
+
+	@Override
+	public String checkWriter(String code) {
+		
+		return session.selectOne("toon.checkWriter", code);
+	}
+
+	@Override
+	public List<ToonDetailDto> getSelectedDetail(String category) {
+		if(category.equals("toon") || category.equals("novel")) {
+			return session.selectList("toon.selectedToonovel",category);
+		}else {
+			return session.selectList("toon.selectedHashtag",category);
+		}
+		
+	}
+
+	@Override
+	public ToonDetailDto getDetailInfo(String title) {
+		
+		return session.selectOne("toon.getDetailInfo", title);
 	}
 	
 }

@@ -42,16 +42,20 @@
 		<!-- 이메일 -->
 		<div class="form-group has-feedback">
 			<label class="control-label" for="email">이메일</label>
-			<input class="form-control" type="text" id="email" name="email"/>
+			<input class="form-control" type="email" id="email" name="email" />
+			<p class="help-block" id="email_notmatch">이메일 형식에 맞게 입력하세요</p>
+			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span class="glyphicon glyphicon-ok form-control-feedback"></span>
 		</div>
+		<!-- 지갑 -->
 		<div class="form-group has-feedback">
 			<label class="control-label" for="wallet">잔액</label>
 			<p>3000원</p>
 		</div>
 		<div class="form-group">
 			<label class="control-label" for="isWriter">당신은 누구입니까?</label><br/>
-				<input type="radio" name="isWriter" value="Y"/>작가<br/>
-				<input type="radio" name="isWriter" value="N" checked="checked"/>독자	
+				<input type="radio" name="isWriter" value="true"/>작가<br/>
+				<input type="radio" name="isWriter" value="false" checked="checked"/>독자	
 		</div>
 		<button disabled="disabled" class="btn btn-primary" type="submit">가입</button>
 		<button class="btn btn-warning" type="reset">취소</button>

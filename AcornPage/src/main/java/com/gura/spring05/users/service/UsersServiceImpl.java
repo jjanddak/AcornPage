@@ -54,6 +54,7 @@ public class UsersServiceImpl implements UsersService{
 		if(isValid) {
 			//로그인 처리를 한다.
 			session.setAttribute("id", dto.getId());
+			session.setAttribute("wallet", dto.getWallet());
 		}
 	}
 	@Override

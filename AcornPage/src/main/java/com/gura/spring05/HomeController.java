@@ -35,13 +35,10 @@ public class HomeController {
 		// HttpServletRequest 객체를 서비스에 넘겨 주면서
 		// 비즈니스 로직을 수행하고 
 		service.getToonList(request);
-		
 		//툰댓글 목록을 얻어와서 request 에 담아준다.
 		//나중에 getList의 패러미터로 code넣어서 사용
 		List<ToonCommentDto> toonCommentList=dao.getList("1");
 		request.setAttribute("toonCommentList", toonCommentList);
-		
-		
 		// view page 로 forward 이동해서 글 목록 출력하기 
 		return new ModelAndView("home");
 		

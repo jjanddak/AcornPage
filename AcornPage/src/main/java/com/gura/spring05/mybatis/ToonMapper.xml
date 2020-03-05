@@ -33,9 +33,11 @@
 	<select id="checkLibrary" parameterType="libraryDto" resultType="libraryDto">
 		select * from library where code in(select code from toonlist where title=#{title})and id=#{id}
 	</select>
+	
 	<select id="getUnBuyList" parameterType="libraryDto" resultType="toonListDto">
 		select * from toonlist where code not in(select code from library where id=#{id})and title=#{title}
 	</select>
+	
 	<insert id="buyEach" parameterType="libraryDto">
 		insert into library values(library_seq.nextval,#{id},#{code},sysdate)
 	</insert>	
@@ -43,29 +45,50 @@
 		insert into toonlist (num,title,writer,content,regdate,code)
 		values (#{num},#{title}, #{writer}, #{content}, sysdate, #{title}||#{num})
 	</insert>
+	
 	<update id="minusCash" parameterType="usersDto">
 		update users set wallet=wallet-#{price} where id=#{id}
 	</update>
+	
 	<select id="getWriterDetail" parameterType="String"
 		resultType="toonDetailDto">
 		select * from toondetail
 		WHERE writer like '%'||#{writer}||'%'
 	</select>
+	
 	<select id="getTitleDetail" parameterType="String"
 		resultType="toonDetailDto">
 		select * from toondetail
 		WHERE title like '%'||#{title}||'%'
 	</select>
+	
 	<select id="getHashtagDetail" parameterType="String"
 		resultType="toonDetailDto">
 		select * from toondetail
 		WHERE hashtag like '%'||#{hashtag}||'%'
-	</select>		
+	</select>	
+		
 	<select id="getMyToon" parameterType="String" resultType="toonDetailDto">
 		select * from toondetail where writer=#{id}
 	</select>
+	
 	<select id="getLastNum" parameterType="String" resultType="int">
 		select max(num) from toonlist where title=#{title}
+	</select>
+	<update id="plusCash" parameterType="usersDto">
+		update users set wallet=wallet+#{price} where id=#{id}
+	</update>
+	<select id="checkWriter" parameterType="String" resultType="String">
+		select writer from toonlist where code=#{code}
+	</select>
+	<select id="selectedToonovel" parameterType="String" resultType="toonDetailDto">
+		select * from toondetail where toonovel=#{category}
+	</select>
+	<select id="selectedHashtag" parameterType="String" resultType="toonDetailDto">
+		select * from toondetail where hashtag=#{category}
+	</select>
+	<select id="getDetailInfo" parameterType="String" resultType="toonDetailDto">
+		select * from toondetail where title=#{title}
 	</select>
 </mapper>
 

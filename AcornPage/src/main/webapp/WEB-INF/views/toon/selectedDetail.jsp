@@ -7,55 +7,66 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <jsp:include page="../include/resource.jsp"/>
-
 </head>
-<body> 
-	<div class="container">
-		<div class="buy" style="float:right">
-			<ul style="list-style:none">
-				<li class="btn btn-primary" id="buyEach" style="float:left"><a style="color:#fff" href="">선택구매</a></li>
-				<li class="btn btn-warning" id="buyAll" style="float:left"><a style="color:#fff" href="#">전체구매</a></li>
-			</ul>
+<body>
+<jsp:include page="../include/navbar.jsp"/>
+	<div class="contentwrapper">
+		<div class="container content">
+			<div class="list">
+				<div class="imgwrapper">
+					<img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>
+				</div>
+				<div class="textwrapper">
+					<p>${dto.title }</p>
+					<p>${dto.writer }</p>
+					<p>${dto.info }</p>
+				</div>
+			</div>
 		</div>
-		<table class="table table-striped table-condensed">
-		<thead>
-			<tr>
-				<th>회차</th>
-				<th>썸네일</th>
-				<th>제목</th>
-				<th>내용</th>
-				<th>평균 별점</th>
-				<th>구매</th>
-				<th><input type="checkbox" id="AllCheck"/></th>
-			</tr>
-		</thead>
-		<tbody>
-		
-		<c:forEach var="tmp" items="${list }">
-			<tr>
-				<td>${tmp.num }</td>
-				<td><!-- ${tmp.writer } -->썸네일</td>
-				<td>
-					<a href="detailCode.do?code=${tmp.code }">
-						${tmp.title }
-					</a>
-				</td>
-				<td>10점만점에 10점~!</td>		
-				<c:choose>
-					<c:when test="${tmp.isBuy }">
-						<td>소장중</td>
-						<td><input type="checkbox" name="selectedCode" value="${tmp.code }" disabled/></td>
-					</c:when>
-					<c:otherwise>
-						<td><a class="btn" href="buyCodeOne.do?code=${tmp.code }">구매</a></td>
-						<td><input type="checkbox" name="selectedCode" value="${tmp.code }"/></td>
-					</c:otherwise>
-				</c:choose>		
-			</tr>
-		</c:forEach>
+		<div class="container content">
+			<div class="buy" style="float:right">
+				<ul style="list-style:none">
+					<li class="btn btn-primary" id="buyEach" style="float:left"><a style="color:#fff" href="">선택구매</a></li>
+					<li class="btn btn-warning" id="buyAll" style="float:left"><a style="color:#fff" href="#">전체구매</a></li>
+				</ul>
+			</div>
+			<table class="table table-striped table-condensed">
+			<thead>
+				<tr>
+					<th>회차</th>
+					<th>썸네일</th>
+					<th>제목</th>
+					<th>구매</th>
+					<th><input type="checkbox" id="AllCheck"/></th>
+				</tr>
+			</thead>
+			<tbody>
 			
-		</tbody>
-	</table>
+			<c:forEach var="tmp" items="${list }">
+				<tr>
+					<td>${tmp.num }</td>
+					<td><!-- ${tmp.writer } -->썸네일</td>
+					<td>
+						<a href="detailCode.do?code=${tmp.code }">
+							${tmp.title }
+						</a>
+					</td>
+					<c:choose>
+						<c:when test="${tmp.isBuy }">
+							<td>소장중</td>
+							<td><input type="checkbox" name="selectedCode" value="${tmp.code }" disabled/></td>
+						</c:when>
+						<c:otherwise>
+							<td><a class="btn" href="buyCodeOne.do?code=${tmp.code }&title=${tmp.title }">구매</a></td>
+							<td><input type="checkbox" name="selectedCode" value="${tmp.code }"/></td>
+						</c:otherwise>
+					</c:choose>	
+				</tr>
+			</c:forEach>
+				
+			</tbody>
+		</table>
+		</div>
 	</div>
 	<script>
 	$(document).ready(function(){

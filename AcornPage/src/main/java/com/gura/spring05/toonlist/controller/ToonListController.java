@@ -1,5 +1,7 @@
 package com.gura.spring05.toonlist.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,24 +44,14 @@ public class ToonListController {
 		return new ModelAndView("redirect:detailCode.do?code="+loc);
 		//리다일렉트 응답
 	}
-//	@RequestMapping("/toon/buyCodeOne")
-//	public ModelAndView buyCode(HttpServletRequest request,@ModelAttribute LibraryDto dto,@RequestParam String code) {
-//		//String id=(String)request.getSession().getAttribute("id");
-//		String id="kapman";
-//		dto.setId(id);
-//		//dto.setCode((String)request.getAttribute("code"));
-//		dto.setCode(code);
-//		service.buyCodeOne(dto);
-//		return new ModelAndView("redirect:/home.do");
-//	}
+
 	//만화를 눌렀을때 전체 화가 나오는 리스트 로직
 	@RequestMapping("/toon/selectedDetail")
 	public ModelAndView detailList(HttpServletRequest request,@RequestParam String title){
-		// HttpServletRequest 객체를 서비스에 넘겨 주면서
-		// 비즈니스 로직을 수행하고 
+		//타이틀로 해당 만화 목록을 가지고 오는 서비스 실행
 		service.getDetailList(request,title);
-		//String id=(String)request.getSession().getAttribute("id");
-				
+		//타이틀로 해당 만화 정보를 가지고 오는 서비스 실행
+		service.getDetailInfo(request, title);		
 		// view page 로 forward 이동해서 글 목록 출력하기 
 		return new ModelAndView("toon/selectedDetail");
 	}
@@ -78,47 +70,45 @@ public class ToonListController {
 	}
 	//캐쉬 충전하기 버튼을 눌렀을때 캐쉬충전하는 로직
 	@RequestMapping("/cash/cashcharge")
-	public ModelAndView chargeCash(HttpServletRequest request,@RequestParam int cash,ModelAndView mView) {
-		//세션에 아이디를 리퀘스트에 담아 넘겨줘야되는 부분. 차후 수정!
-		//String id=(String)request.getSession().getAttribute("id");
-		//@RequestParam String id로 id값 넘겨준다.
-		if(service.cashAdd(request, cash)) {
-			boolean isSuccess=true;
-			mView.addObject("isSuccess",isSuccess);
-		}else {
-			boolean isSuccess=false;
-			mView.addObject("isSuccess",isSuccess);
-		}
-		mView.setViewName("cash/checkcash");
+	public ModelAndView chargeCash(HttpServletRequest request,@RequestParam int cash) {
+
+		service.cashAdd(request, cash);
 		
-		return mView;
+		return new ModelAndView("cash/checkcash");
 	}
 	
 	@RequestMapping("/toon/buyCodeOne")
-	public ModelAndView buyCode(HttpServletRequest request,@ModelAttribute LibraryDto dto,@RequestParam String code) {
-		//String id=(String)request.getSession().getAttribute("id");
-		String id="kapman";
+	public ModelAndView authbuyCodeOne(HttpServletRequest request,@ModelAttribute LibraryDto dto,
+			@RequestParam String code,@RequestParam String title) throws UnsupportedEncodingException {
+		String param=URLEncoder.encode(title, "UTF-8");
+		String id=(String)request.getSession().getAttribute("id");
 		dto.setId(id);
-		//dto.setCode((String)request.getAttribute("code"));
 		dto.setCode(code);
 		service.buyCodeOne(dto);
-		return new ModelAndView("redirect:/home.do");
+		return new ModelAndView("redirect:/toon/selectedDetail.do?title="+param);
 	}
 	
 	@RequestMapping("/toon/buyAll")
-	public ModelAndView buyAll(HttpServletRequest request,@RequestParam String title,int price) {
-		//String id=(String)request.getSession().getAttribute("id");
+	public ModelAndView authbuyAll(HttpServletRequest request,@RequestParam String title,int price) throws UnsupportedEncodingException {
 		service.buyAll(request,title,price);
-		
-		return new ModelAndView("redirect:/home.do");
+		String param=URLEncoder.encode(title, "UTF-8");
+		return new ModelAndView("redirect:/toon/selectedDetail.do?title="+param);
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/toon/buyEach", method=RequestMethod.POST)
-	public Map<String, Object> buyEach(HttpServletRequest request,@RequestParam(value="arrEachCode[]")List<String> eachCode) {
+	public Map<String, Object> authbuyEach(HttpServletRequest request,@RequestParam(value="arrEachCode[]")List<String> eachCode) {
 		service.buyEach(request, eachCode);
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("isSuccess", true);
 		return map;
 	}
 	
-}
+	@RequestMapping("/toon/categorylist")
+	public ModelAndView list(HttpServletRequest request,@RequestParam String category,ModelAndView mView) throws UnsupportedEncodingException {
+		service.list(request, category);
+		request.setAttribute("category", category);
+		mView.setViewName("toon/categorylist");
+		return mView;
+	}
+}	

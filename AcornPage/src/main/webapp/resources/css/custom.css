@@ -1,6 +1,153 @@
 @charset "utf-8";
-
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700&display=swap&subset=korean');
 /* 상단 navbar 때문에 필요한 css */
+a, a:link,a:hover{
+	color:#000;
+	text-decoration:none;
+	outline:none;
+}
 body{
 	padding-top: 60px;
+	font-family: 'Nanum Gothic', sans-serif;
 }
+h1{
+	font-size:0px;
+}
+.logo{
+	margin:12px auto;
+}
+.right-box{
+	position:absolute;
+	top:0;
+	right:0;
+	padding-right:20px;
+}
+.navbar{
+	margin-bottom:10px;
+}
+nav.navbar{
+	border-bottom: 1px solid rgb(223, 223, 223);
+	padding-top:25px;
+}
+.nav-center{
+	text-align:center;
+}
+.navbar-inverse{
+	background-color:#fff;
+	border-color:#fff;
+}
+.navbar-inverse .navbar-nav > li > a{
+	color:#333333;
+}
+.navbar-inverse .navbar-nav > li > a:hover{
+	color:#333333;
+}
+a{
+	color:#333333;
+}
+.nav > li{
+	display:inline-block;
+}
+.nav > li.active{
+	border-bottom:3px solid #ffd200;
+}
+.nav > li > a:hover, .nav > li > a:focus{
+	background-color:#fff;
+}
+.nav > li > a{
+	font-size:25px;
+}
+.search{
+	line-height: 23px;
+    display: inline-block;
+    padding: 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(207, 207, 207);
+    border-image: initial;
+    background: rgb(255, 255, 255);
+    border-radius: 30px;
+}
+.contentwrapper{
+	min-height:1000px;
+	background-color:#eee;
+	margin-top:80px;
+	border-top:20px solid #eee;
+}
+.content{
+	background-color:#fff;
+	padding-top:10px;
+	padding-bottom:10px;
+	border-bottom:10px solid #eee;
+	border-top:10px solid #eee;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 750px;
+  }
+}
+ #star_grade a{
+    text-decoration: none;
+    color: gray;
+}
+#star_grade a.on{
+    color: red;
+}
+ul{
+	list-style:none;
+	margin:0 auto;
+	padding:0;
+}
+.bestList{
+	width:100%;
+}
+div.list{
+	width:100%;
+	height: 110px;
+	margin:10px 10px;
+}
+.imgwrapper{
+	position: relative;
+	float: left;
+}
+.img-thumbnail{
+	width:150px; 
+	height:100px; 
+	border-radius: 10px;
+	padding:0px;
+}
+.textwrapper{
+	position: relative;
+	float:left;
+	padding:10px 20px;
+}
+.list-title{
+	font-size:16px;
+	color:#333333;
+}
+.list-writer{
+	font-size:14px;
+	color:#999999;
+}
+.list-info{
+	font-size:14px;
+	color:#999999;
+}
+.slide{
+	padding:0px;
+	border:0px;
+	border-top:10px solid #eee;
+}
+
+

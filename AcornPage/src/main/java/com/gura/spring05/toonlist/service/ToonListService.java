@@ -18,7 +18,7 @@ public interface ToonListService {
 	//코드값을 통해 데이터를 가져오는 메소드
 	public void getCodeDetail(HttpServletRequest request,String code);
 	//유저의 Id와 충전할 캐쉬의 값을 전달하는 메소드
-	public boolean cashAdd(HttpServletRequest request,int cash);
+	public void cashAdd(HttpServletRequest request,int cash);
 	//LibraryDto를 전달 받아 소장테이블에 저장하는 메소드
 	public void buyCodeOne(LibraryDto dto);
 	
@@ -27,4 +27,8 @@ public interface ToonListService {
 	public void buyEach(HttpServletRequest request,List<String> eachCode);
 	
 	public void getMyToon(String id, ModelAndView mView);
+	
+	public void list(HttpServletRequest request,String category);
+	
+	public void getDetailInfo(HttpServletRequest request,String title);
 }
