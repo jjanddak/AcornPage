@@ -26,7 +26,7 @@
 			<!-- 검색기 -->
 			<div class="search">
 <!-- 			디테일리스트페이지로 연결되게 -->
-			<form action="toon/searchedDetail.do" method="post">
+			<form action="${pageContext.request.contextPath}/toon/searchedDetail.do" method="post">
 			 <select id="select" name="select">
 				  <option value="null">-----</option>
 				  <option value="title">제목</option>
