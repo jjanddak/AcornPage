@@ -28,11 +28,17 @@ public class StarServiceImpl implements StarService{
 
 	@Override
 	public void selectStarValueOneAVG(HttpServletRequest request, String code) {
-		
+
 		StarDto dto= new StarDto();
 		dto.setCode(code);
-		double starvalueAVG=dao.selectStarOneAVG(dto);
+		StarDto dto2=dao.selectStarOneAVG(dto);
+		if(dto2==null) {
+			request.setAttribute("starvalueAVG", 0);
+		}else {
+			request.setAttribute("starvalueAVG", dto2.getStarValue());
+		}
 		
-		request.setAttribute("starvalueAVG", starvalueAVG);
+		
 	}
+
 }
