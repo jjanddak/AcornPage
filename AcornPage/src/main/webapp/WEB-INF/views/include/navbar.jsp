@@ -16,48 +16,8 @@
 			      	<img src="<c:url value='/resources/images/acornLogo.png'/>" alt="logo"/>
 			      </a>
 				</h1>
-		      
-		    	<div class="right-box">	
-			      	<!-- 검색기 -->
-					<div class="search">
-						 <form action="list.do" method="post">
-							<select name="select">
-								  <option value="null">-----</option>
-								  <option value="title">제목</option>
-								  <option value="writer">작가</option>
-								  <option value="hashtag">태그검색</option>
-							 </select>
-						 <input type="text" name="keyword" id="keyword"/>
-						 <input type="submit" class="button" value="검색"/>
-						 <p type="submit" class="glyphicon glyphicon-search"></p>
-						</form>
-					</div>
-						<c:choose>
-							<c:when test="${empty sessionScope.id }">
-								<a class="btn btn-primary navbar-btn btn-sm btn-right" href="${pageContext.request.contextPath }/users/loginform.do">로그인</a>
-								<a class="btn btn-warning navbar-btn btn-sm btn-right" href="${pageContext.request.contextPath }/users/signup_form.do">회원가입</a>	
-							</c:when>
-							<c:otherwise>
-								<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">${id }님
-								<span class="caret"/>
-								</button>					
-								<ul class="dropdown-menu pull-right" style="text-align:center;">
-									<li>
-										<p>내 캐시</p>
-										<strong>${wallet }</strong>									
-									</li>
-									<li><a onclick="popupOpen()" href="#">캐시충전</a></li>
-									<li><a href="#">보관함</a></li>
-									<li><a href="${pageContext.request.contextPath }/users/info.do">정보보기</a></li>
-									<li><a href="${pageContext.request.contextPath }/users/logout.do">로그아웃</a></li>
-								</ul>
-							</c:otherwise>
-						</c:choose>
-				</div>
-	        </div>
+		</div>
 		<div class="container">
-			
-<<<<<<< HEAD
 			<div class="pull-right">
 			<!-- 검색기 -->
 			<div class="search">
@@ -88,8 +48,6 @@
 				</c:otherwise>
 			</c:choose>
 			</div>
-=======
->>>>>>> refs/heads/kimjunseo2
 		</div>
 		<div class="container">
 			<ul class="nav nav-center">
@@ -104,7 +62,6 @@
 	</nav>
 </body>
 <script>
-<<<<<<< HEAD
  
 function popupOpen(){
 	var url= "${pageContext.request.contextPath }/cash/addcash.do";    //팝업창 페이지 URL
@@ -129,12 +86,6 @@ function send(theform){
 	theform.submit();
 }
 
-
-
-
-</script>
-}
-=======
 	function popupOpen(){
 		var url= "${pageContext.request.contextPath }/cash/addcash.do";    //팝업창 페이지 URL
 		var winWidth = 700;
@@ -144,4 +95,3 @@ function send(theform){
 	}
 </script>
 </html>
->>>>>>> refs/heads/kimjunseo2

@@ -19,38 +19,42 @@
 		  <div><p style="width:100%; height:450px; background-color:blue; margin:0px;"></p></div>
 		  <div><p style="width:100%; height:450px; background-color:grey; margin:0px;"></p></div>
 		</div>
-	</div>
-</div>
-		<br/><br/>
-		<h2>웹소설</h2>
-		<ul>
-			<c:forEach var="tmp" items="${notice }" varStatus="status">
-				<li><p class="novel">소설 ${status.count }</p></li>
-			</c:forEach>
-		</ul>
+<div class="container content" style="border-top:20px solid #eee;">
+      <h2>웹툰</h2>
+      <ul>
+         <c:forEach var="tmp" items="${notice }" varStatus="status">
+            <li><p class="toon">만화 ${status.count }</p></li>
+         </c:forEach>
+      </ul>
+      <br/><br/>
+      <h2>웹소설</h2>
+      <ul>
+         <c:forEach var="tmp" items="${notice }" varStatus="status">
+            <li><p class="novel">소설 ${status.count }</p></li>
+         </c:forEach>
+      </ul>
 
-		<div class="bestList">
-			<ul>
-				<c:forEach var="tmp" items="${requestScope.list }">
-					<a href="toon/selectedDetail.do?title=${tmp.title }">
-					<li>
-						<div class="list">
-							<div class="imgwrapper">
-								<img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>
-							</div>
-							<div class="textwrapper">
-								<p>${tmp.title }</p>
-								<p>${tmp.writer }</p>
-								<p>${tmp.info }</p>
-							</div>
-						</div>
-					</li>
-					</a>
-				</c:forEach>
-			</ul>
-		</div>
-	</div><!-- //toon list content -->
-	
+      <div class="bestList">
+         <ul>
+            <c:forEach var="tmp" items="${requestScope.list }">
+               <a href="toon/selectedDetail.do?title=${tmp.title }">
+               <li>
+                  <div class="list">
+                     <div class="imgwrapper">
+                        <img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>
+                     </div>
+                     <div class="textwrapper">
+                        <p>${tmp.title }</p>
+                        <p>${tmp.writer }</p>
+                        <p>${tmp.info }</p>
+                     </div>
+                  </div>
+               </li>
+               </a>
+            </c:forEach>
+         </ul>
+      </div>
+   </div><!-- //toon list content -->
 	<div class="container content">
 		<div class="bestList">
 			<ul>
@@ -99,6 +103,7 @@
 				</dl>		
 			</c:forEach>
 		</ul>
+	</div>
 </div><!-- //contentwrapper -->
 </body>
 <script>
