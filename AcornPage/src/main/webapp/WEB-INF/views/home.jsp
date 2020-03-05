@@ -14,7 +14,7 @@
 </jsp:include>
 <<<<<<< HEAD
 <div class="contentwrapper">
-	<div class="container content slide">
+	<div class="container content slide"> 
 		<div class="your-class">
 		  <div><p style="width:100%; height:450px; background-color:green; margin:0px;"></p></div>
 		  <div><p style="width:100%; height:450px; background-color:blue; margin:0px;"></p></div>
