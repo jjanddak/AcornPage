@@ -1,7 +1,5 @@
 package com.gura.spring05.toonup.dto;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class ToonupDto {
 	private int num;
 	private String writer;
@@ -12,8 +10,7 @@ public class ToonupDto {
 	
 	public ToonupDto() {}
 
-	public ToonupDto(int num, String writer, String title, String content, String regdate, String code, int startRowNum,
-			int endRowNum, int prevNum, int nextNum) {
+	public ToonupDto(int num, String writer, String title, String content, String regdate, String code) {
 		super();
 		this.num = num;
 		this.writer = writer;

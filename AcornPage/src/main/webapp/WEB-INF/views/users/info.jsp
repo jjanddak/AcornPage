@@ -71,7 +71,28 @@
 			<th>가입일</th>
 			<td>${dto.regdate }</td>
 		</tr>
+		<c:if test="${not empty myToon }">
+			<tr>
+				<th>연재중인 작품</th>
+				<table>	
+						<c:forEach var="tmp" items="${myToon }">
+						<tr>
+						<td>			
+							<a href="${pageContext.request.contextPath}/toon/toonup.do?title=${tmp.title }">											
+								<div class="list" style="width:600px; height:150px; border:1px solid blue;">
+									<p>${tmp.title }</p>
+									<p>${tmp.writer }</p>
+									<p>${tmp.info }</p>
+								</div>
+							</a>
+						</td>			
+						</tr>
+						</c:forEach>			
+				</table>
+			</tr>
+		</c:if>		
 	</table>
+	<a href="${pageContext.request.contextPath}/toon/newToonup.do">신작 업로드</a>
 	<a href="../home.do">수정완료</a>
 	<a href="javascript:deleteConfirm()">회원 탈퇴</a>
 </div>

@@ -8,6 +8,8 @@ public class ToonDetailDto {
 	private String hashtag;
 	private String toonovel;
 	
+	public ToonDetailDto() {}
+	
 	public ToonDetailDto(String title, String writer, String info, String regdate, String hashtag, String toonovel) {
 		super();
 		this.title = title;
@@ -17,6 +19,8 @@ public class ToonDetailDto {
 		this.hashtag = hashtag;
 		this.toonovel = toonovel;
 	}
+
+
 
 	public String getTitle() {
 		return title;
@@ -65,7 +69,4 @@ public class ToonDetailDto {
 	public void setToonovel(String toonovel) {
 		this.toonovel = toonovel;
 	}
-
-	public ToonDetailDto() {};
-
 }

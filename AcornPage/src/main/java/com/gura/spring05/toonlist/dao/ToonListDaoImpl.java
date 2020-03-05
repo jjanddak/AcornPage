@@ -83,5 +83,10 @@ public class ToonListDaoImpl implements ToonListDao{
 		session.insert("toon.buyEach",dto);
 		
 	}
+
+	@Override
+	public List<ToonDetailDto> getMyToon(String id) {
+		return session.selectList("toon.getMyToon",id);
+	}
 	
 }

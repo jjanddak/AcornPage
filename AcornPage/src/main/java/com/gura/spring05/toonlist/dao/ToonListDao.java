@@ -30,4 +30,6 @@ public interface ToonListDao {
 	public List<ToonListDto> getUnBuyList(LibraryDto dto);
 	
 	public void buyEach(LibraryDto dto);
+	
+	public List<ToonDetailDto> getMyToon(String id);
 }

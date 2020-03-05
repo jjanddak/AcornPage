@@ -25,14 +25,19 @@
 	<h1>만화 업로드</h1>
 	<form action="toonupload.do" method="post" enctype="multipart/form-data">
 		<div class="form-group">
+			<label for="num">회차</label>
+			<input class="form-control" type="text" 
+				name="num" id="num" value="${lastNum}" readOnly/>
+		</div>
+		<div class="form-group">
 			<label for="title">제목</label>
 			<input class="form-control" type="text" 
-				name="title" id="title" />
+				name="title" id="title" value="${title}" readOnly/>
 		</div>
 		<div class="form-group">
 			<label for="writer">작가명</label>
 			<input class="form-control" type="text" 
-				name="writer" id="writer" value="백" disabled/>
+				name="writer" id="writer" value="${id}" readOnly/>
 		</div>
 		<div class="form-group">
 			<label for="content">내용</label>
