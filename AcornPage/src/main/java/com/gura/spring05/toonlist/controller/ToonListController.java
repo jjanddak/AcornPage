@@ -78,7 +78,7 @@ public class ToonListController {
 	@RequestMapping("/cash/cashcharge")
 	public ModelAndView chargeCash(HttpServletRequest request,@RequestParam int cash) {
 
-		service.cashAdd(request, cash);
+		service.cashAdd(request,request.getSession(), cash);
 		
 		return new ModelAndView("cash/checkcash");
 	}

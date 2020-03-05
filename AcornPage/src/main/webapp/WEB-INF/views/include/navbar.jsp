@@ -16,39 +16,48 @@
 			      	<img src="<c:url value='/resources/images/acornLogo.png'/>" alt="logo"/>
 			      </a>
 				</h1>
-		</div>
-		<div class="container">
-			<div class="pull-right">
-			<!-- 검색기 -->
-			<div class="search">
-<!-- 			디테일리스트페이지로 연결되게 -->
-			<form action="${pageContext.request.contextPath}/toon/searchedDetail.do" method="post">
-			 <select id="select" name="select">
-				  <option value="null">-----</option>
-				  <option value="title">제목</option>
-				  <option value="writer">작가</option>
-				  <option value="hashtag">태그검색</option>
-			 </select>		  
-			 <input type="text" name="keyword" id="keyword"/>
-			 <input type="button" id="button" class="button" onclick="send(this.form);" value="검색"/>
-			</form>
-			</div>		
-			<c:choose>
-				<c:when test="${empty sessionScope.id }">
-						<a class="btn btn-primary navbar-btn btn-xs" href="${pageContext.request.contextPath }/users/loginform.do">로그인</a>
-						<a class="btn btn-warning navbar-btn btn-xs" href="${pageContext.request.contextPath }/users/signup_form.do">회원가입</a>	
-				</c:when>
-				<c:otherwise>
-					<p class="navbar-text pull-right">
-						<strong><a class="navbar-link" href="${pageContext.request.contextPath }/users/info.do">${id }</a></strong>
-						<a class="navbar-link" href="${pageContext.request.contextPath }/users/logout.do">로그아웃</a> 
-						<a onclick="popupOpen()" class="btn btn-success navbar-btn btn-xs">캐쉬충전</a>
-					</p>
-		
-				</c:otherwise>
-			</c:choose>
-			</div>
-		</div>
+		      
+		    	<div class="right-box">	
+			      	<!-- 검색기 -->
+					<div class="search">
+						<!--디테일리스트페이지로 연결되게 -->
+						<form action="${pageContext.request.contextPath}/toon/searchedDetail.do" method="get">
+					         <select class="form-controll" id="select" name="select">
+					             <option value="null">---</option>
+					             <option value="title">제목</option>
+					             <option value="writer">작가</option>
+					             <option value="hashtag">태그</option>
+					         </select>        
+					         <input type="text" name="keyword" id="keyword" autocomplete="off"/>
+					         <!-- <input type="button" id="button" class="btn-link" onclick="send(this.form);"/> -->
+					         <button type="submit" id="button" class="btn-link">
+					         	<span class="glyphicon glyphicon-search"></span>
+					         </button>						
+						</form>
+					</div>		
+						<c:choose>
+							<c:when test="${empty sessionScope.id }">
+								<a class="btn btn-primary navbar-btn btn-sm btn-right" href="${pageContext.request.contextPath }/users/loginform.do">로그인</a>
+								<a class="btn btn-warning navbar-btn btn-sm btn-right" href="${pageContext.request.contextPath }/users/signup_form.do">회원가입</a>	
+							</c:when>
+							<c:otherwise>
+								<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="userInfo">${id }님
+								<span class="caret"/>
+								</button>					
+								<ul class="dropdown-menu pull-right" style="text-align:center;">
+									<li>
+										<p>내 캐시</p>
+										<strong class="nowWallet">${wallet }</strong>									
+									</li>
+									<li><a onclick="popupOpen()" href="#">캐시충전</a></li>
+									<li><a href="#">보관함</a></li>
+									<li><a href="${pageContext.request.contextPath }/users/info.do">정보보기</a></li>
+									<li><a href="${pageContext.request.contextPath }/users/logout.do">로그아웃</a></li>
+								</ul>
+							</c:otherwise>
+						</c:choose>
+				</div>
+	        </div>
 		<div class="container">
 			<ul class="nav nav-center">
 				<li <c:if test="${param.category eq 'home' }">class="active"</c:if>><a href="${pageContext.request.contextPath }/home.do">홈</a></li>
@@ -62,36 +71,23 @@
 	</nav>
 </body>
 <script>
- 
 function popupOpen(){
 	var url= "${pageContext.request.contextPath }/cash/addcash.do";    //팝업창 페이지 URL
-	var winWidth = 700;
-    var winHeight = 600;
+	var winWidth = 550;
+    var winHeight = 840;
     var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
 	window.open(url,"",popupOption);
 }
 
-
-function send(theform){ 
-	if(theform.select.value=="null"){
-		alert("무엇을 검색할지 선택해 주세요");
-		theform.select.focus(); 
-		return false;
+$("#button").click(function(){
+	var select=document.querySelector("#select").value;
+	var keyword=document.querySelector("#keyword").value;
+	if(select!="null" && keyword!=""){
+		location.href="${pageContext.request.contextPath}/toon/searchedDetail.do?select="+select+"&keyword="+keyword;
+	}else if(select=="null"){
+		alert("검색 카테고리를 선택해 주세요");
 	}
-	if(theform.keyword.value==""){ 
-		alert("검색어를 입력 하세요.");
-		theform.keyword.focus(); 
-		return false;
-	}
-	theform.submit();
-}
-
-	function popupOpen(){
-		var url= "${pageContext.request.contextPath }/cash/addcash.do";    //팝업창 페이지 URL
-		var winWidth = 700;
-	    var winHeight = 600;
-	    var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
-		window.open(url,"",popupOption);
-	}
+	return false;
+})
 </script>
 </html>

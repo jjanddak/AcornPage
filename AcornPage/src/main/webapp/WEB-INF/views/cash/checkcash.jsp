@@ -9,6 +9,7 @@
 <body>
 	<script>
 		alert("충전 되었습니다.");
+		window.opener.location.reload();
 		self.close();
 	</script>
 </body>

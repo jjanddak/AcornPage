@@ -12,7 +12,6 @@
 <jsp:include page="include/navbar.jsp">
 	<jsp:param value="home" name="category"/>
 </jsp:include>
-<<<<<<< HEAD
 <div class="contentwrapper">
 	<div class="container content slide">
 		<div class="your-class">
@@ -46,9 +45,9 @@
                         <img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>
                      </div>
                      <div class="textwrapper">
-                        <p>${tmp.title }</p>
-                        <p>${tmp.writer }</p>
-                        <p>${tmp.info }</p>
+                        <p class="list-title">${tmp.title }</p>
+						<p class="list-writer">${tmp.writer }</p>
+						<p class="list-info">${tmp.info }</p>
                      </div>
                   </div>
                </li>
@@ -68,9 +67,9 @@
 								<img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>
 							</div>
 							<div class="textwrapper">
-								<p>${tmp.title }</p>
-								<p>${tmp.writer }</p>
-								<p>${tmp.info }</p>
+								<p class="list-title">${tmp.title }</p>
+								<p class="list-writer">${tmp.writer }</p>
+								<p class="list-info">${tmp.info }</p>
 							</div>
 						</div>
 					</li>

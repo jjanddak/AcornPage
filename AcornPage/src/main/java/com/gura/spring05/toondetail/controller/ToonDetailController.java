@@ -22,7 +22,7 @@ public class ToonDetailController {
 	
 
 	  @RequestMapping(value = "/toon/searchedDetail"
-			  ,method = RequestMethod.POST)
+			  ,method = RequestMethod.GET)
 	  public ModelAndView getDetailList(
 			  HttpServletRequest request){
  

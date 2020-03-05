@@ -3,6 +3,7 @@ package com.gura.spring05.toonlist.service;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,13 +75,14 @@ public class ToonListServiceImpl implements ToonListService{
 	}
 
 	@Override
-	public void cashAdd(HttpServletRequest request, int cash) {
+	public void cashAdd(HttpServletRequest request,HttpSession session,int cash) {
 		String id=(String)request.getSession().getAttribute("id");
 		UsersDto dto=new UsersDto();
 		dto.setId(id);
 		dto.setWallet(cash);
 		dao.cashUpdate(dto);
-
+		int wallet=dao.getWallet(id);
+		session.setAttribute("wallet", wallet);
 	}
 
 
