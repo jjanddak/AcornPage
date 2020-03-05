@@ -16,7 +16,7 @@ public interface ToonListDao {
 	public ToonListDto getCodeDetail(String code);
 	//캐쉬 추가하기
 	//차후에 아이디값이나 usersDto도 같이 전달받아 넘겨줘야됨
-	public void cashUpdate(int cash);
+	public void cashUpdate(UsersDto dto);
 	
 	public void BuyCodeOne(LibraryDto dto);
 	

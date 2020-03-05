@@ -33,9 +33,9 @@ public class ToonListDaoImpl implements ToonListDao{
 	}
 
 	@Override
-	public void cashUpdate(int cash) {
+	public void cashUpdate(UsersDto dto) {
 
-		session.update("toon.cashUpdate",cash);
+		session.update("toon.cashUpdate",dto);
 		
 	}
 

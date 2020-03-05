@@ -75,8 +75,11 @@ public class ToonListServiceImpl implements ToonListService{
 
 	@Override
 	public void cashAdd(HttpServletRequest request, int cash) {
-
-		dao.cashUpdate(cash);
+		String id=(String)request.getSession().getAttribute("id");
+		UsersDto dto=new UsersDto();
+		dto.setId(id);
+		dto.setWallet(cash);
+		dao.cashUpdate(dto);
 
 	}
 

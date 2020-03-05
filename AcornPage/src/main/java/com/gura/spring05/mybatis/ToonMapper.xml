@@ -13,7 +13,7 @@
 		select * from toonlist where code=#{code}
 	</select>
 	<update id="cashUpdate" parameterType="usersDto">
-		update users set wallet=wallet+#{price} where id=#{id}
+		update users set wallet=wallet+#{wallet} where id=#{id}
 	</update>
 	<insert id="buyCodeOne" parameterType="libraryDto">
 		insert into library values(library_seq.nextval,#{id},#{code},sysdate)
