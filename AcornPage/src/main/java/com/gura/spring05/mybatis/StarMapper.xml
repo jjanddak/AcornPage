@@ -15,7 +15,7 @@
 		where id=#{id} and code=#{code}
 	</select>
 	<select id="selectStarValueOneAVG" parameterType="starDto" resultType="starDto">
-		SELECT AVG(starvalue) 
+		SELECT AVG(starvalue) AS starvalue
 		FROM star 
 		WHERE code LIKE '%${code}%' 
 	</select>
