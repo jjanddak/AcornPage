@@ -67,11 +67,16 @@ function popupOpen(){
 
 
 function send(theform){ 
+	if(theform.select.value=="null"){
+		alert("무엇을 검색할지 선택해 주세요");
+		theform.select.focus(); 
+		return false;
+	}
 	if(theform.keyword.value==""){ 
 		alert("검색어를 입력 하세요.");
 		theform.keyword.focus(); 
 		return false;
-	}else
+	}
 	theform.submit();
 }
 
