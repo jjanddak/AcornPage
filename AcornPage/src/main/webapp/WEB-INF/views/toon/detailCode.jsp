@@ -41,26 +41,51 @@
 				<td>${dto.title }</td>
 			</tr>
 			<tr>
-				<th>회별 별점</th>
-				<td><fmt:formatNumber value="${starvalueAVG }" pattern=".00"/> 점</td>
-			</tr>
-			<tr>
 				<th>등록일</th>
 				<td>${dto.upload }</td>
 			</tr>
 		</table>
 		<div class="contents">${dto.content }</div>
-	<form action="starAdd.do" method="post">
-		<p id="star_grade">
-			<a href="#">★</a>
-			<a href="#">★</a>
-			<a href="#">★</a>
-			<a href="#">★</a>
-			<a href="#">★</a>
-		</p>
-		<button id="starBtn" type="submit">별점제출</button>
-	</form>
-	</div>
+		<br/>
+		
+		<c:choose>
+			<c:when test="${dto.prevNum eq 0 }">
+				<div></div>
+			</c:when>
+			<c:when test="${empty havePrev}">
+				<div><a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.title}${dto.num-1}">이전화</a></div>
+			</c:when>
+			<c:otherwise>			
+				<a class="btn" href="buyCodeOne.do?title=${dto.title }&code=${dto.title}${dto.num-1}" 
+				onclick="return confirm('구매하시겠습니까? 100원이 차감됩니다')">
+				이전화 구매</a>
+			</c:otherwise>
+		</c:choose>
+		<c:choose>
+			<c:when test="${dto.nextNum eq 0 }">
+				<div></div>
+			</c:when>
+			<c:when test="${empty haveNext}">
+				<div><a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.title}${dto.num+1}">다음화</a></div>
+			</c:when>
+			<c:otherwise>			
+				<a class="btn" href="buyCodeOne.do?title=${dto.title }&code=${dto.title}${dto.num+1}" 
+				onclick="return confirm('구매하시겠습니까? 100원이 차감됩니다')">
+				다음화 구매</a>
+			</c:otherwise>
+		</c:choose>	
+		
+		<form action="starAdd.do" method="post">
+			<p id="star_grade">
+				<a href="#">★</a>
+				<a href="#">★</a>
+				<a href="#">★</a>
+				<a href="#">★</a>
+				<a href="#">★</a>
+			</p>
+			<button id="starBtn" type="submit">별점제출</button>
+		</form>
+		</div>
 	 </div> <!-- //content -->
 </div> <!--//contentwrapper -->
 	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>

@@ -48,7 +48,7 @@ public class ToonupController {
 		//서비스를 이용해서 DB 에 저장
 		service.saveToon(dto);
 		
-		return new ModelAndView("redirect:../home.do");
+		return new ModelAndView("redirect:/users/info.do");
 	}
 	
 	//툰디테일 신작 업로드 폼

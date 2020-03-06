@@ -7,10 +7,18 @@
 	</select>
 	<select id="getDetailList" parameterType="String"
 		resultType="toonListDto">
-		select * from (select * from toonlist where title=#{title})
+		select * from (select * from toonlist where title=#{title} order by code asc)
 	</select>
-	<select id="getCodeDetail" parameterType="String" resultType="toonListDto">
-		select * from toonlist where code=#{code}
+	<select id="getCodeDetail" parameterType="toonListDto" resultType="toonListDto">
+		SELECT result1.*
+		FROM
+			(SELECT num,title,writer,content,regdate, toonlist.code,
+			LAG(num, 1, 0) OVER(ORDER BY num DESC) AS nextNum,
+			LEAD(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum
+			FROM toonlist
+			WHERE title=#{title}
+			) result1
+		WHERE code=#{code}
 	</select>
 	<update id="cashUpdate" parameterType="usersDto">
 		update users set wallet=wallet+#{wallet} where id=#{id}
@@ -28,7 +36,7 @@
 		select wallet from users where id=#{id}
 	</select>
 	<insert id="insertCode" parameterType="toonListDto">
-		insert into library values(1,#{id},#{code},sysdate)
+		insert into library values(#{num},#{id},#{code},sysdate)
 	</insert>
 	<select id="checkLibrary" parameterType="libraryDto" resultType="libraryDto">
 		select * from library where code in(select code from toonlist where title=#{title})and id=#{id}
@@ -119,6 +127,23 @@
 		DELETE FROM toonlist WHERE writer=#{writer} and title=#{title}
 	</delete>
 	
+	<select id="havePrev" parameterType="String" resultType="String">
+		select *
+		from
+				(select toonlist.code
+				from toonlist left outer join library on toonlist.code=library.code
+				where library.code is null)
+		where code=#{code}
+	</select>
+	
+		<select id="haveNext" parameterType="String" resultType="String">
+		select *
+		from
+				(select toonlist.code
+				from toonlist left outer join library on toonlist.code=library.code
+				where library.code is null)
+		where code=#{code}
+	</select>
 </mapper>
 
 
