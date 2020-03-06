@@ -85,6 +85,9 @@
 									<p>${tmp.info }</p>
 								</div>
 							</a>
+							<a href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" onclick="return confirm('${tmp.title} 작품을 삭제하시겠습니까?');">
+								${tmp.title } 삭제
+							</a>			
 						</td>			
 						</tr>
 						</c:forEach>			
@@ -92,7 +95,7 @@
 			</tr>
 		</c:if>		
 	</table>
-	<a href="${pageContext.request.contextPath}/toon/newToonup.do">신작 업로드</a>
+	<a href="${pageContext.request.contextPath}/toon/newToonup.do"><button>신작 업로드</button></a>
 	<a href="../home.do"><button>수정완료</button></a>
 	<a href="javascript:deleteConfirm()"><button>회원 탈퇴</button></a>
 	<a href="${pageContext.request.contextPath }/toon/userStarList.do?id=${id }"><button><strong>${id }</strong>  님이 별점 매긴 만화 목록 보기</button></a>
@@ -138,6 +141,7 @@
 			location.href="delete.do";
 		}
 	}
+	
 </script>
 </body>
 </html>

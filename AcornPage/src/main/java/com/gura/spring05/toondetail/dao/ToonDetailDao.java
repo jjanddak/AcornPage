@@ -12,4 +12,7 @@ public interface ToonDetailDao {
 
 	public List<ToonDetailDto> getHashtagDetail(String hashtag);
 
+	public void deleteToon(ToonDetailDto dto);
+	
+	public void deleteList(ToonDetailDto dto);
 }

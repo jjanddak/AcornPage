@@ -28,5 +28,15 @@ public class ToonDetailDaoImpl implements ToonDetailDao{
 	public List<ToonDetailDto> getHashtagDetail(String hashtag) {
 		return session.selectList("toon.getHashtagDetail",hashtag);
 	}
+
+	@Override
+	public void deleteToon(ToonDetailDto dto) {
+		session.delete("toon.deleteDetail",dto);
+	}
+
+	@Override
+	public void deleteList(ToonDetailDto dto) {
+		session.delete("toon.deleteList",dto);
+	}
 		
 }

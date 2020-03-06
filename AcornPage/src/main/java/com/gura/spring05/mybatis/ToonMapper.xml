@@ -89,7 +89,7 @@
 	</select>
 	
 	<select id="selectedHashtag" parameterType="String" resultType="toonDetailDto">
-		select * from toondetail where hashtag=#{category}
+		select * from toondetail where hashtag like '%'||#{category}||'%'
 	</select>
 	
 	<select id="getDetailInfo" parameterType="String" resultType="toonDetailDto">
@@ -110,6 +110,15 @@
 		insert into toondetail values (#{title}, #{writer}, #{info}, sysdate, #{hashtag}, 
 		#{toonovel}, #{thumb})
 	</insert>
+	
+	<delete id="deleteDetail" parameterType="toonDetailDto">
+		DELETE FROM toondetail WHERE writer=#{writer} and title=#{title}
+	</delete>
+	
+	<delete id="deleteList" parameterType="toonDetailDto">
+		DELETE FROM toonlist WHERE writer=#{writer} and title=#{title}
+	</delete>
+	
 </mapper>
 
 
