@@ -8,15 +8,6 @@
 <meta charset="UTF-8">
 <title>상세 페이지입니당</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
-<style>
-     #star_grade a{
-        text-decoration: none;
-        color: gray;
-    }
-    #star_grade a.on{
-        color: red;
-    }
-</style>
 </head>
 <body>
 	<div class="container">
@@ -40,7 +31,16 @@
 			</tr>
 			<tr>
 				<th>회별 별점</th>
-				<td><fmt:formatNumber value="${starvalueAVG }" pattern=".00"/> 점</td>
+				<td>
+					<c:choose>
+						<c:when test="${starvalueAVG>0 }">
+							<strong><fmt:formatNumber value="${starvalueAVG }" pattern=".00"/></strong> 점
+						</c:when>
+						<c:otherwise>
+							<strong>이 편은 아직 별점이 없어요. 별점을 ${id } 님이 먼저 매겨주세요!</strong>
+						</c:otherwise>
+					</c:choose>
+				</td>
 			</tr>
 			<tr>
 				<th>등록일</th>
