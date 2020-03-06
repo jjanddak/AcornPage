@@ -28,7 +28,7 @@
 					<c:forEach var="tmp" items="${detailList }">
 					<tr>
 						<td>${tmp.title}</td>
-						<td>${tmp.writer}</td>
+						<td><a href="${pageContext.request.contextPath }/toon/searchedDetail.do?select=writer&keyword=${tmp.writer}">${tmp.writer}</a></td>
 						<td>${tmp.info}</td>
 						<td>${tmp.regdate}</td>
 						<td>${tmp.toonovel}</td>

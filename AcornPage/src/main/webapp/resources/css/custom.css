@@ -24,7 +24,7 @@ h1{
 }
 .right-box{
 	position:absolute;
-	top:-5px;
+	top:0;
 	right:0;
 	padding-right:20px;
 }
@@ -137,6 +137,7 @@ div.list{
 	position: relative;
 	float:left;
 	padding:10px 20px;
+	width:70%;
 }
 .list-title{
 	font-size:16px;
@@ -149,6 +150,9 @@ div.list{
 .list-info{
 	font-size:14px;
 	color:#999999;
+}
+.list-date{
+	border:1px solid red;
 }
 .slide{
 	padding:0px;

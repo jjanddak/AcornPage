@@ -56,6 +56,8 @@ public class UsersServiceImpl implements UsersService{
 			int wallet=dao.getWallet(dto.getId());
 			session.setAttribute("id", dto.getId());
 			session.setAttribute("wallet", wallet);
+		}else {
+			session.setAttribute("wrongPwd", false);
 		}
 	}
 	@Override

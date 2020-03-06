@@ -66,10 +66,12 @@
 							<div class="imgwrapper">
 								<img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>
 							</div>
-							<div class="textwrapper">
+							<div class="textwrapper" style="width:70%;">
 								<p class="list-title">${tmp.title }</p>
 								<p class="list-writer">${tmp.writer }</p>
 								<p class="list-info">${tmp.info }</p>
+								<p style="position:absolute; right:0; top:0;">등록날짜</p>
+								<p style="position:absolute; right:0; top:40px;">별점</p>
 							</div>
 						</div>
 					</li>

@@ -12,10 +12,10 @@
 	<h1>Alert</h1>
 	<c:choose>
 		<c:when test="${not empty sessionScope.id }">
-			<p>
-				<strong>${id }</strong> 회원님 로그인 되었습니다.
-				<a href="${url }">확인</a>
-			</p>
+			<script>
+			window.opener.location.reload();
+			self.close();
+			</script>
 		</c:when>
 		<c:otherwise>
 			<p>
