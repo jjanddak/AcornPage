@@ -13,7 +13,7 @@ import com.gura.spring05.users.dto.UsersDto;
 public interface UsersService {
 	public Map<String, Object> isExistId(String inputId);
 	public void addUser(UsersDto dto);
-	public void validUser(UsersDto dto, HttpSession session, 
+	public boolean validUser(UsersDto dto, HttpSession session, 
 			ModelAndView mView);
 	public void showInfo(String id, ModelAndView mView);
 	public String saveProfileImage(HttpServletRequest request,

@@ -118,23 +118,34 @@
 	function numberWithCommas(x) {
 	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
-	//팝업창이 켜졌을때 가지고있는 캐쉬를 콤마처리하는 함수
+	//팝업창이 켜졌을때 가지고있는 캐쉬와 충전후 보유캐쉬를 콤마처리하는 함수
 	$(document).ready(function(){
+		//보유캐시를 숫자형으로 변형하여
 		var wallet=parseInt(${wallet});
-		$(".nowCash").text(numberWithCommas(wallet));	
+		//콤마처리함수를 이용해 값 변경
+		$(".nowCash").text(numberWithCommas(wallet));
+		//선택되어있는 체크박스의 값을 숫자형으로 변형하여
 		var val=parseInt($("input:checked[name=cash]").val());
+		//보유캐시와 체크된값을 더하여 값 변경
 	    $(".plusCash").text(numberWithCommas(val+wallet));
-	})
+	});
+	
 	//캐쉬 충전버튼을 눌렀을때 controller로 이동하는 함수
 	$("#cashBtn").click(function(){
+		//이용안내 체크값
 		var agreeVal = $(".agree").prop("checked");
+		//체크박스의 값을 담을 변수
 		var radioVal = $('input[name="cash"]:checked').val();
+		//컨펌창으로 분기
 		var isAddCash=confirm(radioVal+"캐쉬를 충전하시겠습니까?");
+		//true값이면
 		if(isAddCash){
+			//이용안내가 false이면 함수종료
 			if(!agreeVal){
 				alert("이용 안내 및 결제 진행에 동의해 주세요");
 				return;
 			}
+			//컨트롤러 이동
 				location.href="cashcharge.do?cash="+radioVal;
 			
 		}else{

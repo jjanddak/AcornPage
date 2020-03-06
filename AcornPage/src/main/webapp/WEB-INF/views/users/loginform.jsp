@@ -15,12 +15,13 @@
 	  background-color: #fff;
 	}
 	@media (min-width: 500px) {
-  .container {
-    width:500px;
-    border:1px solid #eee;
-    padding:20px;
-  }
-}
+	  .container {
+	    width:400px;
+	    border:1px solid #eee;
+	    padding:50px;
+	    margin-top:40px;
+	  }
+	}
 	.form-signin {
 	  margin: 0 auto;
 	}
@@ -80,6 +81,22 @@
 		bottom:0;
 		text-align: center;	
 	}
+	@media (min-width: 500px) {
+	  .footer {
+	    position:static;
+	  }
+	}
+	.info{
+		float:left;
+		padding:10px 0; 
+		border-top:1px solid #d8d8d8; 
+		font-weight: bold;
+	}
+	@media (min-width: 500px) {
+	  .info {
+	    float:none;
+	  }
+	}
 	.footer a{
 		padding:0 4px;
 		font-size:12px;
@@ -96,11 +113,12 @@
 </style>
 </head>
 <body>
+
 <div class="container">
 	<div style="text-align: center; margin-bottom:40px;">
 		<img src="${pageContext.request.contextPath }/resources/images/acornLogo.png" alt="logo" style="width:130px;"/>
 	</div>
-	<form class="form-signin" action="login.do" method="post">
+	<form class="form-signin" id="loginForm" action="login.do" method="post">
 		<%-- 폼 제출할때 목적지 정보도 같이 보내준다. --%>
 			<input type="hidden" name="url" value="${url }" />
 			<div style="position: relative;">
@@ -134,25 +152,26 @@
 				
 			</p>
 		</div>
-		<button class="btn btn-lg btn-primary btn-block" type="submit" style="background-color:#ffe500; color:#000; border:0px; height: 50px; border-radius: 4px; font-size: 15px; font-weight: bold;">로그인</button>
+		<button class="btn btn-lg btn-primary btn-block" style="background-color:#ffe500; color:#000; border:0px; height: 50px; border-radius: 4px; font-size: 15px; font-weight: bold;">로그인</button>
 	</form>	
 	<div style="padding:30px 5px; font-size: 13px; font-weight: bold;">
-		<div style="float:left;"><a href="#">회원가입</a></div>
+		<div style="float:left;"><a href="${pageContext.request.contextPath }/users/signup_form.do">회원가입</a></div>
 		<div style="float:right;"><a href="#">비밀번호 찾기</a></div>
 	</div>
 </div>
 <div class="footer">
-	<div class="info" style="float:left; padding:10px 0; border-top:1px solid #d8d8d8; font-weight: bold;">
+	<div class="info">
 		<a href="#">이용약관</a>
 		<a href="#">개인정보 처리방침</a>
 		<a href="#">운영정책</a>
 		<a href="#">고객센터</a>
 		<a href="#">공지사항</a>
 	</div>
-	<small style="font-style:italic; padding-top:10px;">
+	<div style="font-style:italic; padding-top:10px; font-size:11px;">
 		Copyright&copy; AcornPage Corp.
-	</small>
+	</div>
 </div>
+
 </body>
 <script>
 	//인풋에 키다운이벤트가 일어났을때 인풋값이 널이아니며,탭키가 아닌 다른 키가눌렸을때 실행되는 함수
@@ -168,23 +187,51 @@
  		}
 		
 	});
+	//입력값 지우기 함수를 클릭했을때 입력값을 초기화하고 버튼은 안보이게 실행하는 함수
  	$(".del-id").click(function(){
  		$("#id").val("");
  		$(".del-id").attr("style","display:none;");
  	})
+ 	//입력값 지우기 함수를 클릭했을때 입력값을 초기화하고 버튼은 안보이게 실행하는 함수
  	$(".del-pwd").click(function(){
  		$("#pwd").val("");
  		$(".del-pwd").attr("style","display:none;");
  	})
- 	
+ 	//로그인버튼을 클릭했을때 
  	$(".btn-lg").click(function(){
- 		if($("#id").val==null && $("#pwd").val==null){
+ 		//id와 pwd가 널이라면
+ 		if($("#id").val()=="" || $("#pwd").val()==""){
+ 			//에러창을 활성화하여 알림
  			$(".error").prop("style","display:block; margin-bottom:30px; padding:20px; font-size:13px; background-color:#fafafa;")
- 			$(".error-text").text("아이디 혹은 비밀번호를 입력하세요");
+ 			$(".error-text").text("아이디 또는 비밀번호를 입력하세요");
+ 		//id와 pwd를 입력했다면
+ 		}else if($("#id").val()!="" && $("#pwd").val()!=""){
+ 			//form의 정보를 data화하는 ajax함수 실행
+ 			var formData = $("#loginForm").serialize();
  			
+ 			$.ajax({
+				url: "login.do",//이동할 주소
+				type: "post",//form전송타입
+				data: formData,	//전송data타입(폼전용data함수를 이용해 변수로 전달)
+				async:false, //ajax 리턴타입이 있을경우 꼭 작성해줘야됨
+				success:function(responseData){
+					//해당 아이디와 비밀번호가 맞다면 
+					if(responseData==true){
+						//세션전송을 위해 부모창 새로고침과 팝업창 닫기
+						window.opener.location.reload();
+						self.close();
+					//아이디와 비밀번호가 틀리다면
+					}else{
+						//에러창을 활성화하여 알림
+						$(".error").prop("style","display:block; margin-bottom:30px; padding:20px; font-size:13px; background-color:#fafafa;");
+						$(".error-text").text("아이디 또는 비밀번호가 틀립니다.");
+					}
+				}	
+				
+			});
  		}
  		return false;
- 	})
+ 	})	
 </script>
 </html>
 

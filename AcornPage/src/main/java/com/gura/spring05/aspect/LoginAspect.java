@@ -62,7 +62,7 @@ public class LoginAspect {
 		("redirect:/users/loginform.do?url="+encodedUrl);
 		
 		//여기서 생성한 객체를 리턴해 준다. 
-		return mView;		
+		return mView;
 	}
 	
 	@Around("execution(java.util.Map auth*(..))")

@@ -163,6 +163,9 @@ div.list{
 	background-color:#fff;
 	border-color:#fff;
 }
+.btn-link:hover, .btn-link:focus{
+	text-decoration: none;
+}
 .btn:active{
 	-webkit-box-shadow:none;
 	box-shadow:none;
@@ -224,6 +227,7 @@ select{
 .navbar-inverse .btn-link:hover, .navbar-inverse .btn-link:focus{
 	color:#9d9d9d;
 	outline:none;
+	text-decoration:none;
 }
 div.popwrapper{
 	height:100%;

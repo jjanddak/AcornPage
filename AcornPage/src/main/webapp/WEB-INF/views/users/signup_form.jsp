@@ -1,23 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>/users/signup_form.jsp</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css" />
+<jsp:include page="../include/resource.jsp"/>
 <style>
 	/* 페이지 로딩 시점에 도움말과 피드백 아이콘은 일단 숨기기 */
 	.help-block, .form-control-feedback{
 		display: none;
 	}
 </style>
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
+
 </head>
 <body>
 <div class="container">
-	<h1>회원 가입 페이지</h1>
+	<div style="text-align: center; margin-bottom:40px;">
+		<img src="${pageContext.request.contextPath }/resources/images/acornLogo.png" alt="logo" style="width:130px;"/>
+	</div>
 	<form action="signup.do" method="post" id="signupForm">
 		<div class="form-group has-feedback">
 			<label class="control-label" for="id">아이디</label>
@@ -58,7 +60,6 @@
 				<input type="radio" name="isWriter" value="false" checked="checked"/>독자	
 		</div>
 		<button disabled="disabled" class="btn btn-primary" type="submit">가입</button>
-		<button class="btn btn-warning" type="reset">취소</button>
 	</form>
 </div>
 <script>
