@@ -69,32 +69,9 @@
 			</tr>
 		</c:forEach>
 			
-			<c:forEach var="tmp" items="${list }">
-				<tr>
-					<td>${tmp.num }</td>
-					<td><!-- ${tmp.writer } -->썸네일</td>
-					<td>
-						<a href="detailCode.do?code=${tmp.code }">
-							${tmp.title }
-						</a>
-					</td>
-					<c:choose>
-						<c:when test="${tmp.isBuy }">
-							<td>소장중</td>
-							<td><input type="checkbox" name="selectedCode" value="${tmp.code }" disabled/></td>
-						</c:when>
-						<c:otherwise>
-							<td><a class="btn" href="buyCodeOne.do?code=${tmp.code }&title=${tmp.title }">구매</a></td>
-							<td><input type="checkbox" name="selectedCode" value="${tmp.code }"/></td>
-						</c:otherwise>
-					</c:choose>	
-				</tr>
-			</c:forEach>
-				
 			</tbody>
 		</table>
 		</div>
-	</div>
 	<script>
 	$(document).ready(function(){
 	    //최상단 체크박스 클릭

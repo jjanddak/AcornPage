@@ -7,19 +7,21 @@
 	</select>
 	<select id="getDetailList" parameterType="String"
 		resultType="toonListDto">
-		select * from toonlist t, 
-			(SELECT ROWNUM AS num, x.starvalue
-			FROM (
-				SELECT AVG(starvalue) AS starvalue
+		SELECT * 
+		FROM (
+			SELECT ROWNUM AS num, x.starvalue
+			FROM (	
+				SELECT AVG(NVL(starvalue,0)) AS starvalue
 				FROM (
 					SELECT *
 					FROM toonlist
 					WHERE title=#{title}
-				) t, star s
-			WHERE t.code=s.code
-			GROUP BY t.code
-			) x) x
-		where t.num=x.num 
+				) x, star s
+				WHERE x.code=s.code(+)	
+				GROUP BY x.num
+			) x
+		) x, toonlist t
+		WHERE t.num=x.num 
 		AND title=#{title}
 	</select>
 	<select id="getCodeDetail" parameterType="String" resultType="toonListDto">
