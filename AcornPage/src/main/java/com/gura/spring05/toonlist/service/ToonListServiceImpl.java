@@ -1,5 +1,7 @@
 package com.gura.spring05.toonlist.service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -203,6 +205,25 @@ public class ToonListServiceImpl implements ToonListService{
 		ToonListDto dto=new ToonListDto();
 		dto.setId(id);
 		List<ToonListDto> list=dao.getUserStarList(dto);
+		request.setAttribute("list", list);
+	}
+
+	@Override
+	public void buyList(HttpServletRequest request) {
+		String id=(String)request.getSession().getAttribute("id");
+		List<LibraryDto> code=dao.getLibrary(id);
+		List<String> titles=new ArrayList<String>();
+		for(int i=0; i<code.size(); i++) {
+			String title=dao.getTitle(code.get(i).getCode());
+			titles.add(title);
+		}
+		HashSet<String> hash=new HashSet<String>(titles);
+		List<String> hashTitle=new ArrayList<String>(hash);
+		List<ToonDetailDto> list=new ArrayList<ToonDetailDto>();
+		for(int i=0; i<hashTitle.size(); i++) {
+			ToonDetailDto dto=dao.getTitleDetail(hashTitle.get(i));
+			list.add(dto);
+		}
 		request.setAttribute("list", list);
 	}
 	

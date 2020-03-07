@@ -45,5 +45,10 @@ public interface ToonListDao {
 	public ToonDetailDto getDetailInfo(String title);
 
 	public List<ToonListDto> getUserStarList(ToonListDto dto);
-
+	
+	public List<LibraryDto> getLibrary(String id);
+	
+	public String getTitle(String code);
+	
+	public ToonDetailDto getTitleDetail(String title);
 }

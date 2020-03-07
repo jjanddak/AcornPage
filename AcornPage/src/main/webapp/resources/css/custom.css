@@ -87,7 +87,6 @@ a{
 	border-bottom:10px solid #eee;
 	border-top:10px solid #eee;
 }
-
 @media (min-width: 768px) {
   .container {
     width: 750px;

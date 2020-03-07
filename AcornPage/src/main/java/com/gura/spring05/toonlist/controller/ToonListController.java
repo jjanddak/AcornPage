@@ -117,4 +117,11 @@ public class ToonListController {
 		mView.setViewName("toon/categorylist");
 		return mView;
 	}
+	
+	@RequestMapping("/toon/Buylist")
+	public ModelAndView buyList(HttpServletRequest request) {
+		service.buyList(request);
+		
+		return new ModelAndView("toon/buyList");
+	}
 }	

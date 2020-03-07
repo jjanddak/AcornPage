@@ -105,6 +105,12 @@
 		    order by title asc 
 		    )		
 	</select>
+	<select id="getLibrary" parameterType="String" resultType="libraryDto">
+		select code from library where id=#{id}
+	</select>
+	<select id="getTitle" parameterType="String" resultType="String">
+		select title from toonlist where code=#{code}
+	</select>
 </mapper>
 
 

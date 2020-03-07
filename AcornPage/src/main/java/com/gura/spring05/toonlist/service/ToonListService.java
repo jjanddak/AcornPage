@@ -35,4 +35,5 @@ public interface ToonListService {
 
 	public void userStarList(HttpServletRequest request, String id);
 
+	public void buyList(HttpServletRequest request);
 }

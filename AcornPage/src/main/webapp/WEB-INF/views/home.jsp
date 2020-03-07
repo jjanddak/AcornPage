@@ -15,10 +15,11 @@
 <div class="contentwrapper">
 	<div class="container content slide">
 		<div class="your-class">
-		  <div><p style="width:100%; height:450px; background-color:green; margin:0px;"></p></div>
-		  <div><p style="width:100%; height:450px; background-color:blue; margin:0px;"></p></div>
-		  <div><p style="width:100%; height:450px; background-color:grey; margin:0px;"></p></div>
+		  <div><img class="mainSlide" src="${pageContext.request.contextPath }/resources/images/stil1.png" alt="mainSlide" /></div>
+		  <div><img class="mainSlide" src="${pageContext.request.contextPath }/resources/images/stil2.png" alt="mainSlide" /></div>
+		  <div><img class="mainSlide" src="${pageContext.request.contextPath }/resources/images/stil3.png" alt="mainSlide" /></div>
 		</div>
+		<!-- <img style="width:100%;" src="${pageContext.request.contextPath }/resources/images/stil1.png" alt="" />  -->
 <div class="container content" style="border-top:20px solid #eee;">
 	<h2>웹툰</h2>
 	<ul>
@@ -34,7 +35,6 @@
 		</c:forEach>
 	</ul>
 </div>
-
       <div class="bestList">
          <ul>
             <c:forEach var="tmp" items="${requestScope.list }">
