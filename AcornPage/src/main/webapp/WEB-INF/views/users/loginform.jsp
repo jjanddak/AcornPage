@@ -148,7 +148,7 @@
 			</label>
 		</div>
 		<div class="error">
-			<p class="error-text" style="color:#e65f32; margin:0; font-weight: bold;">
+			<p class="error-text" style="color:#e65f32; margin:0; font-weight: bold; opacity:0;">
 				
 			</p>
 		</div>
@@ -202,8 +202,9 @@
  		//id와 pwd가 널이라면
  		if($("#id").val()=="" || $("#pwd").val()==""){
  			//에러창을 활성화하여 알림
- 			$(".error").prop("style","display:block; margin-bottom:30px; padding:20px; font-size:13px; background-color:#fafafa;")
+ 			$(".error").prop("style","display:block; margin-bottom:30px; padding:20px; font-size:13px; background-color:#fafafa;");
  			$(".error-text").text("아이디 또는 비밀번호를 입력하세요");
+ 			$(".error-text").prop("style","color:#e65f32; margin:0; font-weight: bold; opacity:1; transition:opacity 1s ease;");
  		//id와 pwd를 입력했다면
  		}else if($("#id").val()!="" && $("#pwd").val()!=""){
  			//form의 정보를 data화하는 ajax함수 실행
@@ -225,6 +226,7 @@
 						//에러창을 활성화하여 알림
 						$(".error").prop("style","display:block; margin-bottom:30px; padding:20px; font-size:13px; background-color:#fafafa;");
 						$(".error-text").text("아이디 또는 비밀번호가 틀립니다.");
+						$(".error-text").prop("style","color:#e65f32; margin:0; font-weight: bold; opacity:1; transition:opacity 1s ease;");
 					}
 				}	
 				
