@@ -147,8 +147,8 @@
 				<input type="checkbox" name="isSave" value="yes"/>아이디, 비밀번호 저장
 			</label>
 		</div>
-		<div class="error">
-			<p class="error-text" style="color:#e65f32; margin:0; font-weight: bold; opacity:0;">
+		<div class="error" style="opacity:0;">
+			<p class="error-text" style="color:#e65f32; margin:0; font-weight: bold;">
 				
 			</p>
 		</div>
@@ -202,9 +202,13 @@
  		//id와 pwd가 널이라면
  		if($("#id").val()=="" || $("#pwd").val()==""){
  			//에러창을 활성화하여 알림
- 			$(".error").prop("style","display:block; margin-bottom:30px; padding:20px; font-size:13px; background-color:#fafafa;");
- 			$(".error-text").text("아이디 또는 비밀번호를 입력하세요");
- 			$(".error-text").prop("style","color:#e65f32; margin:0; font-weight: bold; opacity:1; transition:opacity 1s ease;");
+ 				$(".error-text").text("");
+ 				$(".error").prop("style","opacity:0;");
+ 				$(".error").animate({opacity:"1"},1000);
+ 				$(".error").prop("style","display:block; margin-bottom:30px; padding:20px; font-size:13px; background-color:#fafafa;");
+ 	 			$(".error-text").text("아이디 또는 비밀번호를 입력하세요.");
+ 	 			$(".error-text").prop("style","color:#e65f32; margin:0; font-weight: bold;");
+ 			
  		//id와 pwd를 입력했다면
  		}else if($("#id").val()!="" && $("#pwd").val()!=""){
  			//form의 정보를 data화하는 ajax함수 실행
@@ -224,9 +228,12 @@
 					//아이디와 비밀번호가 틀리다면
 					}else{
 						//에러창을 활성화하여 알림
+						$(".error-text").text("");
+		 				$(".error").prop("style","opacity:0;");
+		 				$(".error").animate({opacity:"1"},1000);
 						$(".error").prop("style","display:block; margin-bottom:30px; padding:20px; font-size:13px; background-color:#fafafa;");
 						$(".error-text").text("아이디 또는 비밀번호가 틀립니다.");
-						$(".error-text").prop("style","color:#e65f32; margin:0; font-weight: bold; opacity:1; transition:opacity 1s ease;");
+						$(".error-text").prop("style","color:#e65f32; margin:0; font-weight: bold;");
 					}
 				}	
 				
