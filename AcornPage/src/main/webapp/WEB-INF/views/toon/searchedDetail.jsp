@@ -20,10 +20,10 @@
                      <div class="imgwrapper">
                      <c:choose>
                      	<c:when test="${empty tmp.thumb}">
-	                        <img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>                                           	
+	                        <a href="${pageContext.request.contextPath}/toon/selectedDetail.do?title=${tmp.title }"><img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/></a>                                          	
                      	</c:when>
                      	<c:otherwise>
-                     		<img class="img-thumbnail" src="${pageContext.request.contextPath}${tmp.thumb }" alt="logo"/>
+                     		<a href="${pageContext.request.contextPath}/toon/selectedDetail.do?title=${tmp.title }"><img class="img-thumbnail" src="${pageContext.request.contextPath}${tmp.thumb }" alt="logo"/></a>
                      	</c:otherwise>
                      </c:choose>
                      </div>
@@ -32,7 +32,16 @@
 						<a href="${pageContext.request.contextPath}/toon/searchedDetail.do?select=writer&keyword=${tmp.writer }"><p class="list-writer"><strong>${tmp.writer }</strong></p></a>
 						<p class="list-info">${tmp.info }</p>
 						<p style="position:absolute; right:0; top:0;">연재 시작일 : ${tmp.regdate }</p>
-						<p style="position:absolute; right:0; top:40px;">★별점출력★</p>
+						<p style="position:absolute; right:0; top:30px;">★별점출력★</p>						                     
+                     <c:choose>
+                     	<c:when test="${tmp.toonovel eq 'toon'}">
+	                        <p style="position:absolute; right:0; top:60px;">웹툰</p>	                                          	
+                     	</c:when>
+                     	<c:otherwise>
+                     		<p style="position:absolute; right:0; top:60px;">웹소설</p>	
+                     	</c:otherwise>
+                     </c:choose>
+						<p style="position:absolute; right:0; top:90px;"></p>
                      </div>
                   </div>
                </li>

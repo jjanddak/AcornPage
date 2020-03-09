@@ -96,8 +96,9 @@
 		<!-- 댓글을 작성할수 있는 폼 -->
 		<p>의견쓰기</p>
 		<div class="comment_form">
-			<form action="${pageContext.request.contextPath}/toon/comment_insert.do?code=${dto.code}&title="${dto.title }" method="post">
-				<textarea name="content"><c:if test="${empty id }">로그인이 필요합니다.</c:if></textarea>
+			<h4>의견쓰기</h4>
+			<form action="${pageContext.request.contextPath}/toon/comment_insert.do?code=${dto.code}&title=${dto.title }" method="post">
+				<textarea name="content" style="width:100%"><c:if test="${empty id }">댓글을 작성하려면 로그인이 필요합니다.</c:if></textarea>
 				<button type="submit">등록</button>
 			</form>
 		</div>
@@ -109,7 +110,7 @@
 						<span>${tmp.id }</span>
 						<span>${tmp.regdate }</span>
 						<span>${tmp.likeCount }</span>
-						<span><a href="${pageContext.request.contextPath}/toon/commentlike.do?writer=${tmp.id}&commcode=${tmp.commcode}&code=${tmp.code}&title="${dto.title }">좋아요</a></span>
+						<span><a href="${pageContext.request.contextPath}/toon/commentlike.do?writer=${tmp.id}&commcode=${tmp.commcode}&code=${tmp.code}&title=${dto.title }">좋아요</a></span>
 					</dt>
 					<dd>
 						<pre>${tmp.content }</pre>
