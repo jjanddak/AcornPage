@@ -50,9 +50,18 @@
 					<td>${tmp.num }</td>
 					<td><!-- ${tmp.writer } -->썸네일</td>
 					<td>
-						<a href="detailCode.do?code=${tmp.code }">
-							${tmp.title }
-						</a>
+						<c:choose>
+							<c:when test="${tmp.isBuy }">
+								<strong>
+									<a href="detailCode.do?title=${tmp.title }&code=${tmp.code }">
+										${tmp.title }
+									</a>
+								</strong>
+							</c:when>
+							<c:otherwise>
+								${tmp.title }
+							</c:otherwise>
+						</c:choose>	
 					</td>
 					<td>
 						<c:choose>

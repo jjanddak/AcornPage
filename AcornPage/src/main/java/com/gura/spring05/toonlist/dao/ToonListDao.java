@@ -46,9 +46,9 @@ public interface ToonListDao {
 
 	public List<ToonListDto> getUserStarList(ToonListDto dto);
 
-	public String haveNext(String code);
+	public String haveNext(LibraryDto dto);
 	
-	public String havePrev(String code);
+	public String havePrev(LibraryDto dto);
 	
 	public List<LibraryDto> getLibrary(String id);
 	

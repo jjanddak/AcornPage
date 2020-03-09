@@ -89,8 +89,13 @@ public class ToonListServiceImpl implements ToonListService{
 		String id=(String)request.getSession().getAttribute("id");
 		dto.setId(id);
 		dto=dao.getCodeDetail(dto);
-		String havePrev=dao.havePrev(code);
-		String haveNext=dao.haveNext(code);		
+		
+		LibraryDto libDto=new LibraryDto();
+		libDto.setId(id);	
+		libDto.setTitle(title);
+		libDto.setCode(code);
+		String havePrev=dao.havePrev(libDto);
+		String haveNext=dao.haveNext(libDto);		
 				
 		request.setAttribute("havePrev", havePrev);
 		request.setAttribute("haveNext", haveNext);

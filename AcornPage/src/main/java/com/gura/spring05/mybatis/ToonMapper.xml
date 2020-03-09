@@ -142,22 +142,22 @@
 		DELETE FROM toonlist WHERE writer=#{writer} and title=#{title}
 	</delete>
 	
-	<select id="havePrev" parameterType="String" resultType="String">
+	<select id="havePrev" parameterType="libraryDto" resultType="String">
 		select *
 		from
 				(select toonlist.code
-				from toonlist left outer join library on toonlist.code=library.code
+				from toonlist left outer join (select code from library where id=#{id}) library on toonlist.code=library.code
 				where library.code is null)
 		where code=#{code}
 	</select>
 	
 	<select id="haveNext" parameterType="String" resultType="String">
-	select *
-	from
-			(select toonlist.code
-			from toonlist left outer join library on toonlist.code=library.code
-			where library.code is null)
-	where code=#{code}
+		select *
+		from
+				(select toonlist.code
+				from toonlist left outer join (select code from library where id=#{id}) library on toonlist.code=library.code
+				where library.code is null)
+		where code=#{code}
 	</select>
 	
 	<select id="getLibrary" parameterType="String" resultType="libraryDto">

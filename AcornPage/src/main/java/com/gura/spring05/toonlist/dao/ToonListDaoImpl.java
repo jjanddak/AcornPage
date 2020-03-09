@@ -124,25 +124,27 @@ public class ToonListDaoImpl implements ToonListDao{
 	}
 
 	@Override
-	public String havePrev(String code) {
-		String num = code.replaceAll("[^0-9]","");
-		code = code.replaceAll("[0-9]","");
+	public String havePrev(LibraryDto dto) {
+		String num = dto.getCode().replaceAll("[^0-9]","");
+		String code=dto.getCode().replaceAll("[0-9]","");
 		int tmp=Integer.parseInt(num);
 		tmp--;
 		code=code+tmp;
+		dto.setCode(code);
 		
-		return session.selectOne("toon.havePrev",code);
+		return session.selectOne("toon.havePrev",dto);
 	}
 	
 	@Override
-	public String haveNext(String code) {
-		String num = code.replaceAll("[^0-9]","");
-		code = code.replaceAll("[0-9]","");
+	public String haveNext(LibraryDto dto) {
+		String num = dto.getCode().replaceAll("[^0-9]","");
+		String code=dto.getCode().replaceAll("[0-9]","");
 		int tmp=Integer.parseInt(num);
 		tmp++;
 		code=code+tmp;
+		dto.setCode(code);
 		
-		return session.selectOne("toon.haveNext",code);
+		return session.selectOne("toon.haveNext",dto);
 	}
 
 
