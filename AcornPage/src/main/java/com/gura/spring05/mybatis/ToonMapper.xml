@@ -75,19 +75,22 @@
 	
 	<select id="getWriterDetail" parameterType="String"
 		resultType="toonDetailDto">
-		select * from toondetail
+		select title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel 
+		from toondetail
 		WHERE writer like '%'||#{writer}||'%'
 	</select>
 	
 	<select id="getTitleDetail" parameterType="String"
 		resultType="toonDetailDto">
-		select * from toondetail
+		select title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel
+		from toondetail
 		WHERE title like '%'||#{title}||'%'
 	</select>
 	
 	<select id="getHashtagDetail" parameterType="String"
 		resultType="toonDetailDto">
-		select * from toondetail
+		select title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel
+		from toondetail
 		WHERE hashtag like '%'||#{hashtag}||'%'
 	</select>	
 		
