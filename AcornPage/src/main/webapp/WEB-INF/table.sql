@@ -1,14 +1,22 @@
 drop table toonlist;
 drop table star;
 drop table library;
-drop table comment;
+drop table toon_comment;
 drop table commentlike;
+
+drop sequence toonlist_seq;
+drop sequence users_seq;
+drop sequence star_seq;
+drop sequence library_seq;
+drop sequence toon_comment_seq;
+drop sequence commentlike_seq;
+
 
 create sequence toonlist_seq;
 create sequence users_seq;
 create sequence star_seq;
 create sequence library_seq;
-create sequence comment_seq;
+create sequence toon_comment_seq;
 create sequence commentlike_seq;
 
 
@@ -112,18 +120,19 @@ create table commentlike
 (num number, 
 id varchar2(100), 
 commcode varchar2(50),
-regdate date
+regdate date,
+code varchar2(50)
 );
 
-insert into commentlike values (1,'kapman','one1com1',sysdate);
-insert into commentlike values (2,'kapman','one1com2',sysdate);
-insert into commentlike values (3,'kapman','one1com3',sysdate);
-insert into commentlike values (4,'kapman','one2com1',sysdate);
-insert into commentlike values (5,'kapman','one2com2',sysdate);
-insert into commentlike values (6,'gura','one1com1',sysdate);
-insert into commentlike values (7,'gura','one1com2',sysdate);
-insert into commentlike values (8,'gura','one1com3',sysdate);
-insert into commentlike values (9,'gura','one2com1',sysdate);
-insert into commentlike values (10,'gura','one2com2',sysdate);
+insert into commentlike values (1,'kapman','one1com1',sysdate,one1);
+insert into commentlike values (2,'kapman','one1com2',sysdate,one1);
+insert into commentlike values (3,'kapman','one1com3',sysdate,one1);
+insert into commentlike values (4,'kapman','one2com1',sysdate,one2);
+insert into commentlike values (5,'kapman','one2com2',sysdate,one2);
+insert into commentlike values (6,'gura','one1com1',sysdate,one1);
+insert into commentlike values (7,'gura','one1com2',sysdate,one1);
+insert into commentlike values (8,'gura','one1com3',sysdate,one1);
+insert into commentlike values (9,'gura','one2com1',sysdate,one2);
+insert into commentlike values (10,'gura','one2com2',sysdate,one2);
 
 
