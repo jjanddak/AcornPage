@@ -96,6 +96,8 @@ $("#button").click(function(){
 		location.href="${pageContext.request.contextPath}/toon/searchedDetail.do?select="+select+"&keyword="+keyword;
 	}else if(select=="null"){
 		alert("검색 카테고리를 선택해 주세요");
+	}else if(keyword==""){
+		alert("키워드를 입력해 주세요")
 	}
 	return false;
 })
