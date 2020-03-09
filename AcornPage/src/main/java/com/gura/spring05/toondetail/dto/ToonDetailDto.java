@@ -8,13 +8,12 @@ public class ToonDetailDto {
 	private String hashtag;
 	private String toonovel;
 	private String thumb;
+	private double starvalue;
 	
 	public ToonDetailDto() {}
-	
-	
 
 	public ToonDetailDto(String title, String writer, String info, String regdate, String hashtag, String toonovel,
-			String thumb) {
+			String thumb, double starvalue) {
 		super();
 		this.title = title;
 		this.writer = writer;
@@ -23,21 +22,8 @@ public class ToonDetailDto {
 		this.hashtag = hashtag;
 		this.toonovel = toonovel;
 		this.thumb = thumb;
+		this.starvalue = starvalue;
 	}
-
-
-
-	public String getThumb() {
-		return thumb;
-	}
-
-
-
-	public void setThumb(String thumb) {
-		this.thumb = thumb;
-	}
-
-
 
 	public String getTitle() {
 		return title;
@@ -86,4 +72,21 @@ public class ToonDetailDto {
 	public void setToonovel(String toonovel) {
 		this.toonovel = toonovel;
 	}
+
+	public String getThumb() {
+		return thumb;
+	}
+
+	public void setThumb(String thumb) {
+		this.thumb = thumb;
+	}
+
+	public double getStarvalue() {
+		return starvalue;
+	}
+
+	public void setStarvalue(double starvalue) {
+		this.starvalue = starvalue;
+	}
+	
 }

@@ -7,9 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>상세 페이지입니당</title>
-<jsp:include page="../include/resource.jsp"></jsp:include>
+<jsp:include page="../include/resource.jsp"/>
+<style>
+.star-rating {width:304px; }
+.star-rating,.star-rating span {display:inline-block; height:55px; overflow:hidden; background:url(${pageContext.request.contextPath}/resources/images/star.png)no-repeat; }
+.star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
+</style>
 </head>
 <body>
+<jsp:include page="../include/navbar.jsp"/>
 <div class="contentwrapper">
    <div class="container content">
 	<div class="container">
@@ -29,7 +35,7 @@
 			</tr>
 			<tr>
 				<th>제목</th>
-				<td>${dto.title }</td>
+				<td id="title">${dto.title }</td>
 			</tr>
 			<tr>
 				<th>회별 별점</th>
@@ -78,8 +84,18 @@
 				다음화 구매</a>
 			</c:otherwise>
 		</c:choose>	
-		
-
+		<div class="wrap-star">
+	   		<div class='star-rating'>
+	        	<span style ="width:<fmt:formatNumber value="${starvalueAVG *10}" pattern=".0"/>%"></span>
+	   		</div>
+		</div>
+		<div>
+			<button id="left">왼쪽</button>
+			<span>
+				<img src="${pageContext.request.contextPath }/resources/images/star10.png" id="score" />
+			</span>
+			<button id="right">오른쪽</button>
+		</div>
 	<form action="starAdd.do" method="post">
 		<p id="star_grade">
 			<a href="#">★</a>
@@ -90,7 +106,7 @@
 		</p>
 		<button id="starBtn" type="submit">별점제출</button>
 	</form>
-
+	
 	
 	<div class="comments">
 		<!-- 댓글을 작성할수 있는 폼 -->
@@ -119,10 +135,17 @@
 		</ul>
 
 	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
-		 </div> <!-- //content -->
-</div> <!--//contentwrapper -->
+</div>
+</div>
+</div>
 </body>
 <script>
+	$('#left').click(function(){
+		$('score').values('10');
+	});
+	$('#right').click(function(){
+		
+	});
 var formObj = $("form[role='form']");//폼 가저오기
 
     $('#star_grade a').click(function(){
@@ -134,9 +157,10 @@ var formObj = $("form[role='form']");//폼 가저오기
     
     $("#starBtn").click(function(){
       var starValue = document.querySelectorAll(".on").length*2;
-      var isAddStar=confirm("평점"+starValue+"을 제출하시겠습니까?");
+      var starvalue2 = $("#starman")
+      var isAddStar=confirm("평점"+starValue+"를 제출하시겠습니까?");
       if(isAddStar){
-         location.href="starAdd.do?starValue="+starValue+"&code=${dto.code}";
+         location.href="starAdd.do?starValue="+starValue+"&code=${dto.code}&title=${dto.title}";
       }else{
          
       }
@@ -163,5 +187,9 @@ var formObj = $("form[role='form']");//폼 가저오기
 			}
 		}
 	}); 
+	
+	$(function(){
+	     $('#msComboTest').msDropDown();
+	});
 </script>
 </html>

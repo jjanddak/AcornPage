@@ -51,7 +51,7 @@
 					<td><!-- ${tmp.writer } -->썸네일</td>
 					<td>
 						<a href="detailCode.do?title=${tmp.title }&code=${tmp.code }">
-							${tmp.title }
+							<strong>${tmp.title } ${tmp.num }</strong>화
 						</a>
 					</td>
 					<td>
@@ -80,6 +80,7 @@
 			</tbody>
 		</table>
 		</div>
+	</div>
 	<script>
 	$(document).ready(function(){
 	    //최상단 체크박스 클릭

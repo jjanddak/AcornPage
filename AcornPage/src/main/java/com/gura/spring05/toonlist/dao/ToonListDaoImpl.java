@@ -17,7 +17,6 @@ public class ToonListDaoImpl implements ToonListDao{
 	private SqlSession session;
 	@Override
 	public List<ToonDetailDto> getToonList(ToonDetailDto dto) {
-		// TODO Auto-generated method stub
 		return session.selectList("toon.getToonList", dto);
 	}
 

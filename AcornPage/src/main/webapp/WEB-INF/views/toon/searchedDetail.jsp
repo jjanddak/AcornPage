@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,16 @@
 						<td>${tmp.info}</td>
 						<td>${tmp.regdate}</td>
 						<td>${tmp.toonovel}</td>
-						<td>★수정해야함★</td>
+						<td>
+						<c:choose>
+							<c:when test="${tmp.starvalue>0 }">
+								<strong><fmt:formatNumber value="${tmp.starvalue }" pattern=".0"/></strong> 점
+							</c:when>
+							<c:otherwise>
+								<strong>별점없음.</strong>
+							</c:otherwise>
+						</c:choose>	
+						</td>
 					</tr>		
 					</c:forEach>
 				</tbody>	
