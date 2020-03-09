@@ -57,7 +57,7 @@
 				<div></div>
 			</c:when>
 			<c:when test="${empty havePrev}">
-				<div><a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.title}${dto.num-1}">이전화</a></div>
+				<a class="btn" href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.title}${dto.num-1}">이전화</a>
 			</c:when>
 			<c:otherwise>			
 				<a class="btn" href="buyCodeOne.do?title=${dto.title }&code=${dto.title}${dto.num-1}" 
@@ -70,7 +70,7 @@
 				<div></div>
 			</c:when>
 			<c:when test="${empty haveNext}">
-				<div><a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.title}${dto.num+1}">다음화</a></div>
+				<a class="btn" href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.title}${dto.num+1}">다음화</a>
 			</c:when>
 			<c:otherwise>			
 				<a class="btn" href="buyCodeOne.do?title=${dto.title }&code=${dto.title}${dto.num+1}" 

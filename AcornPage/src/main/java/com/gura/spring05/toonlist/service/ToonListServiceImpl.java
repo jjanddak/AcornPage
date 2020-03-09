@@ -91,11 +91,26 @@ public class ToonListServiceImpl implements ToonListService{
 		dto=dao.getCodeDetail(dto);
 		
 		LibraryDto libDto=new LibraryDto();
+		LibraryDto libDto2=new LibraryDto();
 		libDto.setId(id);	
 		libDto.setTitle(title);
-		libDto.setCode(code);
+		
+		libDto2.setId(id);	
+		libDto2.setTitle(title);
+		
+		String num = code.replaceAll("[^0-9]","");
+		String tmpcode=code.replaceAll("[0-9]","");
+		int tmp=Integer.parseInt(num);
+		tmp--;
+		String nextnum=Integer.toString(tmp+2);
+		String prevnum=Integer.toString(tmp);
+		String prevcode=tmpcode+prevnum;
+		String nextcode=tmpcode+nextnum;
+		libDto.setCode(prevcode);
+		libDto2.setCode(nextcode);
+		
 		String havePrev=dao.havePrev(libDto);
-		String haveNext=dao.haveNext(libDto);		
+		String haveNext=dao.haveNext(libDto2);		
 				
 		request.setAttribute("havePrev", havePrev);
 		request.setAttribute("haveNext", haveNext);

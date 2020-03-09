@@ -151,7 +151,7 @@
 		where code=#{code}
 	</select>
 	
-	<select id="haveNext" parameterType="String" resultType="String">
+	<select id="haveNext" parameterType="libraryDto" resultType="String">
 		select *
 		from
 				(select toonlist.code
