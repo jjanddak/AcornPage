@@ -32,7 +32,6 @@ public class ToonListServiceImpl implements ToonListService{
 	@Override
 	public void getToonList(HttpServletRequest request) {
 		ToonDetailDto dto=new ToonDetailDto();
-		
 		List<ToonDetailDto> list=dao.getToonList(dto);
 		List<ToonDetailDto> toonList = new ArrayList<ToonDetailDto>();
 		List<ToonDetailDto> novelList = new ArrayList<ToonDetailDto>();
