@@ -5,13 +5,21 @@ public class CommentLikeDto {
 	private String id;
 	private String commcode;
 	private String regdatel;
+	private String code;
 	public CommentLikeDto() {};
-	public CommentLikeDto(int num, String id, String commcode, String regdatel) {
+	public CommentLikeDto(int num, String id, String commcode, String regdatel,String code) {
 		super();
 		this.num = num;
 		this.id = id;
 		this.commcode = commcode;
 		this.regdatel = regdatel;
+		this.code=code;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
 	}
 	public int getNum() {
 		return num;
@@ -37,6 +45,7 @@ public class CommentLikeDto {
 	public void setRegdatel(String regdatel) {
 		this.regdatel = regdatel;
 	}
+
 
 
 }

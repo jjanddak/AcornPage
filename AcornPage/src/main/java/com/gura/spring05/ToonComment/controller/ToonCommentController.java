@@ -16,19 +16,21 @@ public class ToonCommentController {
 	private ToonCommentService service;
 	
 	//댓글 저장 요청 처리
-	@RequestMapping(value = "/comment_insert", 
+	@RequestMapping(value = "toon/comment_insert", 
 			method = RequestMethod.POST)
 	public ModelAndView authCommentInsert(HttpServletRequest request) {
 		service.saveComment(request);
-		return new ModelAndView("redirect:/home.do");
+		String code=request.getParameter("code");
+		
+		return new ModelAndView("redirect:/toon/detailCode.do?code="+code);
 	}
 	//댓글 추천 처리
-	@RequestMapping(value = "/commentlike", 
+	@RequestMapping(value = "toon/commentlike", 
 			method = RequestMethod.GET)
-	public ModelAndView authAddLikeCount(HttpServletRequest request) {
-		
+	public ModelAndView authAddLikeCount(HttpServletRequest request) {	
 		service.addLikeCount(request);
-		return new ModelAndView("redirect:/home.do");
+		String code=(String)request.getParameter("code");
+		return new ModelAndView("redirect:/toon/detailCode.do?code="+code);
 	}
 	
 }

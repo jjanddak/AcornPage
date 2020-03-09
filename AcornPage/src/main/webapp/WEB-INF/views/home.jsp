@@ -80,32 +80,6 @@
 		</div>
 	</div><!-- //novel list content -->
 
-	<div class="comments">
-		<!-- 댓글을 작성할수 있는 폼 -->
-		<p>의견쓰기</p>
-		<div class="comment_form">
-			<form action="comment_insert.do" method="post">
-				<textarea name="content"><c:if test="${empty id }">로그인이 필요합니다.</c:if></textarea>
-				<button type="submit">등록</button>
-			</form>
-		</div>
-	</div>
-		<ul>
-			<c:forEach items="${toonCommentList }" var="tmp">
-				<dl>
-					<dt>				
-						<span>${tmp.id }</span>
-						<span>${tmp.regdate }</span>
-						<span>${tmp.likeCount }</span>
-						<span><a href="commentlike.do?writer=${tmp.id}&&commcode=${tmp.commcode}">좋아요</a></span>
-					</dt>
-					<dd>
-						<pre>${tmp.content }</pre>
-					</dd>
-				</dl>		
-			</c:forEach>
-		</ul>
-	</div>
 </div><!-- //contentwrapper -->
 </body>
 <script>
@@ -122,29 +96,7 @@
 			  infinite:true,
 			  arrow:true,
 		  });
-		});
-	//폼에 submit 이벤트가 일어 났을때 실행할 함수 등록 
-	$(".comments form").on("submit", function(){
-		//로그인 여부
-		var isLogin=${not empty id};
-		if(isLogin==false){
-			alert("로그인 페이지로 이동 합니다.");
-			location.href="home.do";
-			return false;//폼 전송 막기 
-		}
-	});
-	//폼에 click 이벤트가 일어 났을때 실행할 함수 등록 
-	$(".comments form textarea").on("click", function(){
-		//로그인 여부
-		var isLogin=${not empty id};
-		if(isLogin==false){
-			var isMove=confirm("로그인 페이지로 이동 하시겠습니까?");
-			if(isMove){
-				location.href="users/loginform.do";
-			}
-		}
-	});
-	
+		});	
     $('#star_grade a').click(function(){
         $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
         $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */

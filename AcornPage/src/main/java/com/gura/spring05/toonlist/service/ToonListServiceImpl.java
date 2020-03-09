@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.ToonComment.dao.ToonCommentDao;
 import com.gura.spring05.exception.NoMoneyException;
 import com.gura.spring05.library.dto.LibraryDto;
+import com.gura.spring05.toon.dto.ToonCommentDto;
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
 import com.gura.spring05.toonlist.dao.ToonListDao;
 import com.gura.spring05.toonlist.dto.ToonListDto;
@@ -20,6 +22,8 @@ public class ToonListServiceImpl implements ToonListService{
 
 	@Autowired
 	private ToonListDao dao;
+	@Autowired
+	ToonCommentDao commdao;
 
 	@Override
 	public void getToonList(HttpServletRequest request) {
@@ -202,6 +206,15 @@ public class ToonListServiceImpl implements ToonListService{
 		dto.setId(id);
 		List<ToonListDto> list=dao.getUserStarList(dto);
 		request.setAttribute("list", list);
+	}
+
+
+	@Override
+	public void getToonCommentList(HttpServletRequest request) {
+		String code=(String)request.getParameter("code");
+		List<ToonCommentDto> toonCommentList=commdao.getList(code);
+		request.setAttribute("toonCommentList", toonCommentList);
+		
 	}
 	
 }

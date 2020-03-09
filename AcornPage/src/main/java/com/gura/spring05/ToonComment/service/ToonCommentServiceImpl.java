@@ -24,11 +24,11 @@ public class ToonCommentServiceImpl implements ToonCommentService{
 		String id=(String)request.getSession()
 				.getAttribute("id");
 		//댓글단 만화의 코드
-		String code="1";
+		String code=(String)request.getParameter("code");
 		//댓글의 내용
 		String content=request.getParameter("content");
 		//댓글고유코드
-		String commcode=seq+code;
+		String commcode=code+"com"+seq;
 
 		//댓글 정보를 Dto 에 담기
 		ToonCommentDto dto=new ToonCommentDto();
@@ -46,12 +46,14 @@ public class ToonCommentServiceImpl implements ToonCommentService{
 	public void addLikeCount(HttpServletRequest request) {
 		String commcode=(String)request.getParameter("commcode");
 		String writer=(String)request.getParameter("writer");
+		String code=(String)request.getParameter("code");
 		String id=(String)request.getSession()
 				.getAttribute("id");	
 		//검증에 사용할 dto
 		CommentLikeDto dto=new CommentLikeDto();
 		dto.setId(id);
 		dto.setCommcode(commcode);
+		dto.setCode(code);
 		boolean isLiked=dao.isLiked(dto); 	
 		if(isLiked) { //라이크를 이미 눌렀다면
 			dao.downLikeCount(commcode);
