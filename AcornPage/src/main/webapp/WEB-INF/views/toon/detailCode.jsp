@@ -7,9 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>상세 페이지입니당</title>
-<jsp:include page="../include/resource.jsp"></jsp:include>
+<jsp:include page="../include/resource.jsp"/>
 </head>
 <body>
+<jsp:include page="../include/navbar.jsp"/>
 <div class="contentwrapper">
    <div class="container content">
 	<div class="container">
@@ -109,8 +110,12 @@
 					<dt>				
 						<span>${tmp.id }</span>
 						<span>${tmp.regdate }</span>
-						<span>${tmp.likeCount }</span>
-						<span><a href="${pageContext.request.contextPath}/toon/commentlike.do?writer=${tmp.id}&commcode=${tmp.commcode}&code=${tmp.code}&title=${dto.title }">좋아요</a></span>
+						<span class="${tmp.commcode }">${tmp.likeCount }</span>
+						<form action="commentlike.do" id="likeForm" method="post">
+						<input type="hidden" name="commcode" value="${tmp.commcode}"/>
+						<input type="hidden" name="code" value="${tmp.code}"/>
+						<button class="like" type="button"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+						</form>
 					</dt>
 					<dd>
 						<pre>${tmp.content }</pre>
@@ -122,9 +127,8 @@
 	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
 		 </div> <!-- //content -->
 </div> <!--//contentwrapper -->
-</body>
 <script>
-var formObj = $("form[role='form']");//폼 가저오기
+	var formObj = $("form[role='form']");//폼 가저오기
 
     $('#star_grade a').click(function(){
         $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
@@ -142,7 +146,7 @@ var formObj = $("form[role='form']");//폼 가저오기
          
       }
       return false;
-   }); 
+   	}); 
 	//폼에 submit 이벤트가 일어 났을때 실행할 함수 등록 
 	$(".comments form").on("submit", function(){
 		//로그인 여부
@@ -163,6 +167,29 @@ var formObj = $("form[role='form']");//폼 가저오기
 				location.href="${pageContext.request.contextPath}/users/loginform.do";
 			}
 		}
-	}); 
+	});
+	$(".like").click(function(){
+		
+		var ele=$(this);
+		var formData = ele.parent().serialize();
+		$.ajax({
+			url: "commentlike.do",//이동할 주소
+			type: "post",
+			data: formData,
+			success:function(responseData){
+				//해당 아이디와 비밀번호가 맞다면 
+				var count=responseData.count;
+				var code=responseData.code;
+				if(responseData.checkLike==false){
+					ele.prop("style","color: black;");
+					$("."+code).text(count);
+				}else{
+					ele.prop("style","color: blue;");
+					$("."+code).text(count);
+				}
+			}
+		});
+	});
 </script>
+</body>
 </html>

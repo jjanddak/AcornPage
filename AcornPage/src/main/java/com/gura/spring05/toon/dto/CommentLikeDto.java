@@ -6,8 +6,9 @@ public class CommentLikeDto {
 	private String commcode;
 	private String regdatel;
 	private String code;
+	private boolean isLike;
 	public CommentLikeDto() {};
-	public CommentLikeDto(int num, String id, String commcode, String regdatel,String code) {
+	public CommentLikeDto(int num, String id, String commcode, String regdatel,String code,boolean isLike) {
 		super();
 		this.num = num;
 		this.id = id;
@@ -44,6 +45,12 @@ public class CommentLikeDto {
 	}
 	public void setRegdatel(String regdatel) {
 		this.regdatel = regdatel;
+	}
+	public boolean isLike() {
+		return isLike;
+	}
+	public void setLike(boolean isLike) {
+		this.isLike = isLike;
 	}
 
 

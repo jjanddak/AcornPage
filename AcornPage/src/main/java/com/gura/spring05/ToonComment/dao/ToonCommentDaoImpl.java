@@ -61,6 +61,12 @@ public class ToonCommentDaoImpl implements ToonCommentDao{
 		session.update("toonComment.downLike",commcode);
 		
 	}
+
+	@Override
+	public int checkLikeCount(String commcode) {
+		
+		return session.selectOne("toonComment.checkLikeCount",commcode);
+	}
 	
 
 }

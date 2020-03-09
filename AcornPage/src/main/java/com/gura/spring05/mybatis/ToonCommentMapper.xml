@@ -43,6 +43,8 @@
 		FROM  commentlike  
 		WHERE id=#{id} and commcode=  #{commcode}
 	</select>
-	
+	<select id="checkLikeCount" parameterType="String" resultType="int">
+		select likecount from toon_comment where commcode=#{commcode}
+	</select>
 
 </mapper>
