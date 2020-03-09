@@ -6,8 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<jsp:include page="../include/resource.jsp"/>
 <title>상세 페이지입니당</title>
-<jsp:include page="../include/resource.jsp"></jsp:include>
+<jsp:include page="../include/navbar.jsp"/>
 </head>
 <body>
 <div class="contentwrapper">
