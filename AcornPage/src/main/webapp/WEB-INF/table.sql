@@ -1,3 +1,9 @@
+drop table toonlist;
+drop table star;
+drop table library;
+drop table comment;
+drop table commentlike;
+
 create sequence toonlist_seq;
 create sequence users_seq;
 create sequence star_seq;
@@ -12,7 +18,8 @@ writer varchar2(100),
 info varchar2(100),
 regdate date,
 hashtag varchar2(100) ,
-toonovel varchar2(100)
+toonovel varchar2(100),
+thumb varchar2(100)
 );
 
 insert into toondetail values('원피스','김준서','동료를 모아 모험을 떠나는 만화',sysdate,'코믹','toon');
