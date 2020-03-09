@@ -9,8 +9,8 @@
 <title>상세 페이지입니당</title>
 <jsp:include page="../include/resource.jsp"/>
 <style>
-.star-rating {width:304px; }
-.star-rating,.star-rating span {display:inline-block; height:55px; overflow:hidden; background:url(${pageContext.request.contextPath}/resources/images/star.png)no-repeat; }
+.star-rating {width:75px; }
+.star-rating,.star-rating span {display:inline-block; height:14px; overflow:hidden; background:url(${pageContext.request.contextPath}/resources/images/star.png)no-repeat; }
 .star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
 </style>
 </head>
@@ -42,7 +42,12 @@
 				<td>
 					<c:choose>
 						<c:when test="${starvalueAVG>0 }">
-							<strong><fmt:formatNumber value="${starvalueAVG }" pattern=".00"/></strong> 점
+							<span class="wrap-star">
+								<span class='star-rating'>
+									<span style ="width:<fmt:formatNumber value="${starvalueAVG *10}" pattern=".0"/>%"></span>
+								</span>
+								<fmt:formatNumber value="${starvalueAVG }" pattern=".0"/>
+							</span>
 						</c:when>
 						<c:otherwise>
 							<strong>이 편은 아직 별점이 없어요. 별점을 ${id } 님이 먼저 매겨주세요!</strong>
@@ -84,18 +89,6 @@
 				다음화 구매</a>
 			</c:otherwise>
 		</c:choose>	
-		<div class="wrap-star">
-	   		<div class='star-rating'>
-	        	<span style ="width:<fmt:formatNumber value="${starvalueAVG *10}" pattern=".0"/>%"></span>
-	   		</div>
-		</div>
-		<div>
-			<button id="left">왼쪽</button>
-			<span>
-				<img src="${pageContext.request.contextPath }/resources/images/star10.png" id="score" />
-			</span>
-			<button id="right">오른쪽</button>
-		</div>
 	<form action="starAdd.do" method="post">
 		<p id="star_grade">
 			<a href="#">★</a>

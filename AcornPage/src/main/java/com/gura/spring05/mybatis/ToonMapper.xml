@@ -14,6 +14,7 @@
 			GROUP BY x.title
 		) x, toondetail t
 		WHERE t.title=x.title 
+		ORDER BY starvalue DESC
 	</select>
 	<select id="getDetailList" parameterType="String"
 		resultType="toonListDto">
@@ -148,11 +149,34 @@
 	</select>
 	
 	<select id="selectedToonovel" parameterType="String" resultType="toonDetailDto">
-		select * from toondetail where toonovel=#{category}
+		SELECT x.title as title, writer, info, regdate, hashtag, toonovel, starvalue
+		FROM (
+			SELECT NVL(AVG(starvalue),0) AS starvalue, title
+			FROM (
+				SELECT *
+				FROM toonlist
+			) x, star s
+			WHERE x.code=s.code(+)	
+			GROUP BY x.title
+		) x, toondetail t
+		WHERE t.title=x.title
+		AND toonovel=#{category}
+<!-- 		select * from toondetail where toonovel=#{category} -->
 	</select>
 	
 	<select id="selectedHashtag" parameterType="String" resultType="toonDetailDto">
-		select * from toondetail where hashtag like '%'||#{category}||'%'
+		SELECT x.title as title, writer, info, regdate, hashtag, toonovel, starvalue
+		FROM (
+			SELECT NVL(AVG(starvalue),0) AS starvalue, title
+			FROM (
+				SELECT *
+				FROM toonlist
+			) x, star s
+			WHERE x.code=s.code(+)	
+			GROUP BY x.title
+		) x, toondetail t
+		WHERE t.title=x.title
+		AND hashtag like '%'||#{category}||'%'
 	</select>
 	
 	<select id="getDetailInfo" parameterType="String" resultType="toonDetailDto">

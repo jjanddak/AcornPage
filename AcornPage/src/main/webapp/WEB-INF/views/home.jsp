@@ -8,6 +8,11 @@
 <meta charset="UTF-8">
 <title>/cafe/list.jsp</title>
 <jsp:include page="include/resource.jsp"></jsp:include>
+<style>
+.star-rating {width:75px; }
+.star-rating,.star-rating span {display:inline-block; height:14px; overflow:hidden; background:url(${pageContext.request.contextPath}/resources/images/star.png)no-repeat; }
+.star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
+</style>
 </head>
 <body>
 <jsp:include page="include/navbar.jsp">
@@ -43,15 +48,13 @@
                         <p class="list-title">${tmp.title }</p>
 						<p class="list-writer">${tmp.writer }</p>
 						<p class="list-info">${tmp.info }</p>
-						<p style="position:absolute; right:0; top:40px;">
-						<c:choose>
-							<c:when test="${tmp.starvalue>0 }">
-								<strong><fmt:formatNumber value="${tmp.starvalue }" pattern=".0"/></strong> 점
-							</c:when>
-							<c:otherwise>
-								<strong>별점없음.</strong>
-							</c:otherwise>
-						</c:choose>	
+						<p style="position:absolute; right:0; top:0;">
+							<span class="wrap-star">
+								<span class='star-rating'>
+									<span style ="width:<fmt:formatNumber value="${tmp.starvalue *10}" pattern=".0"/>%"></span>
+								</span>
+								<fmt:formatNumber value="${tmp.starvalue }" pattern=".0"/>
+							</span>
 						</p>
                      </div>
                   </div>

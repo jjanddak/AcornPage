@@ -27,6 +27,7 @@
 								<p>${tmp.title }</p>
 								<p>${tmp.writer }</p>
 								<p>${tmp.info }</p>
+								<p>${tmp.starvalue }</p>
 							</div>
 						</div>
 					</li>
