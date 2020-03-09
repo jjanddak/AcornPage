@@ -17,4 +17,6 @@ public interface ToonupDao {
 	public int getLastNum(String title);
 	
 	public void newToonupload(NewToonupDto dto);
+	
+	public void writerLibrary(ToonupDto dto);
 }

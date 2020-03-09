@@ -47,6 +47,7 @@ public class ToonupController {
 		dto.setWriter(writer);
 		//서비스를 이용해서 DB 에 저장
 		service.saveToon(dto);
+		service.writerLibrary(dto);
 		
 		return new ModelAndView("redirect:/users/info.do");
 	}

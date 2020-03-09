@@ -43,4 +43,9 @@ public class ToonupDaoImpl implements ToonupDao{
 	public void newToonupload(NewToonupDto dto) {
 		session.insert("toon.newToonup", dto);
 	}
+
+	@Override
+	public void writerLibrary(ToonupDto dto) {
+		session.insert("toon.writerLibrary",dto);
+	}
 }

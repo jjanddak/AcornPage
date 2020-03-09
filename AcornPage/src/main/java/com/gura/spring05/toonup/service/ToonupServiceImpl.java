@@ -78,6 +78,11 @@ public class ToonupServiceImpl implements ToonupService{
 		//FileDao 객체를 이용해서 DB 에 저장하기
 		dao.newToonupload(dto);			
 	}
+
+	@Override
+	public void writerLibrary(ToonupDto dto) {
+		dao.writerLibrary(dto);
+	}
 }
 
 

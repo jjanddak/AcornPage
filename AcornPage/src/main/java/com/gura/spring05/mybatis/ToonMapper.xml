@@ -166,6 +166,10 @@
 	<select id="getTitle" parameterType="String" resultType="String">
 		select title from toonlist where code=#{code}
 	</select>
+	
+	<insert id="writerLibrary" parameterType="toonupDto">
+		insert into library (num,id,code,regdate) values (#{num},#{writer},#{title}||#{num},sysdate)
+	</insert>
 </mapper>
 
 
