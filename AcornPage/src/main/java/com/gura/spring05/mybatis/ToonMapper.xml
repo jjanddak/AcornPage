@@ -7,7 +7,22 @@
 	</select>
 	<select id="getDetailList" parameterType="String"
 		resultType="toonListDto">
-		select * from (select * from toonlist where title=#{title} order by code asc)
+		SELECT * 
+		FROM (
+			SELECT ROWNUM AS num, x.starvalue
+			FROM (	
+				SELECT AVG(NVL(starvalue,0)) AS starvalue
+				FROM (
+					SELECT *
+					FROM toonlist
+					WHERE title=#{title}
+				) x, star s
+				WHERE x.code=s.code(+)	
+				GROUP BY x.num
+			) x
+		) x, toonlist t
+		WHERE t.num=x.num 
+		AND title=#{title}
 	</select>
 	<select id="getCodeDetail" parameterType="toonListDto" resultType="toonListDto">
 		SELECT result1.*
@@ -106,11 +121,11 @@
 	
 	<select id="getUserStarList" parameterType="toonListDto" resultType="toonListDto">
 			select * from (
-			select toonlist.code,starvalue,toonlist.num,toonlist.title
-			from toonlist
-			inner join star on toonlist.code=star.code
-		    where id='${id}'
-		    order by title asc 
+				select toonlist.code,starvalue,toonlist.num,toonlist.title
+				from toonlist
+				inner join star on toonlist.code=star.code
+				where id='${id}'
+				order by title asc 
 		    )		
 	</select>
 

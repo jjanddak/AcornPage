@@ -12,7 +12,6 @@
 <jsp:include page="include/navbar.jsp">
 	<jsp:param value="home" name="category"/>
 </jsp:include>
-<<<<<<< HEAD
 <div class="contentwrapper">
 	<div class="container content slide"> 
 		<div class="your-class">

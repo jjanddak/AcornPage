@@ -30,7 +30,7 @@ public class StarDaoImpl implements StarDao{
 	}
 
 	@Override
-	public double selectStarOneAVG(StarDto dto) {
+	public StarDto selectStarOneAVG(StarDto dto) {
 		return session.selectOne("star.selectStarValueOneAVG", dto);
 	}
 }

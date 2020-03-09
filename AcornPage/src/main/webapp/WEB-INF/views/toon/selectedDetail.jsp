@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,19 +47,22 @@
 			<tr>
 				<td>${tmp.num }</td>
 				<td><!-- ${tmp.writer } -->썸네일</td>
-				<c:choose>
-					<c:when test="${tmp.isBuy }">
-						<td>			
-							<a href="detailCode.do?title=${tmp.title }&code=${tmp.code }">
-								<strong>${tmp.title } ${tmp.num }화</strong>
-							</a>
-						</td>
-					</c:when>
-					<c:otherwise>
-						<td>${tmp.title } ${tmp.num }화</td>
-					</c:otherwise>
-				</c:choose>
-				<td>여기에 별점 입력${tmp.starvalue }</td>
+
+				<td>
+					<a href="detailCode.do?code=${tmp.code }">
+						<strong>${tmp.title } ${tmp.num }화</strong>
+					</a>
+				</td>
+				<td>
+					<c:choose>
+						<c:when test="${tmp.starvalue > 0 }">
+							<strong><fmt:formatNumber value="${tmp.starvalue }" pattern=".00"/></strong> 점
+						</c:when>
+						<c:otherwise>
+							<strong>이 편은 아직 별점이 없어요. 별점을 ${id } 님이 먼저 매겨주세요!</strong>
+						</c:otherwise>
+					</c:choose>
+				</td>
 				<c:choose>
 					<c:when test="${tmp.isBuy }">
 						<td>소장중</td>
@@ -74,7 +78,6 @@
 			</tbody>
 		</table>
 		</div>
-	</div>
 	<script>
 	$(document).ready(function(){
 	    //최상단 체크박스 클릭
