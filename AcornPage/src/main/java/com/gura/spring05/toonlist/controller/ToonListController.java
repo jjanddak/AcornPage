@@ -89,12 +89,13 @@ public class ToonListController {
 	@RequestMapping("/toon/buyCodeOne")
 	public ModelAndView authbuyCodeOne(HttpServletRequest request,@ModelAttribute LibraryDto dto,
 			@RequestParam String code,@RequestParam String title) throws UnsupportedEncodingException {
-		String param=URLEncoder.encode(title, "UTF-8");
+		String tmptitle=URLEncoder.encode(title, "UTF-8");
+		String tmpcode=URLEncoder.encode(code, "UTF-8");
 		String id=(String)request.getSession().getAttribute("id");
 		dto.setId(id);
 		dto.setCode(code);
 		service.buyCodeOne(dto,request);
-		return new ModelAndView("redirect:/toon/selectedDetail.do?title="+param);
+		return new ModelAndView("redirect:/toon/detailCode.do?title="+tmptitle+"&code="+tmpcode);
 	}
 	
 	@RequestMapping("/toon/buyAll")
