@@ -58,7 +58,7 @@
 		</p>
 		<button id="starBtn" type="submit">별점제출</button>
 	</form>
-	</div>
+
 	
 	<div class="comments">
 		<!-- 댓글을 작성할수 있는 폼 -->
@@ -85,8 +85,9 @@
 				</dl>		
 			</c:forEach>
 		</ul>
-	</div>
+
 	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
+	</div>	
 </body>
 <script>
 var formObj = $("form[role='form']");//폼 가저오기
