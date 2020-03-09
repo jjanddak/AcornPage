@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.library.dto.LibraryDto;
@@ -21,7 +22,7 @@ public interface ToonListService {
 	//유저의 Id와 충전할 캐쉬의 값을 전달하는 메소드
 	public void cashAdd(HttpServletRequest request,HttpSession session,int cash);
 	//LibraryDto를 전달 받아 소장테이블에 저장하는 메소드
-	public void buyCodeOne(LibraryDto dto);
+	public void buyCodeOne(LibraryDto dto,HttpServletRequest request);
 	
 	public void buyAll(HttpServletRequest request,String title,int price);
 	

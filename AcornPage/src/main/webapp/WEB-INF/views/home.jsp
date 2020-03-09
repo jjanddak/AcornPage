@@ -20,24 +20,11 @@
 		  <div><img class="mainSlide" src="${pageContext.request.contextPath }/resources/images/stil3.png" alt="mainSlide" /></div>
 		</div>
 		<!-- <img style="width:100%;" src="${pageContext.request.contextPath }/resources/images/stil1.png" alt="" />  -->
-<div class="container content" style="border-top:20px solid #eee;">
-	<h2>웹툰</h2>
-	<ul>
-		<c:forEach var="tmp" items="${notice }" varStatus="status">
-			<li><p class="toon">만화 ${status.count }</p></li>
-		</c:forEach>
-	</ul>
-	<br/><br/>
-	<h2>웹소설</h2>
-	<ul>
-		<c:forEach var="tmp" items="${notice }" varStatus="status">
-			<li><p class="novel">소설 ${status.count }</p></li>
-		</c:forEach>
-	</ul>
-</div>
-      <div class="bestList">
+	<div class="container content" style="border-top:20px solid #eee;">
+		<h2>웹툰</h2>
+		 <div class="bestList">
          <ul>
-            <c:forEach var="tmp" items="${requestScope.list }">
+            <c:forEach var="tmp" items="${requestScope.toonList }">
                <a href="toon/selectedDetail.do?title=${tmp.title }">
                <li>
                   <div class="list">
@@ -54,12 +41,15 @@
                </a>
             </c:forEach>
          </ul>
-      </div>
+      </div>		
+	</div>
+     
    </div><!-- //toon list content -->
 	<div class="container content">
+		<h2>웹소설</h2>
 		<div class="bestList">
 			<ul>
-				<c:forEach var="tmp" items="${requestScope.list }">
+				<c:forEach var="tmp" items="${requestScope.novelList }">
 					<a href="toon/selectedDetail.do?title=${tmp.title }">
 					<li>
 						<div class="list">

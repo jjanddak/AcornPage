@@ -54,9 +54,7 @@ public class ToonListController {
 	@RequestMapping("/toon/selectedDetail")
 	public ModelAndView detailList(HttpServletRequest request,@RequestParam String title){
 		//타이틀로 해당 만화 목록을 가지고 오는 서비스 실행
-		service.getDetailList(request,title);
-		//타이틀로 해당 만화 정보를 가지고 오는 서비스 실행
-		service.getDetailInfo(request, title);		
+		service.getDetailList(request,title);	
 		// view page 로 forward 이동해서 글 목록 출력하기 
 		return new ModelAndView("toon/selectedDetail");
 	}
@@ -90,7 +88,7 @@ public class ToonListController {
 		String id=(String)request.getSession().getAttribute("id");
 		dto.setId(id);
 		dto.setCode(code);
-		service.buyCodeOne(dto);
+		service.buyCodeOne(dto,request);
 		return new ModelAndView("redirect:/toon/selectedDetail.do?title="+param);
 	}
 	
