@@ -14,7 +14,13 @@ h1{
 	font-size:0px;
 }
 .logo{
-	margin:12px auto;
+	margin:5px auto;
+}
+@media (max-width: 992px) {
+  .logo {
+    padding-left:30px;
+    text-align:left;
+  }
 }
 .right-box{
 	position:absolute;
@@ -81,7 +87,6 @@ a{
 	border-bottom:10px solid #eee;
 	border-top:10px solid #eee;
 }
-
 @media (min-width: 768px) {
   .container {
     width: 750px;
@@ -131,6 +136,7 @@ div.list{
 	position: relative;
 	float:left;
 	padding:10px 20px;
+	width:70%;
 }
 .list-title{
 	font-size:16px;
@@ -144,10 +150,89 @@ div.list{
 	font-size:14px;
 	color:#999999;
 }
+.list-date{
+	border:1px solid red;
+}
 .slide{
 	padding:0px;
 	border:0px;
 	border-top:10px solid #eee;
 }
-
-
+.btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus{
+	background-color:#fff;
+	border-color:#fff;
+}
+.btn-link:hover, .btn-link:focus{
+	text-decoration: none;
+}
+.btn:active{
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	outline:none;
+}
+button.dropdown-toggle{
+	border-color:#fff;
+	padding:6px 12px 6px 24px;
+	font-size:16px;
+}
+button.dropdown-toggle:hover{
+	background-color:#fff;
+	border-color:#fff;
+}
+button.dropdown-toggle:active{
+	background-color:#fff;
+	border-color:#fff;
+	outline:none;
+}
+button.dropdown-toggle:focus{
+	background-color:#fff;
+	border-color:#fff;
+	outline:none;
+}
+.dropdown-menu{
+	padding:0px;
+}
+.dropdown-menu li{
+	border-bottom: 1px solid rgb(230, 230, 230);
+	padding:10px 0 0 5px;
+	height: 50px;
+	
+}
+.dropdown-menu li:first-child{
+	background: rgb(231, 238, 255);
+	height: 70px;
+	
+}
+.dropdown-menu li a{
+	width: 100%;
+	height: 100%;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{
+	background-color:#fff;
+}
+input#keyword{
+	border:0px;
+	width:100px;
+}
+input#keyword:focus{
+	outline:none;
+}
+select{
+	border:0px;
+	outline:none;
+	padding-left: 10px;
+	width:65px;
+}
+.navbar-inverse .btn-link:hover, .navbar-inverse .btn-link:focus{
+	color:#9d9d9d;
+	outline:none;
+	text-decoration:none;
+}
+div.popwrapper{
+	height:100%;
+	max-width:500px;
+	margin:0 auto;
+	border:1px solid #dbdbdb;
+	border-top:0 none;
+	background-color:#eee;
+}

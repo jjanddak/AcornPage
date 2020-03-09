@@ -42,7 +42,7 @@ public class UsersServiceImpl implements UsersService{
 		dao.insert(dto);
 	}
 	@Override
-	public void validUser(UsersDto dto, HttpSession session, ModelAndView mView) {
+	public boolean validUser(UsersDto dto, HttpSession session, ModelAndView mView) {
 		//아이디 비밀번호가 유효한지 여부 
 		boolean isValid=false;
 		//아이디를 이용해서 저장된 비밀 번호를 읽어온다. 
@@ -56,6 +56,10 @@ public class UsersServiceImpl implements UsersService{
 			int wallet=dao.getWallet(dto.getId());
 			session.setAttribute("id", dto.getId());
 			session.setAttribute("wallet", wallet);
+			
+			return true;
+		}else {
+			return false;
 		}
 	}
 	@Override

@@ -151,13 +151,20 @@
 		where code=#{code}
 	</select>
 	
-		<select id="haveNext" parameterType="String" resultType="String">
-		select *
-		from
-				(select toonlist.code
-				from toonlist left outer join library on toonlist.code=library.code
-				where library.code is null)
-		where code=#{code}
+	<select id="haveNext" parameterType="String" resultType="String">
+	select *
+	from
+			(select toonlist.code
+			from toonlist left outer join library on toonlist.code=library.code
+			where library.code is null)
+	where code=#{code}
+	</select>
+	
+	<select id="getLibrary" parameterType="String" resultType="libraryDto">
+		select code from library where id=#{id}
+	</select>
+	<select id="getTitle" parameterType="String" resultType="String">
+		select title from toonlist where code=#{code}
 	</select>
 </mapper>
 

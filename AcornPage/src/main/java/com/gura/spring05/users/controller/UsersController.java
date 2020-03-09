@@ -87,8 +87,9 @@ public class UsersController {
 		return "users/loginform";
 	}
 	//로그인 요청 처리 
+	@ResponseBody
 	@RequestMapping(value = "/users/login", method = RequestMethod.POST)
-	public ModelAndView login(@ModelAttribute UsersDto dto,
+	public boolean login(@ModelAttribute UsersDto dto,
 			ModelAndView mView, 
 			HttpServletRequest request,
 			HttpServletResponse response) {
@@ -121,10 +122,9 @@ public class UsersController {
 		response.addCookie(idCook);
 		response.addCookie(pwdCook);
 		
-		service.validUser(dto, request.getSession(), mView);
+		boolean checkPwd=service.validUser(dto, request.getSession(), mView);
 		
-		mView.setViewName("users/login");
-		return mView;
+		return checkPwd;
 	}
 	
 	//로그아웃 처리

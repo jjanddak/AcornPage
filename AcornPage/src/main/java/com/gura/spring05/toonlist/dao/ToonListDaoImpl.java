@@ -145,5 +145,22 @@ public class ToonListDaoImpl implements ToonListDao{
 		return session.selectOne("toon.haveNext",code);
 	}
 
-	
+
+	public List<LibraryDto> getLibrary(String id) {
+		
+		return session.selectList("toon.getLibrary",id);
+	}
+
+	@Override
+	public String getTitle(String code) {
+		
+		return session.selectOne("toon.getTitle",code);
+	}
+
+	@Override
+	public ToonDetailDto getTitleDetail(String title) {
+		
+		return session.selectOne("toon.getTitleDetail",title);
+	}
+
 }

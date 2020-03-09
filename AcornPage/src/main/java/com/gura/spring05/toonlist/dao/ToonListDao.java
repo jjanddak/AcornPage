@@ -49,4 +49,10 @@ public interface ToonListDao {
 	public String haveNext(String code);
 	
 	public String havePrev(String code);
+	
+	public List<LibraryDto> getLibrary(String id);
+	
+	public String getTitle(String code);
+	
+	public ToonDetailDto getTitleDetail(String title);
 }

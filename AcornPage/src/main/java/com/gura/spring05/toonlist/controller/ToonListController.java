@@ -81,7 +81,7 @@ public class ToonListController {
 	@RequestMapping("/cash/cashcharge")
 	public ModelAndView chargeCash(HttpServletRequest request,@RequestParam int cash) {
 
-		service.cashAdd(request, cash);
+		service.cashAdd(request,request.getSession(), cash);
 		
 		return new ModelAndView("cash/checkcash");
 	}
@@ -93,7 +93,7 @@ public class ToonListController {
 		String id=(String)request.getSession().getAttribute("id");
 		dto.setId(id);
 		dto.setCode(code);
-		service.buyCodeOne(dto);
+		service.buyCodeOne(dto,request);
 		return new ModelAndView("redirect:/toon/selectedDetail.do?title="+param);
 	}
 	
@@ -119,5 +119,12 @@ public class ToonListController {
 		request.setAttribute("category", category);
 		mView.setViewName("toon/categorylist");
 		return mView;
+	}
+	
+	@RequestMapping("/toon/Buylist")
+	public ModelAndView buyList(HttpServletRequest request) {
+		service.buyList(request);
+		
+		return new ModelAndView("toon/buyList");
 	}
 }	

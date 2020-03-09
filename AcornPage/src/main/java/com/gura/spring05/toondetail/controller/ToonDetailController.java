@@ -22,14 +22,13 @@ public class ToonDetailController {
 	ToonDetailService service;
 	
 
-	  @RequestMapping(value = "/toon/searchedDetail"
-				  ,method = RequestMethod.POST)
-		  public ModelAndView getDetailList(
-				  HttpServletRequest request){
-	 
-			  List<ToonDetailDto> detailList=service.getDetailList(request); 
-			  request.setAttribute("detailList", detailList);
-	  return new ModelAndView("/toon/searchedDetail");
+	  @RequestMapping(value = "/toon/searchedDetail" ,method = RequestMethod.GET)
+	  public ModelAndView getDetailList(
+			  HttpServletRequest request){
+ 
+		  List<ToonDetailDto> detailList=service.getDetailList(request); 
+		  request.setAttribute("detailList", detailList);
+		  return new ModelAndView("/toon/searchedDetail");
 	  }
 	 
 	//원글 삭제 요청 처리

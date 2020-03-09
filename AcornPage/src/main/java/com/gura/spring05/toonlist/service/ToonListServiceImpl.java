@@ -1,10 +1,14 @@
 package com.gura.spring05.toonlist.service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,8 +34,17 @@ public class ToonListServiceImpl implements ToonListService{
 		ToonDetailDto dto=new ToonDetailDto();
 		
 		List<ToonDetailDto> list=dao.getToonList(dto);
-		
-		request.setAttribute("list", list);
+		List<ToonDetailDto> toonList = new ArrayList<ToonDetailDto>();
+		List<ToonDetailDto> novelList = new ArrayList<ToonDetailDto>();
+		for(int i=0; i<list.size(); i++) {
+			if(list.get(i).getToonovel().equals("toon")) {
+				toonList.add(list.get(i));
+			}else {
+				novelList.add(list.get(i));
+			}
+		}
+		request.setAttribute("toonList", toonList);
+		request.setAttribute("novelList", novelList);
 
 	}
 	
@@ -85,18 +98,19 @@ public class ToonListServiceImpl implements ToonListService{
 	}
 
 	@Override
-	public void cashAdd(HttpServletRequest request, int cash) {
+	public void cashAdd(HttpServletRequest request,HttpSession session,int cash) {
 		String id=(String)request.getSession().getAttribute("id");
 		UsersDto dto=new UsersDto();
 		dto.setId(id);
 		dto.setWallet(cash);
 		dao.cashUpdate(dto);
-
+		int wallet=dao.getWallet(id);
+		session.setAttribute("wallet", wallet);
 	}
 
 
 	@Override
-	public void buyCodeOne(LibraryDto dto) {
+	public void buyCodeOne(LibraryDto dto,HttpServletRequest request) {
 		String id=dto.getId();
 		int price=100;
 		if(price < dao.getWallet(id)) {
@@ -109,6 +123,8 @@ public class ToonListServiceImpl implements ToonListService{
 			dto2.setId(id);
 			dto2.setPrice(price);
 			dao.minusCash(dto2);
+			int wallet=dao.getWallet(id);
+			request.getSession().setAttribute("wallet", wallet);
 			//판매자에게 캐쉬증가
 			dto2.setId(writer);
 			dto2.setPrice(price/2);
@@ -135,6 +151,8 @@ public class ToonListServiceImpl implements ToonListService{
 			dto2.setId(id);
 			dto2.setPrice(price);
 			dao.minusCash(dto2);
+			int wallet=dao.getWallet(id);
+			request.getSession().setAttribute("wallet", wallet);
 			//판매자에게 캐쉬증가
 			dto2.setId(writer);
 			dto2.setPrice(price/2);
@@ -171,6 +189,8 @@ public class ToonListServiceImpl implements ToonListService{
 			dto2.setId(id);
 			dto2.setPrice(price);
 			dao.minusCash(dto2);
+			int wallet=dao.getWallet(id);
+			request.getSession().setAttribute("wallet", wallet);
 			//판매자에게 캐쉬증가
 			dto2.setId(writer);
 			dto2.setPrice(price/2);
@@ -221,7 +241,24 @@ public class ToonListServiceImpl implements ToonListService{
 		String code=(String)request.getParameter("code");
 		List<ToonCommentDto> toonCommentList=commdao.getList(code);
 		request.setAttribute("toonCommentList", toonCommentList);
-		
+	}
+	@Override
+	public void buyList(HttpServletRequest request) {
+		String id=(String)request.getSession().getAttribute("id");
+		List<LibraryDto> code=dao.getLibrary(id);
+		List<String> titles=new ArrayList<String>();
+		for(int i=0; i<code.size(); i++) {
+			String title=dao.getTitle(code.get(i).getCode());
+			titles.add(title);
+		}
+		HashSet<String> hash=new HashSet<String>(titles);
+		List<String> hashTitle=new ArrayList<String>(hash);
+		List<ToonDetailDto> list=new ArrayList<ToonDetailDto>();
+		for(int i=0; i<hashTitle.size(); i++) {
+			ToonDetailDto dto=dao.getTitleDetail(hashTitle.get(i));
+			list.add(dto);
+		}
+		request.setAttribute("list", list);
 	}
 	
 }

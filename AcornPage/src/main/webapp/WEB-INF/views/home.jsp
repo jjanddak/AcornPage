@@ -15,29 +15,16 @@
 <div class="contentwrapper">
 	<div class="container content slide"> 
 		<div class="your-class">
-		  <div><p style="width:100%; height:450px; background-color:green; margin:0px;"></p></div>
-		  <div><p style="width:100%; height:450px; background-color:blue; margin:0px;"></p></div>
-		  <div><p style="width:100%; height:450px; background-color:grey; margin:0px;"></p></div>
+		  <div><img class="mainSlide" src="${pageContext.request.contextPath }/resources/images/stil1.png" alt="mainSlide" /></div>
+		  <div><img class="mainSlide" src="${pageContext.request.contextPath }/resources/images/stil2.png" alt="mainSlide" /></div>
+		  <div><img class="mainSlide" src="${pageContext.request.contextPath }/resources/images/stil3.png" alt="mainSlide" /></div>
 		</div>
-<div class="container content" style="border-top:20px solid #eee;">
-	<h2>웹툰</h2>
-	<ul>
-		<c:forEach var="tmp" items="${notice }" varStatus="status">
-			<li><p class="toon">만화 ${status.count }</p></li>
-		</c:forEach>
-	</ul>
-	<br/><br/>
-	<h2>웹소설</h2>
-	<ul>
-		<c:forEach var="tmp" items="${notice }" varStatus="status">
-			<li><p class="novel">소설 ${status.count }</p></li>
-		</c:forEach>
-	</ul>
-</div>
-
-      <div class="bestList">
+		<!-- <img style="width:100%;" src="${pageContext.request.contextPath }/resources/images/stil1.png" alt="" />  -->
+	<div class="container content" style="border-top:20px solid #eee;">
+		<h2>웹툰</h2>
+		 <div class="bestList">
          <ul>
-            <c:forEach var="tmp" items="${requestScope.list }">
+            <c:forEach var="tmp" items="${requestScope.toonList }">
                <a href="toon/selectedDetail.do?title=${tmp.title }">
                <li>
                   <div class="list">
@@ -52,31 +39,36 @@
                      </c:choose>
                      </div>
                      <div class="textwrapper">
-                        <p>${tmp.title }</p>
-                        <p>${tmp.writer }</p>
-                        <p>${tmp.info }</p>
+                        <p class="list-title">${tmp.title }</p>
+						<p class="list-writer">${tmp.writer }</p>
+						<p class="list-info">${tmp.info }</p>
                      </div>
                   </div>
                </li>
                </a>
             </c:forEach>
          </ul>
-      </div>
+      </div>		
+	</div>
+     
    </div><!-- //toon list content -->
 	<div class="container content">
+		<h2>웹소설</h2>
 		<div class="bestList">
 			<ul>
-				<c:forEach var="tmp" items="${requestScope.list }">
+				<c:forEach var="tmp" items="${requestScope.novelList }">
 					<a href="toon/selectedDetail.do?title=${tmp.title }">
 					<li>
 						<div class="list">
 							<div class="imgwrapper">
 								<img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>
 							</div>
-							<div class="textwrapper">
-								<p>${tmp.title }</p>
-								<p>${tmp.writer }</p>
-								<p>${tmp.info }</p>
+							<div class="textwrapper" style="width:70%;">
+								<p class="list-title">${tmp.title }</p>
+								<p class="list-writer">${tmp.writer }</p>
+								<p class="list-info">${tmp.info }</p>
+								<p style="position:absolute; right:0; top:0;">등록날짜</p>
+								<p style="position:absolute; right:0; top:40px;">별점</p>
 							</div>
 						</div>
 					</li>
