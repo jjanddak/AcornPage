@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="toonComment">
-	<select id="getList" parameterType="string" resultType="toonCommentDto">
-		SELECT num, id, content, likecount, commcode, to_char(regdate,'YYYY-MM-DD') as regdate,code
+	<select id="getCount" parameterType="toonCommentDto" resultType="int">
+		SELECT NVL(MAX(ROWNUM), 0)
 		FROM toon_comment
 		WHERE code=#{code}
-		ORDER by num DESC
+	</select>
+
+	<select id="getList" parameterType="toonCommentDto" resultType="toonCommentDto">
+		SELECT *
+		FROM
+			(SELECT result1.*, ROWNUM AS rnum	
+			FROM	
+				(SELECT num, id, content, likecount, commcode, to_char(regdate,'YYYY-MM-DD') as regdate,code
+				FROM toon_comment
+			WHERE code=#{code}
+			ORDER by num DESC) result1)
+		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
 	<insert id="insert" parameterType="toonCommentDto">
 		INSERT INTO toon_comment

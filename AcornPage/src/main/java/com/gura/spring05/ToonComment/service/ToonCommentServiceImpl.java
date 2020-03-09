@@ -30,7 +30,8 @@ public class ToonCommentServiceImpl implements ToonCommentService{
 		//댓글고유코드
 		String commcode=code+"com"+seq;
 
-		//댓글 정보를 Dto 에 담기
+		//댓글 정보를 Dto 에 담기get
+		
 		ToonCommentDto dto=new ToonCommentDto();
 		dto.setNum(seq);
 		dto.setId(id);
