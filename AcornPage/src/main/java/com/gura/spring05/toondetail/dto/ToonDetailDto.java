@@ -8,7 +8,6 @@ public class ToonDetailDto {
 	private String hashtag;
 	private String toonovel;
 	private String thumb;
-	
 	public ToonDetailDto() {}
 	
 	
