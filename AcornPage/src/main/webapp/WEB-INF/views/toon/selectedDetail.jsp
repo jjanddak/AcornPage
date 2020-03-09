@@ -50,9 +50,7 @@
 					<td>${tmp.num }</td>
 					<td><!-- ${tmp.writer } -->썸네일</td>
 					<td>
-						<a href="detailCode.do?code=${tmp.code }">
-							${tmp.title }
-						</a>
+						<a href="detailCode.do?title=${tmp.title }&code=${tmp.code }"><strong>${tmp.title }</strong> ${tmp.num }화</a>
 					</td>
 					<td>
 						<c:choose>

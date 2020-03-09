@@ -20,9 +20,10 @@ public class ToonCommentController {
 			method = RequestMethod.POST)
 	public ModelAndView authCommentInsert(HttpServletRequest request) {
 		service.saveComment(request);
-		String code=request.getParameter("code");
+		String code=(String)request.getParameter("code");
+		String title=(String)request.getParameter("title");
 		
-		return new ModelAndView("redirect:/toon/detailCode.do?code="+code);
+		return new ModelAndView("redirect:/toon/detailCode.do?title="+title+"&code="+code);
 	}
 	//댓글 추천 처리
 	@RequestMapping(value = "toon/commentlike", 
@@ -30,7 +31,8 @@ public class ToonCommentController {
 	public ModelAndView authAddLikeCount(HttpServletRequest request) {	
 		service.addLikeCount(request);
 		String code=(String)request.getParameter("code");
-		return new ModelAndView("redirect:/toon/detailCode.do?code="+code);
+		String title=(String)request.getParameter("title");
+		return new ModelAndView("redirect:/toon/detailCode.do?title="+title+"&code="+code);
 	}
 	
 }
