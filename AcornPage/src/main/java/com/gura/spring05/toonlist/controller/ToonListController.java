@@ -57,16 +57,18 @@ public class ToonListController {
 		//타이틀로 해당 만화 목록을 가지고 오는 서비스 실행
 		service.getDetailList(request,title);
 		//타이틀로 해당 만화 정보를 가지고 오는 서비스 실행
-		service.getDetailInfo(request, title);		
+		service.getDetailInfo(request, title);	
 		// view page 로 forward 이동해서 글 목록 출력하기 
 		return new ModelAndView("toon/selectedDetail");
 	}
 	//단일 만화의 회차를 눌렀을때 단일 만화의 정보를 가져오는 로직
 	@RequestMapping("/toon/detailCode")
 	public ModelAndView detailCodeView(HttpServletRequest request,@RequestParam String title,@RequestParam String code) {
-		service.getCodeDetail(request, title, code);
+		service.getCodeDetail(request,title, code);
+		starService.selectStarValueOneAVG(request,code);
+		//댓글목록을 가지고오는 서비스 실행
+		service.getToonCommentList(request);
 
-		
 		return new ModelAndView("toon/detailCode");
 	}
 	//캐쉬 충전팝업창 띄우기

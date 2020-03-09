@@ -46,6 +46,7 @@
 			</tr>
 		</table>
 		<div class="contents">${dto.content }</div>
+<<<<<<< HEAD
 		<br/>
 		
 		<c:choose>
@@ -75,20 +76,48 @@
 			</c:otherwise>
 		</c:choose>	
 		
-		<form action="starAdd.do" method="post">
-			<p id="star_grade">
-				<a href="#">★</a>
-				<a href="#">★</a>
-				<a href="#">★</a>
-				<a href="#">★</a>
-				<a href="#">★</a>
-			</p>
-			<button id="starBtn" type="submit">별점제출</button>
-		</form>
+
+	<form action="starAdd.do" method="post">
+		<p id="star_grade">
+			<a href="#">★</a>
+			<a href="#">★</a>
+			<a href="#">★</a>
+			<a href="#">★</a>
+			<a href="#">★</a>
+		</p>
+		<button id="starBtn" type="submit">별점제출</button>
+	</form>
+
+	
+	<div class="comments">
+		<!-- 댓글을 작성할수 있는 폼 -->
+		<p>의견쓰기</p>
+		<div class="comment_form">
+			<form action="${pageContext.request.contextPath}/toon/comment_insert.do?code=${dto.code}" method="post">
+				<textarea name="content"><c:if test="${empty id }">로그인이 필요합니다.</c:if></textarea>
+				<button type="submit">등록</button>
+			</form>
 		</div>
-	 </div> <!-- //content -->
-</div> <!--//contentwrapper -->
+	</div>
+		<ul>
+			<c:forEach items="${toonCommentList }" var="tmp">
+				<dl>
+					<dt>				
+						<span>${tmp.id }</span>
+						<span>${tmp.regdate }</span>
+						<span>${tmp.likeCount }</span>
+						<span><a href="${pageContext.request.contextPath}/toon/commentlike.do?writer=${tmp.id}&commcode=${tmp.commcode}&code=${tmp.code}">좋아요</a></span>
+					</dt>
+					<dd>
+						<pre>${tmp.content }</pre>
+					</dd>
+				</dl>		
+			</c:forEach>
+		</ul>
+
 	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
+		 </div> <!-- //content -->
+</div> <!--//contentwrapper -->
 </body>
 <script>
 var formObj = $("form[role='form']");//폼 가저오기
@@ -109,6 +138,27 @@ var formObj = $("form[role='form']");//폼 가저오기
          
       }
       return false;
-   });   
+   }); 
+	//폼에 submit 이벤트가 일어 났을때 실행할 함수 등록 
+	$(".comments form").on("submit", function(){
+		//로그인 여부
+		var isLogin=${not empty id};
+		if(isLogin==false){
+			alert("로그인 페이지로 이동 합니다.");
+			location.href="${pageContext.request.contextPath}/home.do";
+			return false;//폼 전송 막기 
+		}
+	});
+	//폼에 click 이벤트가 일어 났을때 실행할 함수 등록 
+	$(".comments form textarea").on("click", function(){
+		//로그인 여부
+		var isLogin=${not empty id};
+		if(isLogin==false){
+			var isMove=confirm("로그인 페이지로 이동 하시겠습니까?");
+			if(isMove){
+				location.href="${pageContext.request.contextPath}/users/loginform.do";
+			}
+		}
+	}); 
 </script>
 </html>
