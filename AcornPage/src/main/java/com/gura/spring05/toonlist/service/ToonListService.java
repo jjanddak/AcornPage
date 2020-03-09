@@ -16,7 +16,7 @@ public interface ToonListService {
 	//ToonList 단일 만화 리스트를 가져오는 메소드
 	public void getDetailList(HttpServletRequest request,String title);
 	//코드값을 통해 데이터를 가져오는 메소드
-	public void getCodeDetail(HttpServletRequest request,String code);
+	public void getCodeDetail(HttpServletRequest request,String code, String title);
 	//유저의 Id와 충전할 캐쉬의 값을 전달하는 메소드
 	public void cashAdd(HttpServletRequest request,int cash);
 	//LibraryDto를 전달 받아 소장테이블에 저장하는 메소드

@@ -23,6 +23,12 @@
 				</div>
 			</div>
 		</div>
+		<div class="buy" style="float:right">
+			<ul style="list-style:none">
+				<li class="btn btn-primary" id="buyEach" style="float:left"><a style="color:#fff" href="">선택구매</a></li>
+				<li class="btn btn-warning" id="buyAll" style="float:left"><a style="color:#fff" href="#">전체구매</a></li>
+			</ul>
+		</div>
 		<table class="table table-striped table-condensed">
 		<thead>
 			<tr>
@@ -40,11 +46,18 @@
 			<tr>
 				<td>${tmp.num }</td>
 				<td><!-- ${tmp.writer } -->썸네일</td>
-				<td>
-					<a href="detailCode.do?code=${tmp.code }">
-						<strong>${tmp.title } ${tmp.num }화</strong>
-					</a>
-				</td>
+				<c:choose>
+					<c:when test="${tmp.isBuy }">
+						<td>			
+							<a href="detailCode.do?title=${tmp.title }&code=${tmp.code }">
+								<strong>${tmp.title } ${tmp.num }화</strong>
+							</a>
+						</td>
+					</c:when>
+					<c:otherwise>
+						<td>${tmp.title } ${tmp.num }화</td>
+					</c:otherwise>
+				</c:choose>
 				<td>여기에 별점 입력${tmp.starvalue }</td>
 				<c:choose>
 					<c:when test="${tmp.isBuy }">
@@ -52,35 +65,12 @@
 						<td><input type="checkbox" name="selectedCode" value="${tmp.code }" disabled/></td>
 					</c:when>
 					<c:otherwise>
-						<td><a class="btn" href="buyCodeOne.do?code=${tmp.code }&title=${tmp.title }">구매</a></td>
+						<td><a class="btn" href="buyCodeOne.do?code=${tmp.code}&title=${tmp.title }">구매</a></td>
 						<td><input type="checkbox" name="selectedCode" value="${tmp.code }"/></td>
 					</c:otherwise>
 				</c:choose>	
 			</tr>
 		</c:forEach>
-			
-			<c:forEach var="tmp" items="${list }">
-				<tr>
-					<td>${tmp.num }</td>
-					<td><!-- ${tmp.writer } -->썸네일</td>
-					<td>
-						<a href="detailCode.do?code=${tmp.code }">
-							${tmp.title }
-						</a>
-					</td>
-					<c:choose>
-						<c:when test="${tmp.isBuy }">
-							<td>소장중</td>
-							<td><input type="checkbox" name="selectedCode" value="${tmp.code }" disabled/></td>
-						</c:when>
-						<c:otherwise>
-							<td><a class="btn" href="buyCodeOne.do?code=${tmp.code }&title=${tmp.title }">구매</a></td>
-							<td><input type="checkbox" name="selectedCode" value="${tmp.code }"/></td>
-						</c:otherwise>
-					</c:choose>	
-				</tr>
-			</c:forEach>
-				
 			</tbody>
 		</table>
 		</div>

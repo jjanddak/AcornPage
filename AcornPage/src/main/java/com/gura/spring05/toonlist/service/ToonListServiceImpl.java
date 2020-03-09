@@ -65,11 +65,18 @@ public class ToonListServiceImpl implements ToonListService{
 	}
 
 	@Override
-	public void getCodeDetail(HttpServletRequest request, String code) {
+	public void getCodeDetail(HttpServletRequest request, String title, String code) {
 		ToonListDto dto=new ToonListDto();
-		
-		dto=dao.getCodeDetail(code);
-		
+		dto.setTitle(title);
+		dto.setCode(code);
+		String id=(String)request.getSession().getAttribute("id");
+		dto.setId(id);
+		dto=dao.getCodeDetail(dto);
+		String havePrev=dao.havePrev(code);
+		String haveNext=dao.haveNext(code);		
+				
+		request.setAttribute("havePrev", havePrev);
+		request.setAttribute("haveNext", haveNext);
 		request.setAttribute("dto", dto);
 	}
 

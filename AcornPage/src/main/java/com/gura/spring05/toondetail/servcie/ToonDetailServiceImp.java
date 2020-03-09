@@ -31,4 +31,15 @@ public class ToonDetailServiceImp implements ToonDetailService{
 		return detailList;
 	}
 
+	@Override
+	public void deleteToon(HttpServletRequest request, ToonDetailDto dto, String title) {
+		String id=(String)request.getSession().getAttribute("id");
+		
+		dto.setTitle(title);
+		dto.setWriter(id);
+		
+		dao.deleteToon(dto);
+		dao.deleteList(dto);
+	}
+
 }

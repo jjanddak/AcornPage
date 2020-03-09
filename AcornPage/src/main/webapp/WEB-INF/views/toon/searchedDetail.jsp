@@ -13,6 +13,8 @@
 </head>
 <body>
 <div class="container">
+<div class="contentwrapper">
+   <div class="container content">
 	<h1>선택된 목록입니다.</h1>
 	<table class="table table-striped table-condensed">
 		<thead>
@@ -38,7 +40,8 @@
 			</c:forEach>
 		</tbody>	
 	</table>
-
 </div>
+            </div> <!-- //content -->
+</div> <!--//contentwrapper -->
 </body>
 </html>

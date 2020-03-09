@@ -20,6 +20,7 @@ import com.gura.spring05.star.dto.StarDto;
 import com.gura.spring05.star.service.StarService;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.gura.spring05.library.dto.LibraryDto;
+import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.toonlist.service.ToonListService;
 
 @Controller
@@ -62,9 +63,9 @@ public class ToonListController {
 	}
 	//단일 만화의 회차를 눌렀을때 단일 만화의 정보를 가져오는 로직
 	@RequestMapping("/toon/detailCode")
-	public ModelAndView detailCodeView(HttpServletRequest request,@RequestParam String code) {
-		service.getCodeDetail(request, code);
-		starService.selectStarValueOneAVG(request, code);
+	public ModelAndView detailCodeView(HttpServletRequest request,@RequestParam String title,@RequestParam String code) {
+		service.getCodeDetail(request, title, code);
+
 		
 		return new ModelAndView("toon/detailCode");
 	}

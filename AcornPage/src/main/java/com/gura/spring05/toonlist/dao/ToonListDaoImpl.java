@@ -27,9 +27,9 @@ public class ToonListDaoImpl implements ToonListDao{
 	}
 
 	@Override
-	public ToonListDto getCodeDetail(String code) {
+	public ToonListDto getCodeDetail(ToonListDto dto) {
 		
-		return session.selectOne("toon.getCodeDetail", code);
+		return session.selectOne("toon.getCodeDetail", dto);
 	}
 
 	@Override
@@ -122,5 +122,28 @@ public class ToonListDaoImpl implements ToonListDao{
 	public List<ToonListDto> getUserStarList(ToonListDto dto) {
 		return session.selectList("toon.getUserStarList", dto);
 	}
+
+	@Override
+	public String havePrev(String code) {
+		String num = code.replaceAll("[^0-9]","");
+		code = code.replaceAll("[0-9]","");
+		int tmp=Integer.parseInt(num);
+		tmp--;
+		code=code+tmp;
+		
+		return session.selectOne("toon.havePrev",code);
+	}
+	
+	@Override
+	public String haveNext(String code) {
+		String num = code.replaceAll("[^0-9]","");
+		code = code.replaceAll("[0-9]","");
+		int tmp=Integer.parseInt(num);
+		tmp++;
+		code=code+tmp;
+		
+		return session.selectOne("toon.haveNext",code);
+	}
+
 	
 }

@@ -13,7 +13,7 @@ public interface ToonListDao {
 	
 	public List<ToonListDto> getDetailList(String title);
 	//구매한 만화의 코드를 통해 글 정보 얻어오기
-	public ToonListDto getCodeDetail(String code);
+	public ToonListDto getCodeDetail(ToonListDto dto);
 	//캐쉬 추가하기
 	//차후에 아이디값이나 usersDto도 같이 전달받아 넘겨줘야됨
 	public void cashUpdate(UsersDto dto);
@@ -24,13 +24,13 @@ public interface ToonListDao {
 		
 	public int getWallet(String id);
 	
-	public void insertCode(ToonListDto dto);
-	
 	public List<LibraryDto> checkLibrary(LibraryDto dto);
 	
 	public List<ToonListDto> getUnBuyList(LibraryDto dto);
 	
 	public void buyEach(LibraryDto dto);
+	
+	public void insertCode(ToonListDto dto);
 	
 	public List<ToonDetailDto> getMyToon(String id);
 	
@@ -46,4 +46,7 @@ public interface ToonListDao {
 
 	public List<ToonListDto> getUserStarList(ToonListDto dto);
 
+	public String haveNext(String code);
+	
+	public String havePrev(String code);
 }

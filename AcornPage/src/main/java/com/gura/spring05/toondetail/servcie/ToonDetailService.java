@@ -10,4 +10,5 @@ public interface ToonDetailService {
 
 	public List<ToonDetailDto> getDetailList(HttpServletRequest request);
 
+	public void deleteToon(HttpServletRequest request, ToonDetailDto dto, String title);
 }
