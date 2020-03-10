@@ -43,7 +43,9 @@
 								<span class='star-rating'>
 									<span style ="width:<fmt:formatNumber value="${tmp.starvalue *10}" pattern=".0"/>%"></span>
 								</span>
-								<fmt:formatNumber value="${tmp.starvalue }" pattern=".0"/>
+								<c:if test="${tmp.starvalue gt 0 }">
+                        			<fmt:formatNumber value="${tmp.starvalue }" pattern=".0"/>
+                        		</c:if>
 							</span>
 		                  </p>   					                     
                      <c:choose>

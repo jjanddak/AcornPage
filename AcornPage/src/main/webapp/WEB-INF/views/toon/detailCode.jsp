@@ -106,7 +106,6 @@
 	
 	<div class="comments">
 		<!-- 댓글을 작성할수 있는 폼 -->
-		<p>의견쓰기</p>
 		<div class="comment_form">
 			<h4>의견쓰기</h4>
 			<form action="${pageContext.request.contextPath}/toon/comment_insert.do?code=${dto.code}&title=${dto.title }" method="post">
