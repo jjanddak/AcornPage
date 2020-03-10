@@ -37,7 +37,8 @@
 					</div>		
 						<c:choose>
 							<c:when test="${empty sessionScope.id }">
-								<button class="btn btn-link" id="login" style="padding:0 0 0 15px; font-size:17px;" onclick="loginOpen()">회원가입  |  로그인</button>
+								<button class="btn btn-link" id="login" style="padding:0 0 0 15px; font-size:17px;" onclick="signupOpen()">회원가입</button>
+								<button class="btn btn-link" id="login" style="padding:0 0 0 15px; font-size:17px;" onclick="loginOpen()">로그인</button>
 							</c:when>
 							<c:otherwise>
 								<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="userInfo">${id }님
@@ -83,6 +84,13 @@ function popupOpen(){
 }
 function loginOpen(){
 	var url= "${pageContext.request.contextPath }/users/loginform.do";    //팝업창 페이지 URL
+	var winWidth = 366;
+    var winHeight = 580;
+    var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
+   window.open(url,"",popupOption);
+}
+function signupOpen(){
+	var url= "${pageContext.request.contextPath }/users/signup_form.do";    //팝업창 페이지 URL
 	var winWidth = 366;
     var winHeight = 580;
     var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
