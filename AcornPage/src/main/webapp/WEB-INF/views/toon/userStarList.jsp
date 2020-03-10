@@ -21,7 +21,6 @@
 				<th>제목</th>
 				<th>당신이 매긴 별점</th>
 				<th>썸네일</th>
-				
 			</tr>
 		</thead>
 		<tbody>
@@ -30,11 +29,11 @@
 			<tr>
 				<td>${tmp.num }</td>
 				<td>
-					<a href="detailCode.do?code=${tmp.code }">
-						${tmp.title }
+					<a href="detailCode.do?code=${tmp.code }&title=${tmp.title}">
+						<strong>${tmp.title } ${tmp.num }</strong> 화
 					</a>
 				</td>
-				<td>${tmp.starvalue }</td>
+				<td><strong>${tmp.starvalue }</strong> 점</td>
 				<td><!-- ${tmp.writer } -->썸네일</td>
 			</tr>
 		</c:forEach>

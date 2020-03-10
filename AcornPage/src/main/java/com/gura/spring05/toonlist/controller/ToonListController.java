@@ -32,15 +32,16 @@ public class ToonListController {
 	
 	@RequestMapping("/toon/starAdd")
 	public ModelAndView authAddStar(HttpServletRequest request, @ModelAttribute StarDto dto, 
-			@RequestParam String code, @RequestParam int starValue) {
+			@RequestParam String code, @RequestParam int starValue, @RequestParam String title) throws UnsupportedEncodingException {
 		String id = (String) request.getSession().getAttribute("id");
+		String param=URLEncoder.encode(title, "UTF-8");
 		dto.setCode(code);
 		dto.setStarValue(starValue);
 		dto.setId(id);
 		starService.addStar(dto);
 		String loc=code;
 		//리다일렉트 응답
-		return new ModelAndView("redirect:detailCode.do?code="+loc);
+		return new ModelAndView("redirect:detailCode.do?title="+param+"&code="+loc);
 		
 	}
 	

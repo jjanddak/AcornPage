@@ -5,6 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.star-rating {width:75px; }
+.star-rating,.star-rating span {display:inline-block; height:14px; overflow:hidden; background:url(${pageContext.request.contextPath}/resources/images/star.png)no-repeat; }
+.star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <jsp:include page="../include/resource.jsp"/>
@@ -54,7 +59,7 @@
 							<c:when test="${tmp.isBuy }">
 								<strong>
 									<a href="detailCode.do?title=${tmp.title }&code=${tmp.code }">
-										${tmp.title }
+										<strong>${tmp.title } ${tmp.num }</strong>화
 									</a>
 								</strong>
 							</c:when>
@@ -66,7 +71,12 @@
 					<td>
 						<c:choose>
 							<c:when test="${tmp.starvalue > 0 }">
-								<strong><fmt:formatNumber value="${tmp.starvalue }" pattern=".00"/></strong> 점
+							<span class="wrap-star">
+								<span class='star-rating'>
+									<span style ="width:<fmt:formatNumber value="${tmp.starvalue *10}" pattern=".0"/>%"></span>
+								</span>
+								<fmt:formatNumber value="${tmp.starvalue }" pattern=".0"/>
+							</span>
 							</c:when>
 							<c:otherwise>
 								<strong>이 편은 아직 별점이 없어요. 별점을 ${id } 님이 먼저 매겨주세요!</strong>
@@ -89,6 +99,7 @@
 			</tbody>
 		</table>
 		</div>
+	</div>
 	<script>
 	$(document).ready(function(){
 	    //최상단 체크박스 클릭

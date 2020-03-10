@@ -3,7 +3,18 @@
 <mapper namespace="toon">
 	<select id="getToonList" parameterType="toonDetailDto"
 		resultType="toonDetailDto">
-		select * from toondetail
+		SELECT * 
+		FROM (
+			SELECT NVL(AVG(starvalue),0) AS starvalue, title
+			FROM (
+				SELECT *
+				FROM toonlist
+			) x, star s
+			WHERE x.code=s.code(+)	
+			GROUP BY x.title
+		) x, toondetail t
+		WHERE t.title=x.title 
+		ORDER BY starvalue DESC
 	</select>
 	<select id="getDetailList" parameterType="String"
 		resultType="toonListDto">
@@ -75,20 +86,50 @@
 	
 	<select id="getWriterDetail" parameterType="String"
 		resultType="toonDetailDto">
-		select * from toondetail
-		WHERE writer like '%'||#{writer}||'%'
+		SELECT x.title as title, writer, info, regdate, hashtag, toonovel, starvalue
+		FROM (
+			SELECT NVL(AVG(starvalue),0) AS starvalue, title
+			FROM (
+				SELECT *
+				FROM toonlist
+			) x, star s
+			WHERE x.code=s.code(+)	
+			GROUP BY x.title
+		) x, toondetail t
+		WHERE t.title=x.title
+		AND writer like '%'||#{writer}||'%'
 	</select>
 	
 	<select id="getTitleDetail" parameterType="String"
 		resultType="toonDetailDto">
-		select * from toondetail
-		WHERE title like '%'||#{title}||'%'
+		SELECT x.title as title, writer, info, regdate, hashtag, toonovel, starvalue
+		FROM (
+			SELECT NVL(AVG(starvalue),0) AS starvalue, title
+			FROM (
+				SELECT *
+				FROM toonlist
+			) x, star s
+			WHERE x.code=s.code(+)	
+			GROUP BY x.title
+		) x, toondetail t
+		WHERE t.title=x.title
+		AND x.title like '%'||#{title}||'%'
 	</select>
 	
 	<select id="getHashtagDetail" parameterType="String"
 		resultType="toonDetailDto">
-		select * from toondetail
-		WHERE hashtag like '%'||#{hashtag}||'%'
+		SELECT x.title as title, writer, info, regdate, hashtag, toonovel, starvalue
+		FROM (
+			SELECT NVL(AVG(starvalue),0) AS starvalue, title
+			FROM (
+				SELECT *
+				FROM toonlist
+			) x, star s
+			WHERE x.code=s.code(+)	
+			GROUP BY x.title
+		) x, toondetail t
+		WHERE t.title=x.title
+		AND hashtag like '%'||#{hashtag}||'%'
 	</select>	
 		
 	<select id="getMyToon" parameterType="String" resultType="toonDetailDto">
@@ -108,11 +149,34 @@
 	</select>
 	
 	<select id="selectedToonovel" parameterType="String" resultType="toonDetailDto">
-		select * from toondetail where toonovel=#{category}
+		SELECT x.title as title, writer, info, regdate, hashtag, toonovel, starvalue
+		FROM (
+			SELECT NVL(AVG(starvalue),0) AS starvalue, title
+			FROM (
+				SELECT *
+				FROM toonlist
+			) x, star s
+			WHERE x.code=s.code(+)	
+			GROUP BY x.title
+		) x, toondetail t
+		WHERE t.title=x.title
+		AND toonovel=#{category}
+<!-- 		select * from toondetail where toonovel=#{category} -->
 	</select>
 	
 	<select id="selectedHashtag" parameterType="String" resultType="toonDetailDto">
-		select * from toondetail where hashtag like '%'||#{category}||'%'
+		SELECT x.title as title, writer, info, regdate, hashtag, toonovel, starvalue
+		FROM (
+			SELECT NVL(AVG(starvalue),0) AS starvalue, title
+			FROM (
+				SELECT *
+				FROM toonlist
+			) x, star s
+			WHERE x.code=s.code(+)	
+			GROUP BY x.title
+		) x, toondetail t
+		WHERE t.title=x.title
+		AND hashtag like '%'||#{category}||'%'
 	</select>
 	
 	<select id="getDetailInfo" parameterType="String" resultType="toonDetailDto">
