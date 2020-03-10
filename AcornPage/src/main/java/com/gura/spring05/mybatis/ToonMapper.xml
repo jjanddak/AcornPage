@@ -3,7 +3,7 @@
 <mapper namespace="toon">
 	<select id="getToonList" parameterType="toonDetailDto"
 		resultType="toonDetailDto">
-		SELECT * 
+		SELECT t.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel,thumb, starvalue
 		FROM (
 			SELECT NVL(AVG(starvalue),0) AS starvalue, title
 			FROM (
@@ -86,7 +86,7 @@
 	
 	<select id="getWriterDetail" parameterType="String"
 		resultType="toonDetailDto">
-		SELECT x.title as title, writer, info, regdate, hashtag, toonovel, starvalue
+		SELECT x.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel, thumb, starvalue
 		FROM (
 			SELECT NVL(AVG(starvalue),0) AS starvalue, title
 			FROM (
@@ -98,11 +98,12 @@
 		) x, toondetail t
 		WHERE t.title=x.title
 		AND writer like '%'||#{writer}||'%'
+
 	</select>
 	
 	<select id="getTitleDetail" parameterType="String"
 		resultType="toonDetailDto">
-		SELECT x.title as title, writer, info, regdate, hashtag, toonovel, starvalue
+		SELECT x.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate , hashtag, toonovel,thumb, starvalue
 		FROM (
 			SELECT NVL(AVG(starvalue),0) AS starvalue, title
 			FROM (
@@ -114,11 +115,12 @@
 		) x, toondetail t
 		WHERE t.title=x.title
 		AND x.title like '%'||#{title}||'%'
+
 	</select>
 	
 	<select id="getHashtagDetail" parameterType="String"
 		resultType="toonDetailDto">
-		SELECT x.title as title, writer, info, regdate, hashtag, toonovel, starvalue
+		SELECT x.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel,thumb, starvalue
 		FROM (
 			SELECT NVL(AVG(starvalue),0) AS starvalue, title
 			FROM (

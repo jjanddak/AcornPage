@@ -7,13 +7,14 @@ import com.gura.spring05.toon.dto.ToonCommentDto;
 
 public interface ToonCommentDao {
 	public int getSequence();
-	public void insert(ToonCommentDto dto);
-	public List<ToonCommentDto> getList(String code);	
+	public void insert(ToonCommentDto dto);	
 	public void addLikeCount(CommentLikeDto dto);
 	public boolean isLiked(CommentLikeDto dto);
 	public void upLikeCount(String commcode);
 	public void delLikeCount(CommentLikeDto dto);
 	public void downLikeCount(String commcode);
+	public int getCount(ToonCommentDto dto);
+	public List<ToonCommentDto> getList(ToonCommentDto dto); 
 	
 	
 }

@@ -105,8 +105,9 @@
 		<!-- 댓글을 작성할수 있는 폼 -->
 		<p>의견쓰기</p>
 		<div class="comment_form">
-			<form action="${pageContext.request.contextPath}/toon/comment_insert.do?code=${dto.code}" method="post">
-				<textarea name="content"><c:if test="${empty id }">로그인이 필요합니다.</c:if></textarea>
+			<h4>의견쓰기</h4>
+			<form action="${pageContext.request.contextPath}/toon/comment_insert.do?code=${dto.code}&title=${dto.title }" method="post">
+				<textarea name="content" style="width:100%"><c:if test="${empty id }">댓글을 작성하려면 로그인이 필요합니다.</c:if></textarea>
 				<button type="submit">등록</button>
 			</form>
 		</div>
@@ -118,7 +119,7 @@
 						<span>${tmp.id }</span>
 						<span>${tmp.regdate }</span>
 						<span>${tmp.likeCount }</span>
-						<span><a href="${pageContext.request.contextPath}/toon/commentlike.do?writer=${tmp.id}&commcode=${tmp.commcode}&code=${tmp.code}">좋아요</a></span>
+						<span><a href="${pageContext.request.contextPath}/toon/commentlike.do?writer=${tmp.id}&commcode=${tmp.commcode}&code=${tmp.code}&title=${dto.title }">좋아요</a></span>
 					</dt>
 					<dd>
 						<pre>${tmp.content }</pre>
@@ -128,9 +129,60 @@
 		</ul>
 
 	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
+<<<<<<< HEAD
 </div>
 </div>
 </div>
+=======
+	
+	<div class="page-display">
+		<ul class="pagination">
+		<c:choose>
+			<c:when test="${startPageNum ne 1 }">
+				<li>
+					<a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.code}&pageNum=${startPageNum-1 }">
+						&laquo;
+					</a>
+				</li>
+			</c:when>
+			<c:otherwise>
+				<li class="disabled">
+					<a href="javascript:">&laquo;</a>
+				</li>
+			</c:otherwise>
+		</c:choose>
+		<c:forEach var="i" begin="${startPageNum }" 
+			end="${endPageNum }" step="1">
+			<c:choose>
+				<c:when test="${i eq pageNum }">
+					<li class="active"><a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.code}&pageNum=${i }}">${i }</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.code}&pageNum=${i }">${i }</a></li>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+<!-- 		페이징처리 -->
+		<c:choose>
+			<c:when test="${endPageNum lt totalPageCount }">
+				<li>
+					<a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.code}&pageNum=${endPageNum+1 }">
+						&raquo;
+					</a>
+				</li>
+			</c:when>
+			<c:otherwise>
+				<li class="disabled">
+					<a href="javascript:">&raquo;</a>
+				</li>
+			</c:otherwise>
+		</c:choose>
+		</ul>		
+	</div>		 
+		 
+		 </div> <!-- //content -->
+</div> <!--//contentwrapper -->
+>>>>>>> refs/remotes/origin/JihyeYoon4
 </body>
 <script>
 	$('#left').click(function(){

@@ -37,7 +37,8 @@
 					</div>		
 						<c:choose>
 							<c:when test="${empty sessionScope.id }">
-								<button class="btn btn-link" id="login" style="padding:0 0 0 15px; font-size:17px;" onclick="loginOpen()">회원가입  |  로그인</button>
+								<button class="btn btn-link" id="login" style="padding:0 0 0 15px; font-size:17px;" onclick="signupOpen()">회원가입</button>
+								<button class="btn btn-link" id="login" style="padding:0 0 0 15px; font-size:17px;" onclick="loginOpen()">로그인</button>
 							</c:when>
 							<c:otherwise>
 								<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="userInfo">${id }님
@@ -89,6 +90,13 @@ function loginOpen(){
     var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
    window.open(url,"",popupOption);
 }
+function signupOpen(){
+	var url= "${pageContext.request.contextPath }/users/signup_form.do";    //팝업창 페이지 URL
+	var winWidth = 366;
+    var winHeight = 580;
+    var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
+   window.open(url,"",popupOption);
+}
 
 $("#button").click(function(){
 	var select=document.querySelector("#select").value;
@@ -97,6 +105,8 @@ $("#button").click(function(){
 		location.href="${pageContext.request.contextPath}/toon/searchedDetail.do?select="+select+"&keyword="+keyword;
 	}else if(select=="null"){
 		alert("검색 카테고리를 선택해 주세요");
+	}else if(keyword==""){
+		alert("키워드를 입력해 주세요")
 	}
 	return false;
 })

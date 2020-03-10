@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.gura.spring05.cafe.dto.CafeDto;
 import com.gura.spring05.toon.dto.CommentLikeDto;
 import com.gura.spring05.toon.dto.ToonCommentDto;
 @Repository
@@ -25,8 +26,8 @@ public class ToonCommentDaoImpl implements ToonCommentDao{
 	}
 
 	@Override
-	public List<ToonCommentDto> getList(String code) {
-		return session.selectList("toonComment.getList",code );
+	public List<ToonCommentDto> getList(ToonCommentDto dto) {
+		return session.selectList("toonComment.getList",dto );
 	}
 
 	@Override
@@ -61,6 +62,11 @@ public class ToonCommentDaoImpl implements ToonCommentDao{
 		session.update("toonComment.downLike",commcode);
 		
 	}
-	
+	@Override
+	public int getCount(ToonCommentDto dto) {
+		return session.selectOne("toonComment.getCount", dto);
+	}
+
+
 
 }
