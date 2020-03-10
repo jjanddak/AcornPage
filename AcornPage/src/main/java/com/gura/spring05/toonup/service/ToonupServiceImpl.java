@@ -82,14 +82,14 @@ public class ToonupServiceImpl implements ToonupService{
 			dto.setThumb(path);
 			//FileDao 객체를 이용해서 DB 에 저장하기
 			dao.newToonupload(dto);	
-		}
-		
-		//FileDto 객체에 추가 정보를 담는다.
-		String id=(String)request.getSession().getAttribute("id");
-		dto.setWriter(id); //작성자
-		dto.setThumb(path);
-		//FileDao 객체를 이용해서 DB 에 저장하기
-		dao.newToonupload(dto);			
+		}else {
+			//FileDto 객체에 추가 정보를 담는다.
+			String id=(String)request.getSession().getAttribute("id");
+			dto.setWriter(id); //작성자
+			dto.setThumb(path);
+			//FileDao 객체를 이용해서 DB 에 저장하기
+			dao.newToonupload(dto);						
+		}		
 	}
 
 	@Override

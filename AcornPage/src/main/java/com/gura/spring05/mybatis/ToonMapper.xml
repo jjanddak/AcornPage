@@ -151,7 +151,7 @@
 	</select>
 	
 	<select id="selectedToonovel" parameterType="String" resultType="toonDetailDto">
-		SELECT x.title as title, writer, info, regdate, hashtag, toonovel, starvalue
+		SELECT x.title as title, writer, info, regdate, hashtag, toonovel, starvalue, thumb
 		FROM (
 			SELECT NVL(AVG(starvalue),0) AS starvalue, title
 			FROM (
@@ -167,7 +167,7 @@
 	</select>
 	
 	<select id="selectedHashtag" parameterType="String" resultType="toonDetailDto">
-		SELECT x.title as title, writer, info, regdate, hashtag, toonovel, starvalue
+		SELECT x.title as title, writer, info, regdate, hashtag, toonovel, starvalue, thumb
 		FROM (
 			SELECT NVL(AVG(starvalue),0) AS starvalue, title
 			FROM (
