@@ -161,7 +161,7 @@
          end="${endPageNum }" step="1">
          <c:choose>
             <c:when test="${i eq pageNum }">
-               <li class="active"><a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.code}&pageNum=${i }}">${i }</a></li>
+               <li class="active"><a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.code}&pageNum=${i }">${i }</a></li>
             </c:when>
             <c:otherwise>
                <li><a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.code}&pageNum=${i }">${i }</a></li>

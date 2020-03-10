@@ -49,14 +49,14 @@
 						<p class="list-writer">${tmp.writer }</p>
 						<p class="list-info">${tmp.info }</p>
 						<p style="position:absolute; right:0; top:0;">연재 시작일: ${tmp.regdate }</p>
-						<p style="position:absolute; right:0; top:0;">
+						<p style="position:absolute; right:0; top:30px;">
 							<span class="wrap-star">
 								<span class='star-rating'>
 									<span style ="width:<fmt:formatNumber value="${tmp.starvalue *10}" pattern=".0"/>%"></span>
 								</span>
 								<fmt:formatNumber value="${tmp.starvalue }" pattern=".0"/>
 							</span>
-						</p>			
+		                  </p>  	
                      </div>
                   </div>
                </li>
