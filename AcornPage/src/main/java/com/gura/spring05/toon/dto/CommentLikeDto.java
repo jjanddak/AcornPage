@@ -4,16 +4,16 @@ public class CommentLikeDto {
 	private int num;
 	private String id;
 	private String commcode;
-	private String regdatel;
+	private String regdate;
 	private String code;
 	private boolean isLike;
 	public CommentLikeDto() {};
-	public CommentLikeDto(int num, String id, String commcode, String regdatel,String code,boolean isLike) {
+	public CommentLikeDto(int num, String id, String commcode, String regdate,String code,boolean isLike) {
 		super();
 		this.num = num;
 		this.id = id;
 		this.commcode = commcode;
-		this.regdatel = regdatel;
+		this.regdate = regdate;
 		this.code=code;
 	}
 	public String getCode() {
@@ -40,11 +40,11 @@ public class CommentLikeDto {
 	public void setCommcode(String commcode) {
 		this.commcode = commcode;
 	}
-	public String getRegdatel() {
-		return regdatel;
+	public String getRegdate() {
+		return regdate;
 	}
-	public void setRegdatel(String regdatel) {
-		this.regdatel = regdatel;
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
 	}
 	public boolean isLike() {
 		return isLike;

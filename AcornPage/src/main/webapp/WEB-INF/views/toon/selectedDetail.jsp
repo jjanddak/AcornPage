@@ -20,7 +20,6 @@
 		<div class="container content">
 			<div class="list">
 				<div class="imgwrapper">
-<<<<<<< HEAD
 					<c:choose>
 	                	<c:when test="${empty tmp.thumb}">
 	                      <img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>                                              
@@ -29,16 +28,6 @@
 	                      <img class="img-thumbnail" src="${pageContext.request.contextPath}${tmp.thumb }" alt="logo"/>
 	                   </c:otherwise>
 	                </c:choose>
-=======
-					 <c:choose>
-                     	<c:when test="${empty tmp.thumb}">
-	                        <img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>                                           	
-                     	</c:when>
-                     	<c:otherwise>
-                     		<img class="img-thumbnail" src="${pageContext.request.contextPath}${tmp.thumb }" alt="logo"/>
-                     	</c:otherwise>
-                     </c:choose>
->>>>>>> refs/remotes/origin/JihyeYoon4
 				</div>
 				<div class="textwrapper">
 					<p class="list-title">${dto.title }</p>

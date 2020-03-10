@@ -138,61 +138,59 @@
 		</ul>
 
 	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
-<<<<<<< HEAD
 </div>
+
+
+	   <div class="page-display">
+      <ul class="pagination">
+      <c:choose>
+         <c:when test="${startPageNum ne 1 }">
+            <li>
+               <a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.code}&pageNum=${startPageNum-1 }">
+                  &laquo;
+               </a>
+            </li>
+         </c:when>
+         <c:otherwise>
+            <li class="disabled">
+               <a href="javascript:">&laquo;</a>
+            </li>
+         </c:otherwise>
+      </c:choose>
+      <c:forEach var="i" begin="${startPageNum }" 
+         end="${endPageNum }" step="1">
+         <c:choose>
+            <c:when test="${i eq pageNum }">
+               <li class="active"><a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.code}&pageNum=${i }}">${i }</a></li>
+            </c:when>
+            <c:otherwise>
+               <li><a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.code}&pageNum=${i }">${i }</a></li>
+            </c:otherwise>
+         </c:choose>
+      </c:forEach>
+<!--       페이징처리 -->
+      <c:choose>
+         <c:when test="${endPageNum lt totalPageCount }">
+            <li>
+               <a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.code}&pageNum=${endPageNum+1 }">
+                  &raquo;
+               </a>
+            </li>
+         </c:when>
+         <c:otherwise>
+            <li class="disabled">
+               <a href="javascript:">&raquo;</a>
+            </li>
+         </c:otherwise>
+      </c:choose>
+      </ul>      
+   </div>     
+   </div>  
 </div>
-</div>
-=======
-	
-	<div class="page-display">
-		<ul class="pagination">
-		<c:choose>
-			<c:when test="${startPageNum ne 1 }">
-				<li>
-					<a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.code}&pageNum=${startPageNum-1 }">
-						&laquo;
-					</a>
-				</li>
-			</c:when>
-			<c:otherwise>
-				<li class="disabled">
-					<a href="javascript:">&laquo;</a>
-				</li>
-			</c:otherwise>
-		</c:choose>
-		<c:forEach var="i" begin="${startPageNum }" 
-			end="${endPageNum }" step="1">
-			<c:choose>
-				<c:when test="${i eq pageNum }">
-					<li class="active"><a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.code}&pageNum=${i }}">${i }</a></li>
-				</c:when>
-				<c:otherwise>
-					<li><a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.code}&pageNum=${i }">${i }</a></li>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-<!-- 		페이징처리 -->
-		<c:choose>
-			<c:when test="${endPageNum lt totalPageCount }">
-				<li>
-					<a href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.code}&pageNum=${endPageNum+1 }">
-						&raquo;
-					</a>
-				</li>
-			</c:when>
-			<c:otherwise>
-				<li class="disabled">
-					<a href="javascript:">&raquo;</a>
-				</li>
-			</c:otherwise>
-		</c:choose>
-		</ul>		
-	</div>		 
-		 
-		 </div> <!-- //content -->
-</div> <!--//contentwrapper -->
 </body>
 <script>
+	var formObj = $("form[role='form']");//폼 가저오기
+
 	$('#left').click(function(){
 		$('score').values('10');
 	});

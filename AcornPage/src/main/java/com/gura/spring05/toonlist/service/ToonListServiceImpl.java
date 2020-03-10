@@ -262,8 +262,8 @@ public class ToonListServiceImpl implements ToonListService{
 
 
 	@Override
-	public void getToonCommentList(HttpServletRequest request) {
-		String code=(String)request.getParameter("code");	
+	public void getToonCommentList(HttpServletRequest request,String code) {
+//		String code=(String)request.getParameter("code");		
 		String id=(String)request.getSession().getAttribute("id");
 		ToonCommentDto dto=new ToonCommentDto();
 		CommentLikeDto likedto=new CommentLikeDto();
@@ -271,16 +271,6 @@ public class ToonListServiceImpl implements ToonListService{
 		dto.setId(id);
 		likedto.setCode(code);
 		likedto.setId(id);
-		List<ToonCommentDto> toonCommentList=commdao.getList(dto);
-		List<CommentLikeDto> likeList=commdao.likeList(likedto);
-		for(int i=0; i<toonCommentList.size(); i++) {
-			for(int j=0; j<likeList.size(); j++) {
-				if(toonCommentList.get(i).getCommcode().equals(likeList.get(j).getCommcode())) {
-					toonCommentList.get(i).setIsLike(true);
-					break;
-				}
-			}
-		}
 		//페이징처리
 		//보여줄 페이지의 번호
 		int pageNum=1;
@@ -313,6 +303,17 @@ public class ToonListServiceImpl implements ToonListService{
 		dto.setStartRowNum(startRowNum);
 		dto.setEndRowNum(endRowNum);
 		
+		List<ToonCommentDto> toonCommentList=commdao.getList(dto);
+		List<CommentLikeDto> likeList=commdao.likeList(likedto);
+		
+		for(int i=0; i<toonCommentList.size(); i++) {
+			for(int j=0; j<likeList.size(); j++) {
+				if(toonCommentList.get(i).getCommcode().equals(likeList.get(j).getCommcode())) {
+					toonCommentList.get(i).setIsLike(true);
+					break;
+				}
+			}
+		}
 		
 		request.setAttribute("toonCommentList", toonCommentList);
 		request.setAttribute("startPageNum", startPageNum);

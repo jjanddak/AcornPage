@@ -68,7 +68,7 @@ public class ToonListController {
 		service.getCodeDetail(request,title, code);
 		starService.selectStarValueOneAVG(request,code);
 		//댓글목록을 가지고오는 서비스 실행
-		service.getToonCommentList(request);
+		service.getToonCommentList(request,code);
 
 		return new ModelAndView("toon/detailCode");
 	}
