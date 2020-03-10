@@ -69,4 +69,17 @@ public class ToonCommentDaoImpl implements ToonCommentDao{
 
 
 
+	@Override
+	public int checkLikeCount(String commcode) {
+		
+		return session.selectOne("toonComment.checkLikeCount",commcode);
+	}
+
+	@Override
+	public List<CommentLikeDto> likeList(CommentLikeDto dto) {
+		
+		return session.selectList("toonComment.getCommentLike",dto);
+	}
+	
+
 }

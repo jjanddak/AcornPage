@@ -12,6 +12,9 @@
 .star-rating {width:75px; }
 .star-rating,.star-rating span {display:inline-block; height:14px; overflow:hidden; background:url(${pageContext.request.contextPath}/resources/images/star.png)no-repeat; }
 .star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
+	.btn-link{
+		color:#000;
+	}
 </style>
 </head>
 <body>
@@ -118,8 +121,14 @@
 					<dt>				
 						<span>${tmp.id }</span>
 						<span>${tmp.regdate }</span>
-						<span>${tmp.likeCount }</span>
-						<span><a href="${pageContext.request.contextPath}/toon/commentlike.do?writer=${tmp.id}&commcode=${tmp.commcode}&code=${tmp.code}&title=${dto.title }">좋아요</a></span>
+						<span class="${tmp.commcode }">${tmp.likeCount }</span>
+						<form style="display:inline;" action="commentlike.do" id="likeForm" method="post">
+						<input type="hidden" name="commcode" value="${tmp.commcode}"/>
+						<input type="hidden" name="code" value="${tmp.code}"/>
+						<button <c:if test="${tmp.isLike eq true}">style="color:blue;"</c:if> class="like btn btn-link" type="button">
+							<span class="glyphicon glyphicon-thumbs-up"></span>
+						</button>
+						</form>
 					</dt>
 					<dd>
 						<pre>${tmp.content }</pre>
@@ -182,7 +191,6 @@
 		 
 		 </div> <!-- //content -->
 </div> <!--//contentwrapper -->
->>>>>>> refs/remotes/origin/JihyeYoon4
 </body>
 <script>
 	$('#left').click(function(){
@@ -210,7 +218,7 @@ var formObj = $("form[role='form']");//폼 가저오기
          
       }
       return false;
-   }); 
+   	}); 
 	//폼에 submit 이벤트가 일어 났을때 실행할 함수 등록 
 	$(".comments form").on("submit", function(){
 		//로그인 여부
@@ -231,10 +239,28 @@ var formObj = $("form[role='form']");//폼 가저오기
 				location.href="${pageContext.request.contextPath}/users/loginform.do";
 			}
 		}
-	}); 
-	
-	$(function(){
-	     $('#msComboTest').msDropDown();
+	});
+	$(".like").click(function(){
+		var ele=$(this);
+		var formData = ele.parent().serialize();
+		$.ajax({
+			url: "commentlike.do",//이동할 주소
+			type: "post",
+			data: formData,
+			success:function(responseData){
+				//해당 아이디와 비밀번호가 맞다면 
+				var count=responseData.count;
+				var code=responseData.code;
+				if(responseData.checkLike==false){
+					ele.prop("style","color: black;");
+					$("."+code).text(count);
+				}else{
+					ele.prop("style","color: blue;");
+					$("."+code).text(count);
+				}
+			}
+		});
 	});
 </script>
+</body>
 </html>

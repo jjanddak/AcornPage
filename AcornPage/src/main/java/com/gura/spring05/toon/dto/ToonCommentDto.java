@@ -12,11 +12,12 @@ public class ToonCommentDto {
 	private int endRowNum;
 	private int prevNum; //이전글의 글번호를 담을 필드
 	private int nextNum; //다음글의 글번호를 담을 필드
+	private boolean isLike;
 	
 	public ToonCommentDto(){};
 	
 	public ToonCommentDto(int num, String id, String code, String content, int likeCount, String commcode,
-			String regdate, int startRowNum, int endRowNum, int prevNum, int nextNum) {
+			String regdate, int startRowNum, int endRowNum, int prevNum, int nextNum,boolean isLike) {
 		super();
 		this.num = num;
 		this.id = id;
@@ -104,6 +105,12 @@ public class ToonCommentDto {
 	}
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
+	}
+	public boolean getIsLike() {
+		return isLike;
+	}
+	public void setIsLike(boolean isLike) {
+		this.isLike = isLike;
 	}
 	
 }
