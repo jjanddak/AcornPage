@@ -32,8 +32,9 @@ public class ToonCommentController {
 			method = RequestMethod.POST)
 	public ModelAndView authCommentInsert(HttpServletRequest request,@RequestParam String title) throws UnsupportedEncodingException {
 		service.saveComment(request);
-		String code=(String)request.getParameter("code"); 
+		String code=URLEncoder.encode((String)request.getParameter("code"),"UTF-8"); 
 		String param=URLEncoder.encode(title,"UTF-8");
+		
 		
 		return new ModelAndView("redirect:/toon/detailCode.do?title="+param+"&code="+code);
 	}
