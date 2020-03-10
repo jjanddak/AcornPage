@@ -103,6 +103,11 @@ public class ToonListServiceImpl implements ToonListService{
 		libDto2.setId(id);	
 		libDto2.setTitle(title);
 		
+		UsersDto dto2=new UsersDto();
+		dto2.setId(id);
+		dto2.setLastread(code);
+		dao.lastRead(dto2);
+	      
 		String num = code.replaceAll("[^0-9]","");
 		String tmpcode=code.replaceAll("[0-9]","");
 		int tmp=Integer.parseInt(num);
@@ -269,6 +274,7 @@ public class ToonListServiceImpl implements ToonListService{
 		CommentLikeDto likedto=new CommentLikeDto();
 		dto.setCode(code);
 		dto.setId(id);
+		
 		likedto.setCode(code);
 		likedto.setId(id);
 		//페이징처리
