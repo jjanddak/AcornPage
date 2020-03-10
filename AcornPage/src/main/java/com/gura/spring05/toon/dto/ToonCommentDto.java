@@ -8,10 +8,11 @@ public class ToonCommentDto {
 	private int likeCount;
 	private String commcode;
 	private String regdate;
+	private boolean isLike;
 	
 	public ToonCommentDto(){};
 	public ToonCommentDto(int num, String id, String code, String content, int likeCount, String commcode,
-			String regdate) {
+			String regdate,boolean isLike) {
 		super();
 		this.num = num;
 		this.id = id;
@@ -62,6 +63,12 @@ public class ToonCommentDto {
 	}
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
+	}
+	public boolean getIsLike() {
+		return isLike;
+	}
+	public void setIsLike(boolean isLike) {
+		this.isLike = isLike;
 	}
 	
 }

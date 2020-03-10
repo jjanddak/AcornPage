@@ -38,13 +38,12 @@
 		set likeCount=likeCount-1
 		where commcode= #{commcode}
 	</update>
-	<select id="getCommentLike" parameterType="toonCommentDto" resultType="CommentLikeDto">
-		SELECT num, id, commcode, sysdate
+	<select id="getCommentLike" parameterType="CommentLikeDto" resultType="CommentLikeDto">
+		SELECT commcode
 		FROM  commentlike  
-		WHERE id=#{id} and commcode=  #{commcode}
+		WHERE id=#{id} and code=#{code}
 	</select>
 	<select id="checkLikeCount" parameterType="String" resultType="int">
 		select likecount from toon_comment where commcode=#{commcode}
 	</select>
-
 </mapper>

@@ -15,6 +15,7 @@ public interface ToonCommentDao {
 	public void delLikeCount(CommentLikeDto dto);
 	public void downLikeCount(String commcode);
 	public int checkLikeCount(String commcode);
+	public List<CommentLikeDto> likeList(CommentLikeDto dto);
 	
 	
 }

@@ -8,6 +8,11 @@
 <meta charset="UTF-8">
 <title>상세 페이지입니당</title>
 <jsp:include page="../include/resource.jsp"/>
+<style>
+	.btn-link{
+		color:#000;
+	}
+</style>
 </head>
 <body>
 <jsp:include page="../include/navbar.jsp"/>
@@ -111,10 +116,12 @@
 						<span>${tmp.id }</span>
 						<span>${tmp.regdate }</span>
 						<span class="${tmp.commcode }">${tmp.likeCount }</span>
-						<form action="commentlike.do" id="likeForm" method="post">
+						<form style="display:inline;" action="commentlike.do" id="likeForm" method="post">
 						<input type="hidden" name="commcode" value="${tmp.commcode}"/>
 						<input type="hidden" name="code" value="${tmp.code}"/>
-						<button class="like" type="button"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+						<button <c:if test="${tmp.isLike eq true}">style="color:blue;"</c:if> class="like btn btn-link" type="button">
+							<span class="glyphicon glyphicon-thumbs-up"></span>
+						</button>
 						</form>
 					</dt>
 					<dd>

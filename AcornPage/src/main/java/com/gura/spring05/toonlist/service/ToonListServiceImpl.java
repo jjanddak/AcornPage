@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gura.spring05.ToonComment.dao.ToonCommentDao;
 import com.gura.spring05.exception.NoMoneyException;
 import com.gura.spring05.library.dto.LibraryDto;
+import com.gura.spring05.toon.dto.CommentLikeDto;
 import com.gura.spring05.toon.dto.ToonCommentDto;
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
 import com.gura.spring05.toonlist.dao.ToonListDao;
@@ -239,8 +240,21 @@ public class ToonListServiceImpl implements ToonListService{
 	@Override
 	public void getToonCommentList(HttpServletRequest request) {
 		String code=(String)request.getParameter("code");
+		String id=(String)request.getSession().getAttribute("id");
 		List<ToonCommentDto> toonCommentList=commdao.getList(code);
-		request.setAttribute("toonCommentList", toonCommentList);
+			CommentLikeDto dto=new CommentLikeDto();
+			dto.setId(id);
+			dto.setCode(code);
+			List<CommentLikeDto> likeList=commdao.likeList(dto);
+			for(int i=0; i<toonCommentList.size(); i++) {
+				for(int j=0; j<likeList.size(); j++) {
+					if(toonCommentList.get(i).getCommcode().equals(likeList.get(j).getCommcode())) {
+						toonCommentList.get(i).setIsLike(true);
+						break;
+					}
+				}
+			}
+			request.setAttribute("toonCommentList", toonCommentList);
 	}
 	@Override
 	public void buyList(HttpServletRequest request) {
