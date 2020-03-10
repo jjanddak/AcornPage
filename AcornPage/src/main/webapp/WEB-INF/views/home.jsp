@@ -46,7 +46,6 @@
 					</div>
                      <div class="textwrapper">
                         <p class="list-title">${tmp.title }</p>
-                        <p class="list-info">${tmp.info }</p>
 						<p class="list-writer">${tmp.writer }</p>
 						<p class="list-info">${tmp.info }</p>
 						<p style="position:absolute; right:0; top:0;">연재 시작일: ${tmp.regdate }</p>
@@ -77,19 +76,12 @@
 					<li>
 						<div class="list">
 							<div class="imgwrapper">
-								<c:choose>
-                        			<c:when test="${empty tmp.thumb}">
-			                           <img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>                                              
-			                        </c:when>
-			                        <c:otherwise>
-			                           <img class="img-thumbnail" src="${pageContext.request.contextPath}${tmp.thumb }" alt="logo"/>
-			                        </c:otherwise>
-			                     </c:choose>
+								<img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>
 							</div>
 							<div class="textwrapper" style="width:70%;">
 								<p class="list-title">${tmp.title }</p>
+								<p class="list-writer">${tmp.writer }</p>
 								<p class="list-info">${tmp.info }</p>
-								<p class="list-writer">${tmp.writer } | </p>
 								<p style="position:absolute; right:0; top:0;">연재 시작일: ${tmp.regdate }</p>
 								<p style="position:absolute; right:0; top:0;">
 									<span class="wrap-star">
