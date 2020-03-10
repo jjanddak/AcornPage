@@ -46,7 +46,8 @@ public class ToonupServiceImpl implements ToonupService{
 		String realPath=request.getServletContext().getRealPath("/upload");
 		//콘솔창에 테스트 출력
 		System.out.println(realPath);
-		String saveFileName="1";
+		String saveFileName;
+		String path="";
 		
 		//MultipartFile 객체의 참조값 얻어오기
 		//FileDto 에 담긴 MultipartFile 객체의 참조값을 얻어온다.
@@ -74,11 +75,17 @@ public class ToonupServiceImpl implements ToonupService{
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+			//FileDto 객체에 추가 정보를 담는다.
+			String id=(String)request.getSession().getAttribute("id");
+			path="/upload/"+saveFileName;
+			dto.setWriter(id); //작성자
+			dto.setThumb(path);
+			//FileDao 객체를 이용해서 DB 에 저장하기
+			dao.newToonupload(dto);	
 		}
 		
 		//FileDto 객체에 추가 정보를 담는다.
 		String id=(String)request.getSession().getAttribute("id");
-		String path="/upload/"+saveFileName;
 		dto.setWriter(id); //작성자
 		dto.setThumb(path);
 		//FileDao 객체를 이용해서 DB 에 저장하기
