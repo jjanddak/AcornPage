@@ -26,7 +26,7 @@
 		<div class="container">
 			<h1>만화 업로드</h1>
 			<form action="toonupload.do" method="post" enctype="multipart/form-data">
-				<div class="form-group">
+				<div class="form-group"> 
 					<label for="num">회차</label>
 					<input class="form-control" type="text" 
 						name="num" id="num" value="${lastNum}" readOnly/>
