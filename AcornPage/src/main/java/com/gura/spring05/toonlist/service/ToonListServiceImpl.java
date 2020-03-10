@@ -88,6 +88,10 @@ public class ToonListServiceImpl implements ToonListService{
 		String id=(String)request.getSession().getAttribute("id");
 		dto.setId(id);
 		dto=dao.getCodeDetail(dto);
+		UsersDto dto2=new UsersDto();
+		dto2.setId(id);
+		dto2.setLastread(code);
+		dao.lastRead(dto2);
 		String havePrev=dao.havePrev(code);
 		String haveNext=dao.haveNext(code);		
 				
@@ -256,8 +260,21 @@ public class ToonListServiceImpl implements ToonListService{
 		for(int i=0; i<hashTitle.size(); i++) {
 			ToonDetailDto dto=dao.getTitleDetail(hashTitle.get(i));
 			list.add(dto);
-		}
+		}	
 		request.setAttribute("list", list);
+	}
+
+
+	@Override
+	public ToonListDto getLastRead(HttpServletRequest request) {
+		String id=(String)request.getSession().getAttribute("id");
+		String lastCode=dao.getLastCode(id);
+		String title=dao.getTitle(lastCode);
+
+		ToonListDto dto=new ToonListDto();
+		dto.setCode(lastCode);
+		dto.setTitle(title);
+		return dto;
 	}
 	
 }

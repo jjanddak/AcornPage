@@ -55,4 +55,8 @@ public interface ToonListDao {
 	public String getTitle(String code);
 	
 	public ToonDetailDto getTitleDetail(String title);
+	
+	public void lastRead(UsersDto dto);
+	
+	public String getLastCode(String id);
 }

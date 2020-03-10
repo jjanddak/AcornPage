@@ -127,4 +127,13 @@ public class ToonListController {
 		
 		return new ModelAndView("toon/buyList");
 	}
+	
+	@RequestMapping("/toon/lastRead")
+	public ModelAndView lastRead(HttpServletRequest request) throws UnsupportedEncodingException {
+		ToonListDto dto=service.getLastRead(request);
+		String code=URLEncoder.encode(dto.getCode(),"UTF-8");
+		String title=URLEncoder.encode(dto.getTitle(),"UTF-8");
+
+		return new ModelAndView("redirect:/toon/detailCode.do?title="+title+"&code="+code);
+	}
 }	

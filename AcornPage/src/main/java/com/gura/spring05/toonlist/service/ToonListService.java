@@ -38,4 +38,6 @@ public interface ToonListService {
 	public void getToonCommentList(HttpServletRequest request);
 
 	public void buyList(HttpServletRequest request);
+
+	public ToonListDto getLastRead(HttpServletRequest request);
 }

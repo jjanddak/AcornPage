@@ -166,6 +166,12 @@
 	<select id="getTitle" parameterType="String" resultType="String">
 		select title from toonlist where code=#{code}
 	</select>
+	<update id="lastRead" parameterType="usersDto">
+		update users set lastread=#{lastread} where id=#{id}
+	</update>
+	<select id="getLastCode" parameterType="String" resultType="String">
+		select lastread from users where id=#{id}
+	</select>
 </mapper>
 
 
