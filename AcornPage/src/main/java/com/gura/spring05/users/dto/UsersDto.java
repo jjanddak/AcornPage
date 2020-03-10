@@ -11,7 +11,35 @@ public class UsersDto {
 	private String profile; //프로필 이미지 경로를 저장할 필드
 	private String newPwd; //새로운 비밀번호를 저장할 필드
 	private int price;
+	private String lastread;
+	private String code;
 	
+	
+	
+	
+	public UsersDto(int num, String id, String pwd, String isWriter, int wallet, String email, String regdate,
+			String profile, String newPwd, int price, String lastread,String code) {
+		super();
+		this.num = num;
+		this.id = id;
+		this.pwd = pwd;
+		this.isWriter = isWriter;
+		this.wallet = wallet;
+		this.email = email;
+		this.regdate = regdate;
+		this.profile = profile;
+		this.newPwd = newPwd;
+		this.price = price;
+		this.lastread = lastread;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
 
 	public String getEmail() {
 		return email;
@@ -103,6 +131,14 @@ public class UsersDto {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public String getLastread() {
+		return lastread;
+	}
+
+	public void setLastread(String lastread) {
+		this.lastread = lastread;
 	}
 	
 }

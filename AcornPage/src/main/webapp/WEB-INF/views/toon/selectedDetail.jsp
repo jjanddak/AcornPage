@@ -20,7 +20,14 @@
 		<div class="container content">
 			<div class="list">
 				<div class="imgwrapper">
-					<img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>
+					<c:choose>
+	                	<c:when test="${empty tmp.thumb}">
+	                      <img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>                                              
+	                   </c:when>
+	                   <c:otherwise>
+	                      <img class="img-thumbnail" src="${pageContext.request.contextPath}${tmp.thumb }" alt="logo"/>
+	                   </c:otherwise>
+	                </c:choose>
 				</div>
 				<div class="textwrapper">
 					<p class="list-title">${dto.title }</p>

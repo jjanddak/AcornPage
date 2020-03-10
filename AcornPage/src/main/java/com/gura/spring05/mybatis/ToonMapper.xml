@@ -234,6 +234,12 @@
 	<insert id="writerLibrary" parameterType="toonupDto">
 		insert into library (num,id,code,regdate) values (#{num},#{writer},#{title}||#{num},sysdate)
 	</insert>
+	<update id="lastRead" parameterType="usersDto">
+		update users set lastread=#{lastread} where id=#{id}
+	</update>
+	<select id="getLastCode" parameterType="String" resultType="String">
+		select lastread from users where id=#{id}
+	</select>
 </mapper>
 
 

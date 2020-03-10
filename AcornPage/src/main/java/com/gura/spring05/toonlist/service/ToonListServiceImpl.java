@@ -32,7 +32,6 @@ public class ToonListServiceImpl implements ToonListService{
 	@Override
 	public void getToonList(HttpServletRequest request) {
 		ToonDetailDto dto=new ToonDetailDto();
-		
 		List<ToonDetailDto> list=dao.getToonList(dto);
 		List<ToonDetailDto> toonList = new ArrayList<ToonDetailDto>();
 		List<ToonDetailDto> novelList = new ArrayList<ToonDetailDto>();
@@ -277,8 +276,21 @@ public class ToonListServiceImpl implements ToonListService{
 		for(int i=0; i<hashTitle.size(); i++) {
 			ToonDetailDto dto=dao.getTitleDetail(hashTitle.get(i));
 			list.add(dto);
-		}
+		}	
 		request.setAttribute("list", list);
+	}
+
+
+	@Override
+	public ToonListDto getLastRead(HttpServletRequest request) {
+		String id=(String)request.getSession().getAttribute("id");
+		String lastCode=dao.getLastCode(id);
+		String title=dao.getTitle(lastCode);
+
+		ToonListDto dto=new ToonListDto();
+		dto.setCode(lastCode);
+		dto.setTitle(title);
+		return dto;
 	}
 	
 }

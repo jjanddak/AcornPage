@@ -152,4 +152,17 @@ public class ToonListDaoImpl implements ToonListDao{
 		return session.selectOne("toon.getTitleDetail",title);
 	}
 
+	@Override
+	public void lastRead(UsersDto dto) {
+		
+		session.update("toon.lastRead",dto);
+		
+	}
+
+	@Override
+	public String getLastCode(String id) {
+		
+		return session.selectOne("toon.getLastCode",id);
+	}
+
 }

@@ -50,6 +50,7 @@
 									</li>
 									<li><a onclick="popupOpen()" href="#">캐시충전</a></li>
 									<li><a href="${pageContext.request.contextPath }/toon/Buylist.do">보관함</a></li>
+									<li><a href="${pageContext.request.contextPath }/toon/lastRead.do">이어보기</a></li>
 									<li><a href="${pageContext.request.contextPath }/users/info.do">정보보기</a></li>
 									<li><a href="${pageContext.request.contextPath }/users/logout.do">로그아웃</a></li>
 								</ul>
