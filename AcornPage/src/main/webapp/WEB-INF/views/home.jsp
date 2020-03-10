@@ -38,6 +38,7 @@
                      	</c:otherwise>
                      </c:choose>
                      </div>
+                     <p>${tmp.thumb }</p>
                      <div class="textwrapper">
                         <p class="list-title">${tmp.title }</p>
                         <p class="list-info">${tmp.info }</p>
