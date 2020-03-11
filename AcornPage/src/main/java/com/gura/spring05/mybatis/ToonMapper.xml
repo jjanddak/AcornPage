@@ -242,6 +242,9 @@
 	<select id="getLastCode" parameterType="String" resultType="String">
 		select lastread from users where id=#{id}
 	</select>
+	<select id="getDetail" parameterType="String" resultType="toonDetailDto">
+		select * from toondetail where title=#{title}
+	</select>
 </mapper>
 
 

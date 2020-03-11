@@ -11,6 +11,8 @@ public interface ToonDetailDao {
 	public List<ToonDetailDto> getTitleDetail(String title);
 
 	public List<ToonDetailDto> getHashtagDetail(String hashtag);
+	
+	public ToonDetailDto getToonDetail(String title);
 
 	public void deleteToon(ToonDetailDto dto);
 	

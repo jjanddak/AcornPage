@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gura.spring05.exception.CanNotDeleteException;
 import com.gura.spring05.toondetail.dao.ToonDetailDao;
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
 
@@ -34,6 +35,13 @@ public class ToonDetailServiceImp implements ToonDetailService{
 	@Override
 	public void deleteToon(HttpServletRequest request, ToonDetailDto dto, String title) {
 		String id=(String)request.getSession().getAttribute("id");
+		
+		ToonDetailDto tmpdto=new ToonDetailDto();
+		tmpdto.setWriter(dao.getToonDetail(title).getWriter());
+		
+		if(!id.equals(tmpdto.getWriter())){
+			throw new CanNotDeleteException();
+		}
 		
 		dto.setTitle(title);
 		dto.setWriter(id);
