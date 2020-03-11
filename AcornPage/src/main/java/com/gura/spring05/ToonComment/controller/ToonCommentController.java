@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,10 +43,15 @@ public class ToonCommentController {
 		@ResponseBody
 		@RequestMapping(value = "/toon/commentlike", 
 				method = RequestMethod.POST)
-		public Map<String, Object> authAddLikeCount(HttpServletRequest request,@ModelAttribute("dto") CommentLikeDto dto) {
+		public Map<String, Object> authAddLikeCount(HttpServletRequest request,@ModelAttribute("dto") CommentLikeDto dto,@RequestParam(value="arrEachCode[]")List<String> eachCode) {
+			dto.setCode(eachCode.get(0));
+			dto.setCommcode(eachCode.get(1));
 			boolean checkLike=service.addLikeCount(request,dto);
 			int count=(int)request.getAttribute("count");
-		
+		/*
+		 * if(dto.getCode().trim().length() > 0) { String
+		 * changeCode=dto.getCode().replaceAll(" ","."); dto.setCode(changeCode); }
+		 */
 			Map<String, Object> map=new HashMap<String, Object>();
 			map.put("checkLike",checkLike); 
 			map.put("count", count);

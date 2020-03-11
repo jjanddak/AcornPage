@@ -40,8 +40,12 @@
 		<div class="container content">
 			<div class="buy" style="float:right">
 				<ul style="list-style:none">
-					<li class="btn btn-primary" id="buyEach" style="float:left"><a style="color:#fff" href="">선택구매</a></li>
-					<li class="btn btn-warning" id="buyAll" style="float:left"><a style="color:#fff" href="#">전체구매</a></li>
+					<button class="btn btn-primary" id="buyEach" style="float:left">
+						<a style="color:#fff">선택구매</a>
+					</button>
+					<button class="btn btn-warning" id="buyAll" style="float:left">
+						<a style="color:#fff">전체구매</a>
+					</button>
 				</ul>
 			</div>
 			<table class="table table-striped table-condensed">
@@ -111,6 +115,14 @@
 	</div>
 	<script>
 	$(document).ready(function(){
+		//선택가능한 체크박스의 갯수
+		var buySize=$("input[name=selectedCode]").not("[disabled]").length;
+		//선택가능한 체크박스가 없으면
+		if(buySize==0){
+			//구매버튼 비활성화
+			$("#buyAll").prop('disabled', true);
+			$("#buyEach").prop('disabled', true);
+		}
 	    //최상단 체크박스 클릭
 	    $("#AllCheck").click(function(){
 	        //클릭되었으면

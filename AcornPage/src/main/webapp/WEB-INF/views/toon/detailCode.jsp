@@ -239,15 +239,41 @@ var formObj = $("form[role='form']");//폼 가저오기
 	});
 	$(".like").click(function(){
 		var ele=$(this);
-		var formData = ele.parent().serialize();
+		var commcode=ele.parent().children()[0].value;
+		var code=ele.parent().children()[1].value;
+		//var formData = ele.parent().serialize();
+		var arrCode=[];
+		arrCode.push(code);
+		arrCode.push(commcode);
 		$.ajax({
 			url: "commentlike.do",//이동할 주소
 			type: "post",
-			data: formData,
+			data: {"arrEachCode": arrCode},
+
 			success:function(responseData){
-				//해당 아이디와 비밀번호가 맞다면 
+				//공백체크함수
+				function checkSpace(str) { 
+			        if(str.search(/\s/) != -1) { 
+			            return true; 
+			        } else { 
+			            return false; 
+			        } 
+			    } 
+				//빈 변수 선언하고
+				var code;
 				var count=responseData.count;
-				var code=responseData.code;
+				//공백체크함수로 response된 code에 공백이 있다면
+				if(checkSpace(responseData.code)==true){
+					//replace함수를 통해 공백을 .으로 변환하고 빈 변수에 담는다.
+					//replace("",".")와 replace(/ /gi,".") 차이점은 /""/ 따옴표 안에 바꿀 문자열(ex:#,!등)
+					//을 넣고 /뒤에 gi를 선언하면 replaceAll효과가 있다. 스크립트에선 replaceAll이란 함수는 존재하지 않는다. 
+					code=responseData.code.replace(/ /gi,".");
+					console.log(code);
+				}else{
+					code=responseData.code;
+				}
+				
+
 				if(responseData.checkLike==false){
 					ele.prop("style","color: black;");
 					$("."+code).text(count);
