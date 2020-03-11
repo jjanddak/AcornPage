@@ -48,10 +48,6 @@ public class ToonCommentController {
 			dto.setCommcode(eachCode.get(1));
 			boolean checkLike=service.addLikeCount(request,dto);
 			int count=(int)request.getAttribute("count");
-		/*
-		 * if(dto.getCode().trim().length() > 0) { String
-		 * changeCode=dto.getCode().replaceAll(" ","."); dto.setCode(changeCode); }
-		 */
 			Map<String, Object> map=new HashMap<String, Object>();
 			map.put("checkLike",checkLike); 
 			map.put("count", count);
