@@ -47,8 +47,10 @@ public class ToonCommentDaoImpl implements ToonCommentDao{
 		String id=session.selectOne("toonComment.checkLike",dto);
 		if(id==null) { //라이크를 누르지 않았다면
 			return false;
+		}else {
+			return true;
 		}
-		return true;
+		
 	}
 
 	@Override

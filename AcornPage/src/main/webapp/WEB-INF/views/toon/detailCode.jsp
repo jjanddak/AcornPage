@@ -258,7 +258,7 @@ var formObj = $("form[role='form']");//폼 가저오기
 			        } else { 
 			            return false; 
 			        } 
-			    } 
+			    };
 				//빈 변수 선언하고
 				var code;
 				var count=responseData.count;

@@ -37,8 +37,15 @@
                         <a href="${pageContext.request.contextPath}/toon/selectedDetail.do?title=${tmp.title }"><p class="list-title"><strong>${tmp.title }</strong></p></a>
 						<a href="${pageContext.request.contextPath}/toon/searchedDetail.do?select=writer&keyword=${tmp.writer }"><p class="list-writer"><strong>${tmp.writer }</strong></p></a>
 						<p class="list-info">${tmp.info }</p>
-						<p style="position:absolute; right:0; top:0;">연재 시작일 : ${tmp.regdate }</p>
-		                  <p style="position:absolute; right:0; top:30px;">
+						<c:choose>
+	                     	<c:when test="${tmp.toonovel eq 'toon'}">
+		                        <p style="position:absolute; right:0; top:10px; color:green">웹툰</p>	                                          	
+	                     	</c:when>
+	                     	<c:otherwise>
+	                     		<p style="position:absolute; right:0; top:10px; color:blue">웹소설</p>	
+	                     	</c:otherwise>
+                    	 </c:choose>
+						<p style="position:absolute; right:0; top:35px;">
 							<span class="wrap-star">
 								<span class='star-rating'>
 									<span style ="width:<fmt:formatNumber value="${tmp.starvalue *10}" pattern=".0"/>%"></span>
@@ -47,16 +54,8 @@
                         			<fmt:formatNumber value="${tmp.starvalue }" pattern=".0"/>
                         		</c:if>
 							</span>
-		                  </p>   					                     
-                     <c:choose>
-                     	<c:when test="${tmp.toonovel eq 'toon'}">
-	                        <p style="position:absolute; right:0; top:60px;">웹툰</p>	                                          	
-                     	</c:when>
-                     	<c:otherwise>
-                     		<p style="position:absolute; right:0; top:60px;">웹소설</p>	
-                     	</c:otherwise>
-                     </c:choose>
-						<p style="position:absolute; right:0; top:90px;"></p>
+		                </p>
+		                <p style="position:absolute; right:0; top:62px; color:#999999">연재 시작일: ${tmp.regdate }</p>  	  					                     
                      </div>
                   </div>
                </li>

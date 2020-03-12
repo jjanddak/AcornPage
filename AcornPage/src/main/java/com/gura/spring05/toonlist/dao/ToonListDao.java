@@ -8,8 +8,9 @@ import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.users.dto.UsersDto;
 
 public interface ToonListDao {
-	//차후 별점 이너조인 해서 5개 목록으로 가져와야됨 ㅇㅋ?
 	public List<ToonDetailDto> getToonList(ToonDetailDto dto);
+	
+	public List<ToonDetailDto> getNovelList(ToonDetailDto dto);
 	
 	public List<ToonListDto> getDetailList(String title);
 	//구매한 만화의 코드를 통해 글 정보 얻어오기

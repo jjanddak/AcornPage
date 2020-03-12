@@ -37,7 +37,7 @@ public class ToonListController {
 		dto.setStarValue(starValue);
 		dto.setId(id);
 		starService.addStar(dto);
-		String loc=dto.getCode();
+		String loc=URLEncoder.encode(dto.getCode(),"UTF-8");
 		//리다일렉트 응답
 		return new ModelAndView("redirect:detailCode.do?title="+param+"&code="+loc);
 		

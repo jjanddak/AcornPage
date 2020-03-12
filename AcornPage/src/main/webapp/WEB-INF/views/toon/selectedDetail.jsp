@@ -49,10 +49,16 @@
 				</ul>
 			</div>
 			<table class="table table-striped table-condensed">
+			<colgroup>
+				<col class="col-xs-2"/>
+				<col class="col-xs-4"/>
+				<col class="col-xs-3"/>
+				<col class="col-xs-2"/>
+				<col class="col-xs-2"/>
+			</colgroup>
 			<thead>
 				<tr>
 					<th>회차</th>
-					<th>썸네일</th>
 					<th>제목</th>
 					<th>별점</th>
 					<th>구매</th>
@@ -64,7 +70,6 @@
 			<c:forEach var="tmp" items="${list }">
 				<tr>
 					<td>${tmp.num }</td>
-					<td><!-- ${tmp.writer } -->썸네일</td>
 					<td>
 						<c:choose>
 							<c:when test="${tmp.isBuy }">
@@ -92,7 +97,7 @@
 							</span>
 							</c:when>
 							<c:otherwise>
-								<strong>이 편은 아직 별점이 없어요. 별점을 ${id } 님이 먼저 매겨주세요!</strong>
+								<strong>아직 별점이 없습니다.</strong>
 							</c:otherwise>
 						</c:choose>
 					</td>
@@ -102,7 +107,7 @@
 							<td><input type="checkbox" name="selectedCode" value="${tmp.code }" disabled/></td>
 						</c:when>
 						<c:otherwise>
-							<td><a class="btn buyOne" href="buyCodeOne.do?code=${tmp.code }&title=${tmp.title }">구매</a></td>
+							<td><a style="background-color:#ffe500;" class="btn-xs btn buyOne" href="buyCodeOne.do?code=${tmp.code }&title=${tmp.title }">구매</a></td>
 							<td><input type="checkbox" name="selectedCode" value="${tmp.code }"/></td>
 						</c:otherwise>
 					</c:choose>	
