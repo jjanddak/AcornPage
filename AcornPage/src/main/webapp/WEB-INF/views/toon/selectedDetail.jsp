@@ -113,7 +113,6 @@
 					</c:choose>	
 				</tr>
 			</c:forEach>
-				
 			</tbody>
 		</table>
 		</div>
