@@ -91,7 +91,6 @@
 		<button class="btn btn-info"><a style="color:#fff;" href="pwd_updateform.do">비밀번호 수정하기</a></button>
 		<button style="float:right;" class="btn btn-warning"><a href="javascript:deleteConfirm()">회원 탈퇴</a></button>
 	</div>
-	<c:if test="${not empty myToon }">
 	<div class="container content">
 		<div>
 			<c:if test="${dto.isWriter eq 'Y' }">
@@ -100,10 +99,11 @@
 				</button>
 			</c:if>
 		</div>
+	<c:if test="${not empty myToon }">
 			<div class="bestList">
         		 <ul>
 				<c:forEach var="tmp" items="${myToon }">
-					<a href="${pageContext.request.contextPath }/toon/selectedDetail.do?title=${tmp.title }">
+					<a href="${pageContext.request.contextPath }/toon/toonup.do?title=${tmp.title }">
 	               <li>
 	                  <div class="list">
 						<div class="imgwrapper">
@@ -134,8 +134,8 @@
 				</c:forEach>			
 				</ul>
 			</div>	
-	</div>
 	</c:if>
+	</div>
 </div>
 
 <form action="profile_upload.do" method="post"
