@@ -5,7 +5,7 @@ drop table toon_comment;
 drop table commentlike;
 
 drop sequence toonlist_seq;
-drop sequence users_seq;
+drop sequence users_seq; 
 drop sequence star_seq;
 drop sequence library_seq;
 drop sequence toon_comment_seq;
