@@ -18,7 +18,7 @@ public interface UsersService {
 	public void showInfo(String id, ModelAndView mView);
 	public String saveProfileImage(HttpServletRequest request,
 			MultipartFile mFile);
-	public void updatePassword(UsersDto dto, ModelAndView mView);
+	public boolean updatePassword(UsersDto dto, ModelAndView mView);
 	public void updateUser(UsersDto dto);
 	public void deleteUser(String id);
 }

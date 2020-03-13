@@ -108,7 +108,7 @@ public class UsersServiceImpl implements UsersService{
 		return path;
 	}
 	@Override
-	public void updatePassword(UsersDto dto, ModelAndView mView) {
+	public boolean updatePassword(UsersDto dto, ModelAndView mView) {
 		//1. 예전 비밀번호가 맞는 정보인지 확인
 		String pwdHash=dao.getData(dto.getId()).getPwd();
 		boolean isValid=BCrypt.checkpw(dto.getPwd(), pwdHash);
@@ -120,9 +120,9 @@ public class UsersServiceImpl implements UsersService{
 			dto.setPwd(encodedPwd);
 			//DB 에 수정 반영하기
 			dao.updatePwd(dto);
-			mView.addObject("isSuccess", true);
+			return true;
 		}else {
-			mView.addObject("isSuccess", false);
+			return false;
 		}
 	}
 	@Override

@@ -15,6 +15,12 @@
 	.btn-link{
 		color:#000;
 	}
+	.contents{
+		text-align: center;
+	}
+	.contents *{
+		max-width: 100%;
+	}
 </style>
 </head>
 <body>
@@ -116,11 +122,12 @@
 	</div>
 		<ul>
 			<c:forEach items="${toonCommentList }" var="tmp">
-				<dl>
+				<dl class="${tmp.commcode }">
 					<dt>				
 						<span>${tmp.id }</span>
 						<span>${tmp.regdate }</span>
-						<span class="${tmp.commcode }">${tmp.likeCount }</span>
+						<span class="${tmp.commcode }like">${tmp.likeCount }</span>
+						
 						<form style="display:inline;" action="commentlike.do" id="likeForm" method="post">
 						<input type="hidden" name="commcode" value="${tmp.commcode}"/>
 						<input type="hidden" name="code" value="${tmp.code}"/>
@@ -128,6 +135,12 @@
 							<span class="glyphicon glyphicon-thumbs-up"></span>
 						</button>
 						</form>
+						<p style="display:inline; float:right; margin: 5px 20px 0 0;">
+						<c:if test="${tmp.id eq id}">
+							<a href=""><span>수정</span></a>
+							<button class="del"><span class="${tmp.commcode }" style="padding-left:20px;">삭제</span></button>
+						</c:if>
+						</p>
 					</dt>
 					<dd>
 						<pre>${tmp.content }</pre>
@@ -272,17 +285,29 @@ var formObj = $("form[role='form']");//폼 가저오기
 				}else{
 					code=responseData.code;
 				}
-				
-
 				if(responseData.checkLike==false){
 					ele.prop("style","color: black;");
-					$("."+code).text(count);
+					$("."+code+"like").text(count);
 				}else{
 					ele.prop("style","color: blue;");
-					$("."+code).text(count);
+					$("."+code+"like").text(count);
 				}
 			}
 		});
+	});
+	$(".del").click(function(){
+		var ele=$(this);
+		var commcode=ele.children()[0].className;
+		$.ajax({
+			url:"deleteComment.do",
+			method:"post",
+			data:{"commcode":commcode},
+			success:function(){
+				
+				$("dl."+commcode).remove();
+				
+			}
+		})
 	});
 </script>
 </body>

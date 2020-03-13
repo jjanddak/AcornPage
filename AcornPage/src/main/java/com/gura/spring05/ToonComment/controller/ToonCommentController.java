@@ -55,4 +55,10 @@ public class ToonCommentController {
 		 
 			return map;
 		}
+		@ResponseBody
+		@RequestMapping(value="/toon/deleteComment",method=RequestMethod.POST)
+		public void authcommDel(HttpServletRequest request,@RequestParam String commcode) {
+			service.deleteComment(request, commcode);
+			
+		}
 }
