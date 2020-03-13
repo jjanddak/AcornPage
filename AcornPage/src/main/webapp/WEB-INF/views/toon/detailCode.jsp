@@ -138,7 +138,7 @@
 						<p style="display:inline; float:right; margin: 5px 20px 0 0;">
 						<c:if test="${tmp.id eq id}">
 							<a href=""><span>수정</span></a>
-							<button class="del"><span class="${tmp.commcode }" style="padding-left:20px;">삭제</span></button>
+							<button class="del btn-link"><span class="${tmp.commcode }" style="font-weight: bold;">삭제</span></button>
 						</c:if>
 						</p>
 					</dt>
