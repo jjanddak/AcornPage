@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>toon/userStarList.jsp</title>
+<title>acornpage</title>
 <jsp:include page="../include/resource.jsp"/>
 </head>
 <body>

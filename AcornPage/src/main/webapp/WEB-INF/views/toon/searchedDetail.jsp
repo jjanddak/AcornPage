@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <jsp:include page="../include/resource.jsp"/>
-<title>toon/searchedDetail.jsp</title>
+<title>acornpage</title>
 <style>
 .star-rating {width:75px; }
 .star-rating,.star-rating span {display:inline-block; height:14px; overflow:hidden; background:url(${pageContext.request.contextPath}/resources/images/star.png)no-repeat; }

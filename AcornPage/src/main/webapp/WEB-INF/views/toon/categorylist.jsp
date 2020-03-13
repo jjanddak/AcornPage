@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>acornpage</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
 .star-rating {width:75px; }
