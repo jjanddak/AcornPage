@@ -26,7 +26,7 @@ import com.gura.spring05.toonlist.service.ToonListService;
 public class HomeController {
 	@Autowired
 	ToonListService service;
-
+ 
 	
 	//글목록 요청처리
 	@RequestMapping("/home")
