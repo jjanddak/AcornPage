@@ -11,7 +11,7 @@
 .star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>acornpage</title>
 <jsp:include page="../include/resource.jsp"/>
 </head>
 <body>
@@ -40,15 +40,25 @@
 		<div class="container content">
 			<div class="buy" style="float:right">
 				<ul style="list-style:none">
-					<li class="btn btn-primary" id="buyEach" style="float:left"><a style="color:#fff" href="">선택구매</a></li>
-					<li class="btn btn-warning" id="buyAll" style="float:left"><a style="color:#fff" href="#">전체구매</a></li>
+					<button class="btn btn-primary" id="buyEach" style="float:left">
+						<a style="color:#fff">선택구매</a>
+					</button>
+					<button class="btn btn-warning" id="buyAll" style="float:left">
+						<a style="color:#fff">전체구매</a>
+					</button>
 				</ul>
 			</div>
 			<table class="table table-striped table-condensed">
+			<colgroup>
+				<col class="col-xs-2"/>
+				<col class="col-xs-4"/>
+				<col class="col-xs-3"/>
+				<col class="col-xs-2"/>
+				<col class="col-xs-2"/>
+			</colgroup>
 			<thead>
 				<tr>
 					<th>회차</th>
-					<th>썸네일</th>
 					<th>제목</th>
 					<th>별점</th>
 					<th>구매</th>
@@ -60,7 +70,6 @@
 			<c:forEach var="tmp" items="${list }">
 				<tr>
 					<td>${tmp.num }</td>
-					<td><!-- ${tmp.writer } -->썸네일</td>
 					<td>
 						<c:choose>
 							<c:when test="${tmp.isBuy }">
@@ -88,7 +97,7 @@
 							</span>
 							</c:when>
 							<c:otherwise>
-								<strong>이 편은 아직 별점이 없어요. 별점을 ${id } 님이 먼저 매겨주세요!</strong>
+								<strong>아직 별점이 없습니다.</strong>
 							</c:otherwise>
 						</c:choose>
 					</td>
@@ -98,19 +107,26 @@
 							<td><input type="checkbox" name="selectedCode" value="${tmp.code }" disabled/></td>
 						</c:when>
 						<c:otherwise>
-							<td><a class="btn buyOne" href="buyCodeOne.do?code=${tmp.code }&title=${tmp.title }">구매</a></td>
+							<td><a style="background-color:#ffe500;" class="btn-xs btn buyOne" href="buyCodeOne.do?code=${tmp.code }&title=${tmp.title }">구매</a></td>
 							<td><input type="checkbox" name="selectedCode" value="${tmp.code }"/></td>
 						</c:otherwise>
 					</c:choose>	
 				</tr>
 			</c:forEach>
-				
 			</tbody>
 		</table>
 		</div>
 	</div>
 	<script>
 	$(document).ready(function(){
+		//선택가능한 체크박스의 갯수
+		var buySize=$("input[name=selectedCode]").not("[disabled]").length;
+		//선택가능한 체크박스가 없으면
+		if(buySize==0){
+			//구매버튼 비활성화
+			$("#buyAll").prop('disabled', true);
+			$("#buyEach").prop('disabled', true);
+		}
 	    //최상단 체크박스 클릭
 	    $("#AllCheck").click(function(){
 	        //클릭되었으면

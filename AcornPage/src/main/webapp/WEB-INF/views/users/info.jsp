@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/users/info.jsp</title>
+<title>acornpage</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
 	/* 프로필 이미지가 가로 세로 50px 인 원형으로 표시 될수 있도록  */
@@ -18,91 +18,124 @@
 	#profileForm{
 		display: none;
 	}
+	.bestList ul li:hover{
+		background-color: #eee;
+	}
+	.table tr th{
+		background-color:#f9f9f9;
+	}
 </style>
 </head>
 <body>
-<div class="container">
-	<h1>개인 정보 페이지</h1>
-	<table>
-		<tr>
-			<th>id</th>
-			<td>${dto.id }</td>
-		</tr>
-		<tr>
-			<th>구분</th>
-				<c:choose>
-					<c:when test="${dto.isWriter eq 'Y' }">
-					<td>작가(writer)</td>
-					</c:when>
-					<c:otherwise>
-					<td>독자(reader)</td>
-					</c:otherwise>
-				</c:choose>		
-			
-		</tr>
-		<tr>
-			<th>프로필 이미지</th>
-			<td>
-				<a href="javascript:" id="profileLink">
+<jsp:include page="../include/navbar.jsp"/>
+<div class="contentwrapper">
+	<div class="container content">
+		<h2>개인 정보 페이지</h2>
+		<table class="table table-hover">
+			<colgroup>
+				<col class="col-xs-3"/>
+				<col class="col-xs-9"/>
+			</colgroup>
+			<tr>
+				<th>ID</th>
+				<td>${dto.id }</td>
+			</tr>
+			<tr>
+				<th>구분</th>
 					<c:choose>
-						<c:when test="${empty dto.profile }">
-						<img src="${pageContext.request.contextPath }/resources/images/default_user.jpeg" alt="" />
+						<c:when test="${dto.isWriter eq 'Y' }">
+						<td>작가(writer)</td>
 						</c:when>
 						<c:otherwise>
-						<img src="${pageContext.request.contextPath }${dto.profile}" alt="" />
+						<td>독자(reader)</td>
 						</c:otherwise>
-					</c:choose>
-				</a>
-			</td>
-		</tr>
-		<tr>
-			<th>캐쉬</th>
-			<td>${dto.wallet}</td> 
-		</tr>
-		<tr>
-			<th>비밀번호</th>
-			<td><a href="pwd_updateform.do">수정하기</a></td>
-		</tr>
-		<tr>
-			<th>이메일</th>
-			<td>${dto.email }<a href="updateform.do">이메일 수정하기</a></td>
-		</tr>
-		<tr>
-			<th>가입일</th>
-			<td>${dto.regdate }</td>
-		</tr>
-		<c:if test="${not empty myToon }">
-			<tr>
-				<th>연재중인 작품</th>
-				<table>	
-						<c:forEach var="tmp" items="${myToon }">
-						<tr>
-						<td>			
-							<a href="${pageContext.request.contextPath}/toon/toonup.do?title=${tmp.title }">											
-								<div class="list" style="width:600px; height:150px; border:1px solid blue;">
-									<p>${tmp.title }</p>
-									<p>${tmp.writer }</p>
-									<p>${tmp.info }</p>
-								</div>
-							</a>
-							<a href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
-								onclick="return confirm('${tmp.title} 작품을 삭제하시겠습니까?');">
-								${tmp.title } 삭제
-							</a>			
-						</td>			
-						</tr>
-						</c:forEach>			
-				</table>
+					</c:choose>		
+				
 			</tr>
-		</c:if>		
-	</table>
-	<a href="../home.do"><button>홈으로</button></a>
-	<c:if test="${dto.isWriter eq 'Y' }">	
-		<a href="${pageContext.request.contextPath}/toon/newToonup.do"><button>신작 업로드</button></a>
+			<tr>
+				<th>프로필 이미지</th>
+				<td>
+					<a href="javascript:" id="profileLink">
+						<c:choose>
+							<c:when test="${empty dto.profile }">
+							<img src="${pageContext.request.contextPath }/resources/images/default_user.jpeg" alt="" />
+							</c:when>
+							<c:otherwise>
+							<img src="${pageContext.request.contextPath }${dto.profile}" alt="" />
+							</c:otherwise>
+						</c:choose>
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<th>캐시</th>
+				<td>${dto.wallet}</td> 
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td>${dto.email }<a style="color:blue; padding-left:15px;" href="updateform.do">이메일 수정하기</a></td>
+			</tr>
+			<tr>
+				<th>가입일</th>
+				<td>${dto.regdate }</td>
+			</tr>
+			<tr>
+				<th>별점목록</th>
+				<td>
+					<a style="color:blue;" href="${pageContext.request.contextPath }/toon/userStarList.do?id=${id }">
+						<strong>${id }</strong>님의 별점 리스트 이동하기
+					</a>
+				</td>
+			</tr>
+		</table>
+		<button class="btn btn-info"><a style="color:#fff;" href="pwd_updateform.do">비밀번호 수정하기</a></button>
+		<button style="float:right;" class="btn btn-warning"><a href="javascript:deleteConfirm()">회원 탈퇴</a></button>
+	</div>
+	<c:if test="${not empty myToon }">
+	<div class="container content">
+		<div>
+			<c:if test="${dto.isWriter eq 'Y' }">
+				<button class="btn btn-primary" style="width:100%; font-size:20px; margin-bottom:20px;">
+					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">신작 업로드</a>
+				</button>
+			</c:if>
+		</div>
+			<div class="bestList">
+        		 <ul>
+				<c:forEach var="tmp" items="${myToon }">
+					<a href="${pageContext.request.contextPath }/toon/selectedDetail.do?title=${tmp.title }">
+	               <li>
+	                  <div class="list">
+						<div class="imgwrapper">
+			                 <c:choose>
+			                    <c:when test="${empty tmp.thumb}">
+						           <img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>                                           	
+					            </c:when>
+					            <c:otherwise>
+					               <img class="img-thumbnail" src="${pageContext.request.contextPath}${tmp.thumb }" alt="logo"/>
+					            </c:otherwise>
+					         </c:choose>
+						</div>
+	                     <div class="textwrapper">
+	                        <p class="list-title">${tmp.title }</p>
+							<p class="list-writer">${tmp.writer }</p>
+							<p class="list-info">${tmp.info }</p>
+							<p style="position:absolute; right:-55px; bottom:20px;">
+								<button class="btn btn-danger">
+									<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
+										onclick="return confirm('${tmp.title} 작품을 삭제하시겠습니까?');">
+										삭제
+									</a>
+								</button>
+							</p>
+	                     </div>
+	                  </div>
+	               </li>
+				</c:forEach>			
+				</ul>
+			</div>	
+	</div>
 	</c:if>
-	<a href="javascript:deleteConfirm()"><button>회원 탈퇴</button></a>
-	<a href="${pageContext.request.contextPath }/toon/userStarList.do?id=${id }"><button><strong>${id }</strong>  님이 별점 매긴 만화 목록 보기</button></a>
-
 </div>
 
 <form action="profile_upload.do" method="post"

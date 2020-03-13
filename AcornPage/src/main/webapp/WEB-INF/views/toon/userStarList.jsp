@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>toon/userStarList.jsp</title>
+<title>acornpage</title>
 <jsp:include page="../include/resource.jsp"/>
 </head>
 <body>
@@ -19,8 +19,7 @@
 			<tr>
 				<th>회차</th>
 				<th>제목</th>
-				<th>당신이 매긴 별점</th>
-				<th>썸네일</th>
+				<th>점수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,7 +33,6 @@
 					</a>
 				</td>
 				<td><strong>${tmp.starvalue }</strong> 점</td>
-				<td><!-- ${tmp.writer } -->썸네일</td>
 			</tr>
 		</c:forEach>
 			

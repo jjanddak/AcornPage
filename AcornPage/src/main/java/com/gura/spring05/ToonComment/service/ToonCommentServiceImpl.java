@@ -46,7 +46,7 @@ public class ToonCommentServiceImpl implements ToonCommentService{
 	@Override
 	public boolean addLikeCount(HttpServletRequest request,CommentLikeDto dto) {
 		dto.setId((String)request.getSession().getAttribute("id"));
-		boolean isLiked=dao.isLiked(dto); 	
+		boolean isLiked=dao.isLiked(dto);
 		if(isLiked) { //라이크를 이미 눌렀다면
 			dao.downLikeCount(dto.getCommcode());
 			dao.delLikeCount(dto);

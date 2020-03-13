@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>만화업로드</title>
+<title>acornpage</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 </head>
 <body>

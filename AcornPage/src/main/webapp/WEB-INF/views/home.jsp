@@ -6,12 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/cafe/list.jsp</title>
+<title>acornpage</title>
 <jsp:include page="include/resource.jsp"></jsp:include>
 <style>
 .star-rating {width:75px; }
 .star-rating,.star-rating span {display:inline-block; height:14px; overflow:hidden; background:url(${pageContext.request.contextPath}/resources/images/star.png)no-repeat; }
 .star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
+
 </style>
 </head>
 <body>
@@ -25,7 +26,13 @@
 		  <div><img class="mainSlide" src="${pageContext.request.contextPath }/resources/images/stil2.png" alt="mainSlide" /></div>
 		  <div><img class="mainSlide" src="${pageContext.request.contextPath }/resources/images/stil3.png" alt="mainSlide" /></div>
 		</div>
-		<!-- <img style="width:100%;" src="${pageContext.request.contextPath }/resources/images/stil1.png" alt="" />  -->
+	</div>
+	<div class="container content subslide" style="margin-top:15px;"> 
+		<div class="your-class" style="padding:15px 0;">
+		  <div><img class="subSlide" style="width:90%; height:90px; margin: 0 auto;" src="${pageContext.request.contextPath }/resources/images/subslide1.PNG" alt="mainSlide" /></div>
+		  <div><img class="subSlide" style="width:90%; height:90px; margin: 0 auto;" src="${pageContext.request.contextPath }/resources/images/subslide2.PNG" alt="mainSlide" /></div>
+		</div>
+	</div>
 	<div class="container content" style="border-top:20px solid #eee;">
 		<h2>웹툰</h2>
 		 <div class="bestList">
@@ -48,8 +55,7 @@
                         <p class="list-title">${tmp.title }</p>
 						<p class="list-writer">${tmp.writer }</p>
 						<p class="list-info">${tmp.info }</p>
-						<p style="position:absolute; right:0; top:0;">연재 시작일: ${tmp.regdate }</p>
-						<p style="position:absolute; right:0; top:30px;">
+						<p style="position:absolute; right:0; top:35px;">
 							<span class="wrap-star">
 								<span class='star-rating'>
 									<span style ="width:<fmt:formatNumber value="${tmp.starvalue *10}" pattern=".0"/>%"></span>
@@ -58,7 +64,8 @@
                         			<fmt:formatNumber value="${tmp.starvalue }" pattern=".0"/>
                         		</c:if>
 							</span>
-		                  </p>  	
+		                </p>
+		                <p style="position:absolute; right:0; top:62px; color:#999999">연재 시작일: ${tmp.regdate }</p>  	
                      </div>
                   </div>
                </li>
@@ -66,9 +73,8 @@
             </c:forEach>
          </ul>
       </div>		
-	</div>
+	</div><!-- //toon list content -->
      
-   </div><!-- //toon list content -->
 	<div class="container content">
 		<h2>웹소설</h2>
 		<div class="bestList">
@@ -84,17 +90,17 @@
 								<p class="list-title">${tmp.title }</p>
 								<p class="list-writer">${tmp.writer }</p>
 								<p class="list-info">${tmp.info }</p>
-								<p style="position:absolute; right:0; top:0;">연재 시작일: ${tmp.regdate }</p>
-								<p style="position:absolute; right:0; top:0;">
+								<p style="position:absolute; right:0; top:35px;">
 									<span class="wrap-star">
 										<span class='star-rating'>
 											<span style ="width:<fmt:formatNumber value="${tmp.starvalue *10}" pattern=".0"/>%"></span>
 										</span>
-									<c:if test="${tmp.starvalue gt 0 }">
-	                        			<fmt:formatNumber value="${tmp.starvalue }" pattern=".0"/>
-	                        		</c:if>
+										<c:if test="${tmp.starvalue gt 0 }">
+		                        			<fmt:formatNumber value="${tmp.starvalue }" pattern=".0"/>
+		                        		</c:if>
 									</span>
-								</p>
+				                </p>
+		             		    <p style="position:absolute; right:0; top:62px; color:#999999">연재 시작일: ${tmp.regdate }</p>
 							</div>
 						</div>
 					</li>
@@ -103,7 +109,6 @@
 			</ul>
 		</div>
 	</div><!-- //novel list content -->
-
 </div><!-- //contentwrapper -->
 </body>
 <script>

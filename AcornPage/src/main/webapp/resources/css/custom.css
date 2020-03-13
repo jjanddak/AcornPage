@@ -191,6 +191,9 @@ button.dropdown-toggle:focus{
 	border-color:#fff;
 	outline:none;
 }
+.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus{
+	outline:none;
+}
 .dropdown-menu{
 	padding:0px;
 }

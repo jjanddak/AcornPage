@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/users/loginform.jsp</title>
+<title>acornpage</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
 	/* stylelint-disable selector-no-qualifying-type, property-no-vendor-prefix */

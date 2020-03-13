@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>acornpage</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
 .star-rating {width:75px; }
@@ -37,19 +37,20 @@
 			                     </c:choose>
 							</div>
 							<div class="textwrapper">
-								<p>${tmp.title }</p>
-								<p>${tmp.writer }</p>
-								<p>${tmp.info }</p>
-								<p style="position:absolute; right:0; top:30px;">
-							<span class="wrap-star">
-								<span class='star-rating'>
-									<span style ="width:<fmt:formatNumber value="${tmp.starvalue *10}" pattern=".0"/>%"></span>
-								</span>
-								<c:if test="${tmp.starvalue gt 0 }">
-                        			<fmt:formatNumber value="${tmp.starvalue }" pattern=".0"/>
-                        		</c:if>
-							</span>
-		                  </p>  
+								<p class="list-title">${tmp.title }</p>
+								<p class="list-writer">${tmp.writer }</p>
+								<p class="list-info">${tmp.info }</p>
+								<p style="position:absolute; right:0; top:35px;">
+									<span class="wrap-star">
+										<span class='star-rating'>
+											<span style ="width:<fmt:formatNumber value="${tmp.starvalue *10}" pattern=".0"/>%"></span>
+										</span>
+										<c:if test="${tmp.starvalue gt 0 }">
+		                        			<fmt:formatNumber value="${tmp.starvalue }" pattern=".0"/>
+		                        		</c:if>
+									</span>
+				                </p>
+				                <p style="position:absolute; right:0; top:62px; color:#999999">연재 시작일: ${tmp.regdate }</p>
 							</div>
 						</div>
 					</li>

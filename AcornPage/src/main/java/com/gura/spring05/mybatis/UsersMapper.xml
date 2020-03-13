@@ -17,7 +17,7 @@
 		WHERE id=#{inputId}
 	</select>
 	<select id="getData" parameterType="String" resultType="usersDto">
-		SELECT id,pwd,email,regdate,profile,isWriter,wallet
+		SELECT id,pwd,email,to_char(regdate,'YYYY-MM-DD')as regdate,profile,isWriter,wallet
 		FROM users
 		WHERE id=#{id}
 	</select>

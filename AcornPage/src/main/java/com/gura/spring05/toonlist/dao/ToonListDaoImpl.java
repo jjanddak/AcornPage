@@ -19,7 +19,11 @@ public class ToonListDaoImpl implements ToonListDao{
 	public List<ToonDetailDto> getToonList(ToonDetailDto dto) {
 		return session.selectList("toon.getToonList", dto);
 	}
-
+	
+	public List<ToonDetailDto> getNovelList(ToonDetailDto dto) {
+		return session.selectList("toon.getNovelList", dto);
+	}
+	
 	@Override
 	public List<ToonListDto> getDetailList(String title) {
 		return session.selectList("toon.getDetailList", title);

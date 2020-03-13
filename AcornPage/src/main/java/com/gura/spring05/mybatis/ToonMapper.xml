@@ -3,7 +3,8 @@
 <mapper namespace="toon">
 	<select id="getToonList" parameterType="toonDetailDto"
 		resultType="toonDetailDto">
-		SELECT t.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel,thumb, starvalue
+		select ROWNUM, A.* from 
+		(SELECT t.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel,thumb, starvalue
 		FROM (
 			SELECT NVL(AVG(starvalue),0) AS starvalue, title
 			FROM (
@@ -13,8 +14,26 @@
 			WHERE x.code=s.code(+)	
 			GROUP BY x.title
 		) x, toondetail t
-		WHERE t.title=x.title 
-		ORDER BY starvalue DESC
+		WHERE t.title=x.title and toonovel='toon'
+		ORDER BY starvalue DESC) A
+		where ROWNUM between 1 and 5
+	</select>
+	<select id="getNovelList" parameterType="toonDetailDto"
+		resultType="toonDetailDto">
+		select ROWNUM, A.* from 
+		(SELECT t.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel,thumb, starvalue
+		FROM (
+			SELECT NVL(AVG(starvalue),0) AS starvalue, title
+			FROM (
+				SELECT *
+				FROM toonlist
+			) x, star s
+			WHERE x.code=s.code(+)	
+			GROUP BY x.title
+		) x, toondetail t
+		WHERE t.title=x.title and toonovel='novel'
+		ORDER BY starvalue DESC) A
+		where ROWNUM between 1 and 5
 	</select>
 	<select id="getDetailList" parameterType="String"
 		resultType="toonListDto">
@@ -38,7 +57,7 @@
 	<select id="getCodeDetail" parameterType="toonListDto" resultType="toonListDto">
 		SELECT result1.*
 		FROM
-			(SELECT num,title,writer,content,regdate, toonlist.code,
+			(SELECT num,title,writer,content,to_char(regdate,'YYYY-MM-DD')as regdate, toonlist.code,
 			LAG(num, 1, 0) OVER(ORDER BY num DESC) AS nextNum,
 			LEAD(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum
 			FROM toonlist
@@ -135,7 +154,7 @@
 	</select>	
 		
 	<select id="getMyToon" parameterType="String" resultType="toonDetailDto">
-		select * from toondetail where writer=#{id}
+		select * from toondetail where writer=#{id} order by regdate desc
 	</select>
 	
 	<select id="getLastNum" parameterType="String" resultType="Integer">
@@ -151,7 +170,7 @@
 	</select>
 	
 	<select id="selectedToonovel" parameterType="String" resultType="toonDetailDto">
-		SELECT x.title as title, writer, info, regdate, hashtag, toonovel, starvalue, thumb
+		SELECT x.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel, starvalue, thumb
 		FROM (
 			SELECT NVL(AVG(starvalue),0) AS starvalue, title
 			FROM (
@@ -167,7 +186,7 @@
 	</select>
 	
 	<select id="selectedHashtag" parameterType="String" resultType="toonDetailDto">
-		SELECT x.title as title, writer, info, regdate, hashtag, toonovel, starvalue, thumb
+		SELECT x.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel, starvalue, thumb
 		FROM (
 			SELECT NVL(AVG(starvalue),0) AS starvalue, title
 			FROM (

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/users/signup_form.jsp</title>
+<title>acornpage</title>
 <jsp:include page="../include/resource.jsp"/>
 <style>
 	/* 페이지 로딩 시점에 도움말과 피드백 아이콘은 일단 숨기기 */
