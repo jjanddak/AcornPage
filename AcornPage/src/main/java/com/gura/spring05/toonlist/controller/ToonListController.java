@@ -136,4 +136,9 @@ public class ToonListController {
 
 		return new ModelAndView("redirect:/toon/detailCode.do?title="+title+"&code="+code);
 	}
+	
+	@RequestMapping("/toon/bookList")
+	public String bookList() {
+		return "toon/bookList";
+	}
 }	
