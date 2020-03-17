@@ -37,9 +37,14 @@ public class ToonDetailServiceImp implements ToonDetailService{
 		
 		dto.setTitle(title);
 		dto.setWriter(id);
-		
+		List<String> codes=dao.getCode(title);
+		for(int i=0; i<codes.size(); i++) {
+			dao.deleteLibrary(codes.get(i));
+		}
 		dao.deleteToon(dto);
 		dao.deleteList(dto);
+	
+		
 	}
 
 }

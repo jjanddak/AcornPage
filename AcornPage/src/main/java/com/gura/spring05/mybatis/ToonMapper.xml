@@ -261,6 +261,12 @@
 	<select id="getLastCode" parameterType="String" resultType="String">
 		select lastread from users where id=#{id}
 	</select>
+	<select id="getCode" parameterType="String" resultType="String">
+		select code from toonlist where title=#{title}
+	</select>
+	<delete id="deleteLibrary" parameterType="String">
+		delete from library where code=#{code}
+	</delete>
 </mapper>
 
 

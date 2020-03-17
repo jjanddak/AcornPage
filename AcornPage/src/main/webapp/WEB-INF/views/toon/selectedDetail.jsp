@@ -22,7 +22,7 @@
 				<div class="imgwrapper">
 					<c:choose>
 	                	<c:when test="${empty dto.thumb}">
-	                      <img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>                                              
+	                      <img class="img-thumbnail" src="<c:url value='/resources/images/no.png'/>" alt="logo"/>                                              
 	                   </c:when>
 	                   <c:otherwise>
 	                      <img class="img-thumbnail" src="${pageContext.request.contextPath}${dto.thumb }" alt="logo"/>

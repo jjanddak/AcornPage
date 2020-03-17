@@ -15,4 +15,8 @@ public interface ToonDetailDao {
 	public void deleteToon(ToonDetailDto dto);
 	
 	public void deleteList(ToonDetailDto dto);
+	
+	public void deleteLibrary(String Code);
+	
+	public List<String> getCode(String title);
 }

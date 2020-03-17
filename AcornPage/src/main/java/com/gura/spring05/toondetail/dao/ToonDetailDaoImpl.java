@@ -38,5 +38,16 @@ public class ToonDetailDaoImpl implements ToonDetailDao{
 	public void deleteList(ToonDetailDto dto) {
 		session.delete("toon.deleteList",dto);
 	}
+
+	@Override
+	public void deleteLibrary(String Code) {
+		session.delete("toon.deleteLibrary",Code);
+	}
+
+	@Override
+	public List<String> getCode(String title) {
+		
+		return session.selectList("toon.getCode",title);
+	}
 		
 }

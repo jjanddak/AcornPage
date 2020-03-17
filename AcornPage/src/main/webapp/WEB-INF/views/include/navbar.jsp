@@ -66,6 +66,7 @@
 				<li <c:if test="${param.category eq '코믹' }">class="active"</c:if>><a href="${pageContext.request.contextPath }/toon/categorylist.do?category=코믹">#코믹</a></li>
 				<li <c:if test="${param.category eq '액션' }">class="active"</c:if>><a href="${pageContext.request.contextPath }/toon/categorylist.do?category=액션">#액션</a></li>
 				<li <c:if test="${param.category eq '판타지' }">class="active"</c:if>><a href="${pageContext.request.contextPath }/toon/categorylist.do?category=판타지">#판타지</a></li>
+				<li <c:if test="${param.category eq 'book' }">class="active"</c:if>><a href="${pageContext.request.contextPath }/toon/bookList.do?category=book">도서</a></li>
 			</ul>
 		</div>
 	</nav>

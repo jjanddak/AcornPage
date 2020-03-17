@@ -329,7 +329,9 @@ public class ToonListServiceImpl implements ToonListService{
 		List<LibraryDto> code=dao.getLibrary(id);
 		List<String> titles=new ArrayList<String>();
 		for(int i=0; i<code.size(); i++) {
+			
 			String title=dao.getTitle(code.get(i).getCode());
+			System.out.println(title);
 			titles.add(title);
 		}
 		HashSet<String> hash=new HashSet<String>(titles);

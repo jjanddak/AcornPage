@@ -56,7 +56,6 @@ public class UsersServiceImpl implements UsersService{
 			int wallet=dao.getWallet(dto.getId());
 			session.setAttribute("id", dto.getId());
 			session.setAttribute("wallet", wallet);
-			
 			return true;
 		}else {
 			return false;
@@ -131,6 +130,7 @@ public class UsersServiceImpl implements UsersService{
 	}
 	@Override
 	public void deleteUser(String id) {
+		
 		dao.delete(id);
 	}
 
