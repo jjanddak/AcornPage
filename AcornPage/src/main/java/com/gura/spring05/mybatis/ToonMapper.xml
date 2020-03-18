@@ -53,6 +53,7 @@
 		) x, toonlist t
 		WHERE t.num=x.num 
 		AND title=#{title}
+		order by t.num desc
 	</select>
 	<select id="getCodeDetail" parameterType="toonListDto" resultType="toonListDto">
 		SELECT result1.*
