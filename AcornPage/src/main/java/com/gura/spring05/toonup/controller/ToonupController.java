@@ -56,7 +56,6 @@ public class ToonupController {
 	//툰디테일 신작 업로드 폼
 	@RequestMapping("/toon/newToonup")
 	public ModelAndView NewToonUploadForm(HttpServletRequest request) {
-		String id=(String)request.getSession().getAttribute("id");
 
 			return new ModelAndView("toon/newToonup");		
 	}

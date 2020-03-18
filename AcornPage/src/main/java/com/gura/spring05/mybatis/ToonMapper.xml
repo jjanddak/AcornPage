@@ -71,8 +71,8 @@
 	<insert id="buyCodeOne" parameterType="libraryDto">
 		insert into library values(library_seq.nextval,#{id},#{code},sysdate)
 	</insert>
-	<select id="checkCode" parameterType="libraryDto" resultType="libraryDto">
-		select * from library where 
+	<select id="checkCode" parameterType="libraryDto" resultType="String">
+		select code from library where code=#{code} and id=#{id}
 	</select>
 	<select id="getSelectedList" parameterType="String" resultType="toonListDto">
 		select * from toonlist where title=#{title}

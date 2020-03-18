@@ -169,4 +169,10 @@ public class ToonListDaoImpl implements ToonListDao{
 		return session.selectOne("toon.getLastCode",id);
 	}
 
+	@Override
+	public String checkCode(LibraryDto dto) {
+		
+		return session.selectOne("toon.checkCode",dto);
+	}
+
 }

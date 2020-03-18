@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.exception.NoMoneyException;
 import com.gura.spring05.file.dto.FileDto;
 import com.gura.spring05.toonup.dao.ToonupDao;
 import com.gura.spring05.toonup.dto.NewToonupDto;
@@ -26,7 +27,10 @@ public class ToonupServiceImpl implements ToonupService{
 	//툰리스트 업로드
 	@Override
 	public void saveToon(ToonupDto dto) {
-		dao.insert(dto);
+		
+			dao.insert(dto);	
+		
+		
 	}
 
 	@Override

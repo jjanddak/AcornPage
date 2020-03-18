@@ -60,4 +60,6 @@ public interface ToonListDao {
 	public void lastRead(UsersDto dto);
 	
 	public String getLastCode(String id);
+	
+	public String checkCode(LibraryDto dto);
 }
