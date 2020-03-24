@@ -44,23 +44,6 @@ regdate date ,
 code varchar2(50) primary key
 );
 
-
-insert into toonlist values(1,'원피스','김준서','원피스1화content',sysdate,'one1');
-insert into toonlist values(2,'원피스','김준서','원피스2화content',sysdate,'one2');
-insert into toonlist values(3,'원피스','김준서','원피스3화content',sysdate,'one3');
-
-insert into toonlist values(1,'블리치','백종혁','블리치1화content',sysdate,'ble1');
-insert into toonlist values(2,'블리치','백종혁','블리치2화content',sysdate,'ble2');
-insert into toonlist values(3,'블리치','백종혁','블리치3화content',sysdate,'ble3');
-
-insert into toonlist values(1,'나루토','백종혁','나루토1화content',sysdate,'nar1');
-insert into toonlist values(2,'나루토','백종혁','나루토2화content',sysdate,'nar2');
-insert into toonlist values(3,'나루토','백종혁','나루토3화content',sysdate,'nar3');
-
-insert into toonList values(1,'클레이모어','윤지혜','클레이모어1화content',sysdate,'클레이모어1');
-insert into toonList values(2,'클레이모어','윤지혜','클레이모어2화content',sysdate,'클레이모어2');
-insert into toonList values(3,'클레이모어','윤지혜','클레이모어3화content',sysdate,'클레이모어3');
-
 create table users 
 (num number,
 id varchar2(100) primary key,
@@ -72,7 +55,7 @@ profile varchar2(100),
 regdate date
 );
 
-insert into users values(1,'kapman','1234','kapman@naver.com',0,'false','0',sysdate);
+insert into users values(0,'admin','1','admin@master.com','0','admin',null,sysdate,null);
 
 create table star
 (num number primary key,

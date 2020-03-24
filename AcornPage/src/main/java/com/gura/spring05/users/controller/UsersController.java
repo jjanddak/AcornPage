@@ -237,6 +237,11 @@ public class UsersController {
 		return mView;
 		
 	}
+	
+	@RequestMapping("/admin/needPermit")
+	public ModelAndView authNeedPermit(HttpServletRequest request) {
+		return new ModelAndView("admin/needPermit");
+	}
 }
 
 

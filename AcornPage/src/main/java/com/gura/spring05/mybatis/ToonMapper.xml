@@ -14,7 +14,7 @@
 			WHERE x.code=s.code(+)	
 			GROUP BY x.title
 		) x, toondetail t
-		WHERE t.title=x.title and toonovel='toon'
+		WHERE t.title=x.title and toonovel='toon' and t.permit='Y'
 		ORDER BY starvalue DESC) A
 		where ROWNUM between 1 and 5
 	</select>
@@ -31,7 +31,7 @@
 			WHERE x.code=s.code(+)	
 			GROUP BY x.title
 		) x, toondetail t
-		WHERE t.title=x.title and toonovel='novel'
+		WHERE t.title=x.title and toonovel='novel' and t.permit='Y'
 		ORDER BY starvalue DESC) A
 		where ROWNUM between 1 and 5
 	</select>
@@ -51,7 +51,7 @@
 				GROUP BY x.num
 			) x
 		) x, toonlist t
-		WHERE t.num=x.num 
+		WHERE t.num=x.num  and t.permit='Y'
 		AND title=#{title}
 		order by t.num desc
 	</select>
@@ -96,8 +96,8 @@
 		insert into library values(library_seq.nextval,#{id},#{code},sysdate)
 	</insert>	
 	<insert id="upload" parameterType="toonupDto">
-		insert into toonlist (num,title,writer,content,regdate,code)
-		values (#{num},#{title}, #{writer}, #{content}, sysdate, #{title}||#{num})
+		insert into toonlist (num,title,writer,content,regdate,code,permit)
+		values (#{num},#{title}, #{writer}, #{content}, sysdate, #{title}||#{num} , 'N')
 	</insert>
 	
 	<update id="minusCash" parameterType="usersDto">
@@ -116,7 +116,7 @@
 			WHERE x.code=s.code(+)	
 			GROUP BY x.title
 		) x, toondetail t
-		WHERE t.title=x.title
+		WHERE t.title=x.title and t.permit='Y'
 		AND writer like '%'||#{writer}||'%'
 
 	</select>
@@ -133,7 +133,7 @@
 			WHERE x.code=s.code(+)	
 			GROUP BY x.title
 		) x, toondetail t
-		WHERE t.title=x.title
+		WHERE t.title=x.title and t.permit='Y'
 		AND x.title like '%'||#{title}||'%'
 
 	</select>
@@ -150,7 +150,7 @@
 			WHERE x.code=s.code(+)	
 			GROUP BY x.title
 		) x, toondetail t
-		WHERE t.title=x.title
+		WHERE t.title=x.title and t.permit='Y'
 		AND hashtag like '%'||#{hashtag}||'%'
 	</select>	
 		
@@ -181,7 +181,7 @@
 			WHERE x.code=s.code(+)	
 			GROUP BY x.title
 		) x, toondetail t
-		WHERE t.title=x.title
+		WHERE t.title=x.title and t.permit='Y'
 		AND toonovel=#{category}
 <!-- 		select * from toondetail where toonovel=#{category} -->
 	</select>
@@ -197,7 +197,7 @@
 			WHERE x.code=s.code(+)	
 			GROUP BY x.title
 		) x, toondetail t
-		WHERE t.title=x.title
+		WHERE t.title=x.title and t.permit='Y'
 		AND hashtag like '%'||#{category}||'%'
 	</select>
 	
@@ -217,7 +217,7 @@
 
 	<insert id="newToonup" parameterType="newToonupDto">
 		insert into toondetail values (#{title}, #{writer}, #{info}, sysdate, #{hashtag}, 
-		#{toonovel}, #{thumb})
+		#{toonovel}, #{thumb}, 'N')
 	</insert>
 	
 	<delete id="deleteDetail" parameterType="toonDetailDto">
