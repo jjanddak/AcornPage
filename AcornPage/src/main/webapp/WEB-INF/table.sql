@@ -27,7 +27,8 @@ info varchar2(100),
 regdate date,
 hashtag varchar2(100) ,
 toonovel varchar2(100),
-thumb varchar2(100)
+thumb varchar2(100),
+permit varchar2(10)
 );
 
 insert into toondetail values('원피스','김준서','동료를 모아 모험을 떠나는 만화',sysdate,'코믹','toon');
@@ -41,21 +42,22 @@ title varchar2(100) ,
 writer varchar2(100) , 
 content clob , 
 regdate date , 
-code varchar2(50) primary key
+code varchar2(50) primary key,
+permit vatchar2(10)
 );
 
 
-insert into toonlist values(1,'원피스','김준서','원피스1화content',sysdate,'one1');
-insert into toonlist values(2,'원피스','김준서','원피스2화content',sysdate,'one2');
-insert into toonlist values(3,'원피스','김준서','원피스3화content',sysdate,'one3');
+insert into toonlist values(1,'원피스','김준서','원피스1화content',sysdate,'원피스1');
+insert into toonlist values(2,'원피스','김준서','원피스2화content',sysdate,'원피스2');
+insert into toonlist values(3,'원피스','김준서','원피스3화content',sysdate,'원피스3');
 
-insert into toonlist values(1,'블리치','백종혁','블리치1화content',sysdate,'ble1');
-insert into toonlist values(2,'블리치','백종혁','블리치2화content',sysdate,'ble2');
-insert into toonlist values(3,'블리치','백종혁','블리치3화content',sysdate,'ble3');
+insert into toonlist values(1,'블리치','백종혁','블리치1화content',sysdate,'블리치1');
+insert into toonlist values(2,'블리치','백종혁','블리치2화content',sysdate,'블리치2');
+insert into toonlist values(3,'블리치','백종혁','블리치3화content',sysdate,'블리치3');
 
-insert into toonlist values(1,'나루토','백종혁','나루토1화content',sysdate,'nar1');
-insert into toonlist values(2,'나루토','백종혁','나루토2화content',sysdate,'nar2');
-insert into toonlist values(3,'나루토','백종혁','나루토3화content',sysdate,'nar3');
+insert into toonlist values(1,'나루토','백종혁','나루토1화content',sysdate,'나루토1');
+insert into toonlist values(2,'나루토','백종혁','나루토2화content',sysdate,'나루토2');
+insert into toonlist values(3,'나루토','백종혁','나루토3화content',sysdate,'나루토3');
 
 insert into toonList values(1,'클레이모어','윤지혜','클레이모어1화content',sysdate,'클레이모어1');
 insert into toonList values(2,'클레이모어','윤지혜','클레이모어2화content',sysdate,'클레이모어2');
@@ -81,12 +83,12 @@ code varchar2(50),
 starvalue number
 );
 
-insert into star values(1,'kapman','one1',10);
-insert into star values(2,'gura','one1',3);
-insert into star values(3,'monkey','one1',8);
-insert into star values(4,'gura','one2',7);
-insert into star values(5,'monkey','one2',3);
-insert into star values(6,'monkey','one3',5);
+insert into star values(1,'kapman','원피스1',10);
+insert into star values(2,'gura','원피스1',3);
+insert into star values(3,'monkey','원피스1',8);
+insert into star values(4,'gura','원피스2',7);
+insert into star values(5,'monkey','원피스2',3);
+insert into star values(6,'monkey','원피스3',5);
 
 create table library
 (num number,
@@ -95,10 +97,10 @@ code varchar2(50),
 regdate date
 );
 
-insert into library values (1,'kapman','ble1',sysdate);
-insert into library values (2,'kapman','ble2',sysdate);
-insert into library values (3,'kapman','ble3',sysdate);
-insert into library values (4,'kapman','nar1',sysdate);
+insert into library values (1,'kapman','블리치1',sysdate);
+insert into library values (2,'kapman','블리치2',sysdate);
+insert into library values (3,'kapman','블리치3',sysdate);
+insert into library values (4,'kapman','나루토1',sysdate);
 
 create table toon_comment
 (num number, 
@@ -110,11 +112,11 @@ commcode varchar2(50),
 regdate date
 );
 
-insert into toon_comment values(1,'kapman','one1','더럽게재밋네1',0,'one1com1',sysdate);
-insert into toon_comment values(2,'kapman','one1','더럽게재밋네2',0,'one1com2',sysdate);
-insert into toon_comment values(3,'kapman','one1','더럽게재밋네3',0,'one1com3',sysdate);
-insert into toon_comment values(4,'kapman','one2','더럽게재밋네4',0,'one2com1',sysdate);
-insert into toon_comment values(5,'kapman','one2','더럽게재밋네5',0,'one2com2',sysdate);
+insert into toon_comment values(1,'kapman','원피스1','더럽게재밋네1',0,'원피스1com1',sysdate);
+insert into toon_comment values(2,'kapman','원피스1','더럽게재밋네2',0,'원피스1com2',sysdate);
+insert into toon_comment values(3,'kapman','원피스1','더럽게재밋네3',0,'원피스1com3',sysdate);
+insert into toon_comment values(4,'kapman','원피스2','더럽게재밋네4',0,'원피스2com1',sysdate);
+insert into toon_comment values(5,'kapman','원피스2','더럽게재밋네5',0,'원피스2com2',sysdate);
 
 create table commentlike
 (num number, 
@@ -124,15 +126,15 @@ regdate date,
 code varchar2(50)
 );
 
-insert into commentlike values (1,'kapman','one1com1',sysdate,one1);
-insert into commentlike values (2,'kapman','one1com2',sysdate,one1);
-insert into commentlike values (3,'kapman','one1com3',sysdate,one1);
-insert into commentlike values (4,'kapman','one2com1',sysdate,one2);
-insert into commentlike values (5,'kapman','one2com2',sysdate,one2);
-insert into commentlike values (6,'gura','one1com1',sysdate,one1);
-insert into commentlike values (7,'gura','one1com2',sysdate,one1);
-insert into commentlike values (8,'gura','one1com3',sysdate,one1);
-insert into commentlike values (9,'gura','one2com1',sysdate,one2);
-insert into commentlike values (10,'gura','one2com2',sysdate,one2);
+insert into commentlike values (1,'kapman','원피스1com1',sysdate,one1);
+insert into commentlike values (2,'kapman','원피스1com2',sysdate,one1);
+insert into commentlike values (3,'kapman','원피스1com3',sysdate,one1);
+insert into commentlike values (4,'kapman','원피스2com1',sysdate,one2);
+insert into commentlike values (5,'kapman','원피스2com2',sysdate,one2);
+insert into commentlike values (6,'gura','원피스1com1',sysdate,one1);
+insert into commentlike values (7,'gura','원피스1com2',sysdate,one1);
+insert into commentlike values (8,'gura','원피스1com3',sysdate,one1);
+insert into commentlike values (9,'gura','원피스2com1',sysdate,one2);
+insert into commentlike values (10,'gura','원피스2com2',sysdate,one2);
 
 
