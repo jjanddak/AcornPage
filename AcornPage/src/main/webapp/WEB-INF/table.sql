@@ -72,12 +72,13 @@ email varchar2(100),
 wallet number check(wallet>=0),
 isWriter varchar2(20),
 profile varchar2(100),
-regdate date
+regdate date,
+lastread varchar2(50)
 );
 
-insert into users values(1,'kapman','1234','kapman@naver.com',3000,'N',null,sysdate);
-insert into users values(2,'gura','1234','gura@naver.com',3000,'N',null,sysdate);
-insert into users values(3,'monkey','1234','mon@naver.com',3000,'N',null,sysdate);
+insert into users values(1,'kapman','1234','kapman@naver.com',3000,'N',null,sysdate,null);
+insert into users values(2,'gura','1234','gura@naver.com',3000,'N',null,sysdate,null);
+insert into users values(3,'monkey','1234','mon@naver.com',3000,'N',null,sysdate,null);
 
 create table star
 (num number primary key,
