@@ -34,10 +34,10 @@ thumb varchar2(100),
 permit varchar2(10)
 );
 
-insert into toondetail values('원피스','김준서','동료를 모아 모험을 떠나는 만화',sysdate,'코믹',null,'toon','Y');
-insert into toondetail values('블리치','백종혁','사신대행',sysdate,'액션',null,'toon','Y');
-insert into toondetail values('나루토','김대희','졸렬잎마을 정치이야기',sysdate,'액션',null,'toon','N');
-insert into toondetail values('클레이모어','윤지혜','졔작가의 클레이모어 이야기',sysdate,'액션 판타지',null,'toon','Y');
+insert into toondetail values('원피스','김준서','동료를 모아 모험을 떠나는 만화',sysdate,'코믹','toon',null,'Y');
+insert into toondetail values('블리치','백종혁','사신대행',sysdate,'액션','toon',null,'Y');
+insert into toondetail values('나루토','김대희','졸렬잎마을 정치이야기',sysdate,'액션','toon',null,'N');
+insert into toondetail values('클레이모어','윤지혜','졔작가의 클레이모어 이야기',sysdate,'액션 판타지','toon',null,'Y');
 
 
 create table toonlist
