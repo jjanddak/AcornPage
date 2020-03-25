@@ -61,9 +61,19 @@ public class ToonupController {
 	//신작 업로드 요청 처리
 	@RequestMapping(value = "/toon/newtoonupload", method = RequestMethod.POST)
 	public ModelAndView authUpload(HttpServletRequest request,
-			@ModelAttribute NewToonupDto dto) {
+			@ModelAttribute NewToonupDto dto, @ModelAttribute ToonupDto dto2) {
+		String writer=(String)
+				request.getSession().getAttribute("id");
 		
 		service.newToonupload(request, dto);
+		
+		//ToonupDto 객체에 담고 
+//		ToonupDto dto2=new ToonupDto();
+		dto2.setWriter(writer);
+		
+		//서비스를 이용해서 DB 에 저장
+		service.saveToon(dto2);
+		service.writerLibrary(dto2);
 		
 		return new ModelAndView("redirect:/users/info.do");
 	}

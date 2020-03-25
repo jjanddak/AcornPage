@@ -95,8 +95,8 @@
 		insert into library values(library_seq.nextval,#{id},#{code},sysdate)
 	</insert>	
 	<insert id="upload" parameterType="toonupDto">
-		insert into toonlist (num,title,writer,content,regdate,code)
-		values (#{num},#{title}, #{writer}, #{content}, sysdate, #{title}||#{num})
+		insert into toonlist (num,title,writer,content,regdate,code,permit)
+		values (#{num},#{title}, #{writer}, #{content}, sysdate, #{title}||#{num}, 'N')
 	</insert>
 	
 	<update id="minusCash" parameterType="usersDto">
@@ -216,7 +216,7 @@
 
 	<insert id="newToonup" parameterType="newToonupDto">
 		insert into toondetail values (#{title}, #{writer}, #{info}, sysdate, #{hashtag}, 
-		#{toonovel}, #{thumb})
+		#{toonovel}, #{thumb},'N')
 	</insert>
 	
 	<delete id="deleteDetail" parameterType="toonDetailDto">
