@@ -15,4 +15,5 @@ public interface UsersDao {
 	public int getLogin(String inputId);
 	public String getIp(String inputId);
 	public void setIp(UsersDto dto);
+	public void invalidateLog(String id);
 }

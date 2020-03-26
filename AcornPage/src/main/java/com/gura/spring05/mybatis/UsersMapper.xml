@@ -62,9 +62,13 @@
 		SET ip=#{ip}, login=1
 		WHERE id=#{id}
 	</update>
+	
+	<update id="invalidateLog" parameterType="String">
+		UPDATE users
+		SET ip=null, login=0
+		WHERE id=#{id}
+	</update>
 </mapper>
-
-
 
 
 

@@ -141,7 +141,6 @@ public class UsersController {
 		//응답할때 쿠키도 심어 지도록 
 		response.addCookie(idCook);
 		response.addCookie(pwdCook);
-		System.out.println("컨트롤러 시작할게요");
 		boolean checkPwd=service.validUser(dto, request.getSession(), mView, ip);
 		System.out.println(ip);
 		return checkPwd;
@@ -150,6 +149,8 @@ public class UsersController {
 	//로그아웃 처리
 	@RequestMapping("/users/logout")
 	public String logout(HttpSession session) {
+		String id=(String) session.getAttribute("id");
+		service.invalidateLog(id);
 		session.invalidate();
 		return "redirect:/home.do";
 	}

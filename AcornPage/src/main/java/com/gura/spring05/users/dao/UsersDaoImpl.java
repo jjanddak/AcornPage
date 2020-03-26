@@ -87,6 +87,11 @@ public class UsersDaoImpl implements UsersDao{
 		
 	}
 
+	@Override
+	public void invalidateLog(String id) {
+		session.update("users.invalidateLog", id);
+	}
+
 }
 
 
