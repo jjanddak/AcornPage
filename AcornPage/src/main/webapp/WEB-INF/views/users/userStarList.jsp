@@ -38,7 +38,7 @@
 			
 		</tbody>
 	</table>
-	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
+	<p><a href="${pageContext.request.contextPath }/users/info.do"><button><strong>돌아가기</strong></button></a></p>
 	</div>
 	</div>
 </body>

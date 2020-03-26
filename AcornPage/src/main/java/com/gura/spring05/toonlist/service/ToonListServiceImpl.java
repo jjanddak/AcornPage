@@ -250,13 +250,6 @@ public class ToonListServiceImpl implements ToonListService{
 		mView.addObject("myToon",myToon);
 	}
 
-	@Override
-	public void userStarList(HttpServletRequest request, String id) {
-		ToonListDto dto=new ToonListDto();
-		dto.setId(id);
-		List<ToonListDto> list=dao.getUserStarList(dto);
-		request.setAttribute("list", list);
-	}
 
 
 	@Override

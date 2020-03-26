@@ -40,6 +40,16 @@
 		WHERE id=#{id}
 	</update>
 	
+	<select id="getUserStarList" parameterType="toonListDto" resultType="toonListDto">
+		select * from (
+			select toonlist.code,starvalue,toonlist.num,toonlist.title
+			from toonlist
+			inner join star on toonlist.code=star.code
+			where id='${id}'
+			order by title asc 
+	    )		
+	</select>
+	
 	<delete id="delete" parameterType="String">
 		DELETE FROM users
 		WHERE id=#{id}

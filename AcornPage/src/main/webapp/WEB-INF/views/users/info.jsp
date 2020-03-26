@@ -46,6 +46,9 @@
 						<c:when test="${dto.isWriter eq 'Y' }">
 						<td>작가(writer)</td>
 						</c:when>
+						<c:when test="${dto.isWriter eq 'admin' }">
+						<td>관리자(admin)</td>
+						</c:when>
 						<c:otherwise>
 						<td>독자(reader)</td>
 						</c:otherwise>
@@ -82,7 +85,7 @@
 			<tr>
 				<th>별점목록</th>
 				<td>
-					<a style="color:blue;" href="${pageContext.request.contextPath }/toon/userStarList.do?id=${id }">
+					<a style="color:blue;" href="${pageContext.request.contextPath }/users/userStarList.do?id=${id }">
 						<strong>${id }</strong>님의 별점 리스트 이동하기
 					</a>
 				</td>
@@ -93,9 +96,16 @@
 	</div>
 	<div class="container content">
 		<div>
+			<c:if test="${dto.isWriter eq 'N' }">
+				<button class="btn btn-primary" style="width:100%; font-size:20px; margin-bottom:20px;">
+					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">내 원고로 작가 신청하기</a>
+				</button>
+			</c:if>
+		</div>
+		<div>
 			<c:if test="${dto.isWriter eq 'Y' }">
 				<button class="btn btn-primary" style="width:100%; font-size:20px; margin-bottom:20px;">
-					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">신작 업로드</a>
+					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">신작 원고 전송</a>
 				</button>
 			</c:if>
 		</div>

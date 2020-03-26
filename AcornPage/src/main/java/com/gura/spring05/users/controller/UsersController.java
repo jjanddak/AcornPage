@@ -148,6 +148,15 @@ public class UsersController {
 		return mView;//ModelAndView 객체를 리턴해주기 
 	}
 	
+	
+	@RequestMapping("/users/userStarList")
+	public ModelAndView authStarSearch(HttpServletRequest request, @RequestParam String id) {
+		service.userStarList(request, id);
+		
+		return new ModelAndView("users/userStarList");
+	}
+	
+	
 	/*
 	 *  [ 파일 업로드 설정 ]
 	 *  
