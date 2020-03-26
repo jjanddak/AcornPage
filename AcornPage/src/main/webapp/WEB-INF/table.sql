@@ -32,7 +32,7 @@ regdate date,
 hashtag varchar2(100) ,
 toonovel varchar2(100) not null,
 thumb varchar2(100),
-permit varchar2(10) 
+permit varchar2(100) 
 );
 
 insert into toondetail values('원피스','김준서','동료를 모아 모험을 떠나는 만화',sysdate,'코믹','toon',null,'Y');
@@ -48,7 +48,7 @@ writer varchar2(100) not null,
 content clob not null, 
 regdate date , 
 code varchar2(50) not null primary key,
-permit varchar2(10)
+permit varchar2(100)
 );
 
 
