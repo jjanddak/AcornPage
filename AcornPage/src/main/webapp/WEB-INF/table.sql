@@ -42,7 +42,7 @@ insert into toondetail values('클레이모어','윤지혜','졔작가의 클레
 
 create table toonlist
 (num number not null, 
-title varchar2(100) not null primary key, 
+title varchar2(100) not null, 
 writer varchar2(100) not null, 
 content clob not null, 
 regdate date , 
@@ -84,7 +84,7 @@ insert into users values(2,'gura','1234','gura@naver.com',3000,'N',null,sysdate,
 insert into users values(3,'monkey','1234','mon@naver.com',3000,'N',null,sysdate,null);
 
 create table star
-(num number primary key,
+(num number,
 id varchar2(100) not null,
 code varchar2(50) not null,  
 starvalue number
