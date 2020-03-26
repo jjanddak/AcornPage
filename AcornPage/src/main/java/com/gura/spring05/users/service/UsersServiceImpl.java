@@ -44,7 +44,7 @@ public class UsersServiceImpl implements UsersService{
 		dao.insert(dto);
 	}
 	@Override
-	public boolean validUser(UsersDto dto, HttpSession session, ModelAndView mView) {
+	public boolean validUser(UsersDto dto, HttpSession session, ModelAndView mView, String presentIp) {
 		//아이디 비밀번호가 유효한지 여부 
 		boolean isValid=false;
 		//아이디를 이용해서 저장된 비밀 번호를 읽어온다. 
@@ -58,13 +58,6 @@ public class UsersServiceImpl implements UsersService{
 			int login = dao.getLogin(dto.getId());
 			// ip=db에 저장된 기존아이피주소, presentIp=현재 사용자의 아이피주소
 			String ip = dao.getIp(dto.getId());
-			String presentIp = "ip를 읽지못함";
-			try {
-				presentIp = InetAddress.getLocalHost().getHostAddress();
-			} catch (UnknownHostException e) {
-				e.printStackTrace();
-				presentIp = "ip를 읽지못함";
-			}
 			System.out.println("로그인여부: "+login);
 			System.out.println("ip: "+ip);
 			System.out.println("현재ip: "+presentIp);
