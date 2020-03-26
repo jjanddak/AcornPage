@@ -1,10 +1,11 @@
+drop table library;
+drop table toondetail;
 drop table toonlist;
 drop table star;
-drop table library;
 drop table toon_comment;
 drop table commentlike;
 drop table users;
-drop table toondetail;
+
 
 
 drop sequence toonlist_seq;
@@ -59,9 +60,9 @@ insert into toonlist values(1,'블리치','백종혁','블리치1화content',sys
 insert into toonlist values(2,'블리치','백종혁','블리치2화content',sysdate,'블리치2','Y');
 insert into toonlist values(3,'블리치','백종혁','블리치3화content',sysdate,'블리치3','Y');
 
-insert into toonlist values(1,'나루토','백종혁','나루토1화content',sysdate,'나루토1','N');
-insert into toonlist values(2,'나루토','백종혁','나루토2화content',sysdate,'나루토2','N');
-insert into toonlist values(3,'나루토','백종혁','나루토3화content',sysdate,'나루토3','N');
+insert into toonlist values(1,'나루토','김대희','나루토1화content',sysdate,'나루토1','N');
+insert into toonlist values(2,'나루토','김대희','나루토2화content',sysdate,'나루토2','N');
+insert into toonlist values(3,'나루토','김대희','나루토3화content',sysdate,'나루토3','N');
 
 insert into toonList values(1,'클레이모어','윤지혜','클레이모어1화content',sysdate,'클레이모어1','Y');
 insert into toonList values(2,'클레이모어','윤지혜','클레이모어2화content',sysdate,'클레이모어2','Y');
@@ -100,7 +101,7 @@ insert into star values(6,'monkey','원피스3',5);
 create table library
 (num number,
 id varchar2(100),
-code varchar2(50),
+code varchar2(50) references toonlist(code) ON DELETE CASCADE,
 regdate date
 );
 
