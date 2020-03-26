@@ -24,14 +24,14 @@ create sequence commentlike_seq;
 
 
 create table toondetail
-(title varchar2(100),
-writer varchar2(100),
-info varchar2(100),
+(title varchar2(100) not null primary key,
+writer varchar2(100) not null,
+info varchar2(100) not null,
 regdate date,
 hashtag varchar2(100) ,
-toonovel varchar2(100),
+toonovel varchar2(100) not null,
 thumb varchar2(100),
-permit varchar2(10)
+permit varchar2(10) 
 );
 
 insert into toondetail values('원피스','김준서','동료를 모아 모험을 떠나는 만화',sysdate,'코믹','toon',null,'Y');
@@ -41,12 +41,12 @@ insert into toondetail values('클레이모어','윤지혜','졔작가의 클레
 
 
 create table toonlist
-(num number , 
-title varchar2(100) , 
-writer varchar2(100) , 
-content clob , 
+(num number not null, 
+title varchar2(100) not null primary key, 
+writer varchar2(100) not null, 
+content clob not null, 
 regdate date , 
-code varchar2(50) primary key,
+code varchar2(50) not null primary key,
 permit varchar2(10)
 );
 
@@ -69,9 +69,9 @@ insert into toonList values(3,'클레이모어','윤지혜','클레이모어3화
 
 create table users 
 (num number,
-id varchar2(100) primary key,
+id varchar2(100) primary key not null,
 pwd varchar2(100) not null,
-email varchar2(100),
+email varchar2(100) not null,
 wallet number check(wallet>=0),
 isWriter varchar2(20),
 profile varchar2(100),
@@ -85,8 +85,8 @@ insert into users values(3,'monkey','1234','mon@naver.com',3000,'N',null,sysdate
 
 create table star
 (num number primary key,
-id varchar2(100),
-code varchar2(50), 
+id varchar2(100) not null,
+code varchar2(50) not null,  
 starvalue number
 );
 
@@ -113,9 +113,9 @@ create table toon_comment
 (num number, 
 id varchar2(100),
 code varchar2(50), 
-content varchar2(100), 
+content varchar2(100) not null, 
 likeCount number,
-commcode varchar2(50),
+commcode varchar2(50) not null primary key,
 regdate date
 );
 
