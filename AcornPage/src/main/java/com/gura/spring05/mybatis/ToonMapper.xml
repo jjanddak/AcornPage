@@ -154,7 +154,7 @@
 	</select>	
 		
 	<select id="getMyToon" parameterType="String" resultType="toonDetailDto">
-		select * from toondetail where writer=#{id} order by regdate desc
+		select * from toondetail where writer=#{id} order by permit desc
 	</select>
 	
 	<select id="getLastNum" parameterType="String" resultType="Integer">

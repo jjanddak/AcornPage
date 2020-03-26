@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.file.dto.FileDto;
+import com.gura.spring05.toonlist.dao.ToonListDao;
+import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.toonup.dao.ToonupDao;
 import com.gura.spring05.toonup.dto.NewToonupDto;
 import com.gura.spring05.toonup.dto.ToonupDto;
@@ -21,6 +23,9 @@ import com.gura.spring05.users.dto.UsersDto;
 public class ToonupServiceImpl implements ToonupService{
 	@Autowired
 	private ToonupDao dao;
+	
+	@Autowired
+	private ToonListDao listdao;
 
 	
 	//툰리스트 업로드
@@ -96,6 +101,26 @@ public class ToonupServiceImpl implements ToonupService{
 	public void writerLibrary(ToonupDto dto) {
 		dao.writerLibrary(dto);
 	}
+
+	@Override
+	public void getLastCodeDetail(HttpServletRequest request, String title) {
+		String id=(String)request.getSession().getAttribute("id");
+		int lastNum=dao.getLastNum(title);
+		
+		String code=title+lastNum;
+		
+		ToonListDto dto=new ToonListDto();
+		
+		dto.setId(id);
+		dto.setNum(lastNum);
+		dto.setTitle(title);
+		dto.setCode(code);
+		
+		dto=listdao.getCodeDetail(dto);
+		
+		request.setAttribute("dto", dto);
+	}
+
 }
 
 

@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.file.dto.FileDto;
+import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.toonlist.service.ToonListService;
 import com.gura.spring05.toonup.dto.NewToonupDto;
 import com.gura.spring05.toonup.dto.ToonupDto;
@@ -28,7 +29,7 @@ public class ToonupController {
 	
 	//툰리스트 업로드 폼
 	@RequestMapping("/toon/toonup")
-	public ModelAndView UploadForm(HttpServletRequest request, ModelAndView mView, @RequestParam String title) {
+	public ModelAndView authUploadForm(HttpServletRequest request, ModelAndView mView, @RequestParam String title) {
 		service.getLastNum(request, mView, title);
 		
 		mView.setViewName("toon/toonup");
@@ -76,6 +77,14 @@ public class ToonupController {
 		service.writerLibrary(dto2);
 		
 		return new ModelAndView("redirect:/users/info.do");
+	}
+	
+	@RequestMapping("/toon/toonupdate_form")
+	public ModelAndView authUpdateToonform(HttpServletRequest request,@RequestParam String title, ToonListDto dto) {
+		
+		service.getLastCodeDetail(request, title);
+		
+		return new ModelAndView("toon/toonupdate_form");
 	}
 
 }

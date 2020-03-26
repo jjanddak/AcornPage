@@ -18,4 +18,6 @@ public interface ToonupService {
 	public void newToonupload(HttpServletRequest request, NewToonupDto dto);
 	
 	public void writerLibrary(ToonupDto dto);
+
+	public void getLastCodeDetail(HttpServletRequest request, String title);
 }
