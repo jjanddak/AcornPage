@@ -12,4 +12,7 @@ public interface UsersDao {
 	public void updateUser(UsersDto dto);
 	public void delete(String id);
 	public int getWallet(String inputId);
+	public int getLogin(String inputId);
+	public String getIp(String inputId);
+	public void setIp(UsersDto dto);
 }

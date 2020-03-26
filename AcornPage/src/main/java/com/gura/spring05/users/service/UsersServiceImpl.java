@@ -1,6 +1,8 @@
 package com.gura.spring05.users.service;
 
 import java.io.File;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,12 +54,53 @@ public class UsersServiceImpl implements UsersService{
 			isValid=BCrypt.checkpw(dto.getPwd(), pwdHash);
 		}
 		if(isValid) {
-			//로그인 처리를 한다.
-			int wallet=dao.getWallet(dto.getId());
-			session.setAttribute("id", dto.getId());
-			session.setAttribute("wallet", wallet);
-			
-			return true;
+			//중복로그인 방지를 위해 로그인여부와 ip를 불러오기
+			int login = dao.getLogin(dto.getId());
+			// ip=db에 저장된 기존아이피주소, presentIp=현재 사용자의 아이피주소
+			String ip = dao.getIp(dto.getId());
+			String presentIp = "ip를 읽지못함";
+			try {
+				presentIp = InetAddress.getLocalHost().getHostAddress();
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+				presentIp = "ip를 읽지못함";
+			}
+			System.out.println("로그인여부: "+login);
+			System.out.println("ip: "+ip);
+			System.out.println("현재ip: "+presentIp);
+			if(login==0) { //만약 첫번째 로그인이라면
+				System.out.println("최초로그인상태");
+				//현재 유저의 db에 새 ip주소를 업데이트한다
+				UsersDto dto2 = new UsersDto();
+				dto2.setIp(presentIp);
+				dto2.setId(dto.getId());
+				dao.setIp(dto2);
+				
+				//로그인 처리를 한다.
+				int wallet=dao.getWallet(dto.getId());
+				session.setAttribute("id", dto.getId());
+				session.setAttribute("wallet", wallet);
+				System.out.println("성공?");
+				
+				return true;
+			}else if(login==1&&ip.equals(presentIp)==true){ //만약 ip주소가 같으면
+				System.out.println("ip주소같고 로그인도 돼있는 동일인이라면?");
+				System.out.println("현재 아이피: "+presentIp+" 원래 아이피: "+ip);
+				//로그인 처리를 한다.
+				int wallet=dao.getWallet(dto.getId());
+				session.setAttribute("id", dto.getId());
+				session.setAttribute("wallet", wallet);
+				System.out.println("성공했나?");
+				return true;
+				
+			}else if(login==1&&ip.equals(presentIp)==false) { //만약 먼저 로그인한 쪽이 있고 ip주소가 서로 다르다면
+				System.out.println("아이피주소도 다르고 다른 사람이 로그인도 했네요");
+				System.out.println("현재 아이피: "+presentIp+" 원래 아이피: "+ip);
+				return false;
+			}else { //이도저도 아닌 예외상황이라면
+				System.out.println("셋중 어느 하나도 먹히지 않는 이상한 코드를 작성하셨네요.");
+				return false;
+			}
 		}else {
 			return false;
 		}

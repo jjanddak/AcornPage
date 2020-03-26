@@ -123,7 +123,7 @@ public class UsersController {
 		//응답할때 쿠키도 심어 지도록 
 		response.addCookie(idCook);
 		response.addCookie(pwdCook);
-		
+		System.out.println("컨트롤러 시작할게요");
 		boolean checkPwd=service.validUser(dto, request.getSession(), mView);
 		
 		return checkPwd;

@@ -48,6 +48,20 @@
 	<select id="getWallet" parameterType="String" resultType="int">
 		select wallet from users where id=#{inputId}
 	</select>
+	
+	<select id="getLogin" parameterType="String" resultType="int">
+		SELECT login FROM users WHERE id=#{inputId}
+	</select>
+	
+	<select id="getIp" parameterType="String" resultType="String">
+		SELECT ip FROM users WHERE id=#{inputId}
+	</select>
+	
+	<update id="setIp" parameterType="usersDto">
+		UPDATE users
+		SET ip=#{ip}, login=1
+		WHERE id=#{id}
+	</update>
 </mapper>
 
 

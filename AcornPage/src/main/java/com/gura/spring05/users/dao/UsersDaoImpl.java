@@ -71,6 +71,22 @@ public class UsersDaoImpl implements UsersDao{
 		
 	}
 
+	@Override
+	public int getLogin(String inputId) {
+		return session.selectOne("users.getLogin", inputId);
+	}
+
+	@Override
+	public String getIp(String inputId) {
+		return session.selectOne("users.getIp", inputId);
+	}
+
+	@Override
+	public void setIp(UsersDto dto) {
+		session.update("users.setIp", dto);
+		
+	}
+
 }
 
 
