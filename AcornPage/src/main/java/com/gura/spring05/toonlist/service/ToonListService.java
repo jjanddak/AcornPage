@@ -39,4 +39,6 @@ public interface ToonListService {
 	public void buyList(HttpServletRequest request);
 
 	public ToonListDto getLastRead(HttpServletRequest request);
+	
+	public void getMyToonList(String id, HttpServletRequest request);
 }

@@ -347,5 +347,12 @@ public class ToonListServiceImpl implements ToonListService{
 		dto.setTitle(title);
 		return dto;
 	}
+
+
+	@Override
+	public void getMyToonList(String id, HttpServletRequest request) {
+		List<ToonListDto> myToonList=dao.getMyToonList(id);
+		request.setAttribute("myToonList", myToonList);		
+	}
 	
 }

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gura.spring05.file.dto.FileDto;
 import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.toonlist.service.ToonListService;
 import com.gura.spring05.toonup.dto.NewToonupDto;
@@ -86,5 +85,14 @@ public class ToonupController {
 		
 		return new ModelAndView("toon/toonupdate_form");
 	}
+	
+	@RequestMapping("/toon/toonupdate")
+	public ModelAndView authUpdateToon(HttpServletRequest request, @ModelAttribute ToonListDto dto) {
+		
+		service.toonUpdate(request, dto);
+		
+		return new ModelAndView("redirect:/users/info.do");		
+	}
+	
 
 }

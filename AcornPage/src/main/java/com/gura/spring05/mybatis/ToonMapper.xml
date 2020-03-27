@@ -156,6 +156,9 @@
 	<select id="getMyToon" parameterType="String" resultType="toonDetailDto">
 		select * from toondetail where writer=#{id} order by permit desc
 	</select>
+	<select id="getMyToonlist" parameterType="String" resultType="toonDetailDto">
+		select * from toonlist where writer=#{id} order by permit desc
+	</select>
 	
 	<select id="getLastNum" parameterType="String" resultType="Integer">
 		select max(num) from toonlist where title=#{title}
@@ -253,6 +256,15 @@
 	</select>
 	<select id="getDetail" parameterType="String" resultType="toonDetailDto">
 		select * from toondetail where title=#{title}
+	</select>
+	<update id="toonListUpdate" parameterType="toonListDto">
+		update toonlist set content=#{content}, permit='N' where code=#{code}
+	</update>
+	<update id="toonDetailUpdate" parameterType="toonListDto">
+		update toondetail set permit='N' where title=#{title}
+	</update>
+	<select id="getMyToonList" parameterType="String" resultType="toonListDto">
+		select * from toonlist where writer=#{id}
 	</select>
 </mapper>
 

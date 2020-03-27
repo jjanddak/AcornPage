@@ -15,14 +15,13 @@ public class ToonListDto {
 	private String thumb;
 	private int prevNum; //이전글의 글번호를 담을 필드
 	private int nextNum; //다음글의 글번호를 담을 필드
+	private String permit;
 	
 	public ToonListDto() {}
 
-	
-	
 	public ToonListDto(int num, String title, String writer, String content, String upload, String hashtag,
 			String toon_novel, String code, String id, boolean isBuy, double starvalue, String thumb, int prevNum,
-			int nextNum) {
+			int nextNum, String permit) {
 		super();
 		this.num = num;
 		this.title = title;
@@ -38,9 +37,16 @@ public class ToonListDto {
 		this.thumb = thumb;
 		this.prevNum = prevNum;
 		this.nextNum = nextNum;
+		this.permit = permit;
 	}
 
+	public String getPermit() {
+		return permit;
+	}
 
+	public void setPermit(String permit) {
+		this.permit = permit;
+	}
 
 	public int getPrevNum() {
 		return prevNum;

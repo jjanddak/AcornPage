@@ -24,6 +24,12 @@
 	.table tr th{
 		background-color:#f9f9f9;
 	}
+	.permitlist{
+		padding-bottom: 5px;
+	}
+	.permitlist:hover{
+		background-color: #eee;
+	}
 </style>
 </head>
 <body>
@@ -143,6 +149,23 @@
 			                     </div>
 			                  </div>
 			               </li>
+			               <c:forEach var="list" items="${myToonList }">
+			               <c:if test="${tmp.title eq list.title }">
+			               		<c:choose>
+			               			<c:when test="${list.permit eq 'N' }">
+			               				<div class="permitlist">
+				               				<span>승인 대기중 - ${list.code }</span>
+					               		</div>
+			               			</c:when>
+			               			<c:when test="${list.permit ne 'Y' }">
+			               				<div class="permitlist">
+			               					반려됨 - ${list.code }<br/>
+			               					반려사유 : ${list.permit }
+			               				</div>
+			               			</c:when>
+			               		</c:choose>
+			               </c:if>			               
+		                   </c:forEach>	
 						</c:when>
 						<c:when test="${tmp.permit eq 'Y' }">
 			               	<li>
@@ -177,9 +200,30 @@
 											</a>
 										</button>
 									</p>
-			                     </div>
+			                     </div>	                   	
 			                  </div>
 			               </li>
+			               <c:forEach var="list" items="${myToonList }">
+			               <c:if test="${tmp.title eq list.title }">
+			               		<c:choose>
+			               			<c:when test="${list.permit eq 'N' }">
+			               			<div>
+			               				<div class="permitlist">
+				               				<span>승인 대기중 - ${list.code }</span>
+					               		</div>
+					               	</div>
+			               			</c:when>
+			               			<c:when test="${list.permit ne 'Y' }">
+			               			<div>
+			               				<div class="permitlist">
+			               					반려됨 - ${list.code }<br/>	
+			               					반려사유 : ${list.permit }
+			               				</div>
+			               			</div>
+			               			</c:when>
+			               		</c:choose>
+			               </c:if>			               
+		                   </c:forEach>	
 						</c:when>
 						<c:otherwise>
 			               	<li>
@@ -195,8 +239,7 @@
 							         </c:choose>
 								</div>
 			                     <div class="textwrapper">
-			                        <p style="position:absolute; right:-45px;">반려됨</p>
-									<p style="position:absolute; right:-45px; top:30px;">반려사유 : ${tmp.permit }</p>		
+			                        <p style="position:absolute; right:-45px;">반려됨</p>	
 			                        <p class="list-title">${tmp.title }</p>
 									<p class="list-writer">	${tmp.writer }</p>
 									<p class="list-info">${tmp.info }</p>
@@ -218,6 +261,23 @@
 			                     </div>
 			                  </div>
 			               </li>
+			               <c:forEach var="list" items="${myToonList }">
+			               <c:if test="${tmp.title eq list.title }">
+			               		<c:choose>
+			               			<c:when test="${list.permit eq 'N' }">
+			               				<div class="permitlist">
+				               				<span>승인 대기중 - ${list.code }</span>
+					               		</div>
+			               			</c:when>
+			               			<c:when test="${list.permit ne 'Y' }">
+			               				<div class="permitlist">
+			               					반려됨 - ${list.code }<br/>
+			               					반려사유 : ${list.permit }	               					
+			               				</div>
+			               			</c:when>
+			               		</c:choose>
+			               </c:if>			               
+		                   </c:forEach>	
 						</c:otherwise>
 					</c:choose>					
 				</c:forEach>			

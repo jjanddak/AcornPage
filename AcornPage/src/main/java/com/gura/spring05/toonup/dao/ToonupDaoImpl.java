@@ -10,7 +10,6 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gura.spring05.file.dto.FileDto;
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
 import com.gura.spring05.toonup.dto.NewToonupDto;
 import com.gura.spring05.toonup.dto.ToonupDto;

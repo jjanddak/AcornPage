@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gura.spring05.file.dto.FileDto;
 import com.gura.spring05.toonlist.dao.ToonListDao;
 import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.toonup.dao.ToonupDao;
@@ -119,6 +118,14 @@ public class ToonupServiceImpl implements ToonupService{
 		dto=listdao.getCodeDetail(dto);
 		
 		request.setAttribute("dto", dto);
+	}
+
+	@Override
+	public void toonUpdate(HttpServletRequest request, ToonListDto dto) {
+		String code=dto.getTitle()+dto.getNum();
+		dto.setCode(code);
+		
+		listdao.toonupdate(dto);
 	}
 
 }
