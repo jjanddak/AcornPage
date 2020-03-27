@@ -142,7 +142,6 @@ public class UsersController {
 		response.addCookie(idCook);
 		response.addCookie(pwdCook);
 		boolean checkPwd=service.validUser(dto, request.getSession(), mView, ip);
-		System.out.println(ip);
 		return checkPwd;
 	}
 	

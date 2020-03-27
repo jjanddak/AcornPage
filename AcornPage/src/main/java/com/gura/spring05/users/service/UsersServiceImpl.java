@@ -59,7 +59,7 @@ public class UsersServiceImpl implements UsersService{
 			// ip=db에 저장된 기존아이피주소, presentIp=현재 사용자의 아이피주소
 			String ip = dao.getIp(dto.getId());
 			System.out.println("로그인여부: "+login);
-			System.out.println("ip: "+ip);
+			System.out.println("예전ip: "+ip);
 			System.out.println("현재ip: "+presentIp);
 			if(login==0) { //만약 첫번째 로그인이라면
 				System.out.println("최초로그인상태");
@@ -75,15 +75,13 @@ public class UsersServiceImpl implements UsersService{
 				System.out.println("새 로그인 성공");
 				return true;
 			}else if(login==1&&ip.equals(presentIp)==true){ //만약 ip주소가 같으면
-				System.out.println("현재 아이피: "+presentIp+" 원래 아이피: "+ip);
 				//로그인 처리를 한다.
 				int wallet=dao.getWallet(dto.getId());
 				session.setAttribute("id", dto.getId());
 				session.setAttribute("wallet", wallet);
 				return true;
 			}else if(login==1&&ip.equals(presentIp)==false) { //만약 먼저 로그인한 쪽이 있고 ip주소가 서로 다르다면
-				System.out.println("아이피주소도 다르고 먼저 로그인한 사람이 있어요.");
-				System.out.println("현재 아이피: "+presentIp+" 원래 아이피: "+ip);
+				System.out.println("아이피주소가 다르고 먼저 로그인한 사람이 있어요.");
 				return false;
 			}else { //이도저도 아닌 예외상황이라면
 				return false;

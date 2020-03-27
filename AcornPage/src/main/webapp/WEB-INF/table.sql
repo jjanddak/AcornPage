@@ -1,3 +1,10 @@
+<!-- 테이블에 칼럼추가 로그인기록,ip주소 -->
+ALTER TABLE users ADD(login NUMBER DEFAULT 0);
+ALTER TABLE users ADD(ip VARCHAR2(20));
+<!-- 일이 잘못되면 되돌리기 위해 삭제할 sql문 -->
+ALTER TABLE users DROP(login);
+ALTER TABLE users DROP(ip);
+<!-- ////////// -->
 drop table toonlist;
 drop table star;
 drop table library;
