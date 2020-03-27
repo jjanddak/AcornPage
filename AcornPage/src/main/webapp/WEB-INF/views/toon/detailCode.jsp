@@ -123,7 +123,7 @@
 						<span class="${tmp.commcode }"> <strong>${tmp.likeCount }</strong></span>
 						<c:if test="${id == tmp.id}">
 							<span><a href="#" onclick="cmDelete(${tmp.num});"><button type="button" class="deleteBtn">삭제</button></a></span>
-							<span><a href="commentUpdate.do?commcode=${tmp.commcode}&id=${tmp.id}&num=${tmp.num}&title=${dto.title}&code=${tmp.code}"><button type="button" class="updateBtn">수정</button></a></span>
+							<span><a href="#" onclick="cmUpdate(${tmp.num});"><button type="button" class="updateBtn">수정</button></a></span>
 						</c:if>
 						<form style="display:inline;" action="commentlike.do" id="likeForm" method="post">
 						<input type="hidden" name="commcode" value="${tmp.commcode}"/>
@@ -142,7 +142,6 @@
 
 	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
 </div>
-
 
 	   <div class="page-display">
       <ul class="pagination">
@@ -221,6 +220,25 @@ var formObj = $("form[role='form']");//폼 가저오기
 			}
 		})
     };
+    
+    function cmUpdate(num){
+    	var num = num;
+    	var result1 = prompt("댓글 수정폼 만들기 귀찮으니까 여기에 새로입력하셈"+num);
+    	if(result1 != ""){
+    		$.ajax({
+    			url: "commentUpdate.do",//이동할 주소
+    			type: "post",
+    			data: {"num": num, "content":result1},
+    			success: function(responseData){
+    				if(responseData==true){
+    					prompt("축하하니다"+num+string);
+    				}
+    			}
+    		});
+    	}else{
+    		prompt("글을 한글자 이상 쓰세요. (그냥 닫으셈 이창은)"+num+string);
+    	};
+    }
     
     $("#starBtn").click(function(){
       var starValue = document.querySelectorAll(".on").length*2;

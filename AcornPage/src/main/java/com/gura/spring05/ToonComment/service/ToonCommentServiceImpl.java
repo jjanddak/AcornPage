@@ -68,5 +68,14 @@ public class ToonCommentServiceImpl implements ToonCommentService{
 		return true;
 	}
 
+	@Override
+	public boolean updateComment(HttpServletRequest request, int num, String content) {
+		ToonCommentDto dto=new ToonCommentDto();
+		dto.setNum(num);
+		dto.setContent(content);
+		dao.UpdateComment(dto);
+		return true;
+	}
+
 
 }

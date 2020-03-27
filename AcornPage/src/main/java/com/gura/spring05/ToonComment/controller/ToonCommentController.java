@@ -55,6 +55,7 @@ public class ToonCommentController<toonCommentDto> {
 		 
 			return map;
 		}
+		
 	//댓글 삭제 요청 처리
 	@ResponseBody
 	@RequestMapping(value = "/toon/commentDelete", method=RequestMethod.POST)
@@ -63,14 +64,12 @@ public class ToonCommentController<toonCommentDto> {
 		
 		return isDel;
 	}
-//	//댓글 수정폼 요청처리 (임시)
-//	@RequestMapping(value = "/toon/comment_insert", 
-//			method = RequestMethod.POST)
-//	public ModelAndView authUpdateCommentForm(HttpServletRequest request) throws UnsupportedEncodingException {
-//		service.saveComment(request);
-//		String code=URLEncoder.encode((String)request.getParameter("code"),"UTF-8"); 
-//		
-//		
-//		return new ModelAndView("redirect:/toon/detailCode.do?title="+"바보"+"&code="+code);
-//	}
+	
+	//댓글 수정폼 요청처리 (임시)
+	@ResponseBody
+	@RequestMapping(value = "/toon/commentUpdate", method = RequestMethod.POST)
+	public boolean authUpdateComment(HttpServletRequest request,@RequestParam int num,@RequestParam String content){
+		boolean asdf=service.updateComment(request,num,content);
+		return asdf;
+	}
 }

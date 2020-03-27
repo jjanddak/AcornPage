@@ -60,4 +60,9 @@
 	<delete id="deleteComment" parameterType="int">
 		DELETE FROM toon_comment WHERE num=#{num}
 	</delete>
+	<update id="updateComment" parameterType="CommentLikeDto">
+		UPDATE toon_comment
+		set content=#{content}
+		where num=#{num}
+	</update>
 </mapper>
