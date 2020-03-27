@@ -120,7 +120,11 @@
 					<dt>				
 						<span>${tmp.id }</span>
 						<span>${tmp.regdate }</span>
-						<span class="${tmp.commcode }">${tmp.likeCount }</span>
+						<span class="${tmp.commcode }"> <strong>${tmp.likeCount }</strong></span>
+						<c:if test="${id == tmp.id}">
+							<span><a href="commentDelete.do?commcode=${tmp.commcode}&id=${tmp.id}&num=${tmp.num}&title=${dto.title}&code=${tmp.code}"><button>삭제</button></a></span>
+							<span><a href="commentUpdate.do?commcode=${tmp.commcode}&id=${tmp.id}&num=${tmp.num}&title=${dto.title}&code=${tmp.code}"><button>수정</button></a></span>
+						</c:if>
 						<form style="display:inline;" action="commentlike.do" id="likeForm" method="post">
 						<input type="hidden" name="commcode" value="${tmp.commcode}"/>
 						<input type="hidden" name="code" value="${tmp.code}"/>

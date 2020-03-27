@@ -82,6 +82,11 @@ public class ToonCommentDaoImpl implements ToonCommentDao{
 		
 		return session.selectList("toonComment.getCommentLike",dto);
 	}
+
+	@Override
+	public void deleteComment(ToonCommentDto dto) {
+		session.delete("toonComment.deleteComment", dto);
+	}
 	
 
 }

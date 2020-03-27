@@ -57,4 +57,7 @@
 	<select id="checkLikeCount" parameterType="String" resultType="int">
 		select likecount from toon_comment where commcode=#{commcode}
 	</select>
+	<delete id="deleteComment" parameterType="toonCommentDto">
+		DELETE FROM toon_comment WHERE code=#{code} AND commcode=#{commcode} AND num=#{num} AND id=#{id} 
+	</delete>
 </mapper>

@@ -62,5 +62,15 @@ public class ToonCommentServiceImpl implements ToonCommentService{
 		}
 	}
 
+	@Override
+	public void deleteComment(HttpServletRequest request, ToonCommentDto dto, String id) {
+		if(id.equals(dto.getId())) {
+			dao.deleteComment(dto);
+			System.out.println("성공");
+		}else {
+			System.out.println("id: "+id+" //  dto id: "+dto.getId());
+		}
+	}
+
 
 }

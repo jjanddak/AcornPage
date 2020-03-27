@@ -24,7 +24,7 @@ import com.gura.spring05.toon.dto.CommentLikeDto;
 import com.gura.spring05.toon.dto.ToonCommentDto;
 
 @Controller
-public class ToonCommentController {
+public class ToonCommentController<toonCommentDto> {
 	@Autowired 
 	private ToonCommentService service;
 	
@@ -55,4 +55,20 @@ public class ToonCommentController {
 		 
 			return map;
 		}
+	//댓글 삭제 요청 처리
+	@RequestMapping(value = "/toon/commentDelete")
+	public ModelAndView authCommentDelete(HttpServletRequest request,@ModelAttribute("dto") @RequestParam String commcode,@RequestParam int num,@RequestParam String code,@RequestParam String id,@RequestParam String title) throws UnsupportedEncodingException {
+		ToonCommentDto dto=new ToonCommentDto();
+		dto.setCode(code);
+		dto.setCommcode(commcode);
+		dto.setNum(num);
+		dto.setId(id);
+		
+		id = (String) request.getSession().getAttribute("id");
+		service.deleteComment(request,dto,id);
+		String coder=URLEncoder.encode((String)request.getParameter("code"),"UTF-8"); 
+		String param=URLEncoder.encode(title,"UTF-8");
+		
+		return new ModelAndView("toon/detailCode.do?title="+param+"&code="+coder);
+	}
 }
