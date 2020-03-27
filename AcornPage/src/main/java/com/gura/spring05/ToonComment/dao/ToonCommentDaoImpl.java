@@ -84,8 +84,8 @@ public class ToonCommentDaoImpl implements ToonCommentDao{
 	}
 
 	@Override
-	public void deleteComment(ToonCommentDto dto) {
-		session.delete("toonComment.deleteComment", dto);
+	public void deleteComment(int num) {
+		session.delete("toonComment.deleteComment", num);
 	}
 	
 

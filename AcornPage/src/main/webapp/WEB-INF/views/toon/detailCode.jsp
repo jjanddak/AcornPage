@@ -116,14 +116,14 @@
 	</div>
 		<ul>
 			<c:forEach items="${toonCommentList }" var="tmp">
-				<dl>
+				<dl class="${tmp.num}">
 					<dt>				
 						<span>${tmp.id }</span>
 						<span>${tmp.regdate }</span>
 						<span class="${tmp.commcode }"> <strong>${tmp.likeCount }</strong></span>
 						<c:if test="${id == tmp.id}">
-							<span><a href="commentDelete.do?commcode=${tmp.commcode}&id=${tmp.id}&num=${tmp.num}&title=${dto.title}&code=${tmp.code}"><button>삭제</button></a></span>
-							<span><a href="commentUpdate.do?commcode=${tmp.commcode}&id=${tmp.id}&num=${tmp.num}&title=${dto.title}&code=${tmp.code}"><button>수정</button></a></span>
+							<span><a href="#" onclick="cmDelete(${tmp.num});"><button type="button" class="deleteBtn">삭제</button></a></span>
+							<span><a href="commentUpdate.do?commcode=${tmp.commcode}&id=${tmp.id}&num=${tmp.num}&title=${dto.title}&code=${tmp.code}"><button type="button" class="updateBtn">수정</button></a></span>
 						</c:if>
 						<form style="display:inline;" action="commentlike.do" id="likeForm" method="post">
 						<input type="hidden" name="commcode" value="${tmp.commcode}"/>
@@ -208,6 +208,19 @@ var formObj = $("form[role='form']");//폼 가저오기
         return false;
     });
     
+    function cmDelete(num){
+    		var num=num;
+    	$.ajax({
+			url: "commentDelete.do",//이동할 주소
+			type: "post",
+			data: {"num": num},
+			success: function(responseData){
+				if(responseData==true){
+					$("."+num).remove();
+				}	
+			}
+		})
+    };
     
     $("#starBtn").click(function(){
       var starValue = document.querySelectorAll(".on").length*2;

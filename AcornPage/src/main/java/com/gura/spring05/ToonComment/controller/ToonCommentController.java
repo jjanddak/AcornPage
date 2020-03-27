@@ -56,19 +56,21 @@ public class ToonCommentController<toonCommentDto> {
 			return map;
 		}
 	//댓글 삭제 요청 처리
-	@RequestMapping(value = "/toon/commentDelete")
-	public ModelAndView authCommentDelete(HttpServletRequest request,@ModelAttribute("dto") @RequestParam String commcode,@RequestParam int num,@RequestParam String code,@RequestParam String id,@RequestParam String title) throws UnsupportedEncodingException {
-		ToonCommentDto dto=new ToonCommentDto();
-		dto.setCode(code);
-		dto.setCommcode(commcode);
-		dto.setNum(num);
-		dto.setId(id);
+	@ResponseBody
+	@RequestMapping(value = "/toon/commentDelete", method=RequestMethod.POST)
+	public boolean authCommentDelete(HttpServletRequest request,@RequestParam int num){
+		boolean isDel=service.deleteComment(request,num);
 		
-		id = (String) request.getSession().getAttribute("id");
-		service.deleteComment(request,dto,id);
-		String coder=URLEncoder.encode((String)request.getParameter("code"),"UTF-8"); 
-		String param=URLEncoder.encode(title,"UTF-8");
-		
-		return new ModelAndView("toon/detailCode.do?title="+param+"&code="+coder);
+		return isDel;
 	}
+//	//댓글 수정폼 요청처리 (임시)
+//	@RequestMapping(value = "/toon/comment_insert", 
+//			method = RequestMethod.POST)
+//	public ModelAndView authUpdateCommentForm(HttpServletRequest request) throws UnsupportedEncodingException {
+//		service.saveComment(request);
+//		String code=URLEncoder.encode((String)request.getParameter("code"),"UTF-8"); 
+//		
+//		
+//		return new ModelAndView("redirect:/toon/detailCode.do?title="+"바보"+"&code="+code);
+//	}
 }

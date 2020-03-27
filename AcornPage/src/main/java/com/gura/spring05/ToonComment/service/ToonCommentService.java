@@ -11,6 +11,6 @@ public interface ToonCommentService {
 
 	public boolean addLikeCount(HttpServletRequest request,CommentLikeDto dto);
 
-	public void deleteComment(HttpServletRequest request, ToonCommentDto dto, String id);
+	public boolean deleteComment(HttpServletRequest request, int num);
 	
 }
