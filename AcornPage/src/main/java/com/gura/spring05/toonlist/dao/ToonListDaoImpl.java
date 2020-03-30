@@ -122,9 +122,6 @@ public class ToonListDaoImpl implements ToonListDao{
 		
 		return session.selectOne("toon.getDetailInfo", title);
 	}
-	public List<ToonListDto> getUserStarList(ToonListDto dto) {
-		return session.selectList("toon.getUserStarList", dto);
-	}
 
 	@Override
 	public String havePrev(LibraryDto dto) {
@@ -169,4 +166,15 @@ public class ToonListDaoImpl implements ToonListDao{
 		return session.selectOne("toon.getLastCode",id);
 	}
 
+	@Override
+	public void toonupdate(ToonListDto dto) {
+		session.update("toon.toonListUpdate",dto);
+		session.update("toon.toonDetailUpdate",dto);
+	}
+
+	@Override
+	public List<ToonListDto> getMyToonList(String id) {
+		return session.selectList("toon.getMyToonList",id);
+	}
+	
 }

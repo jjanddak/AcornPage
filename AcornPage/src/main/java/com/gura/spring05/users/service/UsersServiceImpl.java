@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.users.dao.UsersDao;
 import com.gura.spring05.users.dto.UsersDto;
 
@@ -132,6 +133,14 @@ public class UsersServiceImpl implements UsersService{
 	@Override
 	public void deleteUser(String id) {
 		dao.delete(id);
+	}
+
+	@Override
+	public void userStarList(HttpServletRequest request, String id) {
+		ToonListDto dto=new ToonListDto();
+		dto.setId(id);
+		List<ToonListDto> list=dao.getUserStarList(dto);
+		request.setAttribute("list", list);
 	}
 
 }

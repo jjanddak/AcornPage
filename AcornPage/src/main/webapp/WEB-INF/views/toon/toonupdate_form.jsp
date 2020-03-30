@@ -1,46 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%--
+	[ 파일 업로드 처리 하는 방법 ]
+	
+	1. form 속성에 method="post" enctype="multipart/form-data"
+	2. input type="file"
+	3. commons-io.jar , commons-fileupload.jar 라이브러리를  
+	    WEB-INF/lib  폴더에 붙여 넣기해서 사용할 준비하기
+	4. WebContent/upload  폴더 만들기 
+	5. upload.jsp 에서 파일 업로드에 관련된 비즈니스 로직 처리 하기 
+ --%>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/cafe/private/insertform.jsp</title>
+<title>acornpage</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
-<style>
-	/* textarea 의 크기가 SmartEditor 의 크기가 된다. */
-	#content{
-		display: none;
-		width: 100%;
-		height: 400px;
-	}
-</style>
 </head>
 <body>
 <jsp:include page="../include/navbar.jsp">
-	<jsp:param value="cafe" name="category"/>
+	<jsp:param value="file" name="category"/>
 </jsp:include>
-<div class="container">
-	<ol class="breadcrumb">
-		<li><a href="${pageContext.request.contextPath }/cafe/list.do">목록</a></li>
-		<li>새글 작성</li>
-	</ol>
-	<form action="insert.do" method="post">
-		<div class="form-group">
-			<label for="writer">작성자</label>
-			<input class="form-control" type="text" value="${id }" disabled/>
+<div class="contentwrapper">
+   <div class="container content">
+		<div class="container">
+			<h1>회차 업로드</h1>
+			<form action="toonupdate.do" method="post" enctype="multipart/form-data">
+				<div class="form-group"> 
+					<label for="num">회차</label>
+					<input class="form-control" type="text" 
+						name="num" id="num" value="${dto.num}" readOnly/>
+				</div>
+				<div class="form-group">
+					<label for="title">제목</label>
+					<input class="form-control" type="text" 
+						name="title" id="title" value="${dto.title}" readOnly/>
+				</div>
+				<div class="form-group">
+					<label for="writer">작가명</label>
+					<input class="form-control" type="text" 
+						name="writer" id="writer" value="${id}" readOnly/>
+				</div>
+				<div class="form-group">
+					<label for="content">내용</label>
+					<textarea class="form-control" name="content" id="content" cols="30" rows="10">${dto.content }</textarea>
+				</div>
+				<button class="btn btn-primary" type="submit" onclick="submitContents(this);">업로드</button>
+				<button class="btn btn-warning" type="reset">취소</button>	
+			</form>
 		</div>
-		<div class="form-group">
-			<label for="title">제목</label>
-			<input class="form-control" type="text" 
-				name="title" id="title"/>
-		</div>
-		<div class="form-group">
-			<label for="content">내용</label>
-			<textarea class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
-		</div>
-		<button class="btn btn-primary" type="submit" onclick="submitContents(this);">저장</button>
-		<button class="btn btn-warning" type="reset">취소</button>
-	</form>
+	</div>
 </div>
 <%--
 	[ SmartEditor 를 사용하기 위한 설정 ]
@@ -112,13 +121,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

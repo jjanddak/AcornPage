@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.ToonComment.dao.ToonCommentDao;
-import com.gura.spring05.cafe.dto.CafeCommentDto;
 import com.gura.spring05.toon.dto.ToonCommentDto;
 import com.gura.spring05.toonlist.service.ToonListService;
 

@@ -45,8 +45,6 @@ public interface ToonListDao {
 	
 	public ToonDetailDto getDetailInfo(String title);
 
-	public List<ToonListDto> getUserStarList(ToonListDto dto);
-
 	public String haveNext(LibraryDto dto);
 	
 	public String havePrev(LibraryDto dto);
@@ -60,4 +58,8 @@ public interface ToonListDao {
 	public void lastRead(UsersDto dto);
 	
 	public String getLastCode(String id);
+
+	public void toonupdate(ToonListDto dto);
+
+	public List<ToonListDto> getMyToonList(String id);
 }

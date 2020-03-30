@@ -21,6 +21,7 @@ public interface UsersService {
 	public void updatePassword(UsersDto dto, ModelAndView mView);
 	public void updateUser(UsersDto dto);
 	public void deleteUser(String id);
+	public void userStarList(HttpServletRequest request, String id);
 }
 
 

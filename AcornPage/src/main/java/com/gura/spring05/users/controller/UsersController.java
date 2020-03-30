@@ -143,10 +143,20 @@ public class UsersController {
 		//UsersService 객체를 이용해서 개인정보를 ModelAndView 객체에 담기도록 한다.
 		service.showInfo(id, mView);
 		toonService.getMyToon(id, mView);
+		toonService.getMyToonList(id, request);
 		//view page 정보를 담고 
 		mView.setViewName("users/info");
 		return mView;//ModelAndView 객체를 리턴해주기 
 	}
+	
+	
+	@RequestMapping("/users/userStarList")
+	public ModelAndView authStarSearch(HttpServletRequest request, @RequestParam String id) {
+		service.userStarList(request, id);
+		
+		return new ModelAndView("users/userStarList");
+	}
+	
 	
 	/*
 	 *  [ 파일 업로드 설정 ]

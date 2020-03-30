@@ -1,9 +1,12 @@
 package com.gura.spring05.users.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.users.dto.UsersDto;
 
 @Repository
@@ -69,6 +72,11 @@ public class UsersDaoImpl implements UsersDao{
 		
 		return session.selectOne("users.getWallet", inputId);
 		
+	}
+
+	@Override
+	public List<ToonListDto> getUserStarList(ToonListDto dto) {
+		return session.selectList("users.getUserStarList", dto);
 	}
 
 }

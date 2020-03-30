@@ -43,13 +43,6 @@ public class ToonListController {
 		
 	}
 	
-	@RequestMapping("/toon/userStarList")
-	public ModelAndView authStarSearch(HttpServletRequest request, @RequestParam String id) {
-		service.userStarList(request, id);
-		
-		return new ModelAndView("toon/userStarList");
-	}
-	
 	//만화를 눌렀을때 전체 화가 나오는 리스트 로직
 	@RequestMapping("/toon/selectedDetail")
 	public ModelAndView detailList(HttpServletRequest request,@RequestParam String title){

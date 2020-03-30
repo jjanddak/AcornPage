@@ -1,10 +1,11 @@
+drop table library;
+drop table toondetail;
 drop table toonlist;
 drop table star;
-drop table library;
 drop table toon_comment;
 drop table commentlike;
 drop table users;
-drop table toondetail;
+
 
 
 drop sequence toonlist_seq;
@@ -24,14 +25,14 @@ create sequence commentlike_seq;
 
 
 create table toondetail
-(title varchar2(100),
-writer varchar2(100),
-info varchar2(100),
+(title varchar2(100) not null primary key,
+writer varchar2(100) not null,
+info varchar2(100) not null,
 regdate date,
 hashtag varchar2(100) ,
-toonovel varchar2(100),
+toonovel varchar2(100) not null,
 thumb varchar2(100),
-permit varchar2(10)
+permit varchar2(100) 
 );
 
 insert into toondetail values('원피스','김준서','동료를 모아 모험을 떠나는 만화',sysdate,'코믹','toon',null,'Y');
@@ -41,13 +42,13 @@ insert into toondetail values('클레이모어','윤지혜','졔작가의 클레
 
 
 create table toonlist
-(num number , 
-title varchar2(100) , 
-writer varchar2(100) , 
-content clob , 
+(num number not null, 
+title varchar2(100) not null, 
+writer varchar2(100) not null, 
+content clob not null, 
 regdate date , 
-code varchar2(50) primary key,
-permit varchar2(10)
+code varchar2(50) not null primary key,
+permit varchar2(100)
 );
 
 
@@ -59,9 +60,9 @@ insert into toonlist values(1,'블리치','백종혁','블리치1화content',sys
 insert into toonlist values(2,'블리치','백종혁','블리치2화content',sysdate,'블리치2','Y');
 insert into toonlist values(3,'블리치','백종혁','블리치3화content',sysdate,'블리치3','Y');
 
-insert into toonlist values(1,'나루토','백종혁','나루토1화content',sysdate,'나루토1','N');
-insert into toonlist values(2,'나루토','백종혁','나루토2화content',sysdate,'나루토2','N');
-insert into toonlist values(3,'나루토','백종혁','나루토3화content',sysdate,'나루토3','N');
+insert into toonlist values(1,'나루토','김대희','나루토1화content',sysdate,'나루토1','N');
+insert into toonlist values(2,'나루토','김대희','나루토2화content',sysdate,'나루토2','N');
+insert into toonlist values(3,'나루토','김대희','나루토3화content',sysdate,'나루토3','N');
 
 insert into toonList values(1,'클레이모어','윤지혜','클레이모어1화content',sysdate,'클레이모어1','Y');
 insert into toonList values(2,'클레이모어','윤지혜','클레이모어2화content',sysdate,'클레이모어2','Y');
@@ -69,9 +70,9 @@ insert into toonList values(3,'클레이모어','윤지혜','클레이모어3화
 
 create table users 
 (num number,
-id varchar2(100) primary key,
+id varchar2(100) primary key not null,
 pwd varchar2(100) not null,
-email varchar2(100),
+email varchar2(100) not null,
 wallet number check(wallet>=0),
 isWriter varchar2(20),
 profile varchar2(100),
@@ -79,14 +80,18 @@ regdate date,
 lastread varchar2(50)
 );
 
-insert into users values(1,'kapman','1234','kapman@naver.com',3000,'N',null,sysdate,null);
-insert into users values(2,'gura','1234','gura@naver.com',3000,'N',null,sysdate,null);
-insert into users values(3,'monkey','1234','mon@naver.com',3000,'N',null,sysdate,null);
+insert into users values(1,'kapman','1','kapman@naver.com',3000,'N',null,sysdate,null);
+insert into users values(2,'gura','1','gura@naver.com',3000,'N',null,sysdate,null);
+insert into users values(3,'monkey','1','mon@naver.com',3000,'N',null,sysdate,null);
+insert into users values(4,'백종혁','1','mon@naver.com',3000,'N',null,sysdate,null);
+insert into users values(5,'윤지혜','1','mon@naver.com',3000,'N',null,sysdate,null);
+insert into users values(6,'김준서','1','mon@naver.com',3000,'N',null,sysdate,null);
+insert into users values(7,'김대희','1','mon@naver.com',3000,'N',null,sysdate,null);
 
 create table star
-(num number primary key,
-id varchar2(100),
-code varchar2(50), 
+(num number,
+id varchar2(100) not null,
+code varchar2(50) not null,  
 starvalue number
 );
 
@@ -100,7 +105,7 @@ insert into star values(6,'monkey','원피스3',5);
 create table library
 (num number,
 id varchar2(100),
-code varchar2(50),
+code varchar2(50) references toonlist(code) ON DELETE CASCADE,
 regdate date
 );
 
@@ -113,9 +118,9 @@ create table toon_comment
 (num number, 
 id varchar2(100),
 code varchar2(50), 
-content varchar2(100), 
+content varchar2(100) not null, 
 likeCount number,
-commcode varchar2(50),
+commcode varchar2(50) not null primary key,
 regdate date
 );
 

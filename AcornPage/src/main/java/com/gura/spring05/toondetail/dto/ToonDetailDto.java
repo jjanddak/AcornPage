@@ -9,11 +9,13 @@ public class ToonDetailDto {
 	private String toonovel;
 	private String thumb;
 	private double starvalue;
+	private String permit;
 	
 	public ToonDetailDto() {}
 
+	
 	public ToonDetailDto(String title, String writer, String info, String regdate, String hashtag, String toonovel,
-			String thumb, double starvalue) {
+			String thumb, double starvalue, String permit) {
 		super();
 		this.title = title;
 		this.writer = writer;
@@ -23,7 +25,19 @@ public class ToonDetailDto {
 		this.toonovel = toonovel;
 		this.thumb = thumb;
 		this.starvalue = starvalue;
+		this.permit = permit;
 	}
+
+
+	public String getPermit() {
+		return permit;
+	}
+
+
+	public void setPermit(String permit) {
+		this.permit = permit;
+	}
+
 
 	public String getTitle() {
 		return title;

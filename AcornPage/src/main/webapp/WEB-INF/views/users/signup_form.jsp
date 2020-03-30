@@ -54,11 +54,6 @@
 			<label class="control-label" for="wallet">잔액</label>
 			<p>3000원</p>
 		</div>
-		<div class="form-group">
-			<label class="control-label" for="isWriter">당신은 누구입니까?</label><br/>
-				<input type="radio" name="isWriter" value="Y"/>작가<br/>
-				<input type="radio" name="isWriter" value="N" checked="checked"/>독자	
-		</div>
 		<button disabled="disabled" class="btn btn-primary" type="submit">가입</button>
 	</form>
 </div>

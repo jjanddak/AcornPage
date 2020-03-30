@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gura.spring05.file.dto.FileDto;
+import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.toonlist.service.ToonListService;
 import com.gura.spring05.toonup.dto.NewToonupDto;
 import com.gura.spring05.toonup.dto.ToonupDto;
@@ -28,7 +28,7 @@ public class ToonupController {
 	
 	//툰리스트 업로드 폼
 	@RequestMapping("/toon/toonup")
-	public ModelAndView UploadForm(HttpServletRequest request, ModelAndView mView, @RequestParam String title) {
+	public ModelAndView authUploadForm(HttpServletRequest request, ModelAndView mView, @RequestParam String title) {
 		service.getLastNum(request, mView, title);
 		
 		mView.setViewName("toon/toonup");
@@ -61,11 +61,38 @@ public class ToonupController {
 	//신작 업로드 요청 처리
 	@RequestMapping(value = "/toon/newtoonupload", method = RequestMethod.POST)
 	public ModelAndView authUpload(HttpServletRequest request,
-			@ModelAttribute NewToonupDto dto) {
+			@ModelAttribute NewToonupDto dto, @ModelAttribute ToonupDto dto2) {
+		String writer=(String)
+				request.getSession().getAttribute("id");
 		
 		service.newToonupload(request, dto);
 		
+		//ToonupDto 객체에 담고 
+//		ToonupDto dto2=new ToonupDto();
+		dto2.setWriter(writer);
+		
+		//서비스를 이용해서 DB 에 저장
+		service.saveToon(dto2);
+		service.writerLibrary(dto2);
+		
 		return new ModelAndView("redirect:/users/info.do");
 	}
+	
+	@RequestMapping("/toon/toonupdate_form")
+	public ModelAndView authUpdateToonform(HttpServletRequest request,@RequestParam String title, ToonListDto dto) {
+		
+		service.getLastCodeDetail(request, title);
+		
+		return new ModelAndView("toon/toonupdate_form");
+	}
+	
+	@RequestMapping("/toon/toonupdate")
+	public ModelAndView authUpdateToon(HttpServletRequest request, @ModelAttribute ToonListDto dto) {
+		
+		service.toonUpdate(request, dto);
+		
+		return new ModelAndView("redirect:/users/info.do");		
+	}
+	
 
 }

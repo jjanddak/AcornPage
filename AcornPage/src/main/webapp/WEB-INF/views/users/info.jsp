@@ -24,6 +24,12 @@
 	.table tr th{
 		background-color:#f9f9f9;
 	}
+	.permitlist{
+		padding-bottom: 5px;
+	}
+	.permitlist:hover{
+		background-color: #eee;
+	}
 </style>
 </head>
 <body>
@@ -45,6 +51,9 @@
 					<c:choose>
 						<c:when test="${dto.isWriter eq 'Y' }">
 						<td>작가(writer)</td>
+						</c:when>
+						<c:when test="${dto.isWriter eq 'admin' }">
+						<td>관리자(admin)</td>
 						</c:when>
 						<c:otherwise>
 						<td>독자(reader)</td>
@@ -82,7 +91,7 @@
 			<tr>
 				<th>별점목록</th>
 				<td>
-					<a style="color:blue;" href="${pageContext.request.contextPath }/toon/userStarList.do?id=${id }">
+					<a style="color:blue;" href="${pageContext.request.contextPath }/users/userStarList.do?id=${id }">
 						<strong>${id }</strong>님의 별점 리스트 이동하기
 					</a>
 				</td>
@@ -93,9 +102,16 @@
 	</div>
 	<div class="container content">
 		<div>
+			<c:if test="${dto.isWriter eq 'N' }">
+				<button class="btn btn-primary" style="width:100%; font-size:20px; margin-bottom:20px;">
+					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">내 원고로 작가 신청하기</a>
+				</button>
+			</c:if>
+		</div>
+		<div>
 			<c:if test="${dto.isWriter eq 'Y' }">
 				<button class="btn btn-primary" style="width:100%; font-size:20px; margin-bottom:20px;">
-					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">신작 업로드</a>
+					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">신작 원고 전송</a>
 				</button>
 			</c:if>
 		</div>
@@ -103,34 +119,167 @@
 			<div class="bestList">
         		 <ul>
 				<c:forEach var="tmp" items="${myToon }">
-					<a href="${pageContext.request.contextPath }/toon/toonup.do?title=${tmp.title }">
-	               <li>
-	                  <div class="list">
-						<div class="imgwrapper">
-			                 <c:choose>
-			                    <c:when test="${empty tmp.thumb}">
-						           <img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>                                           	
-					            </c:when>
-					            <c:otherwise>
-					               <img class="img-thumbnail" src="${pageContext.request.contextPath}${tmp.thumb }" alt="logo"/>
-					            </c:otherwise>
-					         </c:choose>
-						</div>
-	                     <div class="textwrapper">
-	                        <p class="list-title">${tmp.title }</p>
-							<p class="list-writer">${tmp.writer }</p>
-							<p class="list-info">${tmp.info }</p>
-							<p style="position:absolute; right:-55px; bottom:20px;">
-								<button class="btn btn-danger">
-									<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
-										onclick="return confirm('${tmp.title} 작품을 삭제하시겠습니까?');">
-										삭제
-									</a>
-								</button>
-							</p>
-	                     </div>
-	                  </div>
-	               </li>
+					<c:choose>
+						<c:when test="${tmp.permit eq 'N' }">
+			               	<li>
+			                  <div class="list">
+								<div class="imgwrapper">
+					                 <c:choose>
+					                    <c:when test="${empty tmp.thumb}">
+								           <img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>                                           	
+							            </c:when>
+							            <c:otherwise>
+							               <img class="img-thumbnail" src="${pageContext.request.contextPath}${tmp.thumb }" alt="logo"/>
+							            </c:otherwise>
+							         </c:choose>
+								</div>
+			                     <div class="textwrapper">
+			                        <p style="position:absolute; right:-45px;">승인대기중</p>
+			                        <p class="list-title">${tmp.title }</p>
+									<p class="list-writer">${tmp.writer }</p>
+									<p class="list-info">${tmp.info }</p>	
+									<p style="position:absolute; right:-55px; bottom:15px;">
+										<button class="btn btn-danger">
+											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
+												onclick="return confirm('${tmp.title} 의 승인 신청을 취소하시겠습니까?');">
+												삭제
+											</a>
+										</button>
+									</p>
+			                     </div>
+			                  </div>
+			               </li>
+			               <c:forEach var="list" items="${myToonList }">
+			               <c:if test="${tmp.title eq list.title }">
+			               		<c:choose>
+			               			<c:when test="${list.permit eq 'N' }">
+			               				<div class="permitlist">
+				               				<span>승인 대기중 - ${list.code }</span>
+					               		</div>
+			               			</c:when>
+			               			<c:when test="${list.permit ne 'Y' }">
+			               				<div class="permitlist">
+			               					반려됨 - ${list.code }<br/>
+			               					반려사유 : ${list.permit }
+			               				</div>
+			               			</c:when>
+			               		</c:choose>
+			               </c:if>			               
+		                   </c:forEach>	
+						</c:when>
+						<c:when test="${tmp.permit eq 'Y' }">
+			               	<li>
+			                  <div class="list">
+								<div class="imgwrapper">
+					                 <c:choose>
+					                    <c:when test="${empty tmp.thumb}">
+								           <img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>                                           	
+							            </c:when>
+							            <c:otherwise>
+							               <img class="img-thumbnail" src="${pageContext.request.contextPath}${tmp.thumb }" alt="logo"/>
+							            </c:otherwise>
+							         </c:choose>
+								</div>
+			                     <div class="textwrapper">
+			                        <p style="position:absolute; right:-45px;">연재중</p>
+			                        <p class="list-title">${tmp.title }</p>
+									<p class="list-writer">${tmp.writer }</p>
+									<p class="list-info">${tmp.info }</p>	
+									<p style="position:absolute; right:10px; bottom:15px;">
+										<button class="btn btn-info">											
+											<a style="color:#fff;" href="${pageContext.request.contextPath }/toon/toonup.do?title=${tmp.title }">
+												연재
+											</a>
+										</button>
+									</p>
+									<p style="position:absolute; right:-55px; bottom:15px;">
+										<button class="btn btn-danger">
+											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
+												onclick="return confirm('${tmp.title} 작품을 삭제하시겠습니까?');">
+												삭제
+											</a>
+										</button>
+									</p>
+			                     </div>	                   	
+			                  </div>
+			               </li>
+			               <c:forEach var="list" items="${myToonList }">
+			               <c:if test="${tmp.title eq list.title }">
+			               		<c:choose>
+			               			<c:when test="${list.permit eq 'N' }">
+			               			<div>
+			               				<div class="permitlist">
+				               				<span>승인 대기중 - ${list.code }</span>
+					               		</div>
+					               	</div>
+			               			</c:when>
+			               			<c:when test="${list.permit ne 'Y' }">
+			               			<div>
+			               				<div class="permitlist">
+			               					반려됨 - ${list.code }<br/>	
+			               					반려사유 : ${list.permit }
+			               				</div>
+			               			</div>
+			               			</c:when>
+			               		</c:choose>
+			               </c:if>			               
+		                   </c:forEach>	
+						</c:when>
+						<c:otherwise>
+			               	<li>
+			                  <div class="list">
+								<div class="imgwrapper">
+					                 <c:choose>
+					                    <c:when test="${empty tmp.thumb}">
+								           <img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>                                           	
+							            </c:when>
+							            <c:otherwise>
+							               <img class="img-thumbnail" src="${pageContext.request.contextPath}${tmp.thumb }" alt="logo"/>
+							            </c:otherwise>
+							         </c:choose>
+								</div>
+			                     <div class="textwrapper">
+			                        <p style="position:absolute; right:-45px;">반려됨</p>	
+			                        <p class="list-title">${tmp.title }</p>
+									<p class="list-writer">	${tmp.writer }</p>
+									<p class="list-info">${tmp.info }</p>
+									<p style="position:absolute; right:10px; bottom:15px;">
+										<button class="btn btn-warning">
+											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/toonupdate_form.do?title=${tmp.title}">
+												수정
+											</a>
+										</button>
+									</p>
+									<p style="position:absolute; right:-55px; bottom:15px;">
+										<button class="btn btn-danger">
+											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
+												onclick="return confirm('${tmp.title} 작품을 삭제하시겠습니까?');">
+												삭제
+											</a>
+										</button>
+									</p>
+			                     </div>
+			                  </div>
+			               </li>
+			               <c:forEach var="list" items="${myToonList }">
+			               <c:if test="${tmp.title eq list.title }">
+			               		<c:choose>
+			               			<c:when test="${list.permit eq 'N' }">
+			               				<div class="permitlist">
+				               				<span>승인 대기중 - ${list.code }</span>
+					               		</div>
+			               			</c:when>
+			               			<c:when test="${list.permit ne 'Y' }">
+			               				<div class="permitlist">
+			               					반려됨 - ${list.code }<br/>
+			               					반려사유 : ${list.permit }	               					
+			               				</div>
+			               			</c:when>
+			               		</c:choose>
+			               </c:if>			               
+		                   </c:forEach>	
+						</c:otherwise>
+					</c:choose>					
 				</c:forEach>			
 				</ul>
 			</div>	
