@@ -67,8 +67,9 @@ public class ToonCommentController<toonCommentDto> {
 	
 	//댓글 수정폼 요청처리 (임시)
 	@ResponseBody
-	@RequestMapping(value = "/toon/commentUpdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/toon/updateComment", method = RequestMethod.POST)
 	public boolean authUpdateComment(HttpServletRequest request,@RequestParam int num,@RequestParam String content){
+		System.out.println("num: "+num+", content: "+content);
 		boolean asdf=service.updateComment(request,num,content);
 		return asdf;
 	}

@@ -89,8 +89,8 @@ public class ToonCommentDaoImpl implements ToonCommentDao{
 	}
 
 	@Override
-	public void UpdateComment(ToonCommentDto dto) {
-		session.update("toonComment.deleteComment", dto);
+	public void updateComment(ToonCommentDto dto) {
+		session.update("toonComment.updateComment", dto);
 	}
 	
 

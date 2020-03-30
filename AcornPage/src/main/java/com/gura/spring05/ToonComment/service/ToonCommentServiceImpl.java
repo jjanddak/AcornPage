@@ -73,7 +73,7 @@ public class ToonCommentServiceImpl implements ToonCommentService{
 		ToonCommentDto dto=new ToonCommentDto();
 		dto.setNum(num);
 		dto.setContent(content);
-		dao.UpdateComment(dto);
+		dao.updateComment(dto);
 		return true;
 	}
 

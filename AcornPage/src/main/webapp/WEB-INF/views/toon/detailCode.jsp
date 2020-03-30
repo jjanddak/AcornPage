@@ -134,7 +134,7 @@
 						</form>
 					</dt>
 					<dd>
-						<pre>${tmp.content }</pre>
+						<pre class="${tmp.num }pre">${tmp.content }</pre>
 					</dd>
 				</dl>		
 			</c:forEach>
@@ -223,20 +223,21 @@ var formObj = $("form[role='form']");//폼 가저오기
     
     function cmUpdate(num){
     	var num = num;
-    	var result1 = prompt("댓글 수정폼 만들기 귀찮으니까 여기에 새로입력하셈"+num);
+    	var result1 = prompt("여기에 수정할 댓글을 입력하세요"+num);
     	if(result1 != ""){
+    		alert("num: "+num+", result: "+result1)
     		$.ajax({
-    			url: "commentUpdate.do",//이동할 주소
+    			url: "updateComment.do",//이동할 주소
     			type: "post",
     			data: {"num": num, "content":result1},
     			success: function(responseData){
     				if(responseData==true){
-    					prompt("축하하니다"+num+string);
+    					$("."+num+"pre").text(result1);
     				}
     			}
     		});
     	}else{
-    		prompt("글을 한글자 이상 쓰세요. (그냥 닫으셈 이창은)"+num+string);
+    		alert("글을 한글자 이상 쓰세요.");
     	};
     }
     
