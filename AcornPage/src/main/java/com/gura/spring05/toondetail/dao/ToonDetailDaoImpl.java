@@ -60,5 +60,10 @@ public class ToonDetailDaoImpl implements ToonDetailDao{
 	public ToonDetailDto getNoPermitDetail(String title) {
 		
 		return session.selectOne("getNoPermitDetail",title);
+	}
+
+	@Override
+	public void updateDetail(ToonDetailDto dto) {
+		session.update("toon.updateDetail",dto);
 	}		
 }

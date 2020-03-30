@@ -28,7 +28,6 @@ public class ToonDetailDto {
 		this.permit = permit;
 	}
 
-
 	public String getPermit() {
 		return permit;
 	}

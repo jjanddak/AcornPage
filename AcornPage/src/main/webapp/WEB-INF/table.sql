@@ -25,7 +25,7 @@ create sequence commentlike_seq;
 
 
 create table toondetail
-(title varchar2(100) not null primary key,
+(title varchar2(100) not null,
 writer varchar2(100) not null,
 info varchar2(100) not null,
 regdate date,

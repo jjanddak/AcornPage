@@ -52,4 +52,9 @@ public class ToonDetailServiceImp implements ToonDetailService{
 		
 	}
 
+	@Override
+	public void updateDetail(ToonDetailDto dto) {
+		dao.updateDetail(dto);
+	}
+
 }
