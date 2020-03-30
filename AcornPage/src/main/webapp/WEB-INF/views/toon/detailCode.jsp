@@ -123,7 +123,8 @@
 						<span class="${tmp.commcode }"> <strong>${tmp.likeCount }</strong></span>
 						<c:if test="${id == tmp.id}">
 							<span><a href="#" onclick="cmDelete(${tmp.num});"><button type="button" class="deleteBtn">삭제</button></a></span>
-							<span><a href="#" onclick="updateBtn(${tmp.num});"><button type="button" class="updateBtn">수정</button></a></span>
+							<span><a href="#" onclick="updateBtn(${tmp.num});"><button type="button" class="${tmp.num}updateBtn">수정</button></a></span>
+							<span><a href="#" onclick="cancleBtn(${tmp.num});"><button type="button" class="${tmp.num}cancleBtn" style="display:none;">취소</button></a></span>
 						</c:if>
 						<form style="display:inline;" action="commentlike.do" id="likeForm" method="post">
 						<input type="hidden" name="commcode" value="${tmp.commcode}"/>
@@ -134,10 +135,10 @@
 						</form>
 					</dt>
 					<dd>
-						<pre class="${tmp.num }pre">${tmp.content }</pre>
-						<pre class="${tmp.num }pre2" style="display:none;">
-							<input type="text" class="${tmp.num }text" value="${tmp.content }"/>
-							<span><a href="#" onclick="cmUpdate(${tmp.num});"><button type="button" class="cmUpdate(${tmp.num});">입력</button></a></span>
+						<pre class="${tmp.num }pre" >${tmp.content }</pre>
+						<pre class="${tmp.num }pre2" style="display:none; position: relative;">
+							<input type="text" class="${tmp.num }text" value="${tmp.content }" style="position: absolute; left: 10px; width:700px"/>
+							<span><a href="#" onclick="cmUpdate(${tmp.num});"><button type="button" class="cmUpdate(${tmp.num});" style="position: absolute; left: 10px; bottom: 14px;">입력</button></a></span>
 						</pre>
 					</dd>
 				</dl>		
@@ -239,6 +240,8 @@ var formObj = $("form[role='form']");//폼 가저오기
     					$("."+num+"pre").show();
     					$("."+num+"pre").text(result1);
     					$("."+num+"pre2").hide();
+    			    	$("."+num+"updateBtn").show();
+    			    	$("."+num+"cancleBtn").hide();
     				}
     			}
     		});
@@ -251,8 +254,17 @@ var formObj = $("form[role='form']");//폼 가저오기
     	var num=num;
     	$("."+num+"pre2").show();
     	$("."+num+"pre").hide();
+    	$("."+num+"text").focus();
+    	$("."+num+"cancleBtn").show();
+    	$("."+num+"updateBtn").hide();
     };
-    
+    function cancleBtn(num){
+    	var num=num;
+		$("."+num+"pre").show();
+		$("."+num+"pre2").hide();
+    	$("."+num+"updateBtn").show();
+    	$("."+num+"cancleBtn").hide();
+    }
     $("#starBtn").click(function(){
       var starValue = document.querySelectorAll(".on").length*2;
       var starvalue2 = $("#starman")

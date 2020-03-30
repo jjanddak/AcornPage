@@ -69,7 +69,6 @@ public class ToonCommentController<toonCommentDto> {
 	@ResponseBody
 	@RequestMapping(value = "/toon/updateComment", method = RequestMethod.POST)
 	public boolean authUpdateComment(HttpServletRequest request,@RequestParam int num,@RequestParam String content){
-		System.out.println("num: "+num+", content: "+content);
 		boolean asdf=service.updateComment(request,num,content);
 		return asdf;
 	}
