@@ -65,4 +65,9 @@
 		set content=#{content}
 		where num=#{num}
 	</update>
+	<select id="GetUserCommentList" parameterType="String" resultType="toonCommentDto">
+		SELECT *
+		FROM toon_comment
+		WHERE id=#{id}
+	</select>
 </mapper>

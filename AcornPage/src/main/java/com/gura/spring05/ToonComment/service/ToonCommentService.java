@@ -14,5 +14,7 @@ public interface ToonCommentService {
 	public boolean deleteComment(HttpServletRequest request, int num);
 
 	public boolean updateComment(HttpServletRequest request, int num, String content);
+
+	public void GetUserCommentList(HttpServletRequest request, String id);
 	
 }

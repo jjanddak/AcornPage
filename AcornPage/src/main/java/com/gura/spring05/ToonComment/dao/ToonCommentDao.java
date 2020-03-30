@@ -19,6 +19,7 @@ public interface ToonCommentDao {
 	public List<CommentLikeDto> likeList(CommentLikeDto dto);
 	public void deleteComment(int num);
 	public void updateComment(ToonCommentDto dto);
+	public List<ToonCommentDto> GetUserCommentList(String id);
 	
 	
 }

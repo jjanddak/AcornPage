@@ -87,6 +87,14 @@
 					</a>
 				</td>
 			</tr>
+			<tr>
+				<th>댓글목록</th>
+				<td>
+					<a style="color:fuchsia; " href="${pageContext.request.contextPath}/toon/comment_select.do?id=${id }">
+						<strong>${id }</strong>님의 댓글 목록 보기
+					</a>
+				</td>
+			</tr>
 		</table>
 		<button class="btn btn-info"><a style="color:#fff;" href="pwd_updateform.do">비밀번호 수정하기</a></button>
 		<button style="float:right;" class="btn btn-warning"><a href="javascript:deleteConfirm()">회원 탈퇴</a></button>

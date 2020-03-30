@@ -118,7 +118,7 @@
 			<c:forEach items="${toonCommentList }" var="tmp">
 				<dl class="${tmp.num}">
 					<dt>				
-						<span>${tmp.id }</span>
+						<span><a href="${pageContext.request.contextPath}/toon/comment_select.do?id=${tmp.id }">${tmp.id }</a></span>
 						<span>${tmp.regdate }</span>
 						<span class="${tmp.commcode }"> <strong>${tmp.likeCount }</strong></span>
 						<c:if test="${id == tmp.id}">

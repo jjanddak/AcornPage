@@ -1,5 +1,7 @@
 package com.gura.spring05.ToonComment.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +77,13 @@ public class ToonCommentServiceImpl implements ToonCommentService{
 		dto.setContent(content);
 		dao.updateComment(dto);
 		return true;
+	}
+
+	@Override
+	public void GetUserCommentList(HttpServletRequest request, String id) {
+		List<ToonCommentDto> dto=dao.GetUserCommentList(id);
+		request.setAttribute("dto", dto);
+		request.setAttribute("idid", id);
 	}
 
 
