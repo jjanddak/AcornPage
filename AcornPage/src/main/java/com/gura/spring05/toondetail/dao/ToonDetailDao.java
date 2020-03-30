@@ -3,6 +3,7 @@ package com.gura.spring05.toondetail.dao;
 import java.util.List;
 
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
+import com.gura.spring05.toonlist.dto.ToonListDto;
 
 public interface ToonDetailDao {
 
@@ -19,4 +20,8 @@ public interface ToonDetailDao {
 	public void deleteLibrary(String Code);
 	
 	public List<String> getCode(String title);
+	
+	public List<String> needPermit();
+	
+	public ToonDetailDto getNoPermitDetail(String title);
 }

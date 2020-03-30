@@ -84,7 +84,7 @@
 					<li>
 						<div class="list">
 							<div class="imgwrapper">
-								<img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>
+								<img class="img-thumbnail" src="<c:url value='/resources/images/no.png'/>" alt="logo"/>
 							</div>
 							<div class="textwrapper" style="width:70%;">
 								<p class="list-title">${tmp.title }</p>

@@ -33,6 +33,17 @@
 					<p class="list-title">${dto.title }</p>
 					<p class="list-writer">${dto.writer }</p>
 					<p class="list-info">${dto.info }</p>
+					<p style="position:absolute; right:0; top:35px;">
+						<span class="wrap-star">
+							<span class='star-rating'>
+								<span style ="width:<fmt:formatNumber value="${dto.starvalue *10}" pattern=".0"/>%"></span>
+							</span>
+							<c:if test="${dto.starvalue gt 0 }">
+                       			<fmt:formatNumber value="${dto.starvalue }" pattern=".0"/>
+                       		</c:if>
+						</span>
+	                </p>
+	                <p style="position:absolute; right:0; top:62px; color:#999999">연재 시작일: ${dto.regdate }</p>
 				</div>
 			</div>
 		</div>
