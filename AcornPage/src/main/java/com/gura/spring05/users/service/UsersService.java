@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.users.dto.UsersDto;
 
 public interface UsersService {
@@ -18,10 +19,15 @@ public interface UsersService {
 	public void showInfo(String id, ModelAndView mView);
 	public String saveProfileImage(HttpServletRequest request,
 			MultipartFile mFile);
-	public void updatePassword(UsersDto dto, ModelAndView mView);
+	public boolean updatePassword(UsersDto dto, ModelAndView mView);
 	public void updateUser(UsersDto dto);
 	public void deleteUser(String id);
 	public void userStarList(HttpServletRequest request, String id);
+	public void needPermit(HttpServletRequest request);
+	public void permitDetail(HttpServletRequest request,String title);
+	public void permitCode(HttpServletRequest request);
+	public void permit_update(HttpServletRequest request,ToonListDto dto);
+	public void getToonList(HttpServletRequest request);
 }
 
 

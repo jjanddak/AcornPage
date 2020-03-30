@@ -26,13 +26,12 @@
 						<li>
 							<div class="list">
 								<div class="imgwrapper">
-									<img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>
+									<img class="img-thumbnail" src="<c:url value='/resources/images/no.png'/>" alt="logo"/>
 								</div>
 								<div class="textwrapper" style="width:70%;">
 									<p class="list-title">${tmp.title }</p>
 									<p class="list-writer">${tmp.writer }</p>
 									<p class="list-info">${tmp.info }</p>
-									<p style="position:absolute; right:0; top:10px;">연재 시작일: ${tmp.regdate }</p>
 									<p style="position:absolute; right:0; top:35px;">
 										<span class="wrap-star">
 											<span class='star-rating'>
@@ -42,7 +41,8 @@
 			                        			<fmt:formatNumber value="${tmp.starvalue }" pattern=".0"/>
 			                        		</c:if>
 										</span>
-					                </p>  
+					                </p>
+			             		    <p style="position:absolute; right:0; top:62px; color:#999999">연재 시작일: ${tmp.regdate }</p>
 								</div>
 							</div>
 						</li>

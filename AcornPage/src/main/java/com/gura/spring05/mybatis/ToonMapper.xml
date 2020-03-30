@@ -14,7 +14,7 @@
 			WHERE x.code=s.code(+)	
 			GROUP BY x.title
 		) x, toondetail t
-		WHERE t.title=x.title and toonovel='toon'
+		WHERE t.title=x.title and toonovel='toon' and t.permit='Y'
 		ORDER BY starvalue DESC) A
 		where ROWNUM between 1 and 5
 	</select>
@@ -31,7 +31,7 @@
 			WHERE x.code=s.code(+)	
 			GROUP BY x.title
 		) x, toondetail t
-		WHERE t.title=x.title and toonovel='novel'
+		WHERE t.title=x.title and toonovel='novel' and t.permit='Y'
 		ORDER BY starvalue DESC) A
 		where ROWNUM between 1 and 5
 	</select>
@@ -51,8 +51,9 @@
 				GROUP BY x.num
 			) x
 		) x, toonlist t
-		WHERE t.num=x.num 
+		WHERE t.num=x.num  and t.permit='Y'
 		AND title=#{title}
+		order by t.num desc
 	</select>
 	<select id="getCodeDetail" parameterType="toonListDto" resultType="toonListDto">
 		SELECT result1.*
@@ -71,8 +72,8 @@
 	<insert id="buyCodeOne" parameterType="libraryDto">
 		insert into library values(library_seq.nextval,#{id},#{code},sysdate)
 	</insert>
-	<select id="checkCode" parameterType="libraryDto" resultType="libraryDto">
-		select * from library where 
+	<select id="checkCode" parameterType="libraryDto" resultType="String">
+		select code from library where code=#{code} and id=#{id}
 	</select>
 	<select id="getSelectedList" parameterType="String" resultType="toonListDto">
 		select * from toonlist where title=#{title}
@@ -115,7 +116,7 @@
 			WHERE x.code=s.code(+)	
 			GROUP BY x.title
 		) x, toondetail t
-		WHERE t.title=x.title
+		WHERE t.title=x.title and t.permit='Y'
 		AND writer like '%'||#{writer}||'%'
 
 	</select>
@@ -132,9 +133,8 @@
 			WHERE x.code=s.code(+)	
 			GROUP BY x.title
 		) x, toondetail t
-		WHERE t.title=x.title
+		WHERE t.title=x.title and t.permit='Y'
 		AND x.title like '%'||#{title}||'%'
-
 	</select>
 	
 	<select id="getHashtagDetail" parameterType="String"
@@ -149,7 +149,7 @@
 			WHERE x.code=s.code(+)	
 			GROUP BY x.title
 		) x, toondetail t
-		WHERE t.title=x.title
+		WHERE t.title=x.title and t.permit='Y'
 		AND hashtag like '%'||#{hashtag}||'%'
 	</select>	
 		
@@ -183,7 +183,7 @@
 			WHERE x.code=s.code(+)	
 			GROUP BY x.title
 		) x, toondetail t
-		WHERE t.title=x.title
+		WHERE t.title=x.title and t.permit='Y'
 		AND toonovel=#{category}
 <!-- 		select * from toondetail where toonovel=#{category} -->
 	</select>
@@ -199,17 +199,28 @@
 			WHERE x.code=s.code(+)	
 			GROUP BY x.title
 		) x, toondetail t
-		WHERE t.title=x.title
+		WHERE t.title=x.title and t.permit='Y'
 		AND hashtag like '%'||#{category}||'%'
 	</select>
 	
 	<select id="getDetailInfo" parameterType="String" resultType="toonDetailDto">
-		select * from toondetail where title=#{title}
+		SELECT t.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel,thumb, starvalue
+		FROM (
+			SELECT NVL(AVG(starvalue),0) AS starvalue, title
+			FROM (
+				SELECT *
+				FROM toonlist
+			) x, star s
+			WHERE x.code=s.code(+)	
+			GROUP BY x.title
+		) x, toondetail t
+		WHERE t.title=x.title and t.title=#{title}
+		ORDER BY starvalue DESC
 	</select>
 
 	<insert id="newToonup" parameterType="newToonupDto">
 		insert into toondetail values (#{title}, #{writer}, #{info}, sysdate, #{hashtag}, 
-		#{toonovel}, #{thumb},'N')
+		#{toonovel}, #{thumb}, 'N')
 	</insert>
 	
 	<delete id="deleteDetail" parameterType="toonDetailDto">
@@ -265,6 +276,43 @@
 	</update>
 	<select id="getMyToonList" parameterType="String" resultType="toonListDto">
 		select * from toonlist where writer=#{id}
+	</select>
+	<select id="getCode" parameterType="String" resultType="String">
+		select code from toonlist where title=#{title}
+	</select>
+	<select id="needPermit" resultType="String">
+		select title from toonlist where not permit in('Y')
+	</select>
+	<select id="getNoPermitDetail" parameterType="String"
+		resultType="toonDetailDto">
+		SELECT x.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate , hashtag, toonovel,thumb, starvalue
+		FROM (
+			SELECT NVL(AVG(starvalue),0) AS starvalue, title
+			FROM (
+				SELECT *
+				FROM toonlist
+			) x, star s
+			WHERE x.code=s.code(+)	
+			GROUP BY x.title
+		) x, toondetail t
+		WHERE t.title=x.title
+		AND x.title like '%'||#{title}||'%'
+	</select>
+	<select id="permitDetail" parameterType="String" resultType="toonListDto">
+		SELECT num,title,writer,to_char(regdate,'YYYY-MM-DD')as regdate,code from toonlist where title=#{title} and not permit in('Y') order by num asc
+	</select>
+	<select id="permitCode" parameterType="toonListDto" resultType="toonListDto">
+		select num,title,writer,content,to_char(regdate,'YYYY-MM-DD')as regdate,code,permit 
+		from toonlist where title=#{title} and code=#{code}
+	</select>
+	<update id="permit_update" parameterType="toonListDto">
+		update toonlist set permit=#{permit} where title=#{title} and code=#{code}
+	</update>
+	<update id="permit_update_detail" parameterType="toonDetailDto">
+		update toondetail set permit='Y' where title=#{title}
+	</update>
+	<select id="allDetailList" resultType="toonDetailDto">
+		select * from toondetail where permit='Y'
 	</select>
 </mapper>
 

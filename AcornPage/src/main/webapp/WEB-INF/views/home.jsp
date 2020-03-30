@@ -22,7 +22,7 @@
 <div class="contentwrapper">
 	<div class="container content slide"> 
 		<div class="your-class">
-		  <div><img class="mainSlide" src="${pageContext.request.contextPath }/resources/images/stil1.png" alt="mainSlide" /></div>
+		  <div><a href="http://localhost:8888/spring05/toon/selectedDetail.do?title=%EC%A0%80%EB%8A%94%20%EB%8B%B9%EC%8B%A0%EC%9D%98%20%EC%95%84%EB%82%B4%EA%B0%80%20%EC%95%84%EB%8B%88%EC%97%90%EC%9A%94"><img class="mainSlide" src="${pageContext.request.contextPath }/resources/images/stil4.png" alt="mainSlide" /></a></div>
 		  <div><img class="mainSlide" src="${pageContext.request.contextPath }/resources/images/stil2.png" alt="mainSlide" /></div>
 		  <div><img class="mainSlide" src="${pageContext.request.contextPath }/resources/images/stil3.png" alt="mainSlide" /></div>
 		</div>
@@ -44,7 +44,7 @@
 					<div class="imgwrapper">
 		                 <c:choose>
 		                    <c:when test="${empty tmp.thumb}">
-					           <img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>                                           	
+					           <img class="img-thumbnail" src="<c:url value='/resources/images/no.png'/>" alt="logo"/>                                           	
 				            </c:when>
 				            <c:otherwise>
 				               <img class="img-thumbnail" src="${pageContext.request.contextPath}${tmp.thumb }" alt="logo"/>
@@ -84,7 +84,7 @@
 					<li>
 						<div class="list">
 							<div class="imgwrapper">
-								<img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/>
+								<img class="img-thumbnail" src="<c:url value='/resources/images/no.png'/>" alt="logo"/>
 							</div>
 							<div class="textwrapper" style="width:70%;">
 								<p class="list-title">${tmp.title }</p>

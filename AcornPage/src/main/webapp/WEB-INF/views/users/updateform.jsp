@@ -25,6 +25,11 @@
 		<button class="btn btn-warning" type="reset">취소</button>
 	</form>
 </div>
+<script>
+	$(".btn-primary")click(function(){
+		self.close();
+	});
+</script>
 </body>
 </html>
 

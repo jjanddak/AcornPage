@@ -26,7 +26,7 @@
                      <div class="imgwrapper">
                      <c:choose>
                      	<c:when test="${empty tmp.thumb}">
-	                        <a href="${pageContext.request.contextPath}/toon/selectedDetail.do?title=${tmp.title }"><img class="img-thumbnail" src="<c:url value='/resources/images/wow.jpg'/>" alt="logo"/></a>                                          	
+	                        <a href="${pageContext.request.contextPath}/toon/selectedDetail.do?title=${tmp.title }"><img class="img-thumbnail" src="<c:url value='/resources/images/no.png'/>" alt="logo"/></a>                                          	
                      	</c:when>
                      	<c:otherwise>
                      		<a href="${pageContext.request.contextPath}/toon/selectedDetail.do?title=${tmp.title }"><img class="img-thumbnail" src="${pageContext.request.contextPath}${tmp.thumb }" alt="logo"/></a>

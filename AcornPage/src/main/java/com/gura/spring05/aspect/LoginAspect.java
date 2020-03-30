@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Aspect
 @Component
 public class LoginAspect {
-	
+
 	@Around("execution(org.springframework.web.servlet.ModelAndView auth*(..))")
 	public Object loginCheck(ProceedingJoinPoint joinPoint) throws Throwable {
 		//aop 가 적용된 메소드에 전달된 값을 Object[] 로 얻어오기

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.toonlist.dao.ToonListDao;
 import com.gura.spring05.toonlist.dto.ToonListDto;
+import com.gura.spring05.exception.NoMoneyException;
 import com.gura.spring05.toonup.dao.ToonupDao;
 import com.gura.spring05.toonup.dto.NewToonupDto;
 import com.gura.spring05.toonup.dto.ToonupDto;
@@ -30,7 +31,10 @@ public class ToonupServiceImpl implements ToonupService{
 	//툰리스트 업로드
 	@Override
 	public void saveToon(ToonupDto dto) {
-		dao.insert(dto);
+		
+			dao.insert(dto);	
+		
+		
 	}
 
 	@Override

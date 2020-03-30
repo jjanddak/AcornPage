@@ -62,5 +62,10 @@ public class ToonCommentServiceImpl implements ToonCommentService{
 		}
 	}
 
+	@Override
+	public void deleteComment(HttpServletRequest request, String commcode) {
+		dao.deleteComment(commcode);		
+	}
+
 
 }

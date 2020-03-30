@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
+import com.gura.spring05.toonlist.dto.ToonListDto;
 
 @Component
 public class ToonDetailDaoImpl implements ToonDetailDao{
@@ -43,5 +44,21 @@ public class ToonDetailDaoImpl implements ToonDetailDao{
 	public ToonDetailDto getToonDetail(String title) {
 		return session.selectOne("toon.getDetail",title);
 	}
+	@Override
+	public List<String> getCode(String title) {
 		
+		return session.selectList("toon.getCode",title);
+	}
+
+	@Override
+	public List<String> needPermit() {
+		
+		return session.selectList("toon.needPermit");
+	}
+
+	@Override
+	public ToonDetailDto getNoPermitDetail(String title) {
+		
+		return session.selectOne("getNoPermitDetail",title);
+	}		
 }

@@ -41,4 +41,5 @@ public interface ToonListService {
 	public ToonListDto getLastRead(HttpServletRequest request);
 	
 	public void getMyToonList(String id, HttpServletRequest request);
+
 }

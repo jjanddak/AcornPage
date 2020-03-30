@@ -86,15 +86,23 @@ public class ToonListServiceImpl implements ToonListService{
 		dto.setCode(code);
 		String id=(String)request.getSession().getAttribute("id");
 		dto.setId(id);
-		dto=dao.getCodeDetail(dto);
-		
 		LibraryDto libDto=new LibraryDto();
 		LibraryDto libDto2=new LibraryDto();
 		libDto.setId(id);	
 		libDto.setTitle(title);
-		
+		libDto.setCode(code);
 		libDto2.setId(id);	
 		libDto2.setTitle(title);
+		
+		String checkCode=dao.checkCode(libDto);
+		if(checkCode==null) {
+			throw new NoMoneyException("알 수 없는 에러가 발생했습니다. 돈주고 보세요.");
+		}else {
+			dto=dao.getCodeDetail(dto);
+		}
+		
+		
+		
 		
 		UsersDto dto2=new UsersDto();
 		dto2.setId(id);
@@ -322,6 +330,7 @@ public class ToonListServiceImpl implements ToonListService{
 		List<LibraryDto> code=dao.getLibrary(id);
 		List<String> titles=new ArrayList<String>();
 		for(int i=0; i<code.size(); i++) {
+			
 			String title=dao.getTitle(code.get(i).getCode());
 			titles.add(title);
 		}

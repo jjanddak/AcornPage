@@ -48,6 +48,8 @@ public class ToonDetailServiceImp implements ToonDetailService{
 		
 		dao.deleteToon(dto);
 		dao.deleteList(dto);
+	
+		
 	}
 
 }

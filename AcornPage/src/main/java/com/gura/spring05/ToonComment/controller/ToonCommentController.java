@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,5 +55,11 @@ public class ToonCommentController {
 			map.put("code",dto.getCommcode());
 		 
 			return map;
+		}
+		@ResponseBody
+		@RequestMapping(value="/toon/deleteComment",method=RequestMethod.POST)
+		public void authcommDel(HttpServletRequest request,@RequestParam String commcode) {
+			service.deleteComment(request, commcode);
+			
 		}
 }

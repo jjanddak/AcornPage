@@ -51,7 +51,6 @@ code varchar2(50) not null primary key,
 permit varchar2(100)
 );
 
-
 insert into toonlist values(1,'원피스','김준서','원피스1화content',sysdate,'원피스1','Y');
 insert into toonlist values(2,'원피스','김준서','원피스2화content',sysdate,'원피스2','Y');
 insert into toonlist values(3,'원피스','김준서','원피스3화content',sysdate,'원피스3','Y');

@@ -82,7 +82,7 @@
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td>${dto.email }<a style="color:blue; padding-left:15px;" href="updateform.do">이메일 수정하기</a></td>
+				<td>${dto.email }<a class="email" style="color:blue; cursor:pointer; padding-left:15px;">이메일 수정하기</a></td>
 			</tr>
 			<tr>
 				<th>가입일</th>
@@ -97,11 +97,10 @@
 				</td>
 			</tr>
 		</table>
-		<button class="btn btn-info"><a style="color:#fff;" href="pwd_updateform.do">비밀번호 수정하기</a></button>
-		<button style="float:right;" class="btn btn-warning"><a href="javascript:deleteConfirm()">회원 탈퇴</a></button>
+		<button class="btn btn-info pwd" style="color:#fff;">비밀번호 수정하기</button>
+		<a href="javascript:deleteConfirm()"><button style="float:right;" class="btn btn-warning">회원 탈퇴</button></a>
 	</div>
-	<div class="container content">
-		<div>
+	<div class="container content writer">
 			<c:if test="${dto.isWriter eq 'N' }">
 				<button class="btn btn-primary" style="width:100%; font-size:20px; margin-bottom:20px;">
 					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">내 원고로 작가 신청하기</a>
@@ -279,7 +278,7 @@
 			               </c:if>			               
 		                   </c:forEach>	
 						</c:otherwise>
-					</c:choose>					
+					</c:choose>
 				</c:forEach>			
 				</ul>
 			</div>	
@@ -296,6 +295,12 @@
 <%-- jquery form  플러그인 javascript 로딩 --%>
 <script src="${pageContext.request.contextPath }/resources/js/jquery.form.min.js"></script>
 <script>
+	$(document).ready(function(){
+		var writer="${dto.isWriter}";
+		if(writer!="Y"){
+			$(".writer").prop("style","display:none;");
+		}
+	});
 	//프로파일 이미지를 클릭하면 
 	$("#profileLink").click(function(){
 		//강제로 <input type="file" /> 을 클릭해서 파일 선택창을 띄우고
@@ -326,7 +331,20 @@
 			location.href="delete.do";
 		}
 	}
-	
+	$(".pwd").click(function(){
+		var url= "${pageContext.request.contextPath }/users/pwd_updateform.do";    //팝업창 페이지 URL
+		var winWidth = 366;
+	    var winHeight = 580;
+	    var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
+	   window.open(url,"",popupOption);
+	});
+	$(".email").click(function(){
+		var url= "${pageContext.request.contextPath }/users/updateform.do";    //팝업창 페이지 URL
+		var winWidth = 366;
+	    var winHeight = 580;
+	    var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
+	   window.open(url,"",popupOption);
+	});
 </script>
 </body>
 </html>

@@ -10,18 +10,19 @@ public class ToonListDto {
 	private String toon_novel;
 	private String code;
 	private String id;
+	private String regdate;
+	private String permit;
 	private boolean isBuy;
 	private double starvalue;
 	private String thumb;
 	private int prevNum; //이전글의 글번호를 담을 필드
 	private int nextNum; //다음글의 글번호를 담을 필드
-	private String permit;
 	
 	public ToonListDto() {}
 
 	public ToonListDto(int num, String title, String writer, String content, String upload, String hashtag,
-			String toon_novel, String code, String id, boolean isBuy, double starvalue, String thumb, int prevNum,
-			int nextNum, String permit) {
+			String toon_novel, String code, String id, String regdate, String permit, boolean isBuy, double starvalue,
+			String thumb, int prevNum, int nextNum) {
 		super();
 		this.num = num;
 		this.title = title;
@@ -32,56 +33,13 @@ public class ToonListDto {
 		this.toon_novel = toon_novel;
 		this.code = code;
 		this.id = id;
+		this.regdate = regdate;
+		this.permit = permit;
 		this.isBuy = isBuy;
 		this.starvalue = starvalue;
 		this.thumb = thumb;
 		this.prevNum = prevNum;
 		this.nextNum = nextNum;
-		this.permit = permit;
-	}
-
-	public String getPermit() {
-		return permit;
-	}
-
-	public void setPermit(String permit) {
-		this.permit = permit;
-	}
-
-	public int getPrevNum() {
-		return prevNum;
-	}
-
-
-
-	public void setPrevNum(int prevNum) {
-		this.prevNum = prevNum;
-	}
-
-
-
-	public int getNextNum() {
-		return nextNum;
-	}
-
-
-
-	public void setNextNum(int nextNum) {
-		this.nextNum = nextNum;
-	}
-
-
-
-	public String getThumb() {
-		return thumb;
-	}
-
-	public void setThumb(String thumb) {
-		this.thumb = thumb;
-	}
-
-	public void setBuy(boolean isBuy) {
-		this.isBuy = isBuy;
 	}
 
 	public int getNum() {
@@ -156,6 +114,22 @@ public class ToonListDto {
 		this.id = id;
 	}
 
+	public String getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
+
+	public String getPermit() {
+		return permit;
+	}
+
+	public void setPermit(String permit) {
+		this.permit = permit;
+	}
+
 	public boolean getIsBuy() {
 		return isBuy;
 	}
@@ -171,6 +145,30 @@ public class ToonListDto {
 	public void setStarvalue(double starvalue) {
 		this.starvalue = starvalue;
 	}
-	
+
+	public String getThumb() {
+		return thumb;
+	}
+
+	public void setThumb(String thumb) {
+		this.thumb = thumb;
+	}
+
+	public int getPrevNum() {
+		return prevNum;
+	}
+
+	public void setPrevNum(int prevNum) {
+		this.prevNum = prevNum;
+	}
+
+	public int getNextNum() {
+		return nextNum;
+	}
+
+	public void setNextNum(int nextNum) {
+		this.nextNum = nextNum;
+	}
+
 	
 }

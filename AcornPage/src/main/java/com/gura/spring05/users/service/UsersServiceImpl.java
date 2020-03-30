@@ -1,7 +1,9 @@
 package com.gura.spring05.users.service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +17,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.exception.NoMoneyException;
+import com.gura.spring05.toondetail.dao.ToonDetailDao;
+import com.gura.spring05.toondetail.dto.ToonDetailDto;
+import com.gura.spring05.toonlist.dao.ToonListDao;
 import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.users.dao.UsersDao;
 import com.gura.spring05.users.dto.UsersDto;
@@ -24,6 +30,10 @@ public class UsersServiceImpl implements UsersService{
 	
 	@Autowired
 	private UsersDao dao;
+	@Autowired
+	private ToonDetailDao detailDao;
+	@Autowired
+	private ToonListDao listDao;
 	
 	//인자로 전달된 아이디가 존재하는지 여부를 Map 에 담아서 리턴하는 메소드 
 	@Override
@@ -57,7 +67,6 @@ public class UsersServiceImpl implements UsersService{
 			int wallet=dao.getWallet(dto.getId());
 			session.setAttribute("id", dto.getId());
 			session.setAttribute("wallet", wallet);
-			
 			return true;
 		}else {
 			return false;
@@ -109,7 +118,7 @@ public class UsersServiceImpl implements UsersService{
 		return path;
 	}
 	@Override
-	public void updatePassword(UsersDto dto, ModelAndView mView) {
+	public boolean updatePassword(UsersDto dto, ModelAndView mView) {
 		//1. 예전 비밀번호가 맞는 정보인지 확인
 		String pwdHash=dao.getData(dto.getId()).getPwd();
 		boolean isValid=BCrypt.checkpw(dto.getPwd(), pwdHash);
@@ -121,9 +130,9 @@ public class UsersServiceImpl implements UsersService{
 			dto.setPwd(encodedPwd);
 			//DB 에 수정 반영하기
 			dao.updatePwd(dto);
-			mView.addObject("isSuccess", true);
+			return true;
 		}else {
-			mView.addObject("isSuccess", false);
+			return false;
 		}
 	}
 	@Override
@@ -132,9 +141,9 @@ public class UsersServiceImpl implements UsersService{
 	}
 	@Override
 	public void deleteUser(String id) {
+		
 		dao.delete(id);
 	}
-
 	@Override
 	public void userStarList(HttpServletRequest request, String id) {
 		ToonListDto dto=new ToonListDto();
@@ -143,6 +152,74 @@ public class UsersServiceImpl implements UsersService{
 		request.setAttribute("list", list);
 	}
 
+	@Override
+	public void needPermit(HttpServletRequest request) {
+		
+		String id=(String)request.getSession().getAttribute("id");
+		if(!id.equals("admin")) {
+			throw new NoMoneyException("관리자가 아닙니다.");
+		}else {
+			List<String> list=detailDao.needPermit();
+			HashSet<String> hash=new HashSet<String>(list);
+			list=new ArrayList<String>(hash);
+			List<ToonDetailDto> detailList=new ArrayList<ToonDetailDto>();
+			for(int i=0; i<list.size(); i++) {
+				ToonDetailDto dto=detailDao.getNoPermitDetail(list.get(i));
+				detailList.add(dto);
+			}
+			request.setAttribute("list", detailList);
+		}
+	}
+	@Override
+	public void permitDetail(HttpServletRequest request,String title) {
+		String id=(String)request.getSession().getAttribute("id");
+		if(!id.equals("admin")) {
+			throw new NoMoneyException("관리자가 아닙니다.");
+		}else {
+			List<ToonListDto> list=listDao.permitDetail(title);
+			request.setAttribute("list", list);
+		}
+	}
+	@Override
+	public void permitCode(HttpServletRequest request) {
+		String title=(String)request.getParameter("title");
+		String id=(String)request.getSession().getAttribute("id");
+		String code=(String)request.getParameter("code");
+		ToonListDto dto=new ToonListDto();
+		dto.setCode(code);
+		dto.setTitle(title);
+		if(!id.equals("admin")) {
+			throw new NoMoneyException("관리자가 아닙니다.");
+		}else {
+			dto=listDao.permitCode(dto);
+			request.setAttribute("dto", dto);
+		}
+	}
+	@Override
+	public void permit_update(HttpServletRequest request, ToonListDto dto) {
+		String id=(String)request.getSession().getAttribute("id");
+		if(!id.equals("admin")) {
+			throw new NoMoneyException("관리자가 아닙니다.");
+		}else {
+			if(!dto.getPermit().equals("Y")) {
+				dto.setPermit(dto.getContent());
+				listDao.permit_update(dto);
+			}else {
+				listDao.permit_update(dto);
+				listDao.permit_update_detail(dto);
+			}
+		}
+	}
+	@Override
+	public void getToonList(HttpServletRequest request) {
+		String id=(String)request.getSession().getAttribute("id");
+		if(!id.equals("admin")) {
+			throw new NoMoneyException("관리자가 아닙니다.");
+		}else {
+			List<ToonDetailDto> list=listDao.allDetailList();
+			request.setAttribute("list", list);
+		}
+	}
 }
 
 

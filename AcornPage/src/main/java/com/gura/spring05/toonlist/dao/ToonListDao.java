@@ -58,8 +58,20 @@ public interface ToonListDao {
 	public void lastRead(UsersDto dto);
 	
 	public String getLastCode(String id);
-
+	
 	public void toonupdate(ToonListDto dto);
 
 	public List<ToonListDto> getMyToonList(String id);
+	
+	public String checkCode(LibraryDto dto);
+	
+	public List<ToonListDto> permitDetail(String title);
+	
+	public ToonListDto permitCode(ToonListDto dto);
+	
+	public void permit_update(ToonListDto dto);
+	
+	public void permit_update_detail(ToonListDto dto);
+	
+	public List<ToonDetailDto> allDetailList();
 }

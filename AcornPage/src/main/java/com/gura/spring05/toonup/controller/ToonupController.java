@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.toonlist.dto.ToonListDto;
+import com.gura.spring05.exception.NoMoneyException;
 import com.gura.spring05.toonlist.service.ToonListService;
 import com.gura.spring05.toonup.dto.NewToonupDto;
 import com.gura.spring05.toonup.dto.ToonupDto;
@@ -55,7 +56,8 @@ public class ToonupController {
 	//툰디테일 신작 업로드 폼
 	@RequestMapping("/toon/newToonup")
 	public ModelAndView NewToonUploadForm(HttpServletRequest request) {
-		return new ModelAndView("toon/newToonup");
+
+			return new ModelAndView("toon/newToonup");		
 	}
 	
 	//신작 업로드 요청 처리

@@ -1,5 +1,6 @@
 package com.gura.spring05.users.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.toonlist.service.ToonListService;
 import com.gura.spring05.users.dto.UsersDto;
 import com.gura.spring05.users.service.UsersService;
@@ -190,8 +192,9 @@ public class UsersController {
 		return mView;
 	}
 	//비밀번호 수정 반영 요청 처리
-	@RequestMapping("/users/pwd_update")
-	public ModelAndView authPwdUpdate(HttpServletRequest request,
+	@ResponseBody
+	@RequestMapping(value="/users/pwd_update", method=RequestMethod.POST)
+	public boolean authPwdUpdate(HttpServletRequest request,
 			ModelAndView mView) {
 		//기존 비밀번호 
 		String pwd=request.getParameter("pwd");
@@ -205,10 +208,9 @@ public class UsersController {
 		dto.setNewPwd(newPwd);
 		dto.setId(id);
 		//서비스에 전달
-		service.updatePassword(dto, mView);
+		boolean Success=service.updatePassword(dto, mView);
 		
-		mView.setViewName("users/pwd_update");
-		return mView;
+		return Success;
 	}
 	
 	//회원정보 수정폼 요청처리
@@ -246,6 +248,34 @@ public class UsersController {
 		mView.setViewName("users/delete");
 		return mView;
 		
+	}
+	
+	@RequestMapping("/admin/needPermit")
+	public ModelAndView authNeedPermit(HttpServletRequest request) {
+		service.needPermit(request);
+		return new ModelAndView("admin/needPermit");
+	}
+	@RequestMapping("/admin/permitDetail")
+	public ModelAndView authpermitDetail(HttpServletRequest request,@RequestParam String title) {
+		service.permitDetail(request,title);
+		
+		return new ModelAndView("admin/permitDetail");
+	}
+	@RequestMapping("/admin/permitCode")
+	public ModelAndView authpermitCode(HttpServletRequest request) {
+		service.permitCode(request);
+		return new ModelAndView("admin/permitCode");
+	}
+	@RequestMapping(value="/admin/permit_update", method = RequestMethod.POST)
+	public ModelAndView authpermit_update(HttpServletRequest request,@RequestParam String title,@ModelAttribute("dto") ToonListDto dto) throws UnsupportedEncodingException {
+		service.permit_update(request,dto);
+		String Entitle=URLEncoder.encode(title,"UTF-8");
+		return new ModelAndView("redirect:/admin/permitDetail.do?title="+Entitle);
+	}
+	@RequestMapping("/admin/manageToon")
+	public ModelAndView authdeleteDetail(HttpServletRequest request) {
+		service.getToonList(request);
+		return new ModelAndView("admin/manageToon");
 	}
 }
 
