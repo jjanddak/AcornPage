@@ -50,6 +50,7 @@
 									</li>
 									<c:if test="${id eq 'admin' }">
 										<li><a href="${pageContext.request.contextPath }/admin/needPermit.do">승인처리</a></li>
+										<li><a href="${pageContext.request.contextPath }/admin/manageToon.do">작품관리</a></li>
 									</c:if>
 									<li><a onclick="popupOpen()" href="#">캐시충전</a></li>
 									<li><a href="${pageContext.request.contextPath }/toon/Buylist.do">보관함</a></li>

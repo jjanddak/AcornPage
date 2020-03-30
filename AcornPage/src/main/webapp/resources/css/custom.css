@@ -159,7 +159,9 @@ div.book-list{
 	color:#999999;
 }
 .list-info{
-	margin:0 0 25px;
+	width:70%;
+	word-break: keep-all;
+	/*margin:0 0 25px;*/
 	font-size:14px;
 	color:#999999;
 }

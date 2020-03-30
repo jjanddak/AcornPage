@@ -174,5 +174,30 @@ public class ToonListDaoImpl implements ToonListDao{
 		
 		return session.selectOne("toon.checkCode",dto);
 	}
-
+	@Override
+	public List<ToonListDto> permitDetail(String title) {
+		
+		return session.selectList("toon.permitDetail",title);
+	}
+	
+	@Override
+	public ToonListDto permitCode(ToonListDto dto) {
+		
+		return session.selectOne("toon.permitCode",dto);
+	}
+	@Override
+	public void permit_update(ToonListDto dto) {
+		
+		session.update("toon.permit_update",dto);
+	}
+	@Override
+	public void permit_update_detail(ToonListDto dto) {
+		
+		session.update("toon.permit_update_detail",dto);
+	}
+	@Override
+	public List<ToonDetailDto> allDetailList() {
+		
+		return session.selectList("toon.allDetailList");
+	}
 }

@@ -199,7 +199,6 @@
    </div>     
    </div>  
 </div>
-</body>
 <script>
 	var formObj = $("form[role='form']");//폼 가저오기
 
