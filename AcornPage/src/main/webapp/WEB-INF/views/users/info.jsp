@@ -100,25 +100,23 @@
 		<button class="btn btn-info pwd" style="color:#fff;">비밀번호 수정하기</button>
 		<a href="javascript:deleteConfirm()"><button style="float:right;" class="btn btn-warning">회원 탈퇴</button></a>
 	</div>
-	<div class="container content writer">
-			<c:if test="${dto.isWriter eq 'N' }">
-			<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">
-				<button class="btn btn-primary" style="width:100%; font-size:20px; margin-bottom:20px;">
-					내 원고로 작가 신청하기
-				</button>
-			</a>
-			</c:if>
-		<div>
-			<c:if test="${dto.isWriter eq 'Y' }">
+	<div class="container content">
+		<c:if test="${dto.isWriter eq 'N'}">
+		<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">
+			<button class="btn btn-primary" style="width:100%; font-size:20px; margin-bottom:20px;">
+				내 원고로 작가 신청하기
+			</button>
+		</a>
+		</c:if>
+		<c:if test="${dto.isWriter eq 'Y'}">
 			<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">
 				<button class="btn btn-primary" style="width:100%; font-size:20px; margin-bottom:20px;">
 					신작 원고 전송
 				</button>
 			</a>
-			</c:if>
-		</div>
+		</c:if>
 		
-	<c:if test="${not empty myToon }">
+		<c:if test="${not empty myToon }">
 			<div class="bestList">
         		 <ul>
 				<c:forEach var="tmp" items="${myToon }">
