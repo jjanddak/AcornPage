@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>acornpage</title>
+<style>
+	#thumbForm{
+		display: none;
+	}
+</style>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 </head>
 <body>
@@ -15,7 +20,29 @@
 <div class="contentwrapper">
    <div class="container content">
 		<div class="container">
-			<h1>신작 만화 업로드</h1>
+			<h1>신작 만화 수정</h1>
+			<div class="form-group">
+					<label for="file">썸네일</label><br/>
+					<!-- <input type="file" name="file" id="file" value="${dto.thumb }"/> -->
+					<c:choose>
+						<c:when test="${empty dto.thumb}">
+							<a href="javascript:" id="thumbLink">
+								<img style="border:1px solid black; border-radius:10px; width:150px; height:100px;" src="<c:url value='/resources/images/no.png'/>"/>
+							</a>
+						</c:when>
+						<c:otherwise>
+							<a href="javascript:" id="thumbLink">
+								<img style="border:1px solid black; border-radius:10px; width:150px; height:100px;" src="${pageContext.request.contextPath }${dto.thumb}" alt="" />
+							</a>						
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<form action="thumb_update.do?title=${dto.title }" method="post"
+					enctype="multipart/form-data" id="thumbForm">
+					<label for="thumbImage">프로필 이미지 선택</label>
+					<input type="file" name="thumbImage" id="thumbImage"
+						accept=".jpg, .jpeg, .png, .JPG, .JPEG"/>
+				</form>
 			<form action="updateDetail.do" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="title">제목</label>
@@ -47,10 +74,6 @@
 						<input type="radio" name="toonovel" value="novel" checked="checked"/>소설<br/>	
 					</c:if>
 				</div>		
-				<div class="form-group">
-					<label for="file">썸네일</label>
-					<input type="file" name="file" id="file" value="${dto.thumb }"/>
-				</div>
 				
 				<button class="btn btn-primary" type="submit">수정</button>
 			</form>
@@ -60,5 +83,30 @@
 		</div>
 	</div>
 </div>
+<script src="${pageContext.request.contextPath }/resources/js/jquery.form.min.js"></script>
+<script>
+	//프로파일 이미지를 클릭하면 
+	$("#thumbLink").click(function(){
+		//강제로 <input type="file" /> 을 클릭해서 파일 선택창을 띄우고
+		$("#thumbImage").click();
+	});
+	//input type="file" 에 파일이 선택되면 
+	$("#thumbImage").on("change", function(){
+		//폼을 강제 제출하고 
+		$("#thumbForm").submit();
+	});
+	
+	// jquery form 플러그인의 동작을 이용해서 폼이 ajax 로 제출되도록 한다. 
+	$("#thumbForm").ajaxForm(function(responseData){
+		//responseData 는 plain object 이다.
+		//{savedPath:"/upload/저장된이미지파일명"}
+		//savedPath 라는 방에 저장된 이미지의 경로가 들어 있다.
+		console.log(responseData);
+		var src="${pageContext.request.contextPath }"
+							+responseData.savedPath;
+		// img 의 src 속성에 반영함으로써 이미지가 업데이트 되도록 한다.
+		$("#thumbLink img").attr("src", src);
+	});
+</script>
 </body>
 </html>

@@ -322,6 +322,9 @@
 	<update id="updateList" parameterType="toonListDto">
 		update toonlist set content=#{content}, permit='N' where code=#{code}
 	</update>
+	<update id="updateThumb" parameterType="toonDetailDto">
+		update toondetail set thumb=#{thumb} where title=#{title}
+	</update>
 </mapper>
 
 

@@ -1,6 +1,8 @@
 package com.gura.spring05.toondetail.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
@@ -61,4 +65,39 @@ public class ToonDetailController {
 		return new ModelAndView("redirect:/users/info.do");
 	}
 	
+	// ajax 파일 업로드 처리, JSON 문자열을 리턴해 주어야 한다. 
+	@ResponseBody
+	@RequestMapping(value = "/toon/thumb_update", 
+			method = RequestMethod.POST)
+	public Map<String, Object> profileUpload(HttpServletRequest request,
+			@RequestParam MultipartFile thumbImage, @RequestParam String title){
+		String path=service.thumbUpdate(request, thumbImage, title);
+		/*
+		 *  {"savedPath":"/upload/xxxx.jpg"} 형식의 JSON 문자열을 리턴해주도록
+		 *  Map 객체를 구성해서 리턴해준다. 
+		 */
+		Map<String, Object> map=new HashMap<>();
+		map.put("savedPath", path);
+		return map;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

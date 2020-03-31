@@ -65,5 +65,10 @@ public class ToonDetailDaoImpl implements ToonDetailDao{
 	@Override
 	public void updateDetail(ToonDetailDto dto) {
 		session.update("toon.updateDetail",dto);
+	}
+
+	@Override
+	public void updateThumb(ToonDetailDto dto) {
+		session.update("toon.updateThumb",dto);
 	}		
 }

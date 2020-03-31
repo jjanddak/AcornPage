@@ -26,4 +26,6 @@ public interface ToonDetailDao {
 	public ToonDetailDto getNoPermitDetail(String title);
 
 	public void updateDetail(ToonDetailDto dto);
+
+	public void updateThumb(ToonDetailDto dto);
 }
