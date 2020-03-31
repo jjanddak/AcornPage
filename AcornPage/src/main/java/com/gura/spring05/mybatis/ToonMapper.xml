@@ -50,7 +50,22 @@
 				WHERE x.code=s.code(+)	
 				GROUP BY x.num
 			) x
-		) x, toonlist t
+		) x, (
+			select t.num as num, t.title as title, t.writer as writer, t.content as content, t.regdate as regdate, t.code as code, t.permit as permit, NVL(x.commcount,0) as commcount
+			from toonlist t,(
+				select code, count(*) as commcount
+				from toon_comment
+				where code
+				in (
+					select code
+					from toonlist
+					where title=#{title}
+				)
+				group by code order by code asc
+			) x
+			where t.code=x.code(+) 
+			and t.title=#{title}
+		) t
 		WHERE t.num=x.num 
 		AND title=#{title}
 	</select>

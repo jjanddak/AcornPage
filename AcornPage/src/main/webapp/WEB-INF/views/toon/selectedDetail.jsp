@@ -75,7 +75,10 @@
 							<c:when test="${tmp.isBuy }">
 								<strong>
 									<a href="detailCode.do?title=${tmp.title }&code=${tmp.code }">
-										<strong>${tmp.title } ${tmp.num }</strong>화
+										<strong>${tmp.title } ${tmp.num }</strong>화 
+										<c:if test="${tmp.commcount > 0 }">
+											<strong style="color:red;">[${tmp.commcount }]</strong>
+										</c:if>
 									</a>
 								</strong>
 							</c:when>
