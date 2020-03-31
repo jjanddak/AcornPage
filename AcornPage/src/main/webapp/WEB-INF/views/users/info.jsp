@@ -26,6 +26,7 @@
 	}
 	.permitlist{
 		padding-bottom: 5px;
+		position:relative;
 	}
 	.permitlist:hover{
 		background-color: #eee;
@@ -98,21 +99,27 @@
 			</tr>
 		</table>
 		<button class="btn btn-info pwd" style="color:#fff;">비밀번호 수정하기</button>
-		<a href="javascript:deleteConfirm()"><button style="float:right;" class="btn btn-warning">회원 탈퇴</button></a>
+		<c:if test="${dto.isWriter eq 'Y' }">
+			<a href="${pageContext.request.contextPath }/toon/searchedDetail.do?select=writer&keyword=${dto.id }">
+				<button class="btn btn-warning myToon" style="color:#fff;">내 만화보기</button>
+			</a>
+		</c:if>
+		<a href="javascript:deleteConfirm()"><button style="float:right;" class="btn btn-danger">회원 탈퇴</button></a>
 	</div>
-	<div class="container content writer">
-			<c:if test="${dto.isWriter eq 'N' }">
-				<button class="btn btn-primary" style="width:100%; font-size:20px; margin-bottom:20px;">
-					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">내 원고로 작가 신청하기</a>
-				</button>
-			</c:if>
-		</div>
+	<div class="container content">
 		<div>
-			<c:if test="${dto.isWriter eq 'Y' }">
+			<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">
 				<button class="btn btn-primary" style="width:100%; font-size:20px; margin-bottom:20px;">
-					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">신작 원고 전송</a>
+					<c:choose>
+						<c:when test="${dto.isWriter == 'N'}">
+						내 원고로 작가 신청하기
+						</c:when>
+						<c:otherwise>
+						신작 원고 전송
+						</c:otherwise>
+					</c:choose>
 				</button>
-			</c:if>
+			</a>
 		</div>
 	<c:if test="${not empty myToon }">
 			<div class="bestList">
@@ -138,12 +145,12 @@
 									<p class="list-writer">${tmp.writer }</p>
 									<p class="list-info">${tmp.info }</p>	
 									<p style="position:absolute; right:-55px; bottom:15px;">
-										<button class="btn btn-danger">
-											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
-												onclick="return confirm('${tmp.title} 의 승인 신청을 취소하시겠습니까?');">
+										<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
+											onclick="return confirm('${tmp.title} 의 승인 신청을 취소하시겠습니까?');">
+											<button class="btn btn-danger">
 												삭제
-											</a>
-										</button>
+											</button>
+										</a>
 									</p>
 			                     </div>
 			                  </div>
@@ -184,20 +191,20 @@
 			                        <p class="list-title">${tmp.title }</p>
 									<p class="list-writer">${tmp.writer }</p>
 									<p class="list-info">${tmp.info }</p>	
-									<p style="position:absolute; right:10px; bottom:15px;">
-										<button class="btn btn-info">											
-											<a style="color:#fff;" href="${pageContext.request.contextPath }/toon/toonup.do?title=${tmp.title }">
+									<p style="position:absolute; right:10px; bottom:15px;">							
+										<a style="color:#fff;" href="${pageContext.request.contextPath }/toon/toonup.do?title=${tmp.title }">
+											<button class="btn btn-info">
 												연재
-											</a>
-										</button>
+											</button>
+										</a>
 									</p>
 									<p style="position:absolute; right:-55px; bottom:15px;">
-										<button class="btn btn-danger">
-											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
-												onclick="return confirm('${tmp.title} 작품을 삭제하시겠습니까?');">
+										<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
+											onclick="return confirm('${tmp.title} 작품을 삭제하시겠습니까?');">
+											<button class="btn btn-danger">
 												삭제
-											</a>
-										</button>
+											</button>
+										</a>
 									</p>
 			                     </div>	                   	
 			                  </div>
@@ -209,6 +216,7 @@
 			               			<div>
 			               				<div class="permitlist">
 				               				<span>승인 대기중 - ${list.code }</span>
+				               				<button class="btn btn-danger btn-xs">삭제</button>
 					               		</div>
 					               	</div>
 			               			</c:when>
@@ -217,6 +225,7 @@
 			               				<div class="permitlist">
 			               					반려됨 - ${list.code }<br/>	
 			               					반려사유 : ${list.permit }
+			               					<button class="btn btn-danger btn-xs">삭제</button>    
 			               				</div>
 			               			</div>
 			               			</c:when>
@@ -243,19 +252,19 @@
 									<p class="list-writer">	${tmp.writer }</p>
 									<p class="list-info">${tmp.info }</p>
 									<p style="position:absolute; right:10px; bottom:15px;">
-										<button class="btn btn-warning">
-											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/toonupdate_form.do?title=${tmp.title}">
+										<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/toonupdate_form.do?title=${tmp.title}">
+											<button class="btn btn-warning">
 												수정
-											</a>
-										</button>
+											</button>
+										</a>
 									</p>
 									<p style="position:absolute; right:-55px; bottom:15px;">
-										<button class="btn btn-danger">
-											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
-												onclick="return confirm('${tmp.title} 작품을 삭제하시겠습니까?');">
+										<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
+											onclick="return confirm('${tmp.title} 작품을 삭제하시겠습니까?');">
+											<button class="btn btn-danger">
 												삭제
-											</a>
-										</button>
+											</button>
+										</a>
 									</p>
 			                     </div>
 			                  </div>
@@ -266,13 +275,16 @@
 			               			<c:when test="${list.permit eq 'N' }">
 			               				<div class="permitlist">
 				               				<span>승인 대기중 - ${list.code }</span>
+				               				<button class="btn btn-danger btn-xs">삭제</button>
 					               		</div>
 			               			</c:when>
 			               			<c:when test="${list.permit ne 'Y' }">
 			               				<div class="permitlist">
 			               					반려됨 - ${list.code }<br/>
-			               					반려사유 : ${list.permit }	               					
+			               					반려사유 : ${list.permit }	   
+			               					<button class="btn btn-danger btn-xs">삭제</button>       					
 			               				</div>
+			               				
 			               			</c:when>
 			               		</c:choose>
 			               </c:if>			               

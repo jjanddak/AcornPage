@@ -281,7 +281,7 @@
 		select code from toonlist where title=#{title}
 	</select>
 	<select id="needPermit" resultType="String">
-		select title from toonlist where not permit in('Y')
+		select title from toonlist where permit='N'
 	</select>
 	<select id="getNoPermitDetail" parameterType="String"
 		resultType="toonDetailDto">
@@ -299,7 +299,8 @@
 		AND x.title like '%'||#{title}||'%'
 	</select>
 	<select id="permitDetail" parameterType="String" resultType="toonListDto">
-		SELECT num,title,writer,to_char(regdate,'YYYY-MM-DD')as regdate,code from toonlist where title=#{title} and not permit in('Y') order by num asc
+		SELECT num,title,writer,to_char(regdate,'YYYY-MM-DD')as 
+		regdate,code from toonlist where title=#{title} and permit='N' order by num asc
 	</select>
 	<select id="permitCode" parameterType="toonListDto" resultType="toonListDto">
 		select num,title,writer,content,to_char(regdate,'YYYY-MM-DD')as regdate,code,permit 
@@ -314,6 +315,12 @@
 	<select id="allDetailList" resultType="toonDetailDto">
 		select * from toondetail where permit='Y'
 	</select>
+	<select id="manageDetail" parameterType="String" resultType="toonListDto">
+		select * from toonlist where title like '%'||#{title}||'%' and permit='Y' order by num asc
+	</select>
+	<delete id="deleteCode" parameterType="String">
+		delete from toonlist where code=#{code}
+	</delete>
 </mapper>
 
 

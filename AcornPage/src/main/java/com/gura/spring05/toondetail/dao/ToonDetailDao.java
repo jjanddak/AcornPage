@@ -24,4 +24,5 @@ public interface ToonDetailDao {
 	public List<String> needPermit();
 	
 	public ToonDetailDto getNoPermitDetail(String title);
+
 }

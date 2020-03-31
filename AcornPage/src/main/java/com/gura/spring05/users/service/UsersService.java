@@ -28,6 +28,10 @@ public interface UsersService {
 	public void permitCode(HttpServletRequest request);
 	public void permit_update(HttpServletRequest request,ToonListDto dto);
 	public void getToonList(HttpServletRequest request);
+	public void manageDetail(HttpServletRequest request,String title);
+	public void deleteAll(HttpServletRequest request);
+	public void manageCode(HttpServletRequest request,String title,String code);
+	public boolean deleteCode(HttpServletRequest request,String code);
 }
 
 

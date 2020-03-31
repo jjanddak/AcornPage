@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.exception.NoMoneyException;
+import com.gura.spring05.library.dto.LibraryDto;
 import com.gura.spring05.toondetail.dao.ToonDetailDao;
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
 import com.gura.spring05.toonlist.dao.ToonListDao;
@@ -218,6 +219,92 @@ public class UsersServiceImpl implements UsersService{
 		}else {
 			List<ToonDetailDto> list=listDao.allDetailList();
 			request.setAttribute("list", list);
+		}
+	}
+	@Override
+	public void manageDetail(HttpServletRequest request,String title) {
+		String id=(String)request.getSession().getAttribute("id");
+		if(!id.equals("admin")) {
+			throw new NoMoneyException("관리자가 아닙니다.");
+		}else {
+			List<ToonListDto> list=listDao.manageDetail(title);
+			request.setAttribute("list", list);
+		}	
+	}
+	@Override
+	public void deleteAll(HttpServletRequest request) {
+		String id=(String)request.getSession().getAttribute("id");
+		if(!id.equals("admin")) {
+			throw new NoMoneyException("관리자가 아닙니다.");
+		}else {
+			String title=request.getParameter("title");
+			String writer=request.getParameter("writer");
+			ToonDetailDto detailDto=new ToonDetailDto();
+			detailDto.setWriter(writer);
+			detailDto.setTitle(title);
+			detailDao.deleteToon(detailDto);
+			detailDao.deleteList(detailDto);
+		}
+		
+	}
+	@Override
+	public void manageCode(HttpServletRequest request, String title, String code) {
+		ToonListDto dto=new ToonListDto();
+		dto.setTitle(title);
+		dto.setCode(code);
+		String id=(String)request.getSession().getAttribute("id");
+		dto.setId(id);
+		LibraryDto libDto=new LibraryDto();
+		LibraryDto libDto2=new LibraryDto();
+		libDto.setId(id);	
+		libDto.setTitle(title);
+		libDto.setCode(code);
+		libDto2.setId(id);	
+		libDto2.setTitle(title);		
+		dto=listDao.getCodeDetail(dto);
+		UsersDto dto2=new UsersDto();
+		dto2.setId(id);
+		dto2.setLastread(code);
+		listDao.lastRead(dto2);
+	      
+		String num = code.replaceAll("[^0-9]","");
+		String tmpcode=code.replaceAll("[0-9]","");
+		int tmp=Integer.parseInt(num);
+		tmp--;
+		String nextnum=Integer.toString(tmp+2);
+		String prevnum=Integer.toString(tmp);
+		String prevcode=tmpcode+prevnum;
+		String nextcode=tmpcode+nextnum;
+		libDto.setCode(prevcode);
+		libDto2.setCode(nextcode);
+		
+		String havePrev=listDao.havePrev(libDto);
+		String haveNext=listDao.haveNext(libDto2);		
+				
+		request.setAttribute("havePrev", havePrev);
+		request.setAttribute("haveNext", haveNext);
+		request.setAttribute("dto", dto);
+		
+	}
+	@Override
+	public boolean deleteCode(HttpServletRequest request, String code) {
+		String id=(String)request.getSession().getAttribute("id");
+		if(!id.equals("admin")) {
+			throw new NoMoneyException("관리자가 아닙니다.");
+		}else {
+			String title=listDao.getTitle(code);
+			listDao.deleteCode(code);
+			List<ToonListDto> list=listDao.getDetailList(title);
+			if(list==null) {
+				ToonDetailDto dto=new ToonDetailDto();
+				String writer=(String)request.getParameter("writer");
+				dto.setWriter(writer);
+				dto.setTitle(title);
+				detailDao.deleteToon(dto);
+				return true;
+			}else {
+				return false;
+			}
 		}
 	}
 }

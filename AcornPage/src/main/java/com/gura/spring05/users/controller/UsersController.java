@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.star.service.StarService;
 import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.toonlist.service.ToonListService;
 import com.gura.spring05.users.dto.UsersDto;
@@ -32,6 +33,9 @@ public class UsersController {
 	
 	@Autowired
 	private ToonListService toonService;
+	
+	@Autowired
+	private StarService starService;
 	
 	//회원가입 폼 요청 처리 
 	@RequestMapping("/users/signup_form")
@@ -273,9 +277,40 @@ public class UsersController {
 		return new ModelAndView("redirect:/admin/permitDetail.do?title="+Entitle);
 	}
 	@RequestMapping("/admin/manageToon")
-	public ModelAndView authdeleteDetail(HttpServletRequest request) {
+	public ModelAndView authmanageToon(HttpServletRequest request) {
 		service.getToonList(request);
 		return new ModelAndView("admin/manageToon");
+	}
+	@RequestMapping("/admin/manageDetail")
+	public ModelAndView authmanageDetail(HttpServletRequest request,@RequestParam String title) {
+		service.manageDetail(request, title);
+		toonService.getDetailInfo(request, title);
+		return new ModelAndView("admin/manageDetail");
+	}
+	@RequestMapping("/admin/deleteAll")
+	public ModelAndView authdeleteAll(HttpServletRequest request) {
+		service.deleteAll(request);
+		return new ModelAndView("redirect:/admin/manageToon.do");
+	}
+	@RequestMapping("/admin/manageCode")
+	public ModelAndView authmanageCode(HttpServletRequest request,@RequestParam String title,@RequestParam String code) {
+		service.manageCode(request,title,code);
+		starService.selectStarValueOneAVG(request,code);
+		//댓글목록을 가지고오는 서비스 실행
+		toonService.getToonCommentList(request,code);
+		return new ModelAndView("admin/manageCode");
+	}
+	@RequestMapping("/admin/deleteCode")
+	public ModelAndView authdeleteCode(HttpServletRequest request,@RequestParam String code,@RequestParam String title) throws UnsupportedEncodingException {
+		boolean check=service.deleteCode(request,code);
+		
+		if(check) {
+			return new ModelAndView("redirect:/admin/manageToon.do");
+		}else {
+			String Encode=URLEncoder.encode(title,"UTF-8");
+			return new ModelAndView("redirect:/admin/manageDetail.do?title="+Encode);
+		}
+		
 	}
 }
 
