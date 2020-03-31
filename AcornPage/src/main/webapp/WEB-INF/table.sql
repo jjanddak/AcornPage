@@ -47,7 +47,7 @@ title varchar2(100) not null,
 writer varchar2(100) not null, 
 content clob not null, 
 regdate date , 
-code varchar2(50) not null primary key,
+code varchar2(50) primary key,
 permit varchar2(100)
 );
 
@@ -69,7 +69,7 @@ insert into toonList values(3,'클레이모어','윤지혜','클레이모어3화
 
 create table users 
 (num number,
-id varchar2(100) primary key not null,
+id varchar2(100) primary key ,
 pwd varchar2(100) not null,
 email varchar2(100) not null,
 wallet number check(wallet>=0),
@@ -90,7 +90,7 @@ insert into users values(7,'김대희','1','mon@naver.com',3000,'N',null,sysdate
 create table star
 (num number,
 id varchar2(100) not null,
-code varchar2(50) not null,  
+code varchar2(50) references toonlist(code) ON DELETE CASCADE not null ,  
 starvalue number
 );
 
@@ -116,10 +116,10 @@ insert into library values (4,'kapman','나루토1',sysdate);
 create table toon_comment
 (num number, 
 id varchar2(100),
-code varchar2(50), 
+code varchar2(50) references toonlist(code) ON DELETE CASCADE, 
 content varchar2(100) not null, 
 likeCount number,
-commcode varchar2(50) not null primary key,
+commcode varchar2(50) primary key,
 regdate date
 );
 
@@ -132,7 +132,7 @@ insert into toon_comment values(5,'kapman','원피스2','더럽게재밋네5',0,
 create table commentlike
 (num number, 
 id varchar2(100), 
-commcode varchar2(50),
+commcode varchar2(50) references toon_comment(commcode) ON DELETE CASCADE,
 regdate date,
 code varchar2(50)
 );

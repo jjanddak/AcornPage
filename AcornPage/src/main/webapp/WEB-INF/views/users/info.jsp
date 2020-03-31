@@ -117,6 +117,7 @@
 			</a>
 			</c:if>
 		</div>
+		
 	<c:if test="${not empty myToon }">
 			<div class="bestList">
         		 <ul>
