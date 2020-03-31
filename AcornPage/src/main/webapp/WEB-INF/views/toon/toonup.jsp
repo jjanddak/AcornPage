@@ -46,7 +46,9 @@
 					<textarea class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
 				</div>
 				<button class="btn btn-primary" type="submit" onclick="submitContents(this);">업로드</button>
-				<button class="btn btn-warning" type="reset">취소</button>	
+				<a href="${pageContext.request.contextPath }/users/info.do">
+					<button class="btn btn-warning">취소</button>	
+				</a>
 			</form>
 		</div>
 	</div>

@@ -208,4 +208,14 @@ public class ToonListDaoImpl implements ToonListDao{
 		
 		return session.selectList("toon.allDetailList");
 	}
+
+	@Override
+	public void deleteList(String code) {
+		session.delete("toon.deleteCode",code);
+	}
+
+	@Override
+	public void updateList(ToonListDto dto) {
+		session.update("toon.updateList",dto);
+	}
 }

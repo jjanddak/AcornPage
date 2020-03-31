@@ -24,47 +24,29 @@
 <div class="contentwrapper">
    <div class="container content">
 		<div class="container">
-			<h1>신작 만화 업로드</h1>
-			<form action="newtoonupload.do" method="post" enctype="multipart/form-data">
-				<div class="form-group">
-					<label for="title">제목</label>
-					<input class="form-control" type="text" 
-						name="title" id="title" value="${title}" />
-				</div>
-				<div class="form-group">
-					<label for="writer">작가</label>
-					<input class="form-control" type="text" 
-						name="writer" id="writer" value="${id}" readOnly/>
-				</div>
-				<div class="form-group">
-					<label for="info">만화설명</label>
-					<textarea class="form-control" name="info" id="info" cols="30" rows="10"></textarea>
-				</div>
-				<div class="form-group">
-					<label for="hashtag">해시태그</label>
-					<input class="form-control" type="text" 
-						name="hashtag" id="hashtag"/>
-				</div>
-				<div class="form-group">
-					<label for="toonovel">만화 / 소설</label>	<br/>		
-					<input type="radio" name="toonovel" value="toon" checked="checked"/>만화<br/>
-					<input type="radio" name="toonovel" value="novel" />소설<br/>	
-				</div>		
-				<div class="form-group">
-					<label for="file">썸네일</label>
-					<input type="file" name="file" id="file" />
-				</div>
-				
+			<h1>회차 업로드</h1>
+			<form action="updateList.do" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="code" value="${dto.title }${num }" />
 				<div class="form-group"> 
 					<label for="num">회차</label>
 					<input class="form-control" type="text" 
-						name="num" id="num" value="1" readOnly/>
+						name="num" id="num" value="${num}" readOnly/>
+				</div>
+				<div class="form-group">
+					<label for="title">제목</label>
+					<input class="form-control" type="text" 
+						name="title" id="title" value="${dto.title}" readOnly/>
+				</div>
+				<div class="form-group">
+					<label for="writer">작가명</label>
+					<input class="form-control" type="text" 
+						name="writer" id="writer" value="${dto.writer}" readOnly/>
 				</div>
 				<div class="form-group">
 					<label for="content">내용</label>
-					<textarea class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
+					<textarea class="form-control" name="content" id="content" cols="30" rows="10">${dto.content }</textarea>
 				</div>
-				<button class="btn btn-primary" type="submit" onclick="submitContents(this);">연재신청</button>
+				<button class="btn btn-primary" type="submit" onclick="submitContents(this);">수정</button>
 			</form>
 				<a href="${pageContext.request.contextPath }/users/info.do">
 					<button class="btn btn-warning">취소</button>	

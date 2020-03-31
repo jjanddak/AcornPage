@@ -74,4 +74,8 @@ public interface ToonListDao {
 	public void permit_update_detail(ToonListDto dto);
 	
 	public List<ToonDetailDto> allDetailList();
+
+	public void deleteList(String code);
+
+	public void updateList(ToonListDto dto);
 }

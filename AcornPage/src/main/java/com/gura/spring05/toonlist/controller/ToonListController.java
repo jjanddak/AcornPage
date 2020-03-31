@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -133,5 +134,23 @@ public class ToonListController {
 	@RequestMapping("/toon/bookList")
 	public String bookList() {
 		return "toon/bookList";
+	}
+	
+	@RequestMapping("/toon/deleteList")
+	public ModelAndView authDeleteList(HttpServletRequest request, @RequestParam String code) {
+		service.deleteList(request, code);
+		return new ModelAndView("redirect:/users/info.do");
+	}
+	
+	@RequestMapping("/toon/updateList_form")
+	public ModelAndView authUpdateListForm(HttpServletRequest request,@RequestParam String code,@RequestParam String title) {
+		service.getCodeDetail(request,title,code);
+		return new ModelAndView("toon/updateList_form");
+	}
+	
+	@RequestMapping("/toon/updateList")
+	public ModelAndView authUpdateList(HttpServletRequest request,@ModelAttribute ToonListDto dto) {
+		service.updateList(dto);
+		return new ModelAndView("redirect:/users/info.do");
 	}
 }	

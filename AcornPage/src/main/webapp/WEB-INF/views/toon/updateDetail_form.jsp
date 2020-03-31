@@ -53,8 +53,10 @@
 				</div>
 				
 				<button class="btn btn-primary" type="submit">수정</button>
-				<button class="btn btn-warning" type="reset">취소</button>	
 			</form>
+				<a href="${pageContext.request.contextPath }/users/info.do">
+					<button class="btn btn-warning">취소</button>	
+				</a>
 		</div>
 	</div>
 </div>

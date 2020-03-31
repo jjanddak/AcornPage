@@ -102,15 +102,19 @@
 	</div>
 	<div class="container content writer">
 			<c:if test="${dto.isWriter eq 'N' }">
+			<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">
 				<button class="btn btn-primary" style="width:100%; font-size:20px; margin-bottom:20px;">
-					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">내 원고로 작가 신청하기</a>
+					내 원고로 작가 신청하기
 				</button>
+			</a>
 			</c:if>
 		<div>
 			<c:if test="${dto.isWriter eq 'Y' }">
+			<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">
 				<button class="btn btn-primary" style="width:100%; font-size:20px; margin-bottom:20px;">
-					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/newToonup.do">신작 원고 전송</a>
+					신작 원고 전송
 				</button>
+			</a>
 			</c:if>
 		</div>
 	<c:if test="${not empty myToon }">
@@ -136,19 +140,20 @@
 			                        <p class="list-title">${tmp.title }</p>
 									<p class="list-writer">${tmp.writer }</p>
 									<p class="list-info">${tmp.info }</p>	
-									<p style="position:absolute; right:15px; bottom:15px;">
-										<button class="btn btn-warning">
-											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateDetail_form.do?title=${tmp.title}">
-												수정
-											</a>
-										</button>
-									<p style="position:absolute; right:-55px; bottom:15px;">
-										<button class="btn btn-danger">
-											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
-												onclick="return confirm('${tmp.title} 의 승인 신청을 취소하시겠습니까?');">
-												취소
-											</a>
-										</button>
+									<p style="position:absolute; right:35px; bottom:15px;">										
+										<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateDetail_form.do?title=${tmp.title}">
+											<button class="btn btn-warning">
+												정보수정
+											</button>
+										</a>
+									</p>
+									<p style="position:absolute; right:-55px; bottom:15px;">									
+										<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
+											onclick="return confirm('${tmp.title} 의 모든 정보가 삭제됩니다. 삭제하시겠습니까?');">
+											<button class="btn btn-danger">
+												전체삭제
+											</button>
+										</a>
 									</p>
 			                     </div>
 			                  </div>
@@ -158,19 +163,35 @@
 			               		<c:choose>
 			               			<c:when test="${list.permit eq 'N' }">
 			               				<div class="permitlist">
-				               				<span>승인 대기중 - ${list.code }</span>
-				               				<button class="btn btn-danger">
-											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deleteList.do?title=${tmp.title}" 
-												onclick="return confirm('${tmp.title} 의 승인 신청을 취소하시겠습니까?');">
-												취소
-											</a>
-										</button>
+				               				<span>승인 대기중 - ${list.code }</span>		
+				               				<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}">
+												<button class="btn btn-warning">
+													수정
+												</button>
+											</a>		               				
+											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deleteList.do?code=${list.code}" 
+												onclick="return confirm('${list.code} 의 승인 신청을 취소하고 원고를 삭제하시겠습니까?');">
+												<button class="btn btn-danger">
+													취소
+												</button>
+											</a>										
 					               		</div>
 			               			</c:when>
 			               			<c:when test="${list.permit ne 'Y' }">
 			               				<div class="permitlist">
 			               					반려됨 - ${list.code }<br/>
-			               					반려사유 : ${list.permit }
+			               					반려사유 : ${list.permit }		               					
+			               					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}">
+												<button class="btn btn-warning">
+													수정
+												</button>
+											</a>			               						
+			               					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deleteList.do?code=${list.code}" 
+												onclick="return confirm('${list.code} 을(를) 삭제하시겠습니까?');">
+												<button class="btn btn-danger">
+													취소
+												</button>
+											</a>
 			               				</div>
 			               			</c:when>
 			               		</c:choose>
@@ -196,19 +217,19 @@
 									<p class="list-writer">${tmp.writer }</p>
 									<p class="list-info">${tmp.info }</p>	
 									<p style="position:absolute; right:10px; bottom:15px;">
+									<a style="color:#fff;" href="${pageContext.request.contextPath }/toon/toonup.do?title=${tmp.title }">
 										<button class="btn btn-info">											
-											<a style="color:#fff;" href="${pageContext.request.contextPath }/toon/toonup.do?title=${tmp.title }">
 												연재
-											</a>
 										</button>
+									</a>
 									</p>
 									<p style="position:absolute; right:-55px; bottom:15px;">
+									<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
+										onclick="return confirm('${tmp.title} 작품을 삭제하시겠습니까?');">
 										<button class="btn btn-danger">
-											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
-												onclick="return confirm('${tmp.title} 작품을 삭제하시겠습니까?');">
 												삭제
-											</a>
 										</button>
+									</a>
 									</p>
 			                     </div>	                   	
 			                  </div>
@@ -217,19 +238,37 @@
 			               <c:if test="${tmp.title eq list.title }">
 			               		<c:choose>
 			               			<c:when test="${list.permit eq 'N' }">
-			               			<div>
-			               				<div class="permitlist">
-				               				<span>승인 대기중 - ${list.code }</span>
+			               			<div class="permitlist">
+				               				<span>승인 대기중 - ${list.code }</span>		
+				               				<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}">
+												<button class="btn btn-warning">
+													수정
+												</button>
+											</a>		               				
+											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deleteList.do?code=${list.code}" 
+												onclick="return confirm('${list.code} 의 승인 신청을 취소하고 원고를 삭제하시겠습니까?');">
+												<button class="btn btn-danger">
+													취소
+												</button>
+											</a>										
 					               		</div>
-					               	</div>
 			               			</c:when>
 			               			<c:when test="${list.permit ne 'Y' }">
-			               			<div>
 			               				<div class="permitlist">
-			               					반려됨 - ${list.code }<br/>	
-			               					반려사유 : ${list.permit }
+			               					반려됨 - ${list.code }<br/>
+			               					반려사유 : ${list.permit }		               					
+			               					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}">
+												<button class="btn btn-warning">
+													수정
+												</button>
+											</a>			               						
+			               					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deleteList.do?code=${list.code}" 
+												onclick="return confirm('${list.code} 을(를) 삭제하시겠습니까?');">
+												<button class="btn btn-danger">
+													취소
+												</button>
+											</a>
 			               				</div>
-			               			</div>
 			               			</c:when>
 			               		</c:choose>
 			               </c:if>			               
@@ -253,20 +292,20 @@
 			                        <p class="list-title">${tmp.title }</p>
 									<p class="list-writer">	${tmp.writer }</p>
 									<p class="list-info">${tmp.info }</p>
-									<p style="position:absolute; right:10px; bottom:15px;">
-										<button class="btn btn-warning">
-											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/toonupdate_form.do?title=${tmp.title}">
-												수정
-											</a>
-										</button>
+									<p style="position:absolute; right:35px; bottom:15px;">										
+										<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateDetail_form.do?title=${tmp.title}">
+											<button class="btn btn-warning">
+												정보수정
+											</button>
+										</a>
 									</p>
-									<p style="position:absolute; right:-55px; bottom:15px;">
-										<button class="btn btn-danger">
-											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
-												onclick="return confirm('${tmp.title} 작품을 삭제하시겠습니까?');">
-												삭제
-											</a>
-										</button>
+									<p style="position:absolute; right:-55px; bottom:15px;">									
+										<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
+											onclick="return confirm('${tmp.title} 의 모든 정보가 삭제됩니다. 삭제하시겠습니까?');">
+											<button class="btn btn-danger">
+												전체삭제
+											</button>
+										</a>
 									</p>
 			                     </div>
 			                  </div>
@@ -276,13 +315,35 @@
 			               		<c:choose>
 			               			<c:when test="${list.permit eq 'N' }">
 			               				<div class="permitlist">
-				               				<span>승인 대기중 - ${list.code }</span>
+				               				<span>승인 대기중 - ${list.code }</span>		
+				               				<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}">
+												<button class="btn btn-warning">
+													수정
+												</button>
+											</a>		               				
+											<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deleteList.do?code=${list.code}" 
+												onclick="return confirm('${list.code} 의 승인 신청을 취소하고 원고를 삭제하시겠습니까?');">
+												<button class="btn btn-danger">
+													취소
+												</button>
+											</a>										
 					               		</div>
 			               			</c:when>
 			               			<c:when test="${list.permit ne 'Y' }">
 			               				<div class="permitlist">
 			               					반려됨 - ${list.code }<br/>
-			               					반려사유 : ${list.permit }	               					
+			               					반려사유 : ${list.permit }		               					
+			               					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}">
+												<button class="btn btn-warning">
+													수정
+												</button>
+											</a>			               						
+			               					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deleteList.do?code=${list.code}" 
+												onclick="return confirm('${list.code} 을(를) 삭제하시겠습니까?');">
+												<button class="btn btn-danger">
+													취소
+												</button>
+											</a>
 			               				</div>
 			               			</c:when>
 			               		</c:choose>

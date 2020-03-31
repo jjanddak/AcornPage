@@ -13,10 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.ToonComment.dao.ToonCommentDao;
+import com.gura.spring05.exception.CanNotDeleteException;
 import com.gura.spring05.exception.NoMoneyException;
 import com.gura.spring05.library.dto.LibraryDto;
 import com.gura.spring05.toon.dto.CommentLikeDto;
 import com.gura.spring05.toon.dto.ToonCommentDto;
+import com.gura.spring05.toondetail.dao.ToonDetailDao;
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
 import com.gura.spring05.toonlist.dao.ToonListDao;
 import com.gura.spring05.toonlist.dto.ToonListDto;
@@ -29,6 +31,8 @@ public class ToonListServiceImpl implements ToonListService{
 	private ToonListDao dao;
 	@Autowired
 	private ToonCommentDao commdao;
+	@Autowired
+	private ToonDetailDao detaildao;
 	
 	//한 페이지에 나타낼 row 의 갯수 
 	static final int PAGE_ROW_COUNT=5;
@@ -122,7 +126,8 @@ public class ToonListServiceImpl implements ToonListService{
 		
 		String havePrev=dao.havePrev(libDto);
 		String haveNext=dao.haveNext(libDto2);		
-				
+
+		request.setAttribute("num", num);
 		request.setAttribute("havePrev", havePrev);
 		request.setAttribute("haveNext", haveNext);
 		request.setAttribute("dto", dto);
@@ -362,6 +367,32 @@ public class ToonListServiceImpl implements ToonListService{
 	public void getMyToonList(String id, HttpServletRequest request) {
 		List<ToonListDto> myToonList=dao.getMyToonList(id);
 		request.setAttribute("myToonList", myToonList);		
+	}
+
+
+	@Override
+	public void deleteList(HttpServletRequest request,String code) {
+		String id=(String)request.getSession().getAttribute("id");
+		String title=code.replaceAll("[0-9]","");
+		ToonDetailDto dto=new ToonDetailDto();
+		dto.setTitle(title);
+		dto.setWriter(id);
+		int num = Integer.parseInt(code.replaceAll("[^0-9]","")); 
+		if(id.equals(dao.checkWriter(code))) {
+			if(num==1) {
+				detaildao.deleteToon(dto);
+				dao.deleteList(code);
+			}
+			dao.deleteList(code);			
+		}else {
+			throw new CanNotDeleteException();
+		}
+	}
+
+
+	@Override
+	public void updateList(ToonListDto dto) {
+		dao.updateList(dto);
 	}
 	
 }
