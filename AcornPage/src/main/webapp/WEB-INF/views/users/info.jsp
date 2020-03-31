@@ -215,18 +215,10 @@
 			                        <p class="list-title">${tmp.title }</p>
 									<p class="list-writer">${tmp.writer }</p>
 									<p class="list-info">${tmp.info }</p>	
-									<p style="position:absolute; right:10px; bottom:15px;">
+									<p style="position:absolute; right:-55px; bottom:15px;">
 									<a style="color:#fff;" href="${pageContext.request.contextPath }/toon/toonup.do?title=${tmp.title }">
 										<button class="btn btn-info">											
 												연재
-										</button>
-									</a>
-									</p>
-									<p style="position:absolute; right:-55px; bottom:15px;">
-									<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/deletetoon.do?title=${tmp.title}" 
-										onclick="return confirm('${tmp.title} 작품을 삭제하시겠습니까?');">
-										<button class="btn btn-danger">
-												삭제
 										</button>
 									</a>
 									</p>
