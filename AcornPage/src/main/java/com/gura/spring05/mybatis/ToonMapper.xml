@@ -37,32 +37,11 @@
 	</select>
 	<select id="getDetailList" parameterType="String"
 		resultType="toonListDto">
-		SELECT num,title,x.code,starvalue,commcount,writer,content,regdate,permit
-		FROM (
-			select t.code, avg(s.starvalue) as starvalue
-			from toonlist t
-			inner join star s
-			on t.code=s.code
-			where title=#{title}
-			group by t.code
-		) x, (
-			select t.num as num, t.title as title, t.writer as writer, t.content as content, t.regdate as regdate, t.code as code, t.permit as permit, NVL(x.commcount,0) as commcount
-			from toonlist t,(
-				select code, count(*) as commcount
-				from toon_comment
-				where code
-				in (
-					select code
-					from toonlist
-					where title=#{title}
-				)
-				group by code order by code asc
-			) x
-			where t.code=x.code(+) 
-			and t.title=#{title}
-		) t
-		WHERE t.code=x.code 
-		AND title=#{title}
+		select code,num,title,writer,content,regdate,permit,
+		   (select avg(starvalue) from star s where t.code=s.code)as starvalue,
+		   (select count(num) from toon_comment c where t.code=c.code)as commCount 
+		from toonlist t
+		where title=#{code}
 	</select>
 	<select id="getCodeDetail" parameterType="toonListDto" resultType="toonListDto">
 		SELECT result1.*
