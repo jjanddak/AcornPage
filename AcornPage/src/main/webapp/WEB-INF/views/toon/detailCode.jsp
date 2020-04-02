@@ -100,11 +100,11 @@
 		</c:choose>	
 	<form action="starAdd.do" method="post">
 		<p id="star_grade">
-			<a href="#">★</a>
-			<a href="#">★</a>
-			<a href="#">★</a>
-			<a href="#">★</a>
-			<a href="#">★</a>
+			<a href="#" class="1">★</a>
+			<a href="#" class="2">★</a>
+			<a href="#" class="3">★</a>
+			<a href="#" class="4">★</a>
+			<a href="#" class="5">★</a>
 		</p>
 		<button id="starBtn" type="submit">별점제출</button>
 	</form>
@@ -200,6 +200,11 @@
    </div>  
 </div>
 <script>
+	$(document).ready(function(){
+		var myStar="${myStar}"/2;
+		$("."+myStar).addClass("on").prevAll("a").addClass("on");
+		
+	})
 	var formObj = $("form[role='form']");//폼 가저오기
 
 	$('#left').click(function(){

@@ -68,6 +68,8 @@ public class UsersServiceImpl implements UsersService{
 			int wallet=dao.getWallet(dto.getId());
 			session.setAttribute("id", dto.getId());
 			session.setAttribute("wallet", wallet);
+			UsersDto profile=dao.getData(dto.getId());
+			session.setAttribute("profile", profile.getProfile());			
 			return true;
 		}else {
 			return false;
@@ -249,42 +251,45 @@ public class UsersServiceImpl implements UsersService{
 	}
 	@Override
 	public void manageCode(HttpServletRequest request, String title, String code) {
-		ToonListDto dto=new ToonListDto();
-		dto.setTitle(title);
-		dto.setCode(code);
 		String id=(String)request.getSession().getAttribute("id");
-		dto.setId(id);
-		LibraryDto libDto=new LibraryDto();
-		LibraryDto libDto2=new LibraryDto();
-		libDto.setId(id);	
-		libDto.setTitle(title);
-		libDto.setCode(code);
-		libDto2.setId(id);	
-		libDto2.setTitle(title);		
-		dto=listDao.getCodeDetail(dto);
-		UsersDto dto2=new UsersDto();
-		dto2.setId(id);
-		dto2.setLastread(code);
-		listDao.lastRead(dto2);
-	      
-		String num = code.replaceAll("[^0-9]","");
-		String tmpcode=code.replaceAll("[0-9]","");
-		int tmp=Integer.parseInt(num);
-		tmp--;
-		String nextnum=Integer.toString(tmp+2);
-		String prevnum=Integer.toString(tmp);
-		String prevcode=tmpcode+prevnum;
-		String nextcode=tmpcode+nextnum;
-		libDto.setCode(prevcode);
-		libDto2.setCode(nextcode);
-		
-		String havePrev=listDao.havePrev(libDto);
-		String haveNext=listDao.haveNext(libDto2);		
-				
-		request.setAttribute("havePrev", havePrev);
-		request.setAttribute("haveNext", haveNext);
-		request.setAttribute("dto", dto);
-		
+		if(!id.equals("admin")) {
+			throw new NoMoneyException("관리자가 아닙니다.");
+		}else {
+			ToonListDto dto=new ToonListDto();
+			dto.setTitle(title);
+			dto.setCode(code);
+			dto.setId(id);
+			LibraryDto libDto=new LibraryDto();
+			LibraryDto libDto2=new LibraryDto();
+			libDto.setId(id);	
+			libDto.setTitle(title);
+			libDto.setCode(code);
+			libDto2.setId(id);	
+			libDto2.setTitle(title);		
+			dto=listDao.getCodeDetail(dto);
+			UsersDto dto2=new UsersDto();
+			dto2.setId(id);
+			dto2.setLastread(code);
+			listDao.lastRead(dto2);
+		      
+			String num = code.replaceAll("[^0-9]","");
+			String tmpcode=code.replaceAll("[0-9]","");
+			int tmp=Integer.parseInt(num);
+			tmp--;
+			String nextnum=Integer.toString(tmp+2);
+			String prevnum=Integer.toString(tmp);
+			String prevcode=tmpcode+prevnum;
+			String nextcode=tmpcode+nextnum;
+			libDto.setCode(prevcode);
+			libDto2.setCode(nextcode);
+			
+			String havePrev=listDao.havePrev(libDto);
+			String haveNext=listDao.haveNext(libDto2);		
+					
+			request.setAttribute("havePrev", havePrev);
+			request.setAttribute("haveNext", haveNext);
+			request.setAttribute("dto", dto);
+		}
 	}
 	@Override
 	public boolean deleteCode(HttpServletRequest request, String code) {

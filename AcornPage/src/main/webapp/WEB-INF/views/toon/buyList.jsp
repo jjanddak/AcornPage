@@ -26,7 +26,14 @@
 						<li>
 							<div class="list">
 								<div class="imgwrapper">
-									<img class="img-thumbnail" src="<c:url value='/resources/images/no.png'/>" alt="logo"/>
+									<c:choose>
+					                    <c:when test="${empty tmp.thumb}">
+								           <img class="img-thumbnail" src="<c:url value='/resources/images/no.png'/>" alt="logo"/>                                           	
+							            </c:when>
+							            <c:otherwise>
+							               <img class="img-thumbnail" src="${pageContext.request.contextPath}${tmp.thumb }" alt="logo"/>
+							            </c:otherwise>
+							         </c:choose>
 								</div>
 								<div class="textwrapper" style="width:70%;">
 									<p class="list-title">${tmp.title }</p>

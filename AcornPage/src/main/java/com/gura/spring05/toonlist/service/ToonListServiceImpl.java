@@ -363,5 +363,10 @@ public class ToonListServiceImpl implements ToonListService{
 		List<ToonListDto> myToonList=dao.getMyToonList(id);
 		request.setAttribute("myToonList", myToonList);		
 	}
-	
+	@Override
+	public void searchMyToon(HttpServletRequest request) {
+		String writer=(String)request.getSession().getAttribute("id");
+		List<ToonDetailDto> list=dao.searchMyToon(writer);
+		request.setAttribute("detailList", list);
+	}
 }

@@ -12,8 +12,8 @@
 		<div class="navbar">
 				<h1 class="logo text-center">
 					<a href="${pageContext.request.contextPath }/home.do">
-			      	<img src="<c:url value='/resources/images/acornLogo.png'/>" alt="logo"/>
-			      </a>
+			      		<img src="<c:url value='/resources/images/acornLogo.png'/>" alt="logo"/>
+			        </a>
 				</h1>
 		      
 		    	<div class="right-box">	
@@ -40,6 +40,7 @@
 								<button class="btn btn-link" id="login" style="padding:0 0 0 15px; font-size:17px;" onclick="loginOpen()">로그인</button>
 							</c:when>
 							<c:otherwise>
+								<img id="profile_image" style="width:30px; height:30px; border-radius:50%; margin-left:12px;" src="${pageContext.request.contextPath }${profile }" alt="" />
 								<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="userInfo">${id }님
 								<span class="caret"/>
 								</button>					

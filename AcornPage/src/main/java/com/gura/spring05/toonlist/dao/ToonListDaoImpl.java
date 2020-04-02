@@ -27,7 +27,6 @@ public class ToonListDaoImpl implements ToonListDao{
 	@Override
 	public List<ToonListDto> getDetailList(String title) {
 		List<ToonListDto> list=session.selectList("toon.getDetailList", title);
-		System.out.println(list.size());
 		if(list.size()==0) {
 			return null;
 		}else {
@@ -223,5 +222,10 @@ public class ToonListDaoImpl implements ToonListDao{
 	public void deleteCode(String code) {
 
 		session.delete("toon.deleteCode",code);
+	}
+	@Override
+	public List<ToonDetailDto> searchMyToon(String writer) {
+		
+		return session.selectList("toon.searchMyToon",writer);
 	}
 }

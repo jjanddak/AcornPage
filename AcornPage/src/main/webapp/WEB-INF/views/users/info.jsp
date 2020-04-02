@@ -100,7 +100,7 @@
 		</table>
 		<button class="btn btn-info pwd" style="color:#fff;">비밀번호 수정하기</button>
 		<c:if test="${dto.isWriter eq 'Y' }">
-			<a href="${pageContext.request.contextPath }/toon/searchedDetail.do?select=writer&keyword=${dto.id }">
+			<a href="${pageContext.request.contextPath }/toon/searchMyToon.do">
 				<button class="btn btn-warning myToon" style="color:#fff;">내 만화보기</button>
 			</a>
 		</c:if>
@@ -307,12 +307,6 @@
 <%-- jquery form  플러그인 javascript 로딩 --%>
 <script src="${pageContext.request.contextPath }/resources/js/jquery.form.min.js"></script>
 <script>
-	$(document).ready(function(){
-		var writer="${dto.isWriter}";
-		if(writer!="Y"){
-			$(".writer").prop("style","display:none;");
-		}
-	});
 	//프로파일 이미지를 클릭하면 
 	$("#profileLink").click(function(){
 		//강제로 <input type="file" /> 을 클릭해서 파일 선택창을 띄우고
@@ -334,6 +328,7 @@
 							+responseData.savedPath;
 		// img 의 src 속성에 반영함으로써 이미지가 업데이트 되도록 한다.
 		$("#profileLink img").attr("src", src);
+		$("#profile_image").attr("src",src);
 	});
 	
 

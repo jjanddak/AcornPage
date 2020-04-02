@@ -19,5 +19,8 @@
 		FROM star 
 		WHERE code LIKE '%${code}%' 
 	</select>
+	<select id="checkMyStar" parameterType="starDto" resultType="Object">
+		select starvalue from star where id=#{id} and code=#{code}
+	</select>
 </mapper>
 

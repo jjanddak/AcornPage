@@ -35,7 +35,7 @@
                      </div>
                      <div class="textwrapper">
                         <a href="${pageContext.request.contextPath}/toon/selectedDetail.do?title=${tmp.title }"><p class="list-title"><strong>${tmp.title }</strong></p></a>
-						<a href="${pageContext.request.contextPath}/toon/searchedDetail.do?select=writer&keyword=${tmp.writer }"><p class="list-writer"><strong>${tmp.writer }</strong></p></a>
+						<p class="list-writer"><strong>${tmp.writer }</strong></p>
 						<p class="list-info">${tmp.info }</p>
 						<c:choose>
 	                     	<c:when test="${tmp.toonovel eq 'toon'}">

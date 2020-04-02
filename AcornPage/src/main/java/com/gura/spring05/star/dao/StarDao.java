@@ -7,4 +7,5 @@ public interface StarDao {
 	public void insert(StarDto dto);
 	public void update(StarDto dto);
 	public StarDto selectStarOneAVG(StarDto dto);
+	public Object checkMyStar(StarDto dto);
 }

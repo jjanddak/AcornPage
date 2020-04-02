@@ -178,12 +178,13 @@ public class UsersController {
 	@RequestMapping(value = "/users/profile_upload", 
 			method = RequestMethod.POST)
 	public Map<String, Object> profileUpload(HttpServletRequest request,
-			@RequestParam MultipartFile profileImage){
+			@RequestParam MultipartFile profileImage,HttpSession session){
 		String path=service.saveProfileImage(request, profileImage);
 		/*
 		 *  {"savedPath":"/upload/xxxx.jpg"} 형식의 JSON 문자열을 리턴해주도록
 		 *  Map 객체를 구성해서 리턴해준다. 
 		 */
+		session.setAttribute("profile", path);
 		Map<String, Object> map=new HashMap<>();
 		map.put("savedPath", path);
 		return map;
