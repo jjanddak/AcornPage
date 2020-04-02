@@ -26,6 +26,8 @@
 			<input class="form-control" type="text" id="id" name="id"/>
 			<p class="help-block" id="id_notusable">사용 불가능한 아이디 입니다.</p>
 			<p class="help-block" id="id_required">반드시 입력 하세요</p>
+			<p class="help-block" id="id_tooshort">아이디를 최소 4글자 이상 입력하세요.</p>
+			<p class="help-block" id="id_toolong">아이디가 너무 깁니다. (10글자까지 제한)</p>
 			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
 			<span class="glyphicon glyphicon-ok form-control-feedback"></span>
 		</div>
@@ -34,6 +36,8 @@
 			<input class="form-control" type="password" id="pwd" name="pwd"/>
 			<p class="help-block" id="pwd_required">반드시 입력하세요</p>
 			<p class="help-block" id="pwd_notequal">아래의 확인란과 동일하게 입력하세요</p>
+			<p class="help-block" id="pwd_tooshort">비밀번호를 최소 6글자 이상 입력하세요.</p>
+			<p class="help-block" id="pwd_toolong">비밀번호가 너무 깁니다. (20글자까지 제한)</p>
 			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
 			<span class="glyphicon glyphicon-ok form-control-feedback"></span>
 		</div>
@@ -63,10 +67,18 @@
 	//아이디를 입력 했는지 여부 
 	var isIdInput=false;
 	
+	//아이디가 너무 짧은지&긴지 여부
+	var tooShortId=false;
+	var tooLongId=false;
+	
 	//비밀번호를 확인란과 같게 입력 했는지 여부 
 	var isPwdEqual=false;
 	//비밀번호를 입력했는지 여부 
 	var isPwdInput=false;
+	
+	//비밀번호가 너무 짧은지&긴지 여부
+	var tooShortPwd=false;
+	var tooLongPwd=false;
 	
 	//이메일을 형식에 맞게 입력했는지 여부 
 	var isEmailMatch=false;
@@ -119,8 +131,21 @@
 		}else{
 			isPwdInput=true;
 		}
+		
+		if(pwd.length != 0 && pwd.length < 6){
+			tooShortPwd=false;
+		}else{
+			tooShortPwd=true;
+		}
+		
+		if(pwd.length > 20){
+			tooLongPwd=false;
+		}else{
+			tooLongPwd=true;
+		}
+		
 		//비밀번호 에러 여부 
-		var isError=!isPwdEqual || !isPwdInput;
+		var isError=!isPwdEqual || !isPwdInput || !tooShortPwd || !tooLongPwd;
 		//비밀번호 상태 바꾸기 
 		setState("#pwd", isError);
 	});
@@ -154,10 +179,24 @@
 		}else{
 			isIdInput=true;
 		}
+		
+		if(inputId.length != 0 && inputId.length < 4){
+			tooShortId=false;
+		}else{
+			tooShortId=true;
+		}
+		
+		if(inputId.length > 11){
+			tooLongId=false;
+		}else{
+			tooLongId=true;
+		}
+		
 		//아이디 에러 여부 
-		var isError= !isIdUsable || !isIdInput ;
+		var isError= !isIdUsable || !isIdInput || !tooShortId || !tooLongId ;
 		//아이디 상태 바꾸기 
 		setState("#id", isError );
+		
 	});
 	
 	//입력란의 상태를 바꾸는 함수 
@@ -196,6 +235,12 @@
 		if(!isPwdInput && isPwdDirty){
 			$("#pwd_required").show();
 		}
+		if(!tooShortPwd && isPwdDirty){
+			$("#pwd_tooshort").show();
+		}
+		if(!tooLongPwd && isPwdDirty){
+			$("#pwd_toolong").show();
+		}
 		//에러가 있다면 에러 메세지 띄우기
 		if(!isIdUsable && isIdDirty){
 			$("#id_notusable").show();
@@ -203,10 +248,15 @@
 		if(!isIdInput && isIdDirty){
 			$("#id_required").show();
 		}
-		
+		if(!tooShortId && isIdDirty){
+			$("#id_tooshort").show();
+		}
+		if(!tooLongId && isIdDirty){
+			$("#id_toolong").show();
+		}
 		//버튼의 상태 바꾸기 
-		if(isIdUsable && isIdInput && isPwdEqual && 
-				isPwdInput && (!isEmailInput || isEmailMatch) ){
+		if(isIdUsable && isIdInput && isPwdEqual && (tooShortId || tooLongId) &&
+				isPwdInput && (tooShortPwd || tooLongPwd) && (!isEmailInput || isEmailMatch) ){
 			$("button[type=submit]").removeAttr("disabled");
 		}else{
 			$("button[type=submit]").attr("disabled","disabled");
