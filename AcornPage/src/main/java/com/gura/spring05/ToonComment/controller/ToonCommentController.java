@@ -60,7 +60,7 @@ public class ToonCommentController<toonCommentDto> {
 		
 	//댓글 삭제 요청 처리
 	@ResponseBody
-	@RequestMapping(value = "/toon/commentDelete", method=RequestMethod.POST)
+	@RequestMapping(value = "/toon/deleteComment", method=RequestMethod.POST)
 	public boolean authCommentDelete(HttpServletRequest request,@RequestParam String commcode){
 		boolean isDel=service.deleteComment(request,commcode);
 		

@@ -12,155 +12,165 @@
 .star-rating {width:75px; }
 .star-rating,.star-rating span {display:inline-block; height:14px; overflow:hidden; background:url(${pageContext.request.contextPath}/resources/images/star.png)no-repeat; }
 .star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
-	.btn-link{
-		color:#000;
-	}
-	.contents{
-		text-align: center;
-	}
-	.contents *{
-		max-width: 100%;
-	}
+   .btn-link{
+      color:#000;
+   }
+   .contents{
+      text-align: center;
+   }
+   .contents *{
+      max-width: 100%;
+   }
 </style>
 </head>
 <body>
 <jsp:include page="../include/navbar.jsp"/>
 <div class="contentwrapper">
    <div class="container content">
-	<div class="container">
-		<h3>카페 글 상세 보기</h3>
-			<table class="table table-bordered table-condensed">
-			<colgroup>
-				<col class="col-xs-3"/>
-				<col class="col-xs-9"/>
-			</colgroup>
-			<tr>
-				<th>글번호</th>
-				<td>${dto.num }</td>
-			</tr>
-			<tr>
-				<th>작성자</th>
-				<td>${dto.writer }</td>
-			</tr>
-			<tr>
-				<th>제목</th>
-				<td id="title">${dto.title }</td>
-			</tr>
-			<tr>
-				<th>회별 별점</th>
-				<td>
-					<c:choose>
-						<c:when test="${starvalueAVG>0 }">
-							<span class="wrap-star">
-								<span class='star-rating'>
-									<span style ="width:<fmt:formatNumber value="${starvalueAVG *10}" pattern=".0"/>%"></span>
-								</span>
-								<fmt:formatNumber value="${starvalueAVG }" pattern=".0"/>
-							</span>
-						</c:when>
-						<c:otherwise>
-							<strong>이 편은 아직 별점이 없어요. 별점을 ${id } 님이 먼저 매겨주세요!</strong>
-						</c:otherwise>
-					</c:choose>
-				</td>
-			</tr>
-			<tr>
-				<th>등록일</th>
-				<td>${dto.upload }</td>
-			</tr>
-		</table>
-		<div class="contents">${dto.content }</div>
-		<br/>
-		
-		<c:choose>
-			<c:when test="${dto.prevNum eq 0 }">
-				<div></div>
-			</c:when>
-			<c:when test="${empty havePrev}">
-				<a class="btn" href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.title}${dto.num-1}">이전화</a>
-			</c:when>
-			<c:otherwise>			
-				<a class="btn" href="buyCodeOne.do?title=${dto.title }&code=${dto.title}${dto.num-1}" 
-				onclick="return confirm('구매하시겠습니까? 100원이 차감됩니다')">
-				이전화 구매</a>
-			</c:otherwise>
-		</c:choose>
-		<c:choose>
-			<c:when test="${dto.nextNum eq 0 }">
-				<div></div>
-			</c:when>
-			<c:when test="${empty haveNext}">
-				<a class="btn" href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.title}${dto.num+1}">다음화</a>
-			</c:when>
-			<c:otherwise>			
-				<a class="btn" href="buyCodeOne.do?title=${dto.title }&code=${dto.title}${dto.num+1}" 
-				onclick="return confirm('구매하시겠습니까? 100원이 차감됩니다')">
-				다음화 구매</a>
-			</c:otherwise>
-		</c:choose>	
-	<form action="starAdd.do" method="post">
-		<p id="star_grade">
-			<a href="#" class="1">★</a>
-			<a href="#" class="2">★</a>
-			<a href="#" class="3">★</a>
-			<a href="#" class="4">★</a>
-			<a href="#" class="5">★</a>
-		</p>
-		<button id="starBtn" type="submit">별점제출</button>
-	</form>
-	
-	
-	<div class="comments">
-		<!-- 댓글을 작성할수 있는 폼 -->
-		<div class="comment_form">
-			<h4>의견쓰기</h4>
-			<form action="${pageContext.request.contextPath}/toon/comment_insert.do?code=${dto.code}&title=${dto.title }" method="post">
-				<textarea name="content" style="width:100%"><c:if test="${empty id }">댓글을 작성하려면 로그인이 필요합니다.</c:if></textarea>
-				<button type="submit">등록</button>
-			</form>
-		</div>
-	</div>
-		<ul>
-			<c:forEach items="${toonCommentList }" var="tmp">
-				<dl class="${tmp.commcode}">
-					<dt>				
-						<span><a href="${pageContext.request.contextPath}/toon/comment_select.do?id=${tmp.id }">${tmp.id }</a></span>
-						<span>${tmp.regdate }</span>
-						<span class="${tmp.commcode }like"> <strong>${tmp.likeCount }</strong></span>
-						<c:if test="${id == tmp.id}">
-							<span><a href="#" onclick="cmDelete('${tmp.commcode}');"><button type="button" class="deleteBtn">삭제</button></a></span>
-							<span><a href="#" onclick="updateBtn('${tmp.commcode}');"><button type="button" class="${tmp.commcode}updateBtn">수정</button></a></span>
-							<span><a href="#" onclick="cancleBtn('${tmp.commcode}');"><button type="button" class="${tmp.commcode}cancleBtn" style="display:none;">취소</button></a></span>
-						</c:if>
-						<form style="display:inline;" action="commentlike.do" id="likeForm" method="post">
-						<input type="hidden" name="commcode" value="${tmp.commcode}"/>
-						<input type="hidden" name="code" value="${tmp.code}"/>
-						<button <c:if test="${tmp.isLike eq true}">style="color:blue;"</c:if> class="like btn btn-link" type="button">
-							<span class="glyphicon glyphicon-thumbs-up"></span>
-						</button>
-						</form>
-						<p style="display:inline; float:right; margin: 5px 20px 0 0;">
-						<c:if test="${tmp.id eq id}">
-							<a href=""><span>수정</span></a>
-							<button class="del btn-link"><span class="${tmp.commcode }" style="font-weight: bold;">삭제</span></button>
-						</c:if>
-						</p>
-					</dt>
-					<dd>
-						<pre class="${tmp.commcode }pre" >${tmp.content }</pre>
-						<pre class="${tmp.commcode }pre2" style="display:none; position: relative;">
-							<input type="text" class="${tmp.commcode }text" value="${tmp.content }" style="position: absolute; left: 10px; width:700px"/>
-							<span><a href="#" onclick="cmUpdate('${tmp.commcode}');"><button type="button" class="cmUpdate('${tmp.commcode}');" style="position: absolute; left: 10px; bottom: 14px;">입력</button></a></span>
-						</pre>
-					</dd>
-				</dl>		
-			</c:forEach>
-		</ul>
+   <div class="container">
+      <h3>카페 글 상세 보기</h3>
+         <table class="table table-bordered table-condensed">
+         <colgroup>
+            <col class="col-xs-3"/>
+            <col class="col-xs-9"/>
+         </colgroup>
+         <tr>
+            <th>글번호</th>
+            <td>${dto.num }</td>
+         </tr>
+         <tr>
+            <th>작성자</th>
+            <td>${dto.writer }</td>
+         </tr>
+         <tr>
+            <th>제목</th>
+            <td id="title">${dto.title }</td>
+         </tr>
+         <tr>
+            <th>회별 별점</th>
+            <td>
+               <c:choose>
+                  <c:when test="${starvalueAVG>0 }">
+                     <span class="wrap-star">
+                        <span class='star-rating'>
+                           <span style ="width:<fmt:formatNumber value="${starvalueAVG *10}" pattern=".0"/>%"></span>
+                        </span>
+                        <fmt:formatNumber value="${starvalueAVG }" pattern=".0"/>
+                     </span>
+                  </c:when>
+                  <c:otherwise>
+                     <strong>이 편은 아직 별점이 없어요. 별점을 ${id } 님이 먼저 매겨주세요!</strong>
+                  </c:otherwise>
+               </c:choose>
+            </td>
+         </tr>
+         <tr>
+            <th>등록일</th>
+            <td>${dto.upload }</td>
+         </tr>
+      </table>
+      <div class="contents">${dto.content }</div>
+      <br/>
+      
+      <c:choose>
+         <c:when test="${dto.prevNum eq 0 }">
+            <div></div>
+         </c:when>
+         <c:when test="${empty havePrev}">
+            <a class="btn" href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.title}${dto.num-1}">이전화</a>
+         </c:when>
+         <c:otherwise>         
+            <a class="btn" href="buyCodeOne.do?title=${dto.title }&code=${dto.title}${dto.num-1}" 
+            onclick="return confirm('구매하시겠습니까? 100원이 차감됩니다')">
+            이전화 구매</a>
+         </c:otherwise>
+      </c:choose>
+      <c:choose>
+         <c:when test="${dto.nextNum eq 0 }">
+            <div></div>
+         </c:when>
+         <c:when test="${empty haveNext}">
+            <a class="btn" href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.title}${dto.num+1}">다음화</a>
+         </c:when>
+         <c:otherwise>         
+            <a class="btn" href="buyCodeOne.do?title=${dto.title }&code=${dto.title}${dto.num+1}" 
+            onclick="return confirm('구매하시겠습니까? 100원이 차감됩니다')">
+            다음화 구매</a>
+         </c:otherwise>
+      </c:choose>   
+   <form action="starAdd.do" method="post">
+      <p id="star_grade">
+         <a href="#" class="1">★</a>
+         <a href="#" class="2">★</a>
+         <a href="#" class="3">★</a>
+         <a href="#" class="4">★</a>
+         <a href="#" class="5">★</a>
+      </p>
+      <button id="starBtn" type="submit">별점제출</button>
+   </form>
+   
+   
+   <div class="comments">
+      <!-- 댓글을 작성할수 있는 폼 -->
+      <div class="comment_form">
+         <h4>의견쓰기</h4>
+         <form action="${pageContext.request.contextPath}/toon/comment_insert.do?code=${dto.code}&title=${dto.title }" method="post">
+            <textarea name="content" style="width:100%"><c:if test="${empty id }">댓글을 작성하려면 로그인이 필요합니다.</c:if></textarea>
+            <button type="submit">등록</button>
+         </form>
+      </div>
+   </div>
+      <ul>
+         <c:forEach items="${toonCommentList }" var="tmp">
+            <dl class="${tmp.commcode }">
 
-	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
+               <dt>            
+                  <span><a href="${pageContext.request.contextPath}/toon/comment_select.do?id=${tmp.id }">${tmp.id }</a></span>
+                  <span>${tmp.regdate }</span>
+                  <span class="${tmp.commcode }like"> <strong>${tmp.likeCount }</strong></span>
+                  
+                  <form style="display:inline;" action="commentlike.do" class="likeForm" method="post">
+                  <input type="hidden" name="commcode" value="${tmp.commcode}"/>
+                  <input type="hidden" name="code" value="${tmp.code}"/>
+                  <button <c:if test="${tmp.isLike eq true}">style="color:blue;"</c:if> class="like btn btn-link" type="button">
+                     <span class="glyphicon glyphicon-thumbs-up"></span>
+                  </button>
+                  </form>
+                  <p style="display:inline; float:right; margin: 5px 20px 0 0;">
+                  <c:if test="${tmp.id eq id}">
+                    <a href="#" onclick="updateBtn('${tmp.commcode}');">
+                    	<button type="button" class="${tmp.commcode}updateBtn btn-link">
+                    		<span style="font-weight: bold;">
+                    			수정
+                   			</span>
+              			</button>
+        			</a>
+                     <a href="#" onclick="cancleBtn('${tmp.commcode}');">
+                     	<button type="button" class="${tmp.commcode}cancleBtn btn-link" style="display:none;">
+                     		<span style="font-weight: bold;">
+                     			취소
+                   			</span>
+           				</button>
+         			</a>
+                     <button class="del btn-link"><span class="${tmp.commcode }" style="font-weight: bold;">삭제</span></button>
+                  </c:if>
+                  </p>
+               </dt>
+               <dd>
+                  <pre class="${tmp.commcode }pre" >${tmp.content }</pre>
+                  <pre class="${tmp.commcode }pre2" style="display:none; position: relative;">
+                     <input type="text" class="${tmp.commcode }text" value="${tmp.content }" style="position: absolute; left: 10px; width:700px"/>
+                     <span><a href="#" onclick="cmUpdate('${tmp.commcode}');"><button type="button" class="cmUpdate('${tmp.commcode}');" style="position: absolute; left: 10px; bottom: 14px;">입력</button></a></span>
+                  </pre>
+               </dd>
+            </dl>      
+         </c:forEach>
+      </ul>
+
+   <p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
 </div>
 
-	   <div class="page-display">
+      <div class="page-display">
       <ul class="pagination">
       <c:choose>
          <c:when test="${startPageNum ne 1 }">
@@ -207,19 +217,19 @@
    </div>  
 </div>
 <script>
-	$(document).ready(function(){
-		var myStar="${myStar}"/2;
-		$("."+myStar).addClass("on").prevAll("a").addClass("on");
-		
-	})
-	var formObj = $("form[role='form']");//폼 가저오기
+   $(document).ready(function(){
+      var myStar="${myStar}"/2;
+      $("."+myStar).addClass("on").prevAll("a").addClass("on");
+      
+   })
+   var formObj = $("form[role='form']");//폼 가저오기
 
-	$('#left').click(function(){
-		$('score').values('10');
-	});
-	$('#right').click(function(){
-		
-	});
+   $('#left').click(function(){
+      $('score').values('10');
+   });
+   $('#right').click(function(){
+      
+   });
 var formObj = $("form[role='form']");//폼 가저오기
 
     $('#star_grade a').click(function(){
@@ -227,59 +237,45 @@ var formObj = $("form[role='form']");//폼 가저오기
         $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
         return false;
     });
-    
-    function cmDelete(commcode){
-    	var commcode=commcode;
-    	$.ajax({
-			url: "commentDelete.do",//이동할 주소
-			type: "post",
-			data: {"commcode": commcode},
-			success: function(responseData){
-				if(responseData==true){
-					$("."+commcode).remove();
-				}	
-			}
-		})
-    };
-    
+
     function cmUpdate(commcode){
-    	var commcode = commcode;
-    	var result1 = $("."+commcode+"text").val();	
-    	/* var result1 = prompt("여기에 수정할 댓글을 입력하세요"+num); */
-    	if(result1 != ""){
-    		$.ajax({
-    			url: "updateComment.do",//이동할 주소
-    			type: "post",
-    			data: {"commcode": commcode, "content":result1},
-    			success: function(responseData){
-    				if(responseData==true){
-    					$("."+commcode+"pre").show();
-    					$("."+commcode+"pre").text(result1);
-    					$("."+commcode+"pre2").hide();
-    			    	$("."+commcode+"updateBtn").show();
-    			    	$("."+commcode+"cancleBtn").hide();
-    				}
-    			}
-    		})
-    	}else{
-    		alert("글을 한글자 이상 쓰세요.");
-    	}
+       var commcode = commcode;
+       var result1 = $("."+commcode+"text").val();   
+       /* var result1 = prompt("여기에 수정할 댓글을 입력하세요"+num); */
+       if(result1 != ""){
+          $.ajax({
+             url: "updateComment.do",//이동할 주소
+             type: "post",
+             data: {"commcode": commcode, "content":result1},
+             success: function(responseData){
+                if(responseData==true){
+                   $("."+commcode+"pre").show();
+                   $("."+commcode+"pre").text(result1);
+                   $("."+commcode+"pre2").hide();
+                    $("."+commcode+"updateBtn").show();
+                    $("."+commcode+"cancleBtn").hide();
+                }
+             }
+          })
+       }else{
+          alert("글을 한글자 이상 쓰세요.");
+       }
     }
     
     function updateBtn(commcode){
-    	var commcode=commcode;
-    	$("."+commcode+"pre2").show();
-    	$("."+commcode+"pre").hide();
-    	$("."+commcode+"text").focus();
-    	$("."+commcode+"cancleBtn").show();
-    	$("."+commcode+"updateBtn").hide();
+       var commcode=commcode;
+       $("."+commcode+"pre2").show();
+       $("."+commcode+"pre").hide();
+       $("."+commcode+"text").focus();
+       $("."+commcode+"cancleBtn").show();
+       $("."+commcode+"updateBtn").hide();
     };
     function cancleBtn(commcode){
-    	var commcode=commcode;
-		$("."+commcode+"pre").show();
-		$("."+commcode+"pre2").hide();
-    	$("."+commcode+"updateBtn").show();
-    	$("."+commcode+"cancleBtn").hide();
+       var commcode=commcode;
+      $("."+commcode+"pre").show();
+      $("."+commcode+"pre2").hide();
+       $("."+commcode+"updateBtn").show();
+       $("."+commcode+"cancleBtn").hide();
     }
     $("#starBtn").click(function(){
       var starValue = document.querySelectorAll(".on").length*2;
@@ -291,73 +287,85 @@ var formObj = $("form[role='form']");//폼 가저오기
          
       }
       return false;
-   	}); 
-	//폼에 submit 이벤트가 일어 났을때 실행할 함수 등록 
-	$(".comments form").on("submit", function(){
-		//로그인 여부
-		var isLogin=${not empty id};
-		if(isLogin==false){
-			alert("로그인 페이지로 이동 합니다.");
-			location.href="${pageContext.request.contextPath}/home.do";
-			return false;//폼 전송 막기 
-		}
-	});
-	//폼에 click 이벤트가 일어 났을때 실행할 함수 등록 
-	$(".comments form textarea").on("click", function(){
-		//로그인 여부
-		var isLogin=${not empty id};
-		if(isLogin==false){
-			var isMove=confirm("로그인 페이지로 이동 하시겠습니까?");
-			if(isMove){
-				location.href="${pageContext.request.contextPath}/users/loginform.do";
-			}
-		}
-	});
-	$(".like").click(function(){
-		var ele=$(this);
-		var commcode=ele.parent().children()[0].value;
-		var code=ele.parent().children()[1].value;
-		//var formData = ele.parent().serialize();
-		var arrCode=[];
-		arrCode.push(code);
-		arrCode.push(commcode);
-		$.ajax({
-			url: "commentlike.do",//이동할 주소
-			type: "post",
-			data: {"arrEachCode": arrCode},
+      }); 
+   $(".like").click(function(){
+      var ele=$(this);
+      var commcode=ele.parent().children()[0].value;
+      var code=ele.parent().children()[1].value;
+      //var formData = ele.parent().serialize();
+      var arrCode=[];
+      arrCode.push(code);
+      arrCode.push(commcode);
+      $.ajax({
+         url: "commentlike.do",//이동할 주소
+         type: "post",
+         data: {"arrEachCode": arrCode},
 
-			success:function(responseData){
-				//공백체크함수
-				function checkSpace(str) { 
-			        if(str.search(/\s/) != -1) { 
-			            return true; 
-			        } else { 
-			            return false; 
-			        } 
-			    };
-				//빈 변수 선언하고
-				var code;
-				var count=responseData.count;
-				//공백체크함수로 response된 code에 공백이 있다면
-				if(checkSpace(responseData.code)==true){
-					//replace함수를 통해 공백을 .으로 변환하고 빈 변수에 담는다.
-					//replace("",".")와 replace(/ /gi,".") 차이점은 /""/ 따옴표 안에 바꿀 문자열(ex:#,!등)
-					//을 넣고 /뒤에 gi를 선언하면 replaceAll효과가 있다. 스크립트에선 replaceAll이란 함수는 존재하지 않는다. 
-					code=responseData.code.replace(/ /gi,".");
-					console.log(code);
-				}else{
-					code=responseData.code;
-				}
-				if(responseData.checkLike==false){
-					ele.prop("style","color: black;");
-					$("."+code+"like").text(count);
-				}else{
-					ele.prop("style","color: blue;");
-					$("."+code+"like").text(count);
-				}
-			}
-		});
-	});
+         success:function(responseData){
+            //공백체크함수
+            function checkSpace(str) { 
+                 if(str.search(/\s/) != -1) { 
+                     return true; 
+                 } else { 
+                     return false; 
+                 } 
+             };
+            //빈 변수 선언하고
+            var code;
+            var count=responseData.count;
+            //공백체크함수로 response된 code에 공백이 있다면
+            if(checkSpace(responseData.code)==true){
+               //replace함수를 통해 공백을 .으로 변환하고 빈 변수에 담는다.
+               //replace("",".")와 replace(/ /gi,".") 차이점은 /""/ 따옴표 안에 바꿀 문자열(ex:#,!등)
+               //을 넣고 /뒤에 gi를 선언하면 replaceAll효과가 있다. 스크립트에선 replaceAll이란 함수는 존재하지 않는다. 
+               code=responseData.code.replace(/ /gi,".");
+            }else{
+               code=responseData.code;
+            }
+            if(responseData.checkLike==false){
+               ele.prop("style","color: black;");
+               $("."+code+"like").text(count);
+            }else{
+               ele.prop("style","color: blue;");
+               $("."+code+"like").text(count);
+            }
+         }
+      });
+   });
+   $(".del").click(function(){
+	      var ele=$(this);
+	      var commcode=ele.children()[0].className;
+	      var checkDel=confirm("댓글을 삭제하시겠습니까?");
+	      if(checkDel){
+	         $.ajax({
+	            url:"deleteComment.do",
+	            method:"post",
+	            data:{"commcode":commcode},
+	            success:function(responseData){
+	               if(responseData){
+	                  //공백체크함수
+	                  function checkSpace(str) { 
+	                       if(str.search(/\s/) != -1) { 
+	                           return true; 
+	                       } else { 
+	                           return false; 
+	                       } 
+	                   };
+	                   var spaceCode;
+	                   if(checkSpace(commcode)==true){
+	                     //replace함수를 통해 공백을 .으로 변환하고 빈 변수에 담는다.
+	                     //replace("",".")와 replace(/ /gi,".") 차이점은 /""/ 따옴표 안에 바꿀 문자열(ex:#,!등)
+	                     //을 넣고 /뒤에 gi를 선언하면 replaceAll효과가 있다. 스크립트에선 replaceAll이란 함수는 존재하지 않는다. 
+	                     spaceCode=commcode.replace(/ /gi,".");                  
+	                     $("dl."+spaceCode).remove();
+	                  }else{
+	                     $("dl."+commcode).remove();
+	                  }
+	               }
+	            }
+	         })
+	      }      
+	   });
 </script>
 </body>
 </html>
