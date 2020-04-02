@@ -23,9 +23,9 @@
 						<span>${tmp.regdate }</span>
 						<span class="${tmp.commcode }"></span>
 						<c:if test="${id == tmp.id}">
-							<span><a href="#" onclick="cmDelete(${tmp.commcode});"><button type="button" class="deleteBtn">삭제</button></a></span>
-							<span><a href="#" onclick="updateBtn(${tmp.commcode});"><button type="button" class="${tmp.commcode}updateBtn">수정</button></a></span>
-							<span><a href="#" onclick="cancleBtn(${tmp.commcode});"><button type="button" class="${tmp.commcode}cancleBtn" style="display:none;">취소</button></a></span>
+							<span><a href="#" onclick="cmDelete('${tmp.commcode}');"><button type="button" class="deleteBtn">삭제</button></a></span>
+							<span><a href="#" onclick="updateBtn('${tmp.commcode}');"><button type="button" class="${tmp.commcode}updateBtn">수정</button></a></span>
+							<span><a href="#" onclick="cancleBtn('${tmp.commcode}');"><button type="button" class="${tmp.commcode}cancleBtn" style="display:none;">취소</button></a></span>
 						</c:if>
 						<input type="hidden" name="commcode" value="${tmp.commcode}"/>
 						<input type="hidden" name="code" value="${tmp.code}"/>
@@ -35,7 +35,7 @@
 						<pre class="${tmp.commcode }pre" >${tmp.content }</pre>
 						<pre class="${tmp.commcode }pre2" style="display:none; position: relative;">
 							<input type="text" class="${tmp.commcode }text" value="${tmp.content }" style="position: absolute; left: 10px; width:700px"/>
-							<span><a href="#" onclick="cmUpdate(${tmp.commcode});"><button type="button" class="cmUpdate(${tmp.commcode});" style="position: absolute; left: 10px; bottom: 14px;">입력</button></a></span>
+							<span><a href="#" onclick="cmUpdate('${tmp.commcode}');"><button type="button" class="cmUpdate('${tmp.commcode}');" style="position: absolute; left: 10px; bottom: 14px;">입력</button></a></span>
 						</pre>
 					</dd>
 				</dl>		
@@ -49,12 +49,12 @@
 	function updateBtn(commcode){
 		var commcode=commcode;
 		$("."+commcode+"pre2").show();
-		$("."+ncommcodeum+"pre").hide();
+		$("."+commcode+"pre").hide();
 		$("."+commcode+"text").focus();
 		$("."+commcode+"cancleBtn").show();
 		$("."+commcode+"updateBtn").hide();
 	};
-	
+		
 	function cancleBtn(commcode){
 		var commcode=commcode;
 		$("."+commcode+"pre").show();

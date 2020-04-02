@@ -122,9 +122,9 @@
 						<span>${tmp.regdate }</span>
 						<span class="${tmp.commcode }"> <strong>${tmp.likeCount }</strong></span>
 						<c:if test="${id == tmp.id}">
-							<span><a href="#" onclick="cmDelete(${dto.title}${dto.num },${tmp.num });"><button type="button" class="deleteBtn">삭제</button></a></span>
-							<span><a href="#" onclick="updateBtn(${tmp.commcode});"><button type="button" class="${tmp.commcode}updateBtn">수정</button></a></span>
-							<span><a href="#" onclick="cancleBtn(${tmp.commcode});"><button type="button" class="${tmp.commcode}cancleBtn" style="display:none;">취소</button></a></span>
+							<span><a href="#" onclick="cmDelete('${tmp.commcode}');"><button type="button" class="deleteBtn">삭제</button></a></span>
+							<span><a href="#" onclick="updateBtn('${tmp.commcode}');"><button type="button" class="${tmp.commcode}updateBtn">수정</button></a></span>
+							<span><a href="#" onclick="cancleBtn('${tmp.commcode}');"><button type="button" class="${tmp.commcode}cancleBtn" style="display:none;">취소</button></a></span>
 						</c:if>
 						<form style="display:inline;" action="commentlike.do" id="likeForm" method="post">
 						<input type="hidden" name="commcode" value="${tmp.commcode}"/>
@@ -138,7 +138,7 @@
 						<pre class="${tmp.commcode }pre" >${tmp.content }</pre>
 						<pre class="${tmp.commcode }pre2" style="display:none; position: relative;">
 							<input type="text" class="${tmp.commcode }text" value="${tmp.content }" style="position: absolute; left: 10px; width:700px"/>
-							<span><a href="#" onclick="cmUpdate(${tmp.commcode});"><button type="button" class="cmUpdate(${tmp.commcode});" style="position: absolute; left: 10px; bottom: 14px;">입력</button></a></span>
+							<span><a href="#" onclick="cmUpdate('${tmp.commcode}');"><button type="button" class="cmUpdate('${tmp.commcode}');" style="position: absolute; left: 10px; bottom: 14px;">입력</button></a></span>
 						</pre>
 					</dd>
 				</dl>		
@@ -212,8 +212,8 @@ var formObj = $("form[role='form']");//폼 가저오기
         return false;
     });
     
-    function cmDelete(title,num){
-    		var commcode=title+num;
+    function cmDelete(commcode){
+    		var commcode=commcode;
     	$.ajax({
 			url: "commentDelete.do",//이동할 주소
 			type: "post",
@@ -244,10 +244,10 @@ var formObj = $("form[role='form']");//폼 가저오기
     			    	$("."+commcode+"cancleBtn").hide();
     				}
     			}
-    		});
+    		})
     	}else{
     		alert("글을 한글자 이상 쓰세요.");
-    	};
+    	}
     }
     
     function updateBtn(commcode){
