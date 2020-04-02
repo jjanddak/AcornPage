@@ -138,14 +138,14 @@
                   </form>
                   <p style="display:inline; float:right; margin: 5px 20px 0 0;">
                   <c:if test="${tmp.id eq id}">
-                    <a href="#" onclick="updateBtn('${tmp.commcode}');">
+                    <a onclick="updateBtn('${tmp.commcode}'); return false;">
                     	<button type="button" class="${tmp.commcode}updateBtn btn-link">
                     		<span style="font-weight: bold;">
                     			수정
                    			</span>
               			</button>
         			</a>
-                     <a href="#" onclick="cancleBtn('${tmp.commcode}');">
+                     <a onclick="cancleBtn('${tmp.commcode}');">
                      	<button type="button" class="${tmp.commcode}cancleBtn btn-link" style="display:none;">
                      		<span style="font-weight: bold;">
                      			취소
@@ -160,7 +160,14 @@
                   <pre class="${tmp.commcode }pre" >${tmp.content }</pre>
                   <pre class="${tmp.commcode }pre2" style="display:none; position: relative;">
                      <input type="text" class="${tmp.commcode }text" value="${tmp.content }" style="position: absolute; left: 10px; width:700px"/>
-                     <span><a href="#" onclick="cmUpdate('${tmp.commcode}');"><button type="button" class="cmUpdate('${tmp.commcode}');" style="position: absolute; left: 10px; bottom: 14px;">입력</button></a></span>
+                     
+                     <a onclick="cmUpdate('${tmp.commcode}'); return false;">
+                     	<button type="button" class="" style="position: absolute; left: 10px; bottom: 14px;">
+                     		<span style="font-weight: bold;">
+                     			수정
+                     		</span>
+                 		</button>
+                 	</a>
                   </pre>
                </dd>
             </dl>      
