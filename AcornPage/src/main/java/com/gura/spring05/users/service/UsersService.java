@@ -32,6 +32,7 @@ public interface UsersService {
 	public void deleteAll(HttpServletRequest request);
 	public void manageCode(HttpServletRequest request,String title,String code);
 	public boolean deleteCode(HttpServletRequest request,String code);
+	public void GetUserCommentList(HttpServletRequest request, String id);
 }
 
 

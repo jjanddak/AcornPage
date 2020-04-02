@@ -92,10 +92,4 @@ public class ToonCommentDaoImpl implements ToonCommentDao{
 		session.update("toonComment.updateComment", dto);
 	}
 
-	@Override
-	public List<ToonCommentDto> GetUserCommentList(String id) {
-		return session.selectList("toonComment.GetUserCommentList",id);
-	}
-	
-
 }

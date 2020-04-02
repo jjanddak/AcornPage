@@ -100,7 +100,7 @@
 			<tr>
 				<th>댓글목록</th>
 				<td>
-					<a style="color:fuchsia; " href="${pageContext.request.contextPath}/toon/comment_select.do?id=${id }">
+					<a style="color:fuchsia; " href="${pageContext.request.contextPath}/users/comment_select.do?id=${id }">
 						<strong>${id }</strong>님의 댓글 목록 보기
 					</a>
 				</td>

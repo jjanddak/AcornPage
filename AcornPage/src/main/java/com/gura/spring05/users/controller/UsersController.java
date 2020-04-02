@@ -336,6 +336,14 @@ public class UsersController {
 		}
 		
 	}
+	
+	//댓글목록 보는 페이지 처리
+	@RequestMapping("/users/comment_select")
+	public ModelAndView commentList(HttpServletRequest request,@RequestParam String id) {
+		service.GetUserCommentList(request, id);
+		
+		return new ModelAndView("users/comment_select");
+	}
 }
 
 

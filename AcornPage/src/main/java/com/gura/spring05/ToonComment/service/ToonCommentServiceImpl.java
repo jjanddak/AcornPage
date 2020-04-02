@@ -78,13 +78,4 @@ public class ToonCommentServiceImpl implements ToonCommentService{
 		dao.updateComment(dto);
 		return true;
 	}
-
-	@Override
-	public void GetUserCommentList(HttpServletRequest request, String id) {
-		List<ToonCommentDto> dto=dao.GetUserCommentList(id);
-		request.setAttribute("dto", dto);
-		request.setAttribute("idid", id);
-	}
-
-
 }

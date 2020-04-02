@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.gura.spring05.toon.dto.ToonCommentDto;
 import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.users.dto.UsersDto;
 
@@ -79,6 +80,10 @@ public class UsersDaoImpl implements UsersDao{
 		return session.selectList("users.getUserStarList", dto);
 	}
 
+	@Override
+	public List<ToonCommentDto> GetUserCommentList(String id) {
+		return session.selectList("toonComment.GetUserCommentList",id);
+	}
 }
 
 

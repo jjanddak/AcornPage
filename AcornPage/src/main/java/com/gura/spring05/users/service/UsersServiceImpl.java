@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.exception.NoMoneyException;
 import com.gura.spring05.library.dto.LibraryDto;
+import com.gura.spring05.toon.dto.ToonCommentDto;
 import com.gura.spring05.toondetail.dao.ToonDetailDao;
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
 import com.gura.spring05.toonlist.dao.ToonListDao;
@@ -319,6 +320,14 @@ public class UsersServiceImpl implements UsersService{
 			}
 		}
 	}
+
+	@Override
+	public void GetUserCommentList(HttpServletRequest request, String id) {
+		List<ToonCommentDto> dto=dao.GetUserCommentList(id);
+		request.setAttribute("dto", dto);
+		request.setAttribute("idid", id);
+	}
+	
 }
 
 

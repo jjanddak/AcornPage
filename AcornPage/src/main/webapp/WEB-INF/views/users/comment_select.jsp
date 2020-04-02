@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>acornpage</title>
+<title>acornpage :: 내 댓글</title>
 <jsp:include page="../include/resource.jsp"/>
 </head>
 <body>

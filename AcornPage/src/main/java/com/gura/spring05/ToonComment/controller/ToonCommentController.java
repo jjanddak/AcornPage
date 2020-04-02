@@ -41,14 +41,6 @@ public class ToonCommentController<toonCommentDto> {
 		return new ModelAndView("redirect:/toon/detailCode.do?title="+param+"&code="+code);
 	}
 	
-	//댓글목록 보는 페이지 처리
-	@RequestMapping("/toon/comment_select")
-	public ModelAndView commentList(HttpServletRequest request,@RequestParam String id) {
-		service.GetUserCommentList(request, id);
-		
-		return new ModelAndView("toon/comment_select");
-	}
-	
 	//댓글 추천 처리
 		@ResponseBody
 		@RequestMapping(value = "/toon/commentlike", 

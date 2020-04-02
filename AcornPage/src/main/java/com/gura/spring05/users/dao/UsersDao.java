@@ -2,6 +2,7 @@ package com.gura.spring05.users.dao;
 
 import java.util.List;
 
+import com.gura.spring05.toon.dto.ToonCommentDto;
 import com.gura.spring05.toonlist.dto.ToonListDto;
 import com.gura.spring05.users.dto.UsersDto;
 
@@ -16,4 +17,5 @@ public interface UsersDao {
 	public void delete(String id);
 	public int getWallet(String inputId);
 	public List<ToonListDto> getUserStarList(ToonListDto dto);
+	public List<ToonCommentDto> GetUserCommentList(String id);
 }
