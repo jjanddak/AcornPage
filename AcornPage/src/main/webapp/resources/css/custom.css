@@ -187,7 +187,7 @@ div.book-list{
 }
 button.dropdown-toggle{
 	border-color:#fff;
-	padding:6px 12px 6px 24px;
+	padding:6px 12px 6px 0px;
 	font-size:16px;
 }
 button.dropdown-toggle:hover{

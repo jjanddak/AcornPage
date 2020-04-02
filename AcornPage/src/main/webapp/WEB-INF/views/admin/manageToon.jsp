@@ -17,7 +17,7 @@
 		 <div class="bestList">
          <ul>
             <c:forEach var="tmp" items="${requestScope.list }">
-               <a href="toon/selectedDetail.do?title=${tmp.title }">
+               <a href="manageDetail.do?title=${tmp.title }">
                <li>
                   <div class="list">
 					<div class="imgwrapper">

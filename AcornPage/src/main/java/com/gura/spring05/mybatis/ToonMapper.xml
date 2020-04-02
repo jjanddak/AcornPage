@@ -2,58 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="toon">
 	<select id="getToonList" parameterType="toonDetailDto"
-		resultType="toonDetailDto">
-		select ROWNUM, A.* from 
-		(SELECT t.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel,thumb, starvalue
-		FROM (
-			SELECT NVL(AVG(starvalue),0) AS starvalue, title
-			FROM (
-				SELECT *
-				FROM toonlist
-			) x, star s
-			WHERE x.code=s.code(+)	
-			GROUP BY x.title
-		) x, toondetail t
-		WHERE t.title=x.title and toonovel='toon' and t.permit='Y'
-		ORDER BY starvalue DESC) A
-		where ROWNUM between 1 and 5
-	</select>
-	<select id="getNovelList" parameterType="toonDetailDto"
-		resultType="toonDetailDto">
-		select ROWNUM, A.* from 
-		(SELECT t.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel,thumb, starvalue
-		FROM (
-			SELECT NVL(AVG(starvalue),0) AS starvalue, title
-			FROM (
-				SELECT *
-				FROM toonlist
-			) x, star s
-			WHERE x.code=s.code(+)	
-			GROUP BY x.title
-		) x, toondetail t
-		WHERE t.title=x.title and toonovel='novel' and t.permit='Y'
-		ORDER BY starvalue DESC) A
-		where ROWNUM between 1 and 5
-	</select>
+      resultType="toonDetailDto">
+      select rownum,A.starvalue,A.title,A.writer,A.info,to_char(A.regdate,'YYYY-MM-DD')as regdate,A.thumb from
+      (select A.starvalue,d.* from
+         (select title,round(avg(starvalue),2)as starvalue from
+            (select t.title,
+               (select avg(starvalue) from star s where t.code=s.code)as starvalue
+            from toonlist t left join toondetail d on t.title=d.title
+            where d.toonovel='toon' and d.permit='Y')
+         where starvalue is not null
+         group by title) A left join toondetail d on A.title=d.title
+         order by starvalue desc) A
+      where rownum between 1 and 5
+   </select>
+   <select id="getNovelList" parameterType="toonDetailDto"
+      resultType="toonDetailDto">
+      select rownum,A.starvalue,A.title,A.writer,A.info,to_char(A.regdate,'YYYY-MM-DD')as regdate,A.thumb from
+      (select A.starvalue,d.* from
+         (select title,round(avg(starvalue),2)as starvalue from
+            (select t.title,
+               (select avg(starvalue) from star s where t.code=s.code)as starvalue
+            from toonlist t left join toondetail d on t.title=d.title
+            where d.toonovel='novel' and d.permit='Y')
+         where starvalue is not null
+         group by title) A left join toondetail d on A.title=d.title
+         order by starvalue desc) A
+      where rownum between 1 and 5
+   </select>
 	<select id="getDetailList" parameterType="String"
 		resultType="toonListDto">
-		SELECT * 
-		FROM (
-			SELECT ROWNUM AS num, x.starvalue
-			FROM (	
-				SELECT AVG(NVL(starvalue,0)) AS starvalue
-				FROM (
-					SELECT *
-					FROM toonlist
-					WHERE title=#{title}
-				) x, star s
-				WHERE x.code=s.code(+)	
-				GROUP BY x.num
-			) x
-		) x, toonlist t
-		WHERE t.num=x.num  and t.permit='Y'
-		AND title=#{title}
-		order by t.num desc
+		select num,title,writer,content,to_char(regdate,'YYYY-MM-DD')as regdate,code,
+		   (select nvl(avg(starvalue),0) from star s where t.code=s.code)as starvalue,
+		   (select count(num) from toon_comment c where t.code=c.code)as commCount 
+		from toonlist t
+		where title=#{title}
+		order by num asc
 	</select>
 	<select id="getCodeDetail" parameterType="toonListDto" resultType="toonListDto">
 		SELECT result1.*
@@ -106,51 +89,33 @@
 	
 	<select id="getWriterDetail" parameterType="String"
 		resultType="toonDetailDto">
-		SELECT x.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel, thumb, starvalue
-		FROM (
-			SELECT NVL(AVG(starvalue),0) AS starvalue, title
-			FROM (
-				SELECT *
-				FROM toonlist
-			) x, star s
-			WHERE x.code=s.code(+)	
-			GROUP BY x.title
-		) x, toondetail t
-		WHERE t.title=x.title and t.permit='Y'
-		AND writer like '%'||#{writer}||'%'
+		select title,writer,info,to_char(regdate,'YYYY-MM-DD')as regdate,thumb,toonovel,round(avg(starvalue),2)as starvalue from
+		(select t.title,t.writer,d.info,d.regdate,d.thumb,d.toonovel,
+		   (select avg(starvalue) from star s where t.code=s.code)as starvalue
+			from toonlist t left join toondetail d on t.title=d.title
+			where t.permit='Y' and d.writer like '%'||#{writer}||'%' order by d.writer asc)
+		group by title,writer,info,regdate,thumb,toonovel
 
 	</select>
 	
 	<select id="getTitleDetail" parameterType="String"
 		resultType="toonDetailDto">
-		SELECT x.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate , hashtag, toonovel,thumb, starvalue
-		FROM (
-			SELECT NVL(AVG(starvalue),0) AS starvalue, title
-			FROM (
-				SELECT *
-				FROM toonlist
-			) x, star s
-			WHERE x.code=s.code(+)	
-			GROUP BY x.title
-		) x, toondetail t
-		WHERE t.title=x.title and t.permit='Y'
-		AND x.title like '%'||#{title}||'%'
+		select title,writer,info,to_char(regdate,'YYYY-MM-DD')as regdate,thumb,toonovel,round(avg(starvalue),2)as starvalue from
+		(select t.title,t.writer,d.info,d.regdate,d.thumb,d.toonovel,
+		   (select avg(starvalue) from star s where t.code=s.code)as starvalue
+			from toonlist t left join toondetail d on t.title=d.title
+			where t.permit='Y' and d.title like '%'||#{title}||'%')
+		group by title,writer,info,regdate,thumb,toonovel
 	</select>
 	
 	<select id="getHashtagDetail" parameterType="String"
 		resultType="toonDetailDto">
-		SELECT x.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel,thumb, starvalue
-		FROM (
-			SELECT NVL(AVG(starvalue),0) AS starvalue, title
-			FROM (
-				SELECT *
-				FROM toonlist
-			) x, star s
-			WHERE x.code=s.code(+)	
-			GROUP BY x.title
-		) x, toondetail t
-		WHERE t.title=x.title and t.permit='Y'
-		AND hashtag like '%'||#{hashtag}||'%'
+		select title,writer,info,to_char(regdate,'YYYY-MM-DD')as regdate,thumb,toonovel,round(avg(starvalue),2)as starvalue from
+		(select t.title,t.writer,d.info,d.regdate,d.thumb,d.toonovel,
+		   (select avg(starvalue) from star s where t.code=s.code)as starvalue
+			from toonlist t left join toondetail d on t.title=d.title
+			where t.permit='Y' and d.hashtag like '%'||#{hashtag}||'%')
+		group by title,writer,info,regdate,thumb,toonovel
 	</select>	
 		
 	<select id="getMyToon" parameterType="String" resultType="toonDetailDto">
@@ -170,49 +135,32 @@
 	</select>
 	
 	<select id="selectedToonovel" parameterType="String" resultType="toonDetailDto">
-		SELECT x.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel, starvalue, thumb
-		FROM (
-			SELECT NVL(AVG(starvalue),0) AS starvalue, title
-			FROM (
-				SELECT *
-				FROM toonlist
-			) x, star s
-			WHERE x.code=s.code(+)	
-			GROUP BY x.title
-		) x, toondetail t
-		WHERE t.title=x.title and t.permit='Y'
-		AND toonovel=#{category}
+		select title,writer,info,to_char(regdate,'YYYY-MM-DD')as regdate,thumb,toonovel,round(avg(starvalue),2)as starvalue from
+		(select t.title,t.writer,d.info,d.regdate,d.thumb,d.toonovel,
+		   (select avg(starvalue) from star s where t.code=s.code)as starvalue
+			from toonlist t left join toondetail d on t.title=d.title
+			where t.permit='Y' and d.toonovel=#{category})
+		group by title,writer,info,regdate,thumb,toonovel
+		
 <!-- 		select * from toondetail where toonovel=#{category} -->
 	</select>
 	
 	<select id="selectedHashtag" parameterType="String" resultType="toonDetailDto">
-		SELECT x.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel, starvalue, thumb
-		FROM (
-			SELECT NVL(AVG(starvalue),0) AS starvalue, title
-			FROM (
-				SELECT *
-				FROM toonlist
-			) x, star s
-			WHERE x.code=s.code(+)	
-			GROUP BY x.title
-		) x, toondetail t
-		WHERE t.title=x.title and t.permit='Y'
-		AND hashtag like '%'||#{category}||'%'
+		select title,writer,info,to_char(regdate,'YYYY-MM-DD')as regdate,thumb,toonovel,round(avg(starvalue),2)as starvalue from
+		(select t.title,t.writer,d.info,d.regdate,d.thumb,d.toonovel,
+		   (select avg(starvalue) from star s where t.code=s.code)as starvalue
+			from toonlist t left join toondetail d on t.title=d.title
+			where t.permit='Y' and d.hashtag like '%'||#{category}||'%')
+		group by title,writer,info,regdate,thumb,toonovel
 	</select>
 	
 	<select id="getDetailInfo" parameterType="String" resultType="toonDetailDto">
-		SELECT t.title as title, writer, info, to_char(regdate,'YYYY-MM-DD')as regdate, hashtag, toonovel,thumb, starvalue
-		FROM (
-			SELECT NVL(AVG(starvalue),0) AS starvalue, title
-			FROM (
-				SELECT *
-				FROM toonlist
-			) x, star s
-			WHERE x.code=s.code(+)	
-			GROUP BY x.title
-		) x, toondetail t
-		WHERE t.title=x.title and t.title=#{title}
-		ORDER BY starvalue DESC
+		select title,writer,info,to_char(regdate,'YYYY-MM-DD')as regdate,thumb,round(avg(starvalue),2)as starvalue from
+		(select t.title,t.writer,d.info,d.regdate,d.thumb,
+		   (select avg(starvalue) from star s where t.code=s.code)as starvalue
+			from toonlist t left join toondetail d on t.title=d.title
+			where t.permit='Y' and t.title=#{title})
+		group by title,writer,info,regdate,thumb
 	</select>
 
 	<insert id="newToonup" parameterType="newToonupDto">
@@ -278,7 +226,7 @@
 		select code from toonlist where title=#{title}
 	</select>
 	<select id="needPermit" resultType="String">
-		select title from toonlist where not permit in('Y')
+		select title from toonlist where permit='N'
 	</select>
 	<select id="getNoPermitDetail" parameterType="String"
 		resultType="toonDetailDto">
@@ -296,7 +244,8 @@
 		AND x.title like '%'||#{title}||'%'
 	</select>
 	<select id="permitDetail" parameterType="String" resultType="toonListDto">
-		SELECT num,title,writer,to_char(regdate,'YYYY-MM-DD')as regdate,code from toonlist where title=#{title} and not permit in('Y') order by num asc
+		SELECT num,title,writer,to_char(regdate,'YYYY-MM-DD')as 
+		regdate,code from toonlist where title=#{title} and permit='N' order by num asc
 	</select>
 	<select id="permitCode" parameterType="toonListDto" resultType="toonListDto">
 		select num,title,writer,content,to_char(regdate,'YYYY-MM-DD')as regdate,code,permit 
@@ -325,6 +274,20 @@
 	<update id="updateThumb" parameterType="toonDetailDto">
 		update toondetail set thumb=#{thumb} where title=#{title}
 	</update>
+	<select id="manageDetail" parameterType="String" resultType="toonListDto">
+		select * from toonlist where title like '%'||#{title}||'%' and permit='Y' order by num asc
+	</select>
+	<delete id="deleteCode" parameterType="String">
+		delete from toonlist where code=#{code}
+	</delete>
+	<select id="searchMyToon" parameterType="String" resultType="toonDetailDto">
+		select title,writer,info,to_char(regdate,'YYYY-MM-DD')as regdate,thumb,toonovel,round(avg(starvalue),2)as starvalue from
+		(select t.title,t.writer,d.info,d.regdate,d.thumb,d.toonovel,
+		   (select avg(starvalue) from star s where t.code=s.code)as starvalue
+			from toonlist t left join toondetail d on t.title=d.title
+			where t.permit='Y' and d.writer=#{writer})
+		group by title,writer,info,regdate,thumb,toonovel
+	</select>
 </mapper>
 
 

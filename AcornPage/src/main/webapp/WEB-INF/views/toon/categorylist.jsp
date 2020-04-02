@@ -37,7 +37,7 @@
 			                     </c:choose>
 							</div>
 							<div class="textwrapper">
-								<p class="list-title">${tmp.title }</p>
+								<p class="list-title"><strong>${tmp.title }</strong></p>
 								<p class="list-writer">${tmp.writer }</p>
 								<p class="list-info">${tmp.info }</p>
 								<p style="position:absolute; right:0; top:35px;">

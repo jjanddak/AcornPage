@@ -45,5 +45,7 @@ public interface ToonListService {
 	public void deleteList(HttpServletRequest request, String code);
 	
 	public void updateList(ToonListDto dto);
+	
+	public void searchMyToon(HttpServletRequest request);
 
 }

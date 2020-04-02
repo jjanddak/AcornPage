@@ -25,7 +25,7 @@ public class StarServiceImpl implements StarService{
 			dao.update(dto);
 		}
 	}
-
+	
 	@Override
 	public void selectStarValueOneAVG(HttpServletRequest request, String code) {
 
@@ -36,6 +36,23 @@ public class StarServiceImpl implements StarService{
 			request.setAttribute("starvalueAVG", 0);
 		}else {
 			request.setAttribute("starvalueAVG", dto2.getStarValue());
+		}
+		
+		
+	}
+
+	@Override
+	public void checkMyStar(HttpServletRequest request, String code) {
+		String id=(String)request.getSession().getAttribute("id");
+		StarDto dto=new StarDto();
+		dto.setId(id);
+		dto.setCode(code);
+		Object myStar=dao.checkMyStar(dto);
+		if(myStar==null) {
+			int star=0;
+			request.setAttribute("myStar", star);
+		}else {
+			request.setAttribute("myStar", myStar);
 		}
 		
 		

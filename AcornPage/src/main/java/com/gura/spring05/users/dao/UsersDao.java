@@ -17,5 +17,4 @@ public interface UsersDao {
 	public int getWallet(String inputId);
 
 	public List<ToonListDto> getUserStarList(ToonListDto dto);
-
 }

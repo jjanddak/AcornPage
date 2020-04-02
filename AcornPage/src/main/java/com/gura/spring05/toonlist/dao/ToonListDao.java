@@ -78,4 +78,10 @@ public interface ToonListDao {
 	public void deleteList(String code);
 
 	public void updateList(ToonListDto dto);
+	
+	public List<ToonListDto> manageDetail(String title);
+	
+	public void deleteCode(String code);
+	
+	public List<ToonDetailDto> searchMyToon(String writer);
 }

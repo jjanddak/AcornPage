@@ -9,9 +9,6 @@
 <title>acornpage</title>
 <jsp:include page="../include/resource.jsp"/>
 <style>
-.star-rating {width:75px; }
-.star-rating,.star-rating span {display:inline-block; height:14px; overflow:hidden; background:url(${pageContext.request.contextPath}/resources/images/star.png)no-repeat; }
-.star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
 	.btn-link{
 		color:#000;
 	}
@@ -66,7 +63,11 @@
 			</tr>
 			<tr>
 				<th>등록일</th>
-				<td>${dto.upload }</td>
+				<td>${dto.regdate }</td>
+			</tr>
+			<tr>
+				<th>삭제</th>
+				<td><button class="btn btn-danger btn-sm">삭제</button></td>
 			</tr>
 		</table>
 		<div class="contents">${dto.content }</div>
@@ -77,12 +78,10 @@
 				<div></div>
 			</c:when>
 			<c:when test="${empty havePrev}">
-				<a class="btn" href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.title}${dto.num-1}">이전화</a>
+				<a class="btn" href="${pageContext.request.contextPath}/admin/manageCode.do?title=${dto.title }&code=${dto.title}${dto.num-1}">이전화</a>
 			</c:when>
 			<c:otherwise>			
-				<a class="btn" href="buyCodeOne.do?title=${dto.title }&code=${dto.title}${dto.num-1}" 
-				onclick="return confirm('구매하시겠습니까? 100원이 차감됩니다')">
-				이전화 구매</a>
+				<a class="btn" href="${pageContext.request.contextPath}/admin/manageCode.do?title=${dto.title }&code=${dto.title}${dto.num-1}">이전화</a>
 			</c:otherwise>
 		</c:choose>
 		<c:choose>
@@ -90,36 +89,12 @@
 				<div></div>
 			</c:when>
 			<c:when test="${empty haveNext}">
-				<a class="btn" href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.title}${dto.num+1}">다음화</a>
+				<a class="btn" href="${pageContext.request.contextPath}/admin/manageCode.do?title=${dto.title }&code=${dto.title}${dto.num+1}">다음화</a>
 			</c:when>
 			<c:otherwise>			
-				<a class="btn" href="buyCodeOne.do?title=${dto.title }&code=${dto.title}${dto.num+1}" 
-				onclick="return confirm('구매하시겠습니까? 100원이 차감됩니다')">
-				다음화 구매</a>
+				<a class="btn" href="${pageContext.request.contextPath}/admin/manageCode.do?title=${dto.title }&code=${dto.title}${dto.num+1}">다음화</a>
 			</c:otherwise>
-		</c:choose>	
-	<form action="starAdd.do" method="post">
-		<p id="star_grade">
-			<a href="#" class="1">★</a>
-			<a href="#" class="2">★</a>
-			<a href="#" class="3">★</a>
-			<a href="#" class="4">★</a>
-			<a href="#" class="5">★</a>
-		</p>
-		<button id="starBtn" type="submit">별점제출</button>
-	</form>
-	
-	
-	<div class="comments">
-		<!-- 댓글을 작성할수 있는 폼 -->
-		<div class="comment_form">
-			<h4>의견쓰기</h4>
-			<form action="${pageContext.request.contextPath}/toon/comment_insert.do?code=${dto.code}&title=${dto.title }" method="post">
-				<textarea name="content" style="width:100%"><c:if test="${empty id }">댓글을 작성하려면 로그인이 필요합니다.</c:if></textarea>
-				<button type="submit">등록</button>
-			</form>
-		</div>
-	</div>
+		</c:choose>		
 		<ul>
 			<c:forEach items="${toonCommentList }" var="tmp">
 				<dl class="${tmp.commcode }">
@@ -136,10 +111,9 @@
 						</button>
 						</form>
 						<p style="display:inline; float:right; margin: 5px 20px 0 0;">
-						<c:if test="${tmp.id eq id}">
-							<a href=""><span>수정</span></a>
-							<button class="del btn-link"><span class="${tmp.commcode }" style="font-weight: bold;">삭제</span></button>
-						</c:if>
+							<button class="del btn-link">
+								<span class="${tmp.commcode }" style="font-weight: bold;">삭제</span>
+							</button>
 						</p>
 					</dt>
 					<dd>
@@ -148,7 +122,6 @@
 				</dl>		
 			</c:forEach>
 		</ul>
-
 	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
 </div>
 
@@ -200,11 +173,6 @@
    </div>  
 </div>
 <script>
-	$(document).ready(function(){
-		var myStar="${myStar}"/2;
-		$("."+myStar).addClass("on").prevAll("a").addClass("on");
-		
-	})
 	var formObj = $("form[role='form']");//폼 가저오기
 
 	$('#left').click(function(){
@@ -302,17 +270,44 @@ var formObj = $("form[role='form']");//폼 가저오기
 	$(".del").click(function(){
 		var ele=$(this);
 		var commcode=ele.children()[0].className;
-		$.ajax({
-			url:"deleteComment.do",
-			method:"post",
-			data:{"commcode":commcode},
-			success:function(){
-				
-				$("dl."+commcode).remove();
-				
-			}
-		})
+		var check_del=confirm("댓글을 삭제하시겠습니까?");
+		if(check_del){
+			$.ajax({
+				url:"../toon/deleteComment.do",
+				method:"post",
+				data:{"commcode":commcode},
+				success:function(){
+					//공백체크함수
+					function checkSpace(str) { 
+				        if(str.search(/\s/) != -1) { 
+				            return true; 
+				        } else { 
+				            return false; 
+				        } 
+				    };
+				    var changecode;
+				    var check=checkSpace(commcode);
+				    if(check==true){
+				    	changecode=commcode.replace(/ /gi,".");
+				    	$("dl."+changecode).remove();
+				    }else{
+				    	$("dl."+commcode).remove();
+				    }
+					
+				}
+			})
+		}else{
+			
+		}	
 	});
+	$(".btn-danger").click(function(){
+		var check_remove=confirm("해당 화를 삭제하시겠습니까?");
+		if(check_remove){
+			location.href="deleteCode.do?title=${dto.title}&code=${dto.code }&writer=${dto.writer }";
+		}else{
+			
+		}
+	})
 </script>
 </body>
 </html>

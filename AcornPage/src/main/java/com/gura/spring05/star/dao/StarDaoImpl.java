@@ -33,4 +33,10 @@ public class StarDaoImpl implements StarDao{
 	public StarDto selectStarOneAVG(StarDto dto) {
 		return session.selectOne("star.selectStarValueOneAVG", dto);
 	}
+
+	@Override
+	public Object checkMyStar(StarDto dto) {
+		return session.selectOne("star.checkMyStar",dto);
+				 
+	}
 }

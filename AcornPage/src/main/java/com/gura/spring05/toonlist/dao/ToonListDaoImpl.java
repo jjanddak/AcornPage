@@ -26,7 +26,12 @@ public class ToonListDaoImpl implements ToonListDao{
 	
 	@Override
 	public List<ToonListDto> getDetailList(String title) {
-		return session.selectList("toon.getDetailList", title);
+		List<ToonListDto> list=session.selectList("toon.getDetailList", title);
+		if(list.size()==0) {
+			return null;
+		}else {
+			return list;
+		}
 	}
 
 	@Override
@@ -217,5 +222,21 @@ public class ToonListDaoImpl implements ToonListDao{
 	@Override
 	public void updateList(ToonListDto dto) {
 		session.update("toon.updateList",dto);
+	}
+	
+	@Override
+	public List<ToonListDto> manageDetail(String title) {
+		
+		return session.selectList("toon.manageDetail",title);
+	}
+	@Override
+	public void deleteCode(String code) {
+
+		session.delete("toon.deleteCode",code);
+	}
+	@Override
+	public List<ToonDetailDto> searchMyToon(String writer) {
+		
+		return session.selectList("toon.searchMyToon",writer);
 	}
 }

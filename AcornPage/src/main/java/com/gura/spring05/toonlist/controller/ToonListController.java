@@ -59,6 +59,7 @@ public class ToonListController {
 	public ModelAndView detailCodeView(HttpServletRequest request,@RequestParam String title,@RequestParam String code) {
 		service.getCodeDetail(request,title, code);
 		starService.selectStarValueOneAVG(request,code);
+		starService.checkMyStar(request, code);
 		//댓글목록을 가지고오는 서비스 실행
 		service.getToonCommentList(request,code);
 
@@ -152,5 +153,11 @@ public class ToonListController {
 	public ModelAndView authUpdateList(HttpServletRequest request,@ModelAttribute ToonListDto dto) {
 		service.updateList(dto);
 		return new ModelAndView("redirect:/users/info.do");
+	}
+	
+	@RequestMapping("toon/searchMyToon")
+	public ModelAndView searchMyToon(HttpServletRequest request) {
+		service.searchMyToon(request);
+		return new ModelAndView("/toon/searchedDetail");
 	}
 }	

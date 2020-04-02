@@ -26,6 +26,7 @@
 	}
 	.permitlist{
 		padding-bottom: 5px;
+		position:relative;
 	}
 	.permitlist:hover{
 		background-color: #eee;
@@ -98,7 +99,12 @@
 			</tr>
 		</table>
 		<button class="btn btn-info pwd" style="color:#fff;">비밀번호 수정하기</button>
-		<a href="javascript:deleteConfirm()"><button style="float:right;" class="btn btn-warning">회원 탈퇴</button></a>
+		<c:if test="${dto.isWriter eq 'Y' }">
+			<a href="${pageContext.request.contextPath }/toon/searchMyToon.do">
+				<button class="btn btn-warning myToon" style="color:#fff;">내 만화보기</button>
+			</a>
+		</c:if>
+		<a href="javascript:deleteConfirm()"><button style="float:right;" class="btn btn-danger">회원 탈퇴</button></a>
 	</div>
 	<div class="container content">
 		<c:if test="${dto.isWriter eq 'N'}">
@@ -138,7 +144,7 @@
 			                        <p style="position:absolute; right:-45px;">신작 승인대기중</p>
 			                        <p class="list-title">${tmp.title }</p>
 									<p class="list-writer">${tmp.writer }</p>
-									<p class="list-info">${tmp.info }</p>	
+									<p class="list-info">${tmp.info }</p>
 									<p style="position:absolute; right:35px; bottom:15px;">										
 										<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateDetail_form.do?title=${tmp.title}">
 											<button class="btn btn-warning">
@@ -241,7 +247,7 @@
 												<button class="btn btn-danger">
 													취소
 												</button>
-											</a>										
+											</a>
 					               		</div>
 			               			</c:when>
 			               			<c:when test="${list.permit ne 'Y' }">
@@ -317,7 +323,7 @@
 												<button class="btn btn-danger">
 													취소
 												</button>
-											</a>										
+											</a>		
 					               		</div>
 			               			</c:when>
 			               			<c:when test="${list.permit ne 'Y' }">
@@ -336,6 +342,7 @@
 												</button>
 											</a>
 			               				</div>
+			               				
 			               			</c:when>
 			               		</c:choose>
 			               </c:if>			               
@@ -358,12 +365,6 @@
 <%-- jquery form  플러그인 javascript 로딩 --%>
 <script src="${pageContext.request.contextPath }/resources/js/jquery.form.min.js"></script>
 <script>
-	$(document).ready(function(){
-		var writer="${dto.isWriter}";
-		if(writer!="Y"){
-			$(".writer").prop("style","display:none;");
-		}
-	});
 	//프로파일 이미지를 클릭하면 
 	$("#profileLink").click(function(){
 		//강제로 <input type="file" /> 을 클릭해서 파일 선택창을 띄우고
@@ -385,6 +386,7 @@
 							+responseData.savedPath;
 		// img 의 src 속성에 반영함으로써 이미지가 업데이트 되도록 한다.
 		$("#profileLink img").attr("src", src);
+		$("#profile_image").attr("src",src);
 	});
 	
 
