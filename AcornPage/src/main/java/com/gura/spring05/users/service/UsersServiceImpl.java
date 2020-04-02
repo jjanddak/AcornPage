@@ -54,7 +54,7 @@ public class UsersServiceImpl implements UsersService{
 		dao.insert(dto);
 	}
 	@Override
-	public boolean validUser(UsersDto dto, HttpSession session, ModelAndView mView) {
+	public boolean validUser(UsersDto dto, HttpSession session, ModelAndView mView, String presentIp) {
 		//아이디 비밀번호가 유효한지 여부 
 		boolean isValid=false;
 		//아이디를 이용해서 저장된 비밀 번호를 읽어온다. 
@@ -147,6 +147,7 @@ public class UsersServiceImpl implements UsersService{
 		
 		dao.delete(id);
 	}
+	
 	@Override
 	public void userStarList(HttpServletRequest request, String id) {
 		ToonListDto dto=new ToonListDto();

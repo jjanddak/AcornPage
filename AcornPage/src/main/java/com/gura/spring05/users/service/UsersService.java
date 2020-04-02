@@ -15,7 +15,7 @@ public interface UsersService {
 	public Map<String, Object> isExistId(String inputId);
 	public void addUser(UsersDto dto);
 	public boolean validUser(UsersDto dto, HttpSession session, 
-			ModelAndView mView);
+			ModelAndView mView, String presentIp);
 	public void showInfo(String id, ModelAndView mView);
 	public String saveProfileImage(HttpServletRequest request,
 			MultipartFile mFile);

@@ -10,6 +10,11 @@ public interface ToonCommentService {
 	public void saveComment(HttpServletRequest request);
 
 	public boolean addLikeCount(HttpServletRequest request,CommentLikeDto dto);
+
+	public boolean deleteComment(HttpServletRequest request, String commcode);
+
+	public boolean updateComment(HttpServletRequest request, String commcode, String content);
+
+	public void GetUserCommentList(HttpServletRequest request, String id);
 	
-	public void deleteComment(HttpServletRequest request,String commcode);
 }

@@ -1,5 +1,7 @@
 package com.gura.spring05.ToonComment.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,8 +65,25 @@ public class ToonCommentServiceImpl implements ToonCommentService{
 	}
 
 	@Override
-	public void deleteComment(HttpServletRequest request, String commcode) {
-		dao.deleteComment(commcode);		
+	public boolean deleteComment(HttpServletRequest request, String commcode) {
+		dao.deleteComment(commcode);
+		return true;
+	}
+
+	@Override
+	public boolean updateComment(HttpServletRequest request, String commcode, String content) {
+		ToonCommentDto dto=new ToonCommentDto();
+		dto.setCommcode(commcode);
+		dto.setContent(content);
+		dao.updateComment(dto);
+		return true;
+	}
+
+	@Override
+	public void GetUserCommentList(HttpServletRequest request, String id) {
+		List<ToonCommentDto> dto=dao.GetUserCommentList(id);
+		request.setAttribute("dto", dto);
+		request.setAttribute("idid", id);
 	}
 
 

@@ -4,11 +4,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionAttributeListener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -120,22 +122,39 @@ public class UsersController {
 			idCook.setMaxAge(60*60*24*30);
 			pwdCook.setMaxAge(60*60*24*30);
 		}else{
-			//쿠키 지우기 
+			//쿠키 지우기 RX
 			idCook.setMaxAge(0);
 			pwdCook.setMaxAge(0);
 		}
+		String ip = request.getHeader("X-Forwarded-For");  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("Proxy-Client-IP");  
+        }  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("WL-Proxy-Client-IP");  
+        }  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("HTTP_CLIENT_IP");  
+        }  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("HTTP_X_FORWARDED_FOR");  
+        }  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getRemoteAddr();  
+        }
+		
+		     
 		//응답할때 쿠키도 심어 지도록 
 		response.addCookie(idCook);
 		response.addCookie(pwdCook);
-		
-		boolean checkPwd=service.validUser(dto, request.getSession(), mView);
-		
+		boolean checkPwd=service.validUser(dto, request.getSession(), mView, ip);
 		return checkPwd;
 	}
 	
 	//로그아웃 처리
 	@RequestMapping("/users/logout")
 	public String logout(HttpSession session) {
+		String id=(String) session.getAttribute("id");
 		session.invalidate();
 		return "redirect:/home.do";
 	}

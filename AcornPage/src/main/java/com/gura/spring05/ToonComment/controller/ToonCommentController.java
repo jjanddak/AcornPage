@@ -25,7 +25,7 @@ import com.gura.spring05.toon.dto.CommentLikeDto;
 import com.gura.spring05.toon.dto.ToonCommentDto;
 
 @Controller
-public class ToonCommentController {
+public class ToonCommentController<toonCommentDto> {
 	@Autowired 
 	private ToonCommentService service;
 	
@@ -40,6 +40,15 @@ public class ToonCommentController {
 		
 		return new ModelAndView("redirect:/toon/detailCode.do?title="+param+"&code="+code);
 	}
+	
+	//댓글목록 보는 페이지 처리
+	@RequestMapping("/toon/comment_select")
+	public ModelAndView commentList(HttpServletRequest request,@RequestParam String id) {
+		service.GetUserCommentList(request, id);
+		
+		return new ModelAndView("toon/comment_select");
+	}
+	
 	//댓글 추천 처리
 		@ResponseBody
 		@RequestMapping(value = "/toon/commentlike", 
@@ -56,9 +65,21 @@ public class ToonCommentController {
 		 
 			return map;
 		}
-		@ResponseBody
-		@RequestMapping(value="/toon/deleteComment",method=RequestMethod.POST)
-		public void authcommDel(HttpServletRequest request,@RequestParam String commcode) {
-			service.deleteComment(request, commcode);
-		}
+		
+	//댓글 삭제 요청 처리
+	@ResponseBody
+	@RequestMapping(value = "/toon/commentDelete", method=RequestMethod.POST)
+	public boolean authCommentDelete(HttpServletRequest request,@RequestParam String commcode){
+		boolean isDel=service.deleteComment(request,commcode);
+		
+		return isDel;
+	}
+	
+	//댓글 수정폼 요청처리 (임시)
+	@ResponseBody
+	@RequestMapping(value = "/toon/updateComment", method = RequestMethod.POST)
+	public boolean authUpdateComment(HttpServletRequest request,@RequestParam String commcode,@RequestParam String content){
+		boolean asdf=service.updateComment(request,commcode,content);
+		return asdf;
+	}
 }

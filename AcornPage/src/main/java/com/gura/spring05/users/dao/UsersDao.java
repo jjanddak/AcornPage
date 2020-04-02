@@ -15,6 +15,5 @@ public interface UsersDao {
 	public void updateUser(UsersDto dto);
 	public void delete(String id);
 	public int getWallet(String inputId);
-
 	public List<ToonListDto> getUserStarList(ToonListDto dto);
 }

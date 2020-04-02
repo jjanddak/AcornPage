@@ -97,6 +97,14 @@
 					</a>
 				</td>
 			</tr>
+			<tr>
+				<th>댓글목록</th>
+				<td>
+					<a style="color:fuchsia; " href="${pageContext.request.contextPath}/toon/comment_select.do?id=${id }">
+						<strong>${id }</strong>님의 댓글 목록 보기
+					</a>
+				</td>
+			</tr>
 		</table>
 		<button class="btn btn-info pwd" style="color:#fff;">비밀번호 수정하기</button>
 		<c:if test="${dto.isWriter eq 'Y' }">

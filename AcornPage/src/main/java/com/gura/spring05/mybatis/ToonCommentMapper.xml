@@ -58,6 +58,16 @@
 		select likecount from toon_comment where commcode=#{commcode}
 	</select>
 	<delete id="deleteComment" parameterType="String">
-		delete from toon_comment where commcode=#{commcode}
+		DELETE FROM toon_comment WHERE commcode=#{commcode}
 	</delete>
+	<update id="updateComment" parameterType="CommentLikeDto">
+		UPDATE toon_comment
+		set content=#{content}
+		where commcode=#{commcode}
+	</update>
+	<select id="GetUserCommentList" parameterType="String" resultType="toonCommentDto">
+		SELECT *
+		FROM toon_comment
+		WHERE id=#{id}
+	</select>
 </mapper>

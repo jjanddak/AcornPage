@@ -13,12 +13,14 @@ public class UsersDto {
 	private int price;
 	private String lastread;
 	private String code;
+	private int login;
+	private String ip;
 	
 	
 	
 	
 	public UsersDto(int num, String id, String pwd, String isWriter, int wallet, String email, String regdate,
-			String profile, String newPwd, int price, String lastread,String code) {
+			String profile, String newPwd, int price, String lastread,String code,int login,String ip) {
 		super();
 		this.num = num;
 		this.id = id;
@@ -31,6 +33,24 @@ public class UsersDto {
 		this.newPwd = newPwd;
 		this.price = price;
 		this.lastread = lastread;
+		this.ip = ip;
+		this.login = login;
+	}
+
+	public int getLogin() {
+		return login;
+	}
+
+	public void setLogin(int login) {
+		this.login = login;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 	public String getCode() {

@@ -86,7 +86,7 @@
 							<c:when test="${tmp.isBuy }">
 								<strong>
 									<a href="detailCode.do?title=${tmp.title }&code=${tmp.code }">
-										<strong>${tmp.title } ${tmp.num }</strong>화
+										<strong>${tmp.title } ${tmp.num }</strong>화 
 									</a>
 								</strong>
 							</c:when>

@@ -1,6 +1,7 @@
 package com.gura.spring05.toonlist.dto;
 
 public class ToonListDto {
+	private int commcount;
 	private int num;
 	private String title;
 	private String writer;
@@ -21,8 +22,8 @@ public class ToonListDto {
 	public ToonListDto() {}
 
 	public ToonListDto(int num, String title, String writer, String content, String upload, String hashtag,
-			String toon_novel, String code, String id, String regdate, String permit, boolean isBuy, double starvalue,
-			String thumb, int prevNum, int nextNum) {
+			String toon_novel, String code, String id, boolean isBuy, double starvalue, String thumb, int prevNum,
+			int nextNum, int commcount) {
 		super();
 		this.num = num;
 		this.title = title;
@@ -40,6 +41,19 @@ public class ToonListDto {
 		this.thumb = thumb;
 		this.prevNum = prevNum;
 		this.nextNum = nextNum;
+		this.commcount = commcount;
+	}
+
+
+
+	public int getCommcount() {
+		return commcount;
+	}
+
+
+
+	public void setCommcount(int commcount) {
+		this.commcount = commcount;
 	}
 
 	public int getNum() {

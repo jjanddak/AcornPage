@@ -122,12 +122,25 @@
 	</div>
 		<ul>
 			<c:forEach items="${toonCommentList }" var="tmp">
+<<<<<<< HEAD
 				<dl class="${tmp.commcode }">
+=======
+				<dl class="${tmp.commcode}">
+>>>>>>> refs/remotes/origin/DaeHee_5
 					<dt>				
-						<span>${tmp.id }</span>
+						<span><a href="${pageContext.request.contextPath}/toon/comment_select.do?id=${tmp.id }">${tmp.id }</a></span>
 						<span>${tmp.regdate }</span>
+<<<<<<< HEAD
 						<span class="${tmp.commcode }like">${tmp.likeCount }</span>
 						
+=======
+						<span class="${tmp.commcode }"> <strong>${tmp.likeCount }</strong></span>
+						<c:if test="${id == tmp.id}">
+							<span><a href="#" onclick="cmDelete('${tmp.commcode}');"><button type="button" class="deleteBtn">삭제</button></a></span>
+							<span><a href="#" onclick="updateBtn('${tmp.commcode}');"><button type="button" class="${tmp.commcode}updateBtn">수정</button></a></span>
+							<span><a href="#" onclick="cancleBtn('${tmp.commcode}');"><button type="button" class="${tmp.commcode}cancleBtn" style="display:none;">취소</button></a></span>
+						</c:if>
+>>>>>>> refs/remotes/origin/DaeHee_5
 						<form style="display:inline;" action="commentlike.do" id="likeForm" method="post">
 						<input type="hidden" name="commcode" value="${tmp.commcode}"/>
 						<input type="hidden" name="code" value="${tmp.code}"/>
@@ -143,7 +156,11 @@
 						</p>
 					</dt>
 					<dd>
-						<pre>${tmp.content }</pre>
+						<pre class="${tmp.commcode }pre" >${tmp.content }</pre>
+						<pre class="${tmp.commcode }pre2" style="display:none; position: relative;">
+							<input type="text" class="${tmp.commcode }text" value="${tmp.content }" style="position: absolute; left: 10px; width:700px"/>
+							<span><a href="#" onclick="cmUpdate('${tmp.commcode}');"><button type="button" class="cmUpdate('${tmp.commcode}');" style="position: absolute; left: 10px; bottom: 14px;">입력</button></a></span>
+						</pre>
 					</dd>
 				</dl>		
 			</c:forEach>
@@ -151,7 +168,6 @@
 
 	<p><a href="${pageContext.request.contextPath }/home.do"><button><strong>홈으로 가기</strong></button></a></p>
 </div>
-
 
 	   <div class="page-display">
       <ul class="pagination">
@@ -221,7 +237,59 @@ var formObj = $("form[role='form']");//폼 가저오기
         return false;
     });
     
+    function cmDelete(commcode){
+    		var commcode=commcode;
+    	$.ajax({
+			url: "commentDelete.do",//이동할 주소
+			type: "post",
+			data: {"commcode": commcode},
+			success: function(responseData){
+				if(responseData==true){
+					$("."+commcode).remove();
+				}	
+			}
+		})
+    };
     
+    function cmUpdate(commcode){
+    	var commcode = commcode;
+    	var result1 = $("."+commcode+"text").val();	
+    	/* var result1 = prompt("여기에 수정할 댓글을 입력하세요"+num); */
+    	if(result1 != ""){
+    		$.ajax({
+    			url: "updateComment.do",//이동할 주소
+    			type: "post",
+    			data: {"commcode": commcode, "content":result1},
+    			success: function(responseData){
+    				if(responseData==true){
+    					$("."+commcode+"pre").show();
+    					$("."+commcode+"pre").text(result1);
+    					$("."+commcode+"pre2").hide();
+    			    	$("."+commcode+"updateBtn").show();
+    			    	$("."+commcode+"cancleBtn").hide();
+    				}
+    			}
+    		})
+    	}else{
+    		alert("글을 한글자 이상 쓰세요.");
+    	}
+    }
+    
+    function updateBtn(commcode){
+    	var commcode=commcode;
+    	$("."+commcode+"pre2").show();
+    	$("."+commcode+"pre").hide();
+    	$("."+commcode+"text").focus();
+    	$("."+commcode+"cancleBtn").show();
+    	$("."+commcode+"updateBtn").hide();
+    };
+    function cancleBtn(commcode){
+    	var commcode=commcode;
+		$("."+commcode+"pre").show();
+		$("."+commcode+"pre2").hide();
+    	$("."+commcode+"updateBtn").show();
+    	$("."+commcode+"cancleBtn").hide();
+    }
     $("#starBtn").click(function(){
       var starValue = document.querySelectorAll(".on").length*2;
       var starvalue2 = $("#starman")
