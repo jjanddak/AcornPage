@@ -3,7 +3,7 @@
 <mapper namespace="toon">
 	<select id="getToonList" parameterType="toonDetailDto"
       resultType="toonDetailDto">
-      select rownum,A.starvalue,A.title,A.writer,A.info,to_char(A.regdate,'YYYY-MM-DD')as regdate from
+      select rownum,A.starvalue,A.title,A.writer,A.info,to_char(A.regdate,'YYYY-MM-DD')as regdate,A.thumb from
       (select A.starvalue,d.* from
          (select title,round(avg(starvalue),2)as starvalue from
             (select t.title,
@@ -17,7 +17,7 @@
    </select>
    <select id="getNovelList" parameterType="toonDetailDto"
       resultType="toonDetailDto">
-      select rownum,A.starvalue,A.title,A.writer,A.info,to_char(A.regdate,'YYYY-MM-DD')as regdate from
+      select rownum,A.starvalue,A.title,A.writer,A.info,to_char(A.regdate,'YYYY-MM-DD')as regdate,A.thumb from
       (select A.starvalue,d.* from
          (select title,round(avg(starvalue),2)as starvalue from
             (select t.title,
@@ -162,7 +162,7 @@
 		(select t.title,t.writer,d.info,d.regdate,d.thumb,
 		   (select avg(starvalue) from star s where t.code=s.code)as starvalue
 			from toonlist t left join toondetail d on t.title=d.title
-			where d.toonovel='toon' and t.permit='Y' and t.title=#{title})
+			where t.permit='Y' and t.title=#{title})
 		group by title,writer,info,regdate,thumb
 	</select>
 
