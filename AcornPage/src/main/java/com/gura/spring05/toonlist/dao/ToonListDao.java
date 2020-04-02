@@ -84,4 +84,8 @@ public interface ToonListDao {
 	public void deleteCode(String code);
 	
 	public List<ToonDetailDto> searchMyToon(String writer);
+	
+	public List<String> newDate();
+	
+	public List<String> morePermit(String title);
 }

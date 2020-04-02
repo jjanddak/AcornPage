@@ -292,9 +292,13 @@ public class UsersController {
 	}
 	@RequestMapping(value="/admin/permit_update", method = RequestMethod.POST)
 	public ModelAndView authpermit_update(HttpServletRequest request,@RequestParam String title,@ModelAttribute("dto") ToonListDto dto) throws UnsupportedEncodingException {
-		service.permit_update(request,dto);
-		String Entitle=URLEncoder.encode(title,"UTF-8");
-		return new ModelAndView("redirect:/admin/permitDetail.do?title="+Entitle);
+		boolean morePermit=service.permit_update(request,dto);
+		if(morePermit) {
+			String Entitle=URLEncoder.encode(title,"UTF-8");
+			return new ModelAndView("redirect:/admin/permitDetail.do?title="+Entitle);
+		}else {
+			return new ModelAndView("redirect:/admin/needPermit.do");
+		}
 	}
 	@RequestMapping("/admin/manageToon")
 	public ModelAndView authmanageToon(HttpServletRequest request) {

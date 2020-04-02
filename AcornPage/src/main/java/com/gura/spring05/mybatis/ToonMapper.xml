@@ -283,6 +283,15 @@
 			where t.permit='Y' and d.writer=#{writer})
 		group by title,writer,info,regdate,thumb,toonovel
 	</select>
+	<select id="newDate" resultType="String">
+		SELECT title
+		FROM toonlist
+		where regdate > to_date(sysdate)-1
+		group by title
+	</select>
+	<select id="morePermit" resultType="String">
+		select code from toonlist where title=#{title} and permit='N'
+	</select>
 </mapper>
 
 

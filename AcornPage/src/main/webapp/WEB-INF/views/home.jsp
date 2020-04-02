@@ -52,7 +52,12 @@
 				         </c:choose>
 					</div>
                      <div class="textwrapper">
-                        <p class="list-title"><strong>${tmp.title }</strong></p>
+                        <p class="list-title">
+                        <c:if test="${tmp.newDate }">
+							<img style="height:15px;" src="<c:url value='/resources/images/icon_up.png'/>" alt="" />
+						</c:if>
+                        	<strong>${tmp.title }</strong>
+                        </p>
 						<p class="list-writer">${tmp.writer }</p>
 						<p class="list-info">${tmp.info }</p>
 						<p style="position:absolute; right:0; top:35px;">
@@ -94,7 +99,12 @@
 						         </c:choose>
 							</div>
 							<div class="textwrapper" style="width:70%;">
-								<p class="list-title"><strong>${tmp.title }</strong></p>
+								<p class="list-title">
+		                        <c:if test="${tmp.newDate }">
+									<img style="height:15px;" src="<c:url value='/resources/images/icon_up.png'/>" alt="" />
+								</c:if>
+		                        	<strong>${tmp.title }</strong>
+		                        </p>
 								<p class="list-writer">${tmp.writer }</p>
 								<p class="list-info">${tmp.info }</p>
 								<p style="position:absolute; right:0; top:35px;">

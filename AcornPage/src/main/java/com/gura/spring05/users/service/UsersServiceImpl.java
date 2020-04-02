@@ -200,7 +200,7 @@ public class UsersServiceImpl implements UsersService{
 		}
 	}
 	@Override
-	public void permit_update(HttpServletRequest request, ToonListDto dto) {
+	public boolean permit_update(HttpServletRequest request, ToonListDto dto) {
 		String id=(String)request.getSession().getAttribute("id");
 		if(!id.equals("admin")) {
 			throw new NoMoneyException("관리자가 아닙니다.");
@@ -211,6 +211,12 @@ public class UsersServiceImpl implements UsersService{
 			}else {
 				listDao.permit_update(dto);
 				listDao.permit_update_detail(dto);
+			}
+			List<String> moreList=listDao.morePermit(dto.getTitle());
+			if(moreList.size()==0) {
+				return false;
+			}else {
+				return true;
 			}
 		}
 	}
