@@ -138,14 +138,14 @@
                   </form>
                   <p style="display:inline; float:right; margin: 5px 20px 0 0;">
                   <c:if test="${tmp.id eq id}">
-                    <a href="#" onclick="updateBtn('${tmp.commcode}');">
+                    <a onclick="updateBtn('${tmp.commcode}');">
                     	<button type="button" class="${tmp.commcode}updateBtn btn-link">
                     		<span style="font-weight: bold;">
                     			수정
                    			</span>
               			</button>
         			</a>
-                     <a href="#" onclick="cancleBtn('${tmp.commcode}');">
+                     <a onclick="cancleBtn('${tmp.commcode}');">
                      	<button type="button" class="${tmp.commcode}cancleBtn btn-link" style="display:none;">
                      		<span style="font-weight: bold;">
                      			취소
@@ -217,6 +217,13 @@
    </div>  
 </div>
 <script>
+	function checkSpace(str) { 
+	    if(str.search(/\s/) != -1) { 
+	        return true; 
+	    } else { 
+	        return false; 
+	    } 
+	};
    $(document).ready(function(){
       var myStar="${myStar}"/2;
       $("."+myStar).addClass("on").prevAll("a").addClass("on");
@@ -239,7 +246,12 @@ var formObj = $("form[role='form']");//폼 가저오기
     });
 
     function cmUpdate(commcode){
-       var commcode = commcode;
+    	var commcode = commcode;
+    	
+        if(checkSpace(commcode)==true){
+        	commcode=commcode.replace(/ /gi,".");
+        }
+       
        var result1 = $("."+commcode+"text").val();   
        /* var result1 = prompt("여기에 수정할 댓글을 입력하세요"+num); */
        if(result1 != ""){
@@ -264,14 +276,22 @@ var formObj = $("form[role='form']");//폼 가저오기
     
     function updateBtn(commcode){
        var commcode=commcode;
+
+       if(checkSpace(commcode)==true){
+       	commcode=commcode.replace(/ /gi,".");
+       }
+       
        $("."+commcode+"pre2").show();
        $("."+commcode+"pre").hide();
-       $("."+commcode+"text").focus();
        $("."+commcode+"cancleBtn").show();
        $("."+commcode+"updateBtn").hide();
     };
     function cancleBtn(commcode){
+    	
        var commcode=commcode;
+       if(checkSpace(commcode)==true){
+       	commcode=commcode.replace(/ /gi,".");
+       }
       $("."+commcode+"pre").show();
       $("."+commcode+"pre2").hide();
        $("."+commcode+"updateBtn").show();
@@ -343,14 +363,6 @@ var formObj = $("form[role='form']");//폼 가저오기
 	            data:{"commcode":commcode},
 	            success:function(responseData){
 	               if(responseData){
-	                  //공백체크함수
-	                  function checkSpace(str) { 
-	                       if(str.search(/\s/) != -1) { 
-	                           return true; 
-	                       } else { 
-	                           return false; 
-	                       } 
-	                   };
 	                   var spaceCode;
 	                   if(checkSpace(commcode)==true){
 	                     //replace함수를 통해 공백을 .으로 변환하고 빈 변수에 담는다.
