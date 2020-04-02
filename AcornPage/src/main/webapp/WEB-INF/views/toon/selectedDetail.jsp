@@ -86,12 +86,12 @@
 							<c:when test="${tmp.isBuy }">
 								<strong>
 									<a href="detailCode.do?title=${tmp.title }&code=${tmp.code }">
-										<strong>${tmp.title } ${tmp.num }</strong>화
+										<strong>${tmp.title } ${tmp.num }</strong>화 [${tmp.commCount }]
 									</a>
 								</strong>
 							</c:when>
 							<c:otherwise>
-								${tmp.title }
+								${tmp.title } [${tmp.commCount }]
 							</c:otherwise>
 						</c:choose>	
 					</td>

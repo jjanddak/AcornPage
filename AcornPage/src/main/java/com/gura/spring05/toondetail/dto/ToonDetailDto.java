@@ -10,12 +10,12 @@ public class ToonDetailDto {
 	private String thumb;
 	private double starvalue;
 	private String permit;
+	private boolean newDate;
 	
 	public ToonDetailDto() {}
 
-	
 	public ToonDetailDto(String title, String writer, String info, String regdate, String hashtag, String toonovel,
-			String thumb, double starvalue, String permit) {
+			String thumb, double starvalue, String permit, boolean newDate) {
 		super();
 		this.title = title;
 		this.writer = writer;
@@ -26,17 +26,9 @@ public class ToonDetailDto {
 		this.thumb = thumb;
 		this.starvalue = starvalue;
 		this.permit = permit;
+		this.newDate = newDate;
 	}
 
-
-	public String getPermit() {
-		return permit;
-	}
-
-
-	public void setPermit(String permit) {
-		this.permit = permit;
-	}
 
 
 	public String getTitle() {
@@ -102,5 +94,22 @@ public class ToonDetailDto {
 	public void setStarvalue(double starvalue) {
 		this.starvalue = starvalue;
 	}
+
+	public String getPermit() {
+		return permit;
+	}
+
+	public void setPermit(String permit) {
+		this.permit = permit;
+	}
+
+	public boolean isNewDate() {
+		return newDate;
+	}
+
+	public void setNewDate(boolean newDate) {
+		this.newDate = newDate;
+	}
+
 	
 }

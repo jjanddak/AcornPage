@@ -26,7 +26,7 @@ public interface UsersService {
 	public void needPermit(HttpServletRequest request);
 	public void permitDetail(HttpServletRequest request,String title);
 	public void permitCode(HttpServletRequest request);
-	public void permit_update(HttpServletRequest request,ToonListDto dto);
+	public boolean permit_update(HttpServletRequest request,ToonListDto dto);
 	public void getToonList(HttpServletRequest request);
 	public void manageDetail(HttpServletRequest request,String title);
 	public void deleteAll(HttpServletRequest request);

@@ -228,4 +228,12 @@ public class ToonListDaoImpl implements ToonListDao{
 		
 		return session.selectList("toon.searchMyToon",writer);
 	}
+	@Override
+	public List<String> newDate() {
+		return session.selectList("toon.newDate");
+	}
+	@Override
+	public List<String> morePermit(String title) {
+		return session.selectList("toon.morePermit",title);
+	}
 }

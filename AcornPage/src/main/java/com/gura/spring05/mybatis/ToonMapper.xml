@@ -4,13 +4,12 @@
 	<select id="getToonList" parameterType="toonDetailDto"
       resultType="toonDetailDto">
       select rownum,A.starvalue,A.title,A.writer,A.info,to_char(A.regdate,'YYYY-MM-DD')as regdate,A.thumb from
-      (select A.starvalue,d.* from
+      (select nvl(A.starvalue,0)as starvalue,d.* from
          (select title,round(avg(starvalue),2)as starvalue from
             (select t.title,
                (select avg(starvalue) from star s where t.code=s.code)as starvalue
             from toonlist t left join toondetail d on t.title=d.title
             where d.toonovel='toon' and d.permit='Y')
-         where starvalue is not null
          group by title) A left join toondetail d on A.title=d.title
          order by starvalue desc) A
       where rownum between 1 and 5
@@ -18,13 +17,12 @@
    <select id="getNovelList" parameterType="toonDetailDto"
       resultType="toonDetailDto">
       select rownum,A.starvalue,A.title,A.writer,A.info,to_char(A.regdate,'YYYY-MM-DD')as regdate,A.thumb from
-      (select A.starvalue,d.* from
+      (select nvl(A.starvalue,0)as starvalue,d.* from
          (select title,round(avg(starvalue),2)as starvalue from
             (select t.title,
                (select avg(starvalue) from star s where t.code=s.code)as starvalue
             from toonlist t left join toondetail d on t.title=d.title
             where d.toonovel='novel' and d.permit='Y')
-         where starvalue is not null
          group by title) A left join toondetail d on A.title=d.title
          order by starvalue desc) A
       where rownum between 1 and 5
@@ -276,6 +274,15 @@
 			from toonlist t left join toondetail d on t.title=d.title
 			where t.permit='Y' and d.writer=#{writer})
 		group by title,writer,info,regdate,thumb,toonovel
+	</select>
+	<select id="newDate" resultType="String">
+		SELECT title
+		FROM toonlist
+		where regdate > to_date(sysdate)-1
+		group by title
+	</select>
+	<select id="morePermit" resultType="String">
+		select code from toonlist where title=#{title} and permit='N'
 	</select>
 </mapper>
 
