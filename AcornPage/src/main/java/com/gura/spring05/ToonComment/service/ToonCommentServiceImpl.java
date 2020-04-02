@@ -65,15 +65,15 @@ public class ToonCommentServiceImpl implements ToonCommentService{
 	}
 
 	@Override
-	public boolean deleteComment(HttpServletRequest request, int num) {
-		dao.deleteComment(num);
+	public boolean deleteComment(HttpServletRequest request, String commcode) {
+		dao.deleteComment(commcode);
 		return true;
 	}
 
 	@Override
-	public boolean updateComment(HttpServletRequest request, int num, String content) {
+	public boolean updateComment(HttpServletRequest request, String commcode, String content) {
 		ToonCommentDto dto=new ToonCommentDto();
-		dto.setNum(num);
+		dto.setCommcode(commcode);
 		dto.setContent(content);
 		dao.updateComment(dto);
 		return true;

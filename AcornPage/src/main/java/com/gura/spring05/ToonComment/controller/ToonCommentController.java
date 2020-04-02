@@ -68,8 +68,9 @@ public class ToonCommentController<toonCommentDto> {
 	//댓글 삭제 요청 처리
 	@ResponseBody
 	@RequestMapping(value = "/toon/commentDelete", method=RequestMethod.POST)
-	public boolean authCommentDelete(HttpServletRequest request,@RequestParam int num){
-		boolean isDel=service.deleteComment(request,num);
+	public boolean authCommentDelete(HttpServletRequest request,@RequestParam String commcode){
+		System.out.println(commcode);
+		boolean isDel=service.deleteComment(request,commcode);
 		
 		return isDel;
 	}
@@ -77,8 +78,8 @@ public class ToonCommentController<toonCommentDto> {
 	//댓글 수정폼 요청처리 (임시)
 	@ResponseBody
 	@RequestMapping(value = "/toon/updateComment", method = RequestMethod.POST)
-	public boolean authUpdateComment(HttpServletRequest request,@RequestParam int num,@RequestParam String content){
-		boolean asdf=service.updateComment(request,num,content);
+	public boolean authUpdateComment(HttpServletRequest request,@RequestParam String commcode,@RequestParam String content){
+		boolean asdf=service.updateComment(request,commcode,content);
 		return asdf;
 	}
 }

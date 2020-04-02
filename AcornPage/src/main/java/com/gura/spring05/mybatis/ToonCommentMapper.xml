@@ -57,13 +57,13 @@
 	<select id="checkLikeCount" parameterType="String" resultType="int">
 		select likecount from toon_comment where commcode=#{commcode}
 	</select>
-	<delete id="deleteComment" parameterType="int">
-		DELETE FROM toon_comment WHERE num=#{num}
+	<delete id="deleteComment" parameterType="String">
+		DELETE FROM toon_comment WHERE commcode=#{commcode}
 	</delete>
 	<update id="updateComment" parameterType="CommentLikeDto">
 		UPDATE toon_comment
 		set content=#{content}
-		where num=#{num}
+		where commcode=#{commcode}
 	</update>
 	<select id="GetUserCommentList" parameterType="String" resultType="toonCommentDto">
 		SELECT *
