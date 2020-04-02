@@ -47,11 +47,11 @@ public class ToonListDto {
 
 	
 	public int getCommCount() {
-		return commCount;
+		return commcount;
 	}
 
-	public void setCommCount(int commCount) {
-		this.commCount = commCount;
+	public void setCommCount(int commcount) {
+		this.commcount = commcount;
 	}
 
 	public int getNum() {

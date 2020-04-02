@@ -122,25 +122,16 @@
 	</div>
 		<ul>
 			<c:forEach items="${toonCommentList }" var="tmp">
-<<<<<<< HEAD
-				<dl class="${tmp.commcode }">
-=======
 				<dl class="${tmp.commcode}">
->>>>>>> refs/remotes/origin/DaeHee_5
 					<dt>				
 						<span><a href="${pageContext.request.contextPath}/toon/comment_select.do?id=${tmp.id }">${tmp.id }</a></span>
 						<span>${tmp.regdate }</span>
-<<<<<<< HEAD
-						<span class="${tmp.commcode }like">${tmp.likeCount }</span>
-						
-=======
-						<span class="${tmp.commcode }"> <strong>${tmp.likeCount }</strong></span>
+						<span class="${tmp.commcode }like"> <strong>${tmp.likeCount }</strong></span>
 						<c:if test="${id == tmp.id}">
 							<span><a href="#" onclick="cmDelete('${tmp.commcode}');"><button type="button" class="deleteBtn">삭제</button></a></span>
 							<span><a href="#" onclick="updateBtn('${tmp.commcode}');"><button type="button" class="${tmp.commcode}updateBtn">수정</button></a></span>
 							<span><a href="#" onclick="cancleBtn('${tmp.commcode}');"><button type="button" class="${tmp.commcode}cancleBtn" style="display:none;">취소</button></a></span>
 						</c:if>
->>>>>>> refs/remotes/origin/DaeHee_5
 						<form style="display:inline;" action="commentlike.do" id="likeForm" method="post">
 						<input type="hidden" name="commcode" value="${tmp.commcode}"/>
 						<input type="hidden" name="code" value="${tmp.code}"/>
@@ -238,7 +229,7 @@ var formObj = $("form[role='form']");//폼 가저오기
     });
     
     function cmDelete(commcode){
-    		var commcode=commcode;
+    	var commcode=commcode;
     	$.ajax({
 			url: "commentDelete.do",//이동할 주소
 			type: "post",
@@ -366,20 +357,6 @@ var formObj = $("form[role='form']");//폼 가저오기
 				}
 			}
 		});
-	});
-	$(".del").click(function(){
-		var ele=$(this);
-		var commcode=ele.children()[0].className;
-		$.ajax({
-			url:"deleteComment.do",
-			method:"post",
-			data:{"commcode":commcode},
-			success:function(){
-				
-				$("dl."+commcode).remove();
-				
-			}
-		})
 	});
 </script>
 </body>
