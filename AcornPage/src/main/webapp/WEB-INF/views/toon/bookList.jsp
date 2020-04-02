@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>acornpage</title>
+<title>acornpage :: 도서검색</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
 	li:hover{

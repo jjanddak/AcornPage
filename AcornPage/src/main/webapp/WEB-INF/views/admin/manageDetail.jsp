@@ -16,7 +16,7 @@
 }
 </style>
 <meta charset="UTF-8">
-<title>acornpage</title>
+<title>acornpage :: admin</title>
 <jsp:include page="../include/resource.jsp"/>
 </head>
 <body>

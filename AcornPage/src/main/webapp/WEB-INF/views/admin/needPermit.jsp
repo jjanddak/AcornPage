@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>acornpage :: admin</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 </head>
 <body>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>acornpage</title>
+<title>acornpage :: 정보수정</title>
 <style>
 	#thumbForm{
 		display: none;

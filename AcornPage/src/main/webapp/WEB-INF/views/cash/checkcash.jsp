@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>acornpage</title>
+<title>acornpage :: 캐시충전</title>
 </head>
 <body>
 	<script>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>acornpage</title>
+<title>acornpage :: 회원정보</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
 	/* 프로필 이미지가 가로 세로 50px 인 원형으로 표시 될수 있도록  */

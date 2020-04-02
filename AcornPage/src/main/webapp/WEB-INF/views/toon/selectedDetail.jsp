@@ -11,7 +11,7 @@
 .star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
 </style>
 <meta charset="UTF-8">
-<title>acornpage</title>
+<title>acornpage :: ${dto.title }</title>
 <jsp:include page="../include/resource.jsp"/>
 </head>
 <body>

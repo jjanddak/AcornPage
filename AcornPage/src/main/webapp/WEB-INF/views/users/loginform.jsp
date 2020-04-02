@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>acornpage</title>
+<title>acornpage :: 로그인</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
 	/* stylelint-disable selector-no-qualifying-type, property-no-vendor-prefix */

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>acornpage</title>
+<title>acornpage :: 회원가입</title>
 <jsp:include page="../include/resource.jsp"/>
 </head>
 <body>

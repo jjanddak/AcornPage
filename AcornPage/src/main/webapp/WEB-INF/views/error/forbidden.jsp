@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/error/forbidden.jsp</title>
+<title>acornpage :: 오류</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 </head>
 <body>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>acornpage</title>
+<title>acornpage :: 보관함</title>
 <jsp:include page="../include/resource.jsp"/>
 <style>
 .star-rating {width:75px; }

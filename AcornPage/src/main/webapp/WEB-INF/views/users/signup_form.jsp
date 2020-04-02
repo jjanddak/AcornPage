@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>acornpage</title>
+<title>acornpage :: 회원가입</title>
 <jsp:include page="../include/resource.jsp"/>
 <style>
 	/* 페이지 로딩 시점에 도움말과 피드백 아이콘은 일단 숨기기 */

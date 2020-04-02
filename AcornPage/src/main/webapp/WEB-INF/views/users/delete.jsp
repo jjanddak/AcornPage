@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/users/delete.jsp</title>
+<title>acornpage :: 회원탈퇴</title>
 </head>
 <body>
 <script>

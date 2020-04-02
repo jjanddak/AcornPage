@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/error/404.jsp</title>
+<title>acornpage :: 404</title>
 <jsp:include page="../include/resource.jsp"/>
 </head>
 <body>

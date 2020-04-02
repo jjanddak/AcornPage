@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>acornpage</title>
+<title>acornpage :: 신작 업로드</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 </head>
 <body>

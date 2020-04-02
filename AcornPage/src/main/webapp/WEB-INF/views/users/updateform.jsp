@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/users/updateform.jsp</title>
+<title>acornpage :: 이메일 수정</title>
 <jsp:include page="../include/resource.jsp"/>
 </head>
 <body>

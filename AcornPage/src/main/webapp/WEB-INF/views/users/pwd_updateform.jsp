@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/users/pwd_updateform.jsp</title>
+<title>acornpage :: 비밀번호 변경</title>
 <jsp:include page="../include/resource.jsp"/>
 <style>
 	/* stylelint-disable selector-no-qualifying-type, property-no-vendor-prefix */
