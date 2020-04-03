@@ -26,8 +26,8 @@
 			<input class="form-control" type="text" id="id" name="id"/>
 			<p class="help-block" id="id_notusable">사용 불가능한 아이디 입니다.</p>
 			<p class="help-block" id="id_required">반드시 입력 하세요</p>
-			<p class="help-block" id="id_tooshort">아이디를 최소 4글자 이상 입력하세요.</p>
-			<p class="help-block" id="id_toolong">아이디가 너무 깁니다. (10글자까지 제한)</p>
+			<p class="help-block" id="id_tooshort">아이디를 최소 4자 이상 입력하세요.</p>
+			<p class="help-block" id="id_toolong">아이디가 너무 깁니다. (최대 10글자 제한)</p>
 			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
 			<span class="glyphicon glyphicon-ok form-control-feedback"></span>
 		</div>
@@ -36,8 +36,8 @@
 			<input class="form-control" type="password" id="pwd" name="pwd"/>
 			<p class="help-block" id="pwd_required">반드시 입력하세요</p>
 			<p class="help-block" id="pwd_notequal">아래의 확인란과 동일하게 입력하세요</p>
-			<p class="help-block" id="pwd_tooshort">비밀번호를 최소 6글자 이상 입력하세요.</p>
-			<p class="help-block" id="pwd_toolong">비밀번호가 너무 깁니다. (20글자까지 제한)</p>
+			<p class="help-block" id="pwd_tooshort">비밀번호를 최소 6자 이상 입력하세요.</p>
+			<p class="help-block" id="pwd_toolong">비밀번호가 너무 깁니다. (최대 20글자 제한)</p>
 			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
 			<span class="glyphicon glyphicon-ok form-control-feedback"></span>
 		</div>
@@ -157,7 +157,25 @@
 		//1. 입력한 아이디를 읽어온다.
 		var inputId=$("#id").val();
 		//2. 서버에 보내서 사용가능 여부를 응답 받는다.
-		$.ajax({
+		if(inputId.length > 4 && inputId.length < 11){
+			$.ajax({
+				url:"${pageContext.request.contextPath }/users/checkid.do",
+				method:"GET",
+				data:{inputId:inputId},
+				success:function(responseData){
+					if(responseData.isExist){//이미 존재하는 아이디라면 
+						isIdUsable=false;
+					}else{
+						isIdUsable=true;
+					}
+					//아이디 에러 여부 
+					var isError= !isIdUsable || !isIdInput ;
+					//아이디 상태 바꾸기 
+					setState("#id", isError );
+				}
+			});
+		}
+		/* $.ajax({
 			url:"${pageContext.request.contextPath }/users/checkid.do",
 			method:"GET",
 			data:{inputId:inputId},
@@ -172,7 +190,7 @@
 				//아이디 상태 바꾸기 
 				setState("#id", isError );
 			}
-		});
+		}); */
 		//아이디를 입력했는지 검증
 		if(inputId.length == 0){//만일 입력하지 않았다면 
 			isIdInput=false;
@@ -255,8 +273,8 @@
 			$("#id_toolong").show();
 		}
 		//버튼의 상태 바꾸기 
-		if(isIdUsable && isIdInput && isPwdEqual && (tooShortId || tooLongId) &&
-				isPwdInput && (tooShortPwd || tooLongPwd) && (!isEmailInput || isEmailMatch) ){
+		if(isIdUsable && isIdInput && isPwdEqual && tooShortId && tooLongId &&
+				isPwdInput && tooShortPwd && tooLongPwd && (!isEmailInput || isEmailMatch) ){
 			$("button[type=submit]").removeAttr("disabled");
 		}else{
 			$("button[type=submit]").attr("disabled","disabled");
