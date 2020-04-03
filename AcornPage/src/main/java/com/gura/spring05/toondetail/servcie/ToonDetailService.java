@@ -17,5 +17,7 @@ public interface ToonDetailService {
 	public void updateDetail(ToonDetailDto dto);
 
 	public String thumbUpdate(HttpServletRequest request, MultipartFile mFile, String title);
+
+	public void getUpdateDetail(HttpServletRequest request, String title);
 	
 }

@@ -2,6 +2,8 @@ package com.gura.spring05.toondetail.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -69,5 +71,10 @@ public class ToonDetailDaoImpl implements ToonDetailDao{
 	@Override
 	public void updateThumb(ToonDetailDto dto) {
 		session.update("toon.updateThumb",dto);
-	}		
+	}
+	
+	@Override
+	public ToonDetailDto getUpdateDetail(HttpServletRequest request, String title) {
+		return session.selectOne("toon.getUpdateDetail", title);	
+	}
 }

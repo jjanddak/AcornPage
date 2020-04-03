@@ -160,6 +160,9 @@
 			where t.permit='Y' and t.title=#{title})
 		group by title,writer,info,regdate,thumb
 	</select>
+	<select id="getUpdateDetail" parameterType="String" resultType="toonDetailDto">
+		select * from toondetail where title=#{title}
+	</select>
 
 	<insert id="newToonup" parameterType="newToonupDto">
 		insert into toondetail values (#{title}, #{writer}, #{info}, sysdate, #{hashtag}, 

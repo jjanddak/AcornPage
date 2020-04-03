@@ -53,7 +53,7 @@ public class ToonDetailController {
 	//신작 디테일 수정
 	@RequestMapping("/toon/updateDetail_form")
 	public ModelAndView authUpdateDetailForm(HttpServletRequest request, @RequestParam String title) {
-		listService.getDetailInfo(request, title);
+		service.getUpdateDetail(request,title);
 		
 		return new ModelAndView("/toon/updateDetail_form");
 	}

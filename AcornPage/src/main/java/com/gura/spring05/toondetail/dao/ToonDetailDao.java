@@ -2,6 +2,8 @@ package com.gura.spring05.toondetail.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.gura.spring05.toondetail.dto.ToonDetailDto;
 import com.gura.spring05.toonlist.dto.ToonListDto;
 
@@ -28,4 +30,6 @@ public interface ToonDetailDao {
 	public void updateDetail(ToonDetailDto dto);
 
 	public void updateThumb(ToonDetailDto dto);
+
+	public ToonDetailDto getUpdateDetail(HttpServletRequest request, String title);
 }

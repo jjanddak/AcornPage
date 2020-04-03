@@ -97,4 +97,9 @@ public class ToonDetailServiceImp implements ToonDetailService{
 		return path;
 	}
 
+	@Override
+	public void getUpdateDetail(HttpServletRequest request, String title) {
+		ToonDetailDto dto=dao.getUpdateDetail(request,title);
+		request.setAttribute("dto", dto);
+	}
 }
