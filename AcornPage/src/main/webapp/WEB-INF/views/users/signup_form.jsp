@@ -49,6 +49,7 @@
 		<div class="form-group has-feedback">
 			<label class="control-label" for="email">이메일</label>
 			<input class="form-control" type="email" id="email" name="email" />
+			<p class="help-block" id="email_required">반드시 입력하세요</p>
 			<p class="help-block" id="email_notmatch">이메일 형식에 맞게 입력하세요</p>
 			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
 			<span class="glyphicon glyphicon-ok form-control-feedback"></span>
@@ -89,9 +90,14 @@
 	var isIdDirty=false;
 	//비밀 번호 입력란에 한번이라도 입력한 적이 있는지 여부
 	var isPwdDirty=false;
+	//이메일 입력란에 한번이라도 입력한 적이 있는지 여부
+	var isEmailDirty=false;
+	
+	
 	//이메일을 입력할때 실행할 함수 등록
 	$("#email").on("input", function(){
 		var email=$("#email").val();
+		isEmailDirty=true;
 		
 		if(email.match("@")){//이메일 형식에 맞게 입력 했다면
 			isEmailMatch=true;
@@ -105,7 +111,7 @@
 			isEmailInput=true;
 		}
 		//이메일 에러 여부 
-		var isError=isEmailInput && !isEmailMatch;
+		var isError=!isEmailInput || !isEmailMatch;
 		//이메일 상태 바꾸기 
 		setState("#email", isError);
 	});
@@ -175,22 +181,7 @@
 				}
 			});
 		}
-		/* $.ajax({
-			url:"${pageContext.request.contextPath }/users/checkid.do",
-			method:"GET",
-			data:{inputId:inputId},
-			success:function(responseData){
-				if(responseData.isExist){//이미 존재하는 아이디라면 
-					isIdUsable=false;
-				}else{
-					isIdUsable=true;
-				}
-				//아이디 에러 여부 
-				var isError= !isIdUsable || !isIdInput ;
-				//아이디 상태 바꾸기 
-				setState("#id", isError );
-			}
-		}); */
+		
 		//아이디를 입력했는지 검증
 		if(inputId.length == 0){//만일 입력하지 않았다면 
 			isIdInput=false;
@@ -246,6 +237,9 @@
 		if(isEmailInput && !isEmailMatch){
 			$("#email_notmatch").show();
 		}
+		if(!isEmailInput && isEmailDirty){
+			$("#email_required").show();
+		}
 		//에러가 있다면 에러 메세지 띄우기
 		if(!isPwdEqual && isPwdDirty){
 			$("#pwd_notequal").show();
@@ -274,7 +268,7 @@
 		}
 		//버튼의 상태 바꾸기 
 		if(isIdUsable && isIdInput && isPwdEqual && tooShortId && tooLongId &&
-				isPwdInput && tooShortPwd && tooLongPwd && (!isEmailInput || isEmailMatch) ){
+				isPwdInput && tooShortPwd && tooLongPwd && isEmailInput && isEmailMatch ){
 			$("button[type=submit]").removeAttr("disabled");
 		}else{
 			$("button[type=submit]").attr("disabled","disabled");
