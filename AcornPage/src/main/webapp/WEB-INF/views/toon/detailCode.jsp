@@ -158,9 +158,9 @@
                </dt>
                <dd>
                   <pre class="${tmp.commcode }pre" >${tmp.content }</pre>
-                  <pre class="${tmp.commcode }pre2" style="display:none; position: relative;">
+                  <pre class="${tmp.commcode }pre2" style="display:none; position: relative; white-space: pre-line;">
                      <input type="text" class="${tmp.commcode }text" value="${tmp.content }" style="position: absolute; left: 10px; width:700px"/>
-                     <span><a href="#" onclick="cmUpdate('${tmp.commcode}');"><button type="button" class="cmUpdate('${tmp.commcode}');" style="position: absolute; left: 10px; bottom: 14px;">입력</button></a></span>
+                     <span><a onclick="cmUpdate('${tmp.commcode}');"><button type="button" class="cmUpdate('${tmp.commcode}');" style="position: absolute; top: 10px; right: 8px;">입력</button></a></span>
                   </pre>
                </dd>
             </dl>      
@@ -247,12 +247,13 @@ var formObj = $("form[role='form']");//폼 가저오기
 
     function cmUpdate(commcode){
     	var commcode = commcode;
-    	
+    	var spaceCode;
         if(checkSpace(commcode)==true){
-        	commcode=commcode.replace(/ /gi,".");
+        	spaceCode=commcode.replace(/ /gi,".");
+        }else{
+        	spaceCode=commcode;
         }
-       
-       var result1 = $("."+commcode+"text").val();   
+       var result1 = $("."+spaceCode+"text").val();   
        /* var result1 = prompt("여기에 수정할 댓글을 입력하세요"+num); */
        if(result1 != ""){
           $.ajax({
@@ -261,11 +262,11 @@ var formObj = $("form[role='form']");//폼 가저오기
              data: {"commcode": commcode, "content":result1},
              success: function(responseData){
                 if(responseData==true){
-                   $("."+commcode+"pre").show();
-                   $("."+commcode+"pre").text(result1);
-                   $("."+commcode+"pre2").hide();
-                    $("."+commcode+"updateBtn").show();
-                    $("."+commcode+"cancleBtn").hide();
+                   $("."+spaceCode+"pre").show();
+                   $("."+spaceCode+"pre").text(result1);
+                   $("."+spaceCode+"pre2").hide();
+                    $("."+spaceCode+"updateBtn").show();
+                    $("."+spaceCode+"cancleBtn").hide();
                 }
              }
           })
@@ -344,10 +345,10 @@ var formObj = $("form[role='form']");//폼 가저오기
             }
             if(responseData.checkLike==false){
                ele.prop("style","color: black;");
-               $("."+code+"like").text(count);
+               ele.parents()[1].children[2].textContent=count;
             }else{
                ele.prop("style","color: blue;");
-               $("."+code+"like").text(count);
+               ele.parents()[1].children[2].textContent=count;
             }
          }
       });
