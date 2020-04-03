@@ -28,6 +28,7 @@
 <div class="contentwrapper">
    <div class="container content">
    <div class="container">
+   <div style="margin-right: 30px;">
       <h3>카페 글 상세 보기</h3>
          <table class="table table-bordered table-condensed">
          <colgroup>
@@ -100,13 +101,12 @@
       </c:choose>   
    <form action="starAdd.do" method="post">
       <p id="star_grade">
-         <a href="#" class="1">★</a>
-         <a href="#" class="2">★</a>
-         <a href="#" class="3">★</a>
-         <a href="#" class="4">★</a>
-         <a href="#" class="5">★</a>
+         <a href="#" class="1" id="2">★</a>
+         <a href="#" class="2" id="4">★</a>
+         <a href="#" class="3" id="6">★</a>
+         <a href="#" class="4" id="8">★</a>
+         <a href="#" class="5" id="10">★</a>
       </p>
-      <button id="starBtn" type="submit">별점제출</button>
    </form>
    
    
@@ -115,8 +115,8 @@
       <div class="comment_form">
          <h4>의견쓰기</h4>
          <form action="${pageContext.request.contextPath}/toon/comment_insert.do?code=${dto.code}&title=${dto.title }" method="post">
-            <textarea name="content" style="width:100%"><c:if test="${empty id }">댓글을 작성하려면 로그인이 필요합니다.</c:if></textarea>
-            <button type="submit">등록</button>
+            <textarea name="content" style="width:93%"><c:if test="${empty id }">댓글을 작성하려면 로그인이 필요합니다.</c:if></textarea>
+            <button type="submit" style="float:right; height: 46px;">등록</button>
          </form>
       </div>
    </div>
@@ -127,8 +127,6 @@
                <dt>            
                   <span><a href="${pageContext.request.contextPath}/toon/comment_select.do?id=${tmp.id }">${tmp.id }</a></span>
                   <span>${tmp.regdate }</span>
-                  <span class="${tmp.commcode }like"> <strong>${tmp.likeCount }</strong></span>
-                  
                   <form style="display:inline;" action="commentlike.do" class="likeForm" method="post">
                   <input type="hidden" name="commcode" value="${tmp.commcode}"/>
                   <input type="hidden" name="code" value="${tmp.code}"/>
@@ -136,6 +134,7 @@
                      <span class="glyphicon glyphicon-thumbs-up"></span>
                   </button>
                   </form>
+                  <span class="${tmp.commcode }like"> <strong>${tmp.likeCount }</strong></span>
                   <p style="display:inline; float:right; margin: 5px 20px 0 0;">
                   <c:if test="${tmp.id eq id}">
                     <a onclick="updateBtn('${tmp.commcode}');">
@@ -159,7 +158,7 @@
                <dd>
                   <pre class="${tmp.commcode }pre" >${tmp.content }</pre>
                   <pre class="${tmp.commcode }pre2" style="display:none; position: relative; white-space: pre-line;">
-                     <input type="text" class="${tmp.commcode }text" value="${tmp.content }" style="position: absolute; left: 10px; width:700px"/>
+                     <input type="text" class="${tmp.commcode }text" value="${tmp.content }" style="position: absolute; left: 10px; width:90%"/>
                      <span><a onclick="cmUpdate('${tmp.commcode}');"><button type="button" class="cmUpdate('${tmp.commcode}');" style="position: absolute; top: 10px; right: 8px;">입력</button></a></span>
                   </pre>
                </dd>
@@ -213,6 +212,7 @@
          </c:otherwise>
       </c:choose>
       </ul>      
+   </div>
    </div>     
    </div>  
 </div>
@@ -240,8 +240,18 @@
 var formObj = $("form[role='form']");//폼 가저오기
 
     $('#star_grade a').click(function(){
-        $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
-        $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+    	var tmp=$(this).attr("id");
+        var isAddStar=confirm("평점 "+tmp+" 점을 제출하시겠습니까?");
+        if(isAddStar){
+        	$(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+            $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+            var starValue = document.querySelectorAll(".on").length*2;
+            var starvalue2 = $("#starman")
+            location.href="starAdd.do?starValue="+starValue+"&code=${dto.code}&title=${dto.title}";
+        }else{
+        	var myStar="${myStar}"/2;
+            $("."+myStar).addClass("on").prevAll("a").addClass("on");
+        }
         return false;
     });
 
@@ -298,17 +308,7 @@ var formObj = $("form[role='form']");//폼 가저오기
        $("."+commcode+"updateBtn").show();
        $("."+commcode+"cancleBtn").hide();
     }
-    $("#starBtn").click(function(){
-      var starValue = document.querySelectorAll(".on").length*2;
-      var starvalue2 = $("#starman")
-      var isAddStar=confirm("평점"+starValue+"를 제출하시겠습니까?");
-      if(isAddStar){
-         location.href="starAdd.do?starValue="+starValue+"&code=${dto.code}&title=${dto.title}";
-      }else{
-         
-      }
-      return false;
-      }); 
+
    $(".like").click(function(){
       var ele=$(this);
       var commcode=ele.parent().children()[0].value;
@@ -345,10 +345,10 @@ var formObj = $("form[role='form']");//폼 가저오기
             }
             if(responseData.checkLike==false){
                ele.prop("style","color: black;");
-               ele.parents()[1].children[2].textContent=count;
+               ele.parents()[1].children[3].textContent=count;
             }else{
                ele.prop("style","color: blue;");
-               ele.parents()[1].children[2].textContent=count;
+               ele.parents()[1].children[3].textContent=count;
             }
          }
       });

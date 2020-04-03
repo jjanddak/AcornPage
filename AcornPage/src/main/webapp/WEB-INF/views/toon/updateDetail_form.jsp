@@ -20,6 +20,7 @@
 <div class="contentwrapper">
    <div class="container content">
 		<div class="container">
+		<div style="margin-right: 30px; position: relative;">
 			<h1>신작 만화 수정</h1>
 			<div class="form-group">
 					<label for="file">썸네일</label><br/>
@@ -77,9 +78,10 @@
 				
 				<button class="btn btn-primary" type="submit">수정</button>
 			</form>
-				<a href="${pageContext.request.contextPath }/users/info.do">
+				<a href="${pageContext.request.contextPath }/users/info.do" style="position: absolute; bottom: 0px; right: 0px;">
 					<button class="btn btn-warning">취소</button>	
 				</a>
+		</div>
 		</div>
 	</div>
 </div>
