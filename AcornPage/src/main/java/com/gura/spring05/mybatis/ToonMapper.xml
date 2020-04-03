@@ -292,6 +292,9 @@
 	<select id="morePermit" resultType="String">
 		select code from toonlist where title=#{title} and permit='N'
 	</select>
+	<update id="updateWriter" parameterType="String">
+		update users set isWriter='Y' where id=#{writer}
+	</update>
 </mapper>
 
 

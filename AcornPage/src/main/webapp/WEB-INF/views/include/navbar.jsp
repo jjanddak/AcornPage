@@ -77,7 +77,6 @@
 	</nav>
 </body>
 <script>
-
 function popupOpen(){
    var url= "${pageContext.request.contextPath }/cash/addcash.do";    //팝업창 페이지 URL
    var winWidth = 700;
@@ -86,21 +85,30 @@ function popupOpen(){
 	var winWidth = 550;
     var winHeight = 840;
     var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
-	window.open(url,"",popupOption);
+    var _left = Math.ceil(( window.screen.width - winWidth )/2);
+    var _top = Math.ceil(( window.screen.height - winHeight )/2);
+    var popupLoc= ',left=' + _left + ', top='+ _top; 
+	window.open(url,"",popupOption+popupLoc);
 }
 function loginOpen(){
 	var url= "${pageContext.request.contextPath }/users/loginform.do";    //팝업창 페이지 URL
 	var winWidth = 366;
     var winHeight = 580;
     var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
-   window.open(url,"",popupOption);
+    var _left = Math.ceil(( window.screen.width - winWidth )/2);
+    var _top = Math.ceil(( window.screen.height - winHeight )/2);
+    var popupLoc= ',left=' + _left + ', top='+ _top; 
+	window.open(url,"",popupOption+popupLoc);
 }
 function signupOpen(){
 	var url= "${pageContext.request.contextPath }/users/signup_form.do";    //팝업창 페이지 URL
 	var winWidth = 366;
     var winHeight = 580;
     var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
-   window.open(url,"",popupOption);
+    var _left = Math.ceil(( window.screen.width - winWidth )/2);
+    var _top = Math.ceil(( window.screen.height - winHeight )/2);
+    var popupLoc= ',left=' + _left + ', top='+ _top; 
+	window.open(url,"",popupOption+popupLoc);
 }
 
 $("#button").click(function(){

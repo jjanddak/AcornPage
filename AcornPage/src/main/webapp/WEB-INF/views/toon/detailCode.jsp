@@ -72,7 +72,7 @@
       </table>
       <div class="contents">${dto.content }</div>
       <br/>
-      
+      <div style="text-align: center; margin-bottom:20px;">
       <c:choose>
          <c:when test="${dto.prevNum eq 0 }">
             <div></div>
@@ -98,9 +98,10 @@
             onclick="return confirm('구매하시겠습니까? 100원이 차감됩니다')">
             다음화 구매</a>
          </c:otherwise>
-      </c:choose>   
+      </c:choose>
+      </div>   
    <form action="starAdd.do" method="post">
-      <p id="star_grade">
+      <p id="star_grade" style="text-align: center;">
          <a href="#" class="1" id="2">★</a>
          <a href="#" class="2" id="4">★</a>
          <a href="#" class="3" id="6">★</a>
