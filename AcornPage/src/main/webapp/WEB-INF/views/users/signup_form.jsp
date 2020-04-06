@@ -99,7 +99,8 @@
 		var email=$("#email").val();
 		isEmailDirty=true;
 		
-		if(email.match("@")){//이메일 형식에 맞게 입력 했다면
+		var regEmail = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+		if(email.match(regEmail)){//이메일 형식에 맞게 입력 했다면
 			isEmailMatch=true;
 		}else{//형식에 맞지 않게 입력했다면 
 			isEmailMatch=false;
