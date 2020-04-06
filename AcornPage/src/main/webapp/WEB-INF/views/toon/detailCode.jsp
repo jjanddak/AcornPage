@@ -126,7 +126,7 @@
             <dl class="${tmp.commcode }">
 
                <dt>            
-                  <span><a href="${pageContext.request.contextPath}/toon/comment_select.do?id=${tmp.id }">${tmp.id }</a></span>
+                  <span><a href="${pageContext.request.contextPath}/users/comment_select.do?id=${tmp.id }">${tmp.id }</a></span>
                   <span>${tmp.regdate }</span>
                   <form style="display:inline;" action="commentlike.do" class="likeForm" method="post">
                   <input type="hidden" name="commcode" value="${tmp.commcode}"/>
