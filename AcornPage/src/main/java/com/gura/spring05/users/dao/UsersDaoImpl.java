@@ -84,6 +84,11 @@ public class UsersDaoImpl implements UsersDao{
 	public List<ToonCommentDto> GetUserCommentList(String id) {
 		return session.selectList("toonComment.GetUserCommentList",id);
 	}
+	@Override
+	public void updateWriter(String writer) {
+		session.update("toon.updateWriter",writer);
+		
+	}
 }
 
 

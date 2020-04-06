@@ -16,7 +16,7 @@
 <body>
 <div class="container">
    <h1>회원정보 수정폼</h1>
-   <form action="update.do" method="post">
+	<form action="update.do" method="post" id="update">
       <input type="hidden" name="id" value="${id }"/>
       <div class="form-group has-feedback">
          <label for="id">아이디</label>
@@ -35,8 +35,6 @@
    </form>
 </div>
 <script>
-   
-
    var isEmailDirty=true;
    //이메일을 형식에 맞게 입력했는지 여부 
    var isEmailMatch=false;
@@ -104,11 +102,18 @@
          $("button[type=submit]").attr("disabled","disabled");
       }
    }
-   
-   $(".btn-primary").click(function(){
-      self.close();
-   });
-
+	$(".btn-primary").click(function(){
+		var formData = $("#update").serialize();
+		$.ajax({
+			url: "update.do", //이동할 주소
+			type: "post", //form 전송 방식
+			data:formData,
+			success:function(){
+					opener.parent.location.reload();
+					self.close();
+			}	
+		});
+	});
 </script>
 </body>
 </html>

@@ -409,14 +409,20 @@
 		var winWidth = 366;
 	    var winHeight = 580;
 	    var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
-	   window.open(url,"",popupOption);
+	    var _left = Math.ceil(( window.screen.width - winWidth )/2);
+	    var _top = Math.ceil(( window.screen.height - winHeight )/2);
+	    var popupLoc= ',left=' + _left + ', top='+ _top; 
+		window.open(url,"",popupOption+popupLoc);
 	});
 	$(".email").click(function(){
 		var url= "${pageContext.request.contextPath }/users/updateform.do";    //팝업창 페이지 URL
 		var winWidth = 366;
 	    var winHeight = 580;
 	    var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
-	   window.open(url,"",popupOption);
+	    var _left = Math.ceil(( window.screen.width - winWidth )/2);
+	    var _top = Math.ceil(( window.screen.height - winHeight )/2);
+	    var popupLoc= ',left=' + _left + ', top='+ _top; 
+		window.open(url,"",popupOption+popupLoc);
 	});
 </script>
 </body>

@@ -212,6 +212,7 @@ public class UsersServiceImpl implements UsersService{
 			}else {
 				listDao.permit_update(dto);
 				listDao.permit_update_detail(dto);
+				dao.updateWriter(dto.getWriter());
 			}
 			List<String> moreList=listDao.morePermit(dto.getTitle());
 			if(moreList.size()==0) {

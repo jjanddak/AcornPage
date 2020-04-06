@@ -28,6 +28,7 @@
 <div class="contentwrapper">
    <div class="container content">
    <div class="container">
+   <div style="margin-right: 30px;">
       <h3>카페 글 상세 보기</h3>
          <table class="table table-bordered table-condensed">
          <colgroup>
@@ -71,7 +72,7 @@
       </table>
       <div class="contents">${dto.content }</div>
       <br/>
-      
+      <div style="text-align: center; margin-bottom:20px;">
       <c:choose>
          <c:when test="${dto.prevNum eq 0 }">
             <div></div>
@@ -97,16 +98,16 @@
             onclick="return confirm('구매하시겠습니까? 100원이 차감됩니다')">
             다음화 구매</a>
          </c:otherwise>
-      </c:choose>   
+      </c:choose>
+      </div>   
    <form action="starAdd.do" method="post">
-      <p id="star_grade">
-         <a href="#" class="1">★</a>
-         <a href="#" class="2">★</a>
-         <a href="#" class="3">★</a>
-         <a href="#" class="4">★</a>
-         <a href="#" class="5">★</a>
+      <p id="star_grade" style="text-align: center;">
+         <a href="#" class="1" id="2">★</a>
+         <a href="#" class="2" id="4">★</a>
+         <a href="#" class="3" id="6">★</a>
+         <a href="#" class="4" id="8">★</a>
+         <a href="#" class="5" id="10">★</a>
       </p>
-      <button id="starBtn" type="submit">별점제출</button>
    </form>
    
    
@@ -115,8 +116,8 @@
       <div class="comment_form">
          <h4>의견쓰기</h4>
          <form action="${pageContext.request.contextPath}/toon/comment_insert.do?code=${dto.code}&title=${dto.title }" method="post">
-            <textarea name="content" style="width:100%"><c:if test="${empty id }">댓글을 작성하려면 로그인이 필요합니다.</c:if></textarea>
-            <button type="submit">등록</button>
+            <textarea name="content" style="width:93%"><c:if test="${empty id }">댓글을 작성하려면 로그인이 필요합니다.</c:if></textarea>
+            <button type="submit" style="float:right; height: 46px;">등록</button>
          </form>
       </div>
    </div>
@@ -125,35 +126,34 @@
             <dl class="${tmp.commcode }">
 
                <dt>            
-                  <span><a href="${pageContext.request.contextPath}/toon/comment_select.do?id=${tmp.id }">${tmp.id }</a></span>
+                  <span><a href="${pageContext.request.contextPath}/users/comment_select.do?id=${tmp.id }">${tmp.id }</a></span>
                   <span>${tmp.regdate }</span>
-                  <span class="${tmp.commcode }like"> <strong>${tmp.likeCount }</strong></span>
-                  
                   <form style="display:inline;" action="commentlike.do" class="likeForm" method="post">
-                  <input type="hidden" name="commcode" value="${tmp.commcode}"/>
-                  <input type="hidden" name="code" value="${tmp.code}"/>
-                  <button <c:if test="${tmp.isLike eq true}">style="color:blue;"</c:if> class="like btn btn-link" type="button">
-                     <span class="glyphicon glyphicon-thumbs-up"></span>
-                  </button>
+	                  <input type="hidden" name="commcode" value="${tmp.commcode}"/>
+	                  <input type="hidden" name="code" value="${tmp.code}"/>
+	                  <button <c:if test="${tmp.isLike eq true}">style="color:blue;"</c:if> class="like btn btn-link" type="button">
+	                     <span class="glyphicon glyphicon-thumbs-up"></span>
+	                  </button>
                   </form>
+                  <span class="${tmp.commcode }like"> <strong>${tmp.likeCount }</strong></span>
                   <p style="display:inline; float:right; margin: 5px 20px 0 0;">
-                  <c:if test="${tmp.id eq id}">
-                    <a onclick="updateBtn('${tmp.commcode}'); return false;">
-                    	<button type="button" class="${tmp.commcode}updateBtn btn-link">
-                    		<span style="font-weight: bold;">
-                    			수정
-                   			</span>
-              			</button>
-        			</a>
-                     <a onclick="cancleBtn('${tmp.commcode}');">
-                     	<button type="button" class="${tmp.commcode}cancleBtn btn-link" style="display:none;">
-                     		<span style="font-weight: bold;">
-                     			취소
-                   			</span>
-           				</button>
-         			</a>
-                     <button class="del btn-link"><span class="${tmp.commcode }" style="font-weight: bold;">삭제</span></button>
-                  </c:if>
+	                  <c:if test="${tmp.id eq id}">
+	                    <a onclick="updateBtn('${tmp.commcode}'); return false;">
+	                    	<button type="button" class="${tmp.commcode}updateBtn btn-link">
+	                    		<span style="font-weight: bold;">
+	                    			수정
+	                   			</span>
+	              			</button>
+	        			</a>
+	                     <a onclick="cancleBtn('${tmp.commcode}');">
+	                     	<button type="button" class="${tmp.commcode}cancleBtn btn-link" style="display:none;">
+	                     		<span style="font-weight: bold;">
+	                     			취소
+	                   			</span>
+	           				</button>
+	         			</a>
+	                     <button class="del btn-link"><span class="${tmp.commcode }" style="font-weight: bold;">삭제</span></button>
+	                  </c:if>
                   </p>
                </dt>
                <dd>
@@ -220,10 +220,18 @@
          </c:otherwise>
       </c:choose>
       </ul>      
+   </div>
    </div>     
    </div>  
 </div>
 <script>
+	function checkSpace(str) { 
+	    if(str.search(/\s/) != -1) { 
+	        return true; 
+	    } else { 
+	        return false; 
+	    } 
+	};
    $(document).ready(function(){
       var myStar="${myStar}"/2;
       $("."+myStar).addClass("on").prevAll("a").addClass("on");
@@ -240,14 +248,30 @@
 var formObj = $("form[role='form']");//폼 가저오기
 
     $('#star_grade a').click(function(){
-        $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
-        $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+    	var tmp=$(this).attr("id");
+        var isAddStar=confirm("평점 "+tmp+" 점을 제출하시겠습니까?");
+        if(isAddStar){
+        	$(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+            $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+            var starValue = document.querySelectorAll(".on").length*2;
+            var starvalue2 = $("#starman")
+            location.href="starAdd.do?starValue="+starValue+"&code=${dto.code}&title=${dto.title}";
+        }else{
+        	var myStar="${myStar}"/2;
+            $("."+myStar).addClass("on").prevAll("a").addClass("on");
+        }
         return false;
     });
 
     function cmUpdate(commcode){
-       var commcode = commcode;
-       var result1 = $("."+commcode+"text").val();   
+    	var commcode = commcode;
+    	var spaceCode;
+        if(checkSpace(commcode)==true){
+        	spaceCode=commcode.replace(/ /gi,".");
+        }else{
+        	spaceCode=commcode;
+        }
+       var result1 = $("."+spaceCode+"text").val();   
        /* var result1 = prompt("여기에 수정할 댓글을 입력하세요"+num); */
        if(result1 != ""){
           $.ajax({
@@ -256,11 +280,11 @@ var formObj = $("form[role='form']");//폼 가저오기
              data: {"commcode": commcode, "content":result1},
              success: function(responseData){
                 if(responseData==true){
-                   $("."+commcode+"pre").show();
-                   $("."+commcode+"pre").text(result1);
-                   $("."+commcode+"pre2").hide();
-                    $("."+commcode+"updateBtn").show();
-                    $("."+commcode+"cancleBtn").hide();
+                   $("."+spaceCode+"pre").show();
+                   $("."+spaceCode+"pre").text(result1);
+                   $("."+spaceCode+"pre2").hide();
+                    $("."+spaceCode+"updateBtn").show();
+                    $("."+spaceCode+"cancleBtn").hide();
                 }
              }
           })
@@ -271,30 +295,28 @@ var formObj = $("form[role='form']");//폼 가저오기
     
     function updateBtn(commcode){
        var commcode=commcode;
+
+       if(checkSpace(commcode)==true){
+       	commcode=commcode.replace(/ /gi,".");
+       }
+       
        $("."+commcode+"pre2").show();
        $("."+commcode+"pre").hide();
-       $("."+commcode+"text").focus();
        $("."+commcode+"cancleBtn").show();
        $("."+commcode+"updateBtn").hide();
     };
     function cancleBtn(commcode){
+    	
        var commcode=commcode;
+       if(checkSpace(commcode)==true){
+       	commcode=commcode.replace(/ /gi,".");
+       }
       $("."+commcode+"pre").show();
       $("."+commcode+"pre2").hide();
        $("."+commcode+"updateBtn").show();
        $("."+commcode+"cancleBtn").hide();
     }
-    $("#starBtn").click(function(){
-      var starValue = document.querySelectorAll(".on").length*2;
-      var starvalue2 = $("#starman")
-      var isAddStar=confirm("평점"+starValue+"를 제출하시겠습니까?");
-      if(isAddStar){
-         location.href="starAdd.do?starValue="+starValue+"&code=${dto.code}&title=${dto.title}";
-      }else{
-         
-      }
-      return false;
-      }); 
+
    $(".like").click(function(){
       var ele=$(this);
       var commcode=ele.parent().children()[0].value;
@@ -331,10 +353,10 @@ var formObj = $("form[role='form']");//폼 가저오기
             }
             if(responseData.checkLike==false){
                ele.prop("style","color: black;");
-               $("."+code+"like").text(count);
+               ele.parents()[1].children[3].textContent=count;
             }else{
                ele.prop("style","color: blue;");
-               $("."+code+"like").text(count);
+               ele.parents()[1].children[3].textContent=count;
             }
          }
       });
@@ -350,14 +372,6 @@ var formObj = $("form[role='form']");//폼 가저오기
 	            data:{"commcode":commcode},
 	            success:function(responseData){
 	               if(responseData){
-	                  //공백체크함수
-	                  function checkSpace(str) { 
-	                       if(str.search(/\s/) != -1) { 
-	                           return true; 
-	                       } else { 
-	                           return false; 
-	                       } 
-	                   };
 	                   var spaceCode;
 	                   if(checkSpace(commcode)==true){
 	                     //replace함수를 통해 공백을 .으로 변환하고 빈 변수에 담는다.

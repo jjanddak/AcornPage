@@ -79,9 +79,9 @@
 	
 	
 		<div class="comments">
-			<!-- 댓글을 작성할수 있는 폼 -->
 			<div class="comment_form">
 			<form action="${pageContext.request.contextPath}/admin/permit_update.do?code=${dto.code}&title=${dto.title }" method="post">
+				<input type="hidden" name="writer" value="${dto.writer }">
 				<input type="radio" name="permit" value="Y">
 				<label for="Y">승인</label>
 				<input type="radio" name="permit" value="N">
