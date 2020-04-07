@@ -25,7 +25,7 @@
    <div class="container content">
       <div class="container">
          <h1>신작 만화 업로드</h1>
-         <form action="newtoonupload.do" method="post" enctype="multipart/form-data">
+         <form id="smartEdit" action="newtoonupload.do" method="post" enctype="multipart/form-data">
             <div class="form-group">
                <label for="title">제목</label>
                <input class="form-control" type="text" 
@@ -64,8 +64,8 @@
                <label for="content">내용</label>
                <textarea class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
             </div>
-            <button class="btn btn-primary">연재신청</button>
          </form>
+            <button class="btn btn-primary" onclick="submitContents();">연재신청</button>
             <a href="${pageContext.request.contextPath }/users/info.do">
                <button class="btn btn-warning">취소</button>   
             </a>
@@ -90,7 +90,6 @@
 <script src="${pageContext.request.contextPath }/SmartEditor/js/HuskyEZCreator.js"></script>
 <script>
    var oEditors = [];
-   
    //추가 글꼴 목록
    //var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
    
@@ -123,29 +122,46 @@
       var sHTML = oEditors.getById["content"].getIR();
       alert(sHTML);
    }
+     /*
+   function submitContents(elClickedObj) {	
+	   oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);   // 에디터의 내용이 textarea에 적용됩니다.
       
-   $(".btn-primary").click(function(){
-      var title=$("#title").val();
-      var info=$("#info").val();
-      var hashtag=$("#hashtag").val();
-      var content=$("textarea").val();
-      if(title=="" || info=="" || hashtag=="" || content==""){
-         alert("빈칸 없이 입력해주세요");
-      }else{
-         submitContents(this);
-      }
-      return false;
-   })
-   function submitContents(elClickedObj) {
-      
-      oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);   // 에디터의 내용이 textarea에 적용됩니다.
-      
-      // 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("content").value를 이용해서 처리하면 됩니다.
-      
-      try {
-         elClickedObj.form.submit();
-      } catch(e) {}
+	   // 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("content").value를 이용해서 처리하면 됩니다.
+	   var title=$("#title").val();
+	   var info=$("#info").val();
+	   var hashtag=$("#hashtag").val();
+	   var content=document.getElementById("content").value;
+	   if(content=='<p>&nbsp;</p>'){
+			alert("빈칸 없이 입력해주세요");
+	   }else{
+		   alert("빈칸아님");
+	   }
+	   
+		try {
+			elClickedObj.form.submit();
+		} catch(e) {}  
+	}
+   */
+   
+   function submitContents() {
+       var elClickedObj = $("#smartEdit");
+       oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+       var content = $("#content").val();
+       var title=$("#title").val();
+	   var info=$("#info").val();
+	   var hashtag=$("#hashtag").val();
+
+       if( content == '<p>&nbsp;</p>' || title=="" || info=="" || hashtag=="")  {
+            alert("빈칸 없이 모두 입력해주세요!");
+            oEditors.getById["content"].exec("FOCUS"); //포커싱
+            return;
+       }
+
+       try {
+           elClickedObj.submit();
+       } catch(e) {}
    }
+      
    
    function setDefaultFont() {
       var sDefaultFont = '궁서';
