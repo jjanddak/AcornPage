@@ -29,32 +29,34 @@ iframe{
 <div class="contentwrapper">
    <div class="container content">
 		<div class="container">
-			<h1>회차 업로드</h1>
-			<form action="toonupload.do" method="post" enctype="multipart/form-data">
-				<div class="form-group"> 
-					<label for="num">회차</label>
-					<input class="form-control" type="text" 
-						name="num" id="num" value="${lastNum}" readOnly/>
-				</div>
-				<div class="form-group">
-					<label for="title">제목</label>
-					<input class="form-control" type="text" 
-						name="title" id="title" value="${title}" readOnly/>
-				</div>
-				<div class="form-group">
-					<label for="writer">작가명</label>
-					<input class="form-control" type="text" 
-						name="writer" id="writer" value="${id}" readOnly/>
-				</div>
-				<div class="form-group">
-					<label for="content">내용</label>
-					<textarea class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
-				</div>
-				<button class="btn btn-primary" type="submit" onclick="submitContents(this);">업로드</button>
-				<a href="${pageContext.request.contextPath }/users/info.do" style="position: absolute; bottom: 0px; right: 0px;">
-					<button class="btn btn-warning">취소</button>	
-				</a>
-			</form>
+			<div style="margin-right: 30px; position: relative;">
+				<h1>회차 업로드</h1>
+				<form action="toonupload.do" method="post" enctype="multipart/form-data">
+					<div class="form-group"> 
+						<label for="num">회차</label>
+						<input class="form-control" type="text" 
+							name="num" id="num" value="${lastNum}" readOnly/>
+					</div>
+					<div class="form-group">
+						<label for="title">제목</label>
+						<input class="form-control" type="text" 
+							name="title" id="title" value="${title}" readOnly/>
+					</div>
+					<div class="form-group">
+						<label for="writer">작가명</label>
+						<input class="form-control" type="text" 
+							name="writer" id="writer" value="${id}" readOnly/>
+					</div>
+					<div class="form-group">
+						<label for="content">내용</label>
+						<textarea class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
+					</div>
+					<button class="btn btn-primary" type="submit" onclick="submitContents(this);">업로드</button>
+					<a href="${pageContext.request.contextPath }/users/info.do" style="position: absolute; bottom: 0px; right: 0px;">
+						<button class="btn btn-warning">취소</button>	
+					</a>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
