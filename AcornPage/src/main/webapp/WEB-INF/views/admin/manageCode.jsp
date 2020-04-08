@@ -25,6 +25,7 @@
 <div class="contentwrapper">
    <div class="container content">
 	<div class="container">
+	<div style="margin-right: 30px;">
 		<h3>카페 글 상세 보기</h3>
 			<table class="table table-bordered table-condensed">
 			<colgroup>
@@ -169,7 +170,8 @@
          </c:otherwise>
       </c:choose>
       </ul>      
-   </div>     
+   </div> 
+   </div>    
    </div>  
 </div>
 <script>

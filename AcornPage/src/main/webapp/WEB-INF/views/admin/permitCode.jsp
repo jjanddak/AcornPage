@@ -24,7 +24,8 @@
 <div class="contentwrapper">
    <div class="container content">
 	<div class="container">
-		<h3>카페 글 상세 보기</h3>
+		<div style="margin-right: 30px;">
+		<h3>업로드작품 상세보기</h3>
 			<table class="table table-bordered table-condensed">
 			<colgroup>
 				<col class="col-xs-3"/>
@@ -94,6 +95,7 @@
 				</form>
 			</div>
 			</div>
+		</div>
 		</div>
    </div>  
 </div>

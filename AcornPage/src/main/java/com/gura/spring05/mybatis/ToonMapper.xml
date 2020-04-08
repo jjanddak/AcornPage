@@ -259,7 +259,7 @@
 		update toondetail set permit='Y' where title=#{title}
 	</update>
 	<select id="allDetailList" resultType="toonDetailDto">
-		select * from toondetail where permit='Y'
+		select title,writer,info,thumb,to_char(regdate,'YYYY-MM-DD')as regdate from toondetail where permit='Y'
 	</select>
 	<update id="updateDetail" parameterType="toonDetailDto">
 		update toondetail 
