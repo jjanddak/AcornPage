@@ -86,25 +86,28 @@
 	
 	function cmDelete(commcode){
 		var commcode=commcode;
-		$.ajax({
-			url: "${pageContext.request.contextPath }/toon/deleteComment.do",//이동할 주소
-			type: "post",
-			data: {"commcode": commcode},
-			success: function(responseData){
-				if(responseData==true){
-					var spaceCode;
-	                if(checkSpace(commcode)==true){
-	                  //replace함수를 통해 공백을 .으로 변환하고 빈 변수에 담는다.
-	                  //replace("",".")와 replace(/ /gi,".") 차이점은 /""/ 따옴표 안에 바꿀 문자열(ex:#,!등)
-	                  //을 넣고 /뒤에 gi를 선언하면 replaceAll효과가 있다. 스크립트에선 replaceAll이란 함수는 존재하지 않는다. 
-	                  spaceCode=commcode.replace(/ /gi,".");                  
-	                  $("dl."+spaceCode).remove();
-	                }else{
-	                  $("dl."+commcode).remove();
-	                }
-				}	
-			}
-		})
+		var checkDel=confirm("댓글을 삭제하시겠습니까?");
+		if(checkDel){
+			$.ajax({
+				url: "${pageContext.request.contextPath }/toon/deleteComment.do",//이동할 주소
+				type: "post",
+				data: {"commcode": commcode},
+				success: function(responseData){
+					if(responseData==true){
+						var spaceCode;
+		                if(checkSpace(commcode)==true){
+		                  //replace함수를 통해 공백을 .으로 변환하고 빈 변수에 담는다.
+		                  //replace("",".")와 replace(/ /gi,".") 차이점은 /""/ 따옴표 안에 바꿀 문자열(ex:#,!등)
+		                  //을 넣고 /뒤에 gi를 선언하면 replaceAll효과가 있다. 스크립트에선 replaceAll이란 함수는 존재하지 않는다. 
+		                  spaceCode=commcode.replace(/ /gi,".");                  
+		                  $("dl."+spaceCode).remove();
+		                }else{
+		                  $("dl."+commcode).remove();
+		                }
+					}	
+				}
+			})
+		}
 	};
 	
 	function cmUpdate(commcode){
