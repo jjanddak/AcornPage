@@ -43,7 +43,7 @@
 			LAG(num, 1, 0) OVER(ORDER BY num DESC) AS nextNum,
 			LEAD(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum
 			FROM toonlist
-			WHERE title=#{title} and permit='Y'
+			WHERE title=#{title} <if test="updating == null">and permit='Y'</if>
 			) result1
 		WHERE code=#{code}
 	</select>

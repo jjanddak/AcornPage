@@ -177,7 +177,7 @@
 			               			<c:when test="${list.permit eq 'N' }">
 			               				<div class="permitlist">
 				               				<span>승인 대기중 - ${list.code }</span>		
-				               				<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}">
+				               				<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}&updating=true">
 												<button class="btn btn-warning">
 													수정
 												</button>
@@ -194,7 +194,7 @@
 			               				<div class="permitlist">
 			               					반려됨 - ${list.code }<br/>
 			               					반려사유 : ${list.permit }		               					
-			               					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}">
+			               					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}&updating=true">
 												<button class="btn btn-warning">
 													수정
 												</button>
@@ -245,7 +245,7 @@
 			               			<c:when test="${list.permit eq 'N' }">
 			               			<div class="permitlist">
 				               				<span>승인 대기중 - ${list.code }</span>		
-				               				<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}">
+				               				<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}&updating=true">
 												<button class="btn btn-warning">
 													수정
 												</button>
@@ -262,7 +262,7 @@
 			               				<div class="permitlist">
 			               					반려됨 - ${list.code }<br/>
 			               					반려사유 : ${list.permit }		               					
-			               					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}">
+			               					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}&updating=true">
 												<button class="btn btn-warning">
 													수정
 												</button>
@@ -321,7 +321,7 @@
 			               			<c:when test="${list.permit eq 'N' }">
 			               				<div class="permitlist">
 				               				<span>승인 대기중 - ${list.code }</span>		
-				               				<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}">
+				               				<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}&updating=true">
 												<button class="btn btn-warning">
 													수정
 												</button>
@@ -338,7 +338,7 @@
 			               				<div class="permitlist">
 			               					반려됨 - ${list.code }<br/>
 			               					반려사유 : ${list.permit }		               					
-			               					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}">
+			               					<a style="color:#fff;" href="${pageContext.request.contextPath}/toon/updateList_form.do?title=${list.title}&code=${list.code}&updating=true">
 												<button class="btn btn-warning">
 													수정
 												</button>

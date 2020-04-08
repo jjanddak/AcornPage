@@ -102,6 +102,12 @@ public class ToonListServiceImpl implements ToonListService{
 	@Override
 	public void getCodeDetail(HttpServletRequest request, String title, String code) {
 		ToonListDto dto=new ToonListDto();
+		
+		String updating=request.getParameter("updating");
+		if(updating!=null) {
+			dto.setUpdating(updating);
+		}
+		
 		dto.setTitle(title);
 		dto.setCode(code);
 		String id=(String)request.getSession().getAttribute("id");
