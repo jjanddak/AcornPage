@@ -16,6 +16,11 @@
 <meta charset="UTF-8">
 <title>acornpage :: 신작 업로드</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
+<style>
+iframe{
+	border-right: 1px solid #b5b5b5;
+}
+</style>
 </head>
 <body>
 <jsp:include page="../include/navbar.jsp">
@@ -24,6 +29,7 @@
 <div class="contentwrapper">
    <div class="container content">
       <div class="container">
+      <div style="margin-right: 30px; position: relative;">
          <h1>신작 만화 업로드</h1>
          <form id="smartEdit" action="newtoonupload.do" method="post" enctype="multipart/form-data">
             <div class="form-group">
@@ -66,9 +72,10 @@
             </div>
          </form>
             <button class="btn btn-primary" onclick="submitContents();">연재신청</button>
-            <a href="${pageContext.request.contextPath }/users/info.do">
-               <button class="btn btn-warning">취소</button>   
-            </a>
+            <a href="${pageContext.request.contextPath }/users/info.do" style="position: absolute; bottom: 0px; right: 0px;">
+				<button class="btn btn-warning">취소</button>	
+			</a>
+      </div>
       </div>
    </div>
 </div>

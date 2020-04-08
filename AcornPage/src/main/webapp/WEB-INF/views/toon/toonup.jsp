@@ -16,6 +16,11 @@
 <meta charset="UTF-8">
 <title>acornpage :: 연재</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
+<style>
+iframe{
+	border-right: 1px solid #b5b5b5;
+}
+</style>
 </head>
 <body>
 <jsp:include page="../include/navbar.jsp">
@@ -46,7 +51,7 @@
 					<textarea class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
 				</div>
 				<button class="btn btn-primary" type="submit" onclick="submitContents(this);">업로드</button>
-				<a href="${pageContext.request.contextPath }/users/info.do">
+				<a href="${pageContext.request.contextPath }/users/info.do" style="position: absolute; bottom: 0px; right: 0px;">
 					<button class="btn btn-warning">취소</button>	
 				</a>
 			</form>

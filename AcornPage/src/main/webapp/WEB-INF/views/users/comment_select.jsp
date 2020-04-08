@@ -22,7 +22,7 @@
 	<div class="container content">
 		<table class="table table-striped table-condensed">
 		<ul>
-		<span>${idid } 님의 댓글정보입니다.</span>
+		<h4>${idid } 님의 댓글정보입니다.</h4>
 			<c:forEach items="${dto }" var="tmp">
 				<dl class="${tmp.commcode}">
 					<dt style="position:relative;">				

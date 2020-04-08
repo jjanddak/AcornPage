@@ -16,6 +16,11 @@
 <meta charset="UTF-8">
 <title>acornpage :: 내용수정</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
+<style>
+iframe{
+	border-right: 1px solid #b5b5b5;
+}
+</style>
 </head>
 <body>
 <jsp:include page="../include/navbar.jsp">
@@ -24,6 +29,7 @@
 <div class="contentwrapper">
    <div class="container content">
 		<div class="container">
+		<div style="margin-right: 30px; position: relative;">
 			<h1>회차 업로드</h1>
 			<form action="updateList.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="code" value="${dto.title }${num }" />
@@ -48,9 +54,10 @@
 				</div>
 				<button class="btn btn-primary" type="submit" onclick="submitContents(this);">수정</button>
 			</form>
-				<a href="${pageContext.request.contextPath }/users/info.do">
+				<a href="${pageContext.request.contextPath }/users/info.do" style="position: absolute; bottom: 0px; right: 0px;">
 					<button class="btn btn-warning">취소</button>	
 				</a>
+		</div>
 		</div>
 	</div>
 </div>
