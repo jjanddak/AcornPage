@@ -33,7 +33,7 @@
 		   (select nvl(avg(starvalue),0) from star s where t.code=s.code)as starvalue,
 		   (select count(num) from toon_comment c where t.code=c.code)as commCount 
 		from toonlist t
-		where title=#{title}
+		where title=#{title} and permit='Y'
 		order by num asc
 	</select>
 	<select id="getCodeDetail" parameterType="toonListDto" resultType="toonListDto">
@@ -289,7 +289,7 @@
 	<select id="newDate" resultType="String">
 		SELECT title
 		FROM toonlist
-		where regdate > to_date(sysdate)-1
+		where regdate > to_date(sysdate)-1 and permit='Y'
 		group by title
 	</select>
 	<select id="morePermit" resultType="String">
