@@ -158,16 +158,9 @@
                </dt>
                <dd>
                   <pre class="${tmp.commcode }pre" >${tmp.content }</pre>
-                  <pre class="${tmp.commcode }pre2" style="display:none; position: relative;">
-                     <input type="text" class="${tmp.commcode }text" value="${tmp.content }" style="position: absolute; left: 10px; width:700px"/>
-                     
-                     <a onclick="cmUpdate('${tmp.commcode}'); return false;">
-                     	<button type="button" class="" style="position: absolute; left: 10px; bottom: 14px;">
-                     		<span style="font-weight: bold;">
-                     			수정
-                     		</span>
-                 		</button>
-                 	</a>
+                  <pre class="${tmp.commcode }pre2" style="display:none; position: relative; white-space: pre-line;">
+                     <input type="text" class="${tmp.commcode }text" value="${tmp.content }" style="position: absolute; left: 10px; width:90%"/>
+                     <span><a onclick="cmUpdate('${tmp.commcode}');"><button type="button" class="cmUpdate('${tmp.commcode}');" style="position: absolute; top: 10px; right: 8px;">입력</button></a></span>
                   </pre>
                </dd>
             </dl>      
