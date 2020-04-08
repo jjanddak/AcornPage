@@ -39,7 +39,7 @@
 	<select id="getCodeDetail" parameterType="toonListDto" resultType="toonListDto">
 		SELECT result1.*
 		FROM
-			(SELECT num,title,writer,content,to_char(regdate,'YYYY-MM-DD')as regdate, toonlist.code,
+			(SELECT num,title,writer,content,to_char(regdate,'YYYY-MM-DD')as upload, toonlist.code,
 			LAG(num, 1, 0) OVER(ORDER BY num DESC) AS nextNum,
 			LEAD(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum
 			FROM toonlist
