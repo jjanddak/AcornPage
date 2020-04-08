@@ -129,14 +129,12 @@ public class ToonListServiceImpl implements ToonListService{
 		dto2.setLastread(code);
 		dao.lastRead(dto2);
 	      
-		String num = code.replaceAll("[^0-9]","");
-		String tmpcode=code.replaceAll("[0-9]","");
-		int tmp=Integer.parseInt(num);
-		tmp--;
-		String nextnum=Integer.toString(tmp+2);
-		String prevnum=Integer.toString(tmp);
-		String prevcode=tmpcode+prevnum;
-		String nextcode=tmpcode+nextnum;
+		int num = dto.getNum();
+		num--;
+		String nextnum=Integer.toString(num+2);
+		String prevnum=Integer.toString(num);
+		String prevcode=title+prevnum;
+		String nextcode=title+nextnum;
 		libDto.setCode(prevcode);
 		libDto2.setCode(nextcode);
 		

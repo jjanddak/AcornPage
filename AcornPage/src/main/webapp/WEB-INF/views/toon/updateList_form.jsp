@@ -32,11 +32,11 @@ iframe{
 		<div style="margin-right: 30px; position: relative;">
 			<h1>회차 업로드</h1>
 			<form action="updateList.do" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="code" value="${dto.title }${num }" />
+			<input type="hidden" name="code" value="${dto.code}" />
 				<div class="form-group"> 
 					<label for="num">회차</label>
 					<input class="form-control" type="text" 
-						name="num" id="num" value="${num}" readOnly/>
+						name="num" id="num" value="${dto.num}" readOnly/>
 				</div>
 				<div class="form-group">
 					<label for="title">제목</label>
