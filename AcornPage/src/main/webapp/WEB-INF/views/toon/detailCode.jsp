@@ -21,6 +21,9 @@
    .contents *{
       max-width: 100%;
    }
+   .contents p img{
+      width:100%;
+   }
 </style>
 </head>
 <body>
@@ -29,18 +32,17 @@
    <div class="container content">
    <div class="container">
    <div style="margin-right: 30px;">
-      <h3>카페 글 상세 보기</h3>
          <table class="table table-bordered table-condensed">
          <colgroup>
             <col class="col-xs-3"/>
             <col class="col-xs-9"/>
          </colgroup>
          <tr>
-            <th>글번호</th>
+            <th>회차</th>
             <td>${dto.num }</td>
          </tr>
          <tr>
-            <th>작성자</th>
+            <th>작가</th>
             <td>${dto.writer }</td>
          </tr>
          <tr>
@@ -66,7 +68,7 @@
             </td>
          </tr>
          <tr>
-            <th>등록일</th>
+            <th>업로드날짜</th>
             <td>${dto.upload }</td>
          </tr>
       </table>
@@ -83,7 +85,7 @@
          <c:otherwise>         
             <a class="btn" href="buyCodeOne.do?title=${dto.title }&code=${dto.title}${dto.num-1}" 
             onclick="return confirm('구매하시겠습니까? 100원이 차감됩니다')">
-            이전화 구매</a>
+           		 이전화 구매</a>
          </c:otherwise>
       </c:choose>
       <c:choose>
@@ -96,7 +98,7 @@
          <c:otherwise>         
             <a class="btn" href="buyCodeOne.do?title=${dto.title }&code=${dto.title}${dto.num+1}" 
             onclick="return confirm('구매하시겠습니까? 100원이 차감됩니다')">
-            다음화 구매</a>
+      	      다음화 구매</a>
          </c:otherwise>
       </c:choose>
       </div>   
