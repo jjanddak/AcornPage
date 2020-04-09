@@ -253,7 +253,7 @@
 		from toonlist where title=#{title} and code=#{code}
 	</select>
 	<update id="permit_update" parameterType="toonListDto">
-		update toonlist set permit=#{permit} where title=#{title} and code=#{code}
+		update toonlist set permit=#{permit},regdate=sysdate where title=#{title} and code=#{code}
 	</update>
 	<update id="permit_update_detail" parameterType="toonDetailDto">
 		update toondetail set permit='Y' where title=#{title}
