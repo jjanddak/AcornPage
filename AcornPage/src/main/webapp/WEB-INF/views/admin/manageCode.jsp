@@ -26,7 +26,7 @@
    <div class="container content">
 	<div class="container">
 	<div style="margin-right: 30px;">
-		<h3>카페 글 상세 보기</h3>
+		<h3>작품관리 상세보기창</h3>
 			<table class="table table-bordered table-condensed">
 			<colgroup>
 				<col class="col-xs-3"/>
@@ -64,7 +64,7 @@
 			</tr>
 			<tr>
 				<th>등록일</th>
-				<td>${dto.regdate }</td>
+				<td>${dto.upload }</td>
 			</tr>
 			<tr>
 				<th>삭제</th>
@@ -102,22 +102,13 @@
 					<dt>				
 						<span>${tmp.id }</span>
 						<span>${tmp.regdate }</span>
-						<span class="${tmp.commcode }like">${tmp.likeCount }</span>
-						
-						<form style="display:inline;" action="commentlike.do" id="likeForm" method="post">
-						<input type="hidden" name="commcode" value="${tmp.commcode}"/>
-						<input type="hidden" name="code" value="${tmp.code}"/>
-						<button <c:if test="${tmp.isLike eq true}">style="color:blue;"</c:if> class="like btn btn-link" type="button">
-							<span class="glyphicon glyphicon-thumbs-up"></span>
-						</button>
-						</form>
-						<p style="display:inline; float:right; margin: 5px 20px 0 0;">
+						<p style="display:inline; float:right; margin: -5px 0 0 0;">
 							<button class="del btn-link">
 								<span class="${tmp.commcode }" style="font-weight: bold;">삭제</span>
 							</button>
 						</p>
 					</dt>
-					<dd>
+					<dd style="margin-top: 15px;">
 						<pre>${tmp.content }</pre>
 					</dd>
 				</dl>		
@@ -224,51 +215,7 @@ var formObj = $("form[role='form']");//폼 가저오기
 			}
 		}
 	});
-	$(".like").click(function(){
-		var ele=$(this);
-		var commcode=ele.parent().children()[0].value;
-		var code=ele.parent().children()[1].value;
-		//var formData = ele.parent().serialize();
-		var arrCode=[];
-		arrCode.push(code);
-		arrCode.push(commcode);
-		$.ajax({
-			url: "commentlike.do",//이동할 주소
-			type: "post",
-			data: {"arrEachCode": arrCode},
-
-			success:function(responseData){
-				//공백체크함수
-				function checkSpace(str) { 
-			        if(str.search(/\s/) != -1) { 
-			            return true; 
-			        } else { 
-			            return false; 
-			        } 
-			    };
-				//빈 변수 선언하고
-				var code;
-				var count=responseData.count;
-				//공백체크함수로 response된 code에 공백이 있다면
-				if(checkSpace(responseData.code)==true){
-					//replace함수를 통해 공백을 .으로 변환하고 빈 변수에 담는다.
-					//replace("",".")와 replace(/ /gi,".") 차이점은 /""/ 따옴표 안에 바꿀 문자열(ex:#,!등)
-					//을 넣고 /뒤에 gi를 선언하면 replaceAll효과가 있다. 스크립트에선 replaceAll이란 함수는 존재하지 않는다. 
-					code=responseData.code.replace(/ /gi,".");
-					console.log(code);
-				}else{
-					code=responseData.code;
-				}
-				if(responseData.checkLike==false){
-					ele.prop("style","color: black;");
-					$("."+code+"like").text(count);
-				}else{
-					ele.prop("style","color: blue;");
-					$("."+code+"like").text(count);
-				}
-			}
-		});
-	});
+	
 	$(".del").click(function(){
 		var ele=$(this);
 		var commcode=ele.children()[0].className;
