@@ -280,7 +280,8 @@
 		update toondetail set thumb=#{thumb} where title=#{title}
 	</update>
 	<select id="manageDetail" parameterType="String" resultType="toonListDto">
-		select * from toonlist where title like '%'||#{title}||'%' and permit='Y' order by num asc
+		select t.*,(select nvl(avg(starvalue),0) from star s where t.code=s.code)as starvalue
+		from toonlist t where title like '%'||#{title}||'%' and permit='Y' order by num asc
 	</select>
 	<select id="searchMyToon" parameterType="String" resultType="toonDetailDto">
 		select title,writer,info,to_char(regdate,'YYYY-MM-DD')as regdate,thumb,toonovel,round(avg(starvalue),2)as starvalue from
