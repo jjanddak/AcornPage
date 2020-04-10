@@ -122,7 +122,7 @@ public class ToonListServiceImpl implements ToonListService{
 		
 		String checkCode=dao.checkCode(libDto);
 		if(checkCode==null) {
-			throw new NoMoneyException("알 수 없는 에러가 발생했습니다. 돈주고 보세요.");
+			throw new NoMoneyException("지갑에 돈이 부족하거나 허용되지 않은 이동입니다. 만화 구매후 이용해주세요.");
 		}else {
 			dto=dao.getCodeDetail(dto);
 		}
