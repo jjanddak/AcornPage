@@ -62,7 +62,7 @@
                      </span>
                   </c:when>
                   <c:otherwise>
-                     <strong>이 편은 아직 별점이 없어요. 별점을 ${id } 님이 먼저 매겨주세요!</strong>
+                     <strong>아직 별점이 없습니다. 별점을 등록해보세요!</strong>
                   </c:otherwise>
                </c:choose>
             </td>
