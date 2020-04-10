@@ -136,9 +136,8 @@ public class ToonListServiceImpl implements ToonListService{
 		dao.lastRead(dto2);
 	      
 		int num = dto.getNum();
-		num--;
-		String nextnum=Integer.toString(num+2);
-		String prevnum=Integer.toString(num);
+		String nextnum=Integer.toString(num+1);
+		String prevnum=Integer.toString(num-1);
 		String prevcode=title+prevnum;
 		String nextcode=title+nextnum;
 		libDto.setCode(prevcode);

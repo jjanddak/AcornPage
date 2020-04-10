@@ -181,7 +181,9 @@
 		select *
 		from
 				(select toonlist.code
-				from toonlist left outer join (select code from library where id=#{id}) library on toonlist.code=library.code
+				from toonlist left outer join 
+					(select code from library where id=#{id}) 
+				library on toonlist.code=library.code
 				where library.code is null)
 		where code=#{code}
 	</select>
@@ -190,7 +192,9 @@
 		select *
 		from
 				(select toonlist.code
-				from toonlist left outer join (select code from library where id=#{id}) library on toonlist.code=library.code
+				from toonlist left outer join 
+					(select code from library where id=#{id}) 
+				library on toonlist.code=library.code
 				where library.code is null)
 		where code=#{code}
 	</select>
