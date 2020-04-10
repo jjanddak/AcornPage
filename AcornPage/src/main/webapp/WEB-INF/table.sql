@@ -25,7 +25,7 @@ create sequence commentlike_seq;
 
 
 create table toondetail
-(title varchar2(100) not null,
+(title varchar2(100) unique,
 writer varchar2(100) not null,
 info varchar2(100) not null,
 regdate date,
@@ -47,7 +47,7 @@ title varchar2(100) not null,
 writer varchar2(100) not null, 
 content clob not null, 
 regdate date , 
-code varchar2(50) primary key,
+code varchar2(50) unique,
 permit varchar2(100)
 );
 
@@ -70,8 +70,8 @@ insert into toonList values(3,'클레이모어','윤지혜','클레이모어3화
 create table users 
 (num number,
 id varchar2(100) primary key ,
-pwd varchar2(100) not null,
-email varchar2(100) not null,
+pwd varchar2(100) not null unique,
+email varchar2(100) unique,
 wallet number check(wallet>=0),
 isWriter varchar2(20),
 profile varchar2(100),
