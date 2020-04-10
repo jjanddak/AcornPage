@@ -80,12 +80,12 @@
             <div></div>
          </c:when>
          <c:when test="${empty havePrev}">
-            <a class="btn" href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.title}${dto.num-1}">
+            <a class="btn" href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.title}${dto.prevNum}">
            		이전화
 			</a>
          </c:when>
          <c:otherwise>         
-            <a class="btn" href="buyCodeOne.do?title=${dto.title }&code=${dto.title}${dto.num-1}" 
+            <a class="btn" href="buyCodeOne.do?title=${dto.title }&code=${dto.title}${dto.prevNum}" 
             onclick="return confirm('구매하시겠습니까? 100원이 차감됩니다')">
            		 이전화 구매</a>
          </c:otherwise>
@@ -95,12 +95,12 @@
             <div></div>
          </c:when>
          <c:when test="${empty haveNext}">
-            <a class="btn" href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.title}${dto.num+1}">
+            <a class="btn" href="${pageContext.request.contextPath}/toon/detailCode.do?title=${dto.title }&code=${dto.title}${dto.nextNum}">
             	다음화
            	</a>
          </c:when>
          <c:otherwise>         
-            <a class="btn" href="buyCodeOne.do?title=${dto.title }&code=${dto.title}${dto.num+1}" 
+            <a class="btn" href="buyCodeOne.do?title=${dto.title }&code=${dto.title}${dto.nextNum}" 
             onclick="return confirm('구매하시겠습니까? 100원이 차감됩니다')">
       	      다음화 구매</a>
          </c:otherwise>
