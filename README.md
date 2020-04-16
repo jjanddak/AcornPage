@@ -1,4 +1,4 @@
-# acornPage
+# acornpage
 팀명 지혜없조
 팀프로젝트 acornpage 
 
