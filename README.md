@@ -7,4 +7,4 @@
 https://trello.com/b/2HRxAtp2/acornpageboard
 
 # PPT
-https://docs.google.com/presentation/d/1aFwSMPt0UhCZ5mzN4-wo08gR79F7H2zlLUtDID74leM/edit#slide=id.p1
+https://docs.google.com/presentation/d/1aFwSMPt0UhCZ5mzN4-wo08gR79F7H2zlLUtDID74leM/edit?usp=sharing
